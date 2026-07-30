@@ -1,27 +1,26 @@
-# Chinese (Traditional, Taiwan) translations for PROJECT.
-# Copyright (C) 2026 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-07-18 05:32+0000\n"
-"PO-Revision-Date: 2026-06-26 23:49+0800\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: zh_Hant_TW\n"
-"Language-Team: zh_Hant_TW <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"PO-Revision-Date: 2026-07-30 07:34\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: mast\n"
+"X-Crowdin-Project-ID: 916991\n"
+"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-File: /main/locale/template/LC_MESSAGES/mast.pot\n"
+"X-Crowdin-File-ID: 60391\n"
+"Language: zh_TW\n"
 
 #: mast/gtk4/about_dialog.py:22
-#, fuzzy
 msgid "GitHub"
-msgstr "Git"
+msgstr ""
 
 #: mast/gtk4/main_window.py:93 mast/qt6/main_window.py:62
 #: mast/tui/main_window.py:126
@@ -29,30 +28,30 @@ msgid "About"
 msgstr ""
 
 #: mast/gtk4/module.py:33 mast/qt6/module.py:29
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "{name} — MaST"
-msgstr "MaST"
+msgstr ""
 
 #: mast/gtk4/module_button.py:51 mast/qt6/module_button.py:43
 msgid "Experimental"
-msgstr "實驗性"
+msgstr ""
 
 #: mast/gtk4/command/dialog.py:30 mast/qt6/command/dialog.py:30
 msgid "Running command, please wait..."
-msgstr "正在執行命令，請稍候..."
+msgstr ""
 
 #: mast/gtk4/command/dialog.py:53 mast/qt6/command/dialog.py:44
 #: mast/tui/packages/window.py:42 mast/tui/services/window.py:362
 msgid "Close"
-msgstr "關閉"
+msgstr ""
 
 #: mast/gtk4/command/dialog.py:80 mast/qt6/command/dialog.py:60
 msgid "Command completed successfully."
-msgstr "命令執行成功。"
+msgstr ""
 
 #: mast/gtk4/command/dialog.py:82 mast/qt6/command/dialog.py:62
 msgid "Command failed. See output for details."
-msgstr "命令執行失敗。請查看輸出了解詳情。"
+msgstr ""
 
 #: mast/gtk4/command/worker.py:55 mast/gtk4/flatpak/settings.py:51
 #: mast/gtk4/flatpak/window.py:92 mast/gtk4/snapshots/window.py:209
@@ -61,22 +60,22 @@ msgstr "命令執行失敗。請查看輸出了解詳情。"
 #: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:120
 #: mast/tui/snapshots/window.py:212 mast/tui/snapshots/window.py:239
 msgid "Unknown error"
-msgstr "未知錯誤"
+msgstr ""
 
 #: mast/gtk4/cron/__init__.py:16 mast/qt6/cron/__init__.py:12
 #: mast/tui/cron/__init__.py:12
 msgid "Cron"
-msgstr "排程工作"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:193
 msgid "Edit Cron Job"
-msgstr "編輯排程工作"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:179
 msgid "Add Cron Job"
-msgstr "新增排程工作"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:29
 #: mast/gtk4/flatpak/remote_manager.py:172
@@ -91,7 +90,7 @@ msgstr "新增排程工作"
 #: mast/tui/repositories/window.py:488 mast/tui/snapshots/config_screen.py:110
 #: mast/tui/ssh/window.py:526 mast/tui/ssh/window.py:626
 msgid "Cancel"
-msgstr "取消"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:30
 #: mast/gtk4/flatpak/remote_manager.py:173
@@ -105,68 +104,68 @@ msgstr "取消"
 #: mast/tui/snapshots/config_screen.py:111 mast/tui/ssh/window.py:525
 #: mast/tui/ssh/window.py:625
 msgid "OK"
-msgstr "確定"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:43 mast/gtk4/cron/manager.py:82
 #: mast/qt6/cron/cron_edit_dialog.py:42 mast/qt6/cron/manager.py:71
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:295
 msgid "Minute"
-msgstr "分钟"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:43 mast/qt6/cron/cron_edit_dialog.py:41
 msgid "0-59 or *"
-msgstr "0-59 或 *"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/gtk4/cron/manager.py:88
 #: mast/qt6/cron/cron_edit_dialog.py:46 mast/qt6/cron/manager.py:72
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:299
 msgid "Hour"
-msgstr "小時"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/qt6/cron/cron_edit_dialog.py:45
 msgid "0-23 or *"
-msgstr "0-23 或 *"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/gtk4/cron/manager.py:94
 #: mast/qt6/cron/cron_edit_dialog.py:50 mast/qt6/cron/manager.py:73
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:303
 msgid "Day"
-msgstr "日期"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/qt6/cron/cron_edit_dialog.py:49
 msgid "1-31 or *"
-msgstr "1-31 或 *"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/gtk4/cron/manager.py:100
 #: mast/qt6/cron/cron_edit_dialog.py:54 mast/qt6/cron/manager.py:74
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:307
 msgid "Month"
-msgstr "月份"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/qt6/cron/cron_edit_dialog.py:53
 msgid "1-12 or *"
-msgstr "1-12 或 *"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/gtk4/cron/manager.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:58 mast/qt6/cron/manager.py:75
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:311
 msgid "Weekday"
-msgstr "星期"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/qt6/cron/cron_edit_dialog.py:57
 msgid "0-7 or *"
-msgstr "0-7 或 *"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:49 mast/gtk4/cron/manager.py:112
 #: mast/qt6/cron/cron_edit_dialog.py:62 mast/qt6/cron/manager.py:76
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:315
 msgid "Command"
-msgstr "命令"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:53 mast/qt6/cron/cron_edit_dialog.py:61
 #: mast/tui/cron/window.py:317
 msgid "Command to execute"
-msgstr "执行的命令"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:57 mast/gtk4/cron/manager.py:117
 #: mast/gtk4/hosts/window.py:97 mast/gtk4/ssh/keys_generate_dialog.py:65
@@ -177,17 +176,17 @@ msgstr "执行的命令"
 #: mast/tui/hosts/window.py:269 mast/tui/ssh/window.py:293
 #: mast/tui/ssh/window.py:622
 msgid "Comment"
-msgstr "備註"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:61 mast/qt6/cron/cron_edit_dialog.py:66
 #: mast/tui/cron/window.py:321 mast/tui/ssh/window.py:623
 msgid "Optional comment"
-msgstr "可选備註"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:91 mast/gtk4/cron/cron_edit_dialog.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:93 mast/qt6/cron/cron_edit_dialog.py:99
 msgid "Suggestions"
-msgstr "建议"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:128 mast/gtk4/cron/manager.py:251
 #: mast/gtk4/datetime/window.py:178 mast/gtk4/datetime/window.py:227
@@ -291,12 +290,11 @@ msgstr "建议"
 #: mast/qt6/users/users_manager.py:268 mast/qt6/users/users_manager.py:294
 #: mast/qt6/users/users_manager.py:300
 msgid "Error"
-msgstr "錯誤"
+msgstr ""
 
 #: mast/gtk4/cron/cron_edit_dialog.py:130 mast/qt6/cron/cron_edit_dialog.py:111
-#, fuzzy
 msgid "Command cannot be empty"
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:40 mast/gtk4/flatpak/remote_manager.py:28
 #: mast/gtk4/hosts/window.py:33 mast/gtk4/repositories/window.py:40
@@ -311,7 +309,7 @@ msgstr "主機名不能為空。"
 #: mast/tui/repositories/window.py:70 mast/tui/ssh/window.py:259
 #: mast/tui/users/window.py:105 mast/tui/users/window.py:141
 msgid "Add"
-msgstr "新增"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:44 mast/gtk4/flatpak/remote_manager.py:32
 #: mast/gtk4/flatpak/remote_manager.py:233 mast/gtk4/hosts/window.py:37
@@ -322,7 +320,7 @@ msgstr "新增"
 #: mast/tui/cron/window.py:80 mast/tui/hosts/window.py:70
 #: mast/tui/repositories/window.py:71 mast/tui/ssh/window.py:260
 msgid "Edit"
-msgstr "編輯"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:49 mast/gtk4/flatpak/remote_manager.py:36
 #: mast/gtk4/hosts/window.py:41 mast/gtk4/repositories/window.py:51
@@ -342,7 +340,7 @@ msgstr "編輯"
 #: mast/tui/ssh/window.py:269 mast/tui/users/window.py:106
 #: mast/tui/users/window.py:142
 msgid "Delete"
-msgstr "刪除"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:57 mast/gtk4/datetime/window.py:157
 #: mast/gtk4/git/window.py:70 mast/gtk4/hostname/window.py:48
@@ -361,7 +359,7 @@ msgstr "刪除"
 #: mast/tui/ssh/window.py:262 mast/tui/users/window.py:107
 #: mast/tui/users/window.py:143
 msgid "Save"
-msgstr "儲存"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:76 mast/gtk4/hosts/window.py:76
 #: mast/gtk4/repositories/repo_edit_dialog.py:38
@@ -373,7 +371,7 @@ msgstr "儲存"
 #: mast/tui/repositories/window.py:353 mast/tui/services/window.py:126
 #: mast/tui/ssh/window.py:288
 msgid "Enabled"
-msgstr "启用"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:187 mast/gtk4/cron/manager.py:217
 #: mast/gtk4/flatpak/package_manager.py:299
@@ -402,17 +400,17 @@ msgstr "启用"
 #: mast/qt6/snapshots/window.py:175 mast/qt6/snapshots/window.py:191
 #: mast/qt6/ssh/hosts_tab.py:148 mast/qt6/ssh/hosts_tab.py:169
 msgid "Information"
-msgstr "信息"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:187 mast/qt6/cron/manager.py:161
 #: mast/tui/cron/window.py:186
 msgid "Please select a cron job to edit."
-msgstr "請選擇要編輯的排程工作。"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:217 mast/qt6/cron/manager.py:179
 #: mast/tui/cron/window.py:205
 msgid "Please select a cron job to delete."
-msgstr "請選擇要刪除的排程工作。"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:225 mast/gtk4/flatpak/package_manager.py:338
 #: mast/gtk4/flatpak/remote_manager.py:132
@@ -431,11 +429,11 @@ msgstr "請選擇要刪除的排程工作。"
 #: mast/qt6/ssh/keys_generate_dialog.py:184
 #: mast/qt6/users/groups_manager.py:214 mast/qt6/users/users_manager.py:273
 msgid "Confirm"
-msgstr "确认"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:227 mast/qt6/cron/manager.py:183
 msgid "Are you sure you want to delete this cron job?"
-msgstr "您確定要刪除此排程工作吗？"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:249 mast/gtk4/datetime/window.py:229
 #: mast/gtk4/datetime/window.py:235 mast/gtk4/flatpak/package_manager.py:314
@@ -464,11 +462,11 @@ msgstr "您確定要刪除此排程工作吗？"
 #: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
 #: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
 msgid "Success"
-msgstr "成功"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:249 mast/qt6/cron/manager.py:229
 msgid "Cron jobs saved successfully."
-msgstr "排程工作儲存成功。"
+msgstr ""
 
 #: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:238
 #: mast/gtk4/hostname/window.py:108 mast/gtk4/languages/settings.py:145
@@ -476,7 +474,7 @@ msgstr "排程工作儲存成功。"
 #: mast/qt6/datetime/window.py:211 mast/qt6/hostname/window.py:130
 #: mast/qt6/languages/settings.py:144 mast/qt6/proxy/window.py:117
 msgid "Permission denied. Root permission required."
-msgstr "權限被拒絕。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/cron/window.py:31 mast/gtk4/flatpak/remote_manager.py:189
 #: mast/gtk4/git/window.py:46 mast/gtk4/journal/window.py:66
@@ -491,7 +489,7 @@ msgstr "權限被拒絕。需要 root 權限。"
 #: mast/tui/users/window.py:173 mast/tui/users/window.py:233
 #: mast/tui/users/window.py:494
 msgid "User"
-msgstr "使用者"
+msgstr ""
 
 #: mast/gtk4/cron/window.py:35 mast/gtk4/flatpak/remote_manager.py:188
 #: mast/gtk4/journal/window.py:65 mast/gtk4/services/window.py:67
@@ -501,85 +499,84 @@ msgstr "使用者"
 #: mast/tui/cron/window.py:72 mast/tui/services/window.py:94
 #: mast/tui/services/window.py:188 mast/tui/users/window.py:233
 msgid "System"
-msgstr "系統"
+msgstr ""
 
 #: mast/gtk4/datetime/__init__.py:16 mast/qt6/datetime/__init__.py:12
 #: mast/tui/datetime/__init__.py:10
 msgid "Date & Time"
-msgstr "日期和時間"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:47 mast/gtk4/datetime/window.py:58
 #: mast/qt6/datetime/window.py:63 mast/tui/datetime/window.py:97
 msgid "Timezone"
-msgstr "時區"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:73
 msgid "Search timezone..."
-msgstr "搜尋時區..."
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:84 mast/tui/datetime/window.py:102
 msgid "Hardware Clock"
-msgstr "硬體時鐘"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:97 mast/qt6/datetime/window.py:83
 #: mast/tui/datetime/window.py:103
 msgid "Set hardware clock to UTC"
-msgstr "將硬體時鐘設定為UTC"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:108 mast/tui/datetime/window.py:106
 msgid "NTP Synchronization"
-msgstr "NTP同步"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:119 mast/qt6/datetime/window.py:97
 #: mast/tui/datetime/window.py:107
 msgid "Enable NTP synchronization"
-msgstr "啟用NTP同步"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:126 mast/qt6/datetime/window.py:105
 #: mast/tui/datetime/window.py:109
 msgid "NTP Servers"
-msgstr "NTP伺服器"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:132 mast/qt6/datetime/window.py:110
 msgid "Enter NTP servers separated by spaces"
-msgstr "輸入用空格分隔的NTP伺服器"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:139 mast/qt6/datetime/window.py:118
 #: mast/tui/datetime/window.py:112
 msgid "Sync Now"
-msgstr "立即同步"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:178 mast/qt6/datetime/window.py:148
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load timezone: {0}"
-msgstr "載入時區失敗"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:202 mast/qt6/datetime/window.py:175
 #: mast/tui/datetime/window.py:226
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Timezone: {0}"
-msgstr "時區"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:207 mast/qt6/datetime/window.py:180
 #: mast/tui/datetime/window.py:231
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Hardware clock: {0}"
-msgstr "硬體時鐘"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:218 mast/gtk4/datetime/window.py:220
 #: mast/gtk4/datetime/window.py:224 mast/qt6/datetime/window.py:191
 #: mast/qt6/datetime/window.py:193 mast/qt6/datetime/window.py:197
 #: mast/tui/datetime/window.py:242 mast/tui/datetime/window.py:244
 #: mast/tui/datetime/window.py:248
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "NTP: {0}"
-msgstr "選項：{0}"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:229 mast/qt6/datetime/window.py:202
 #: mast/tui/datetime/window.py:253
-#, fuzzy
 msgid "All settings saved successfully."
-msgstr "NTP設定更新成功"
+msgstr ""
 
 #: mast/gtk4/datetime/window.py:240 mast/gtk4/hostname/window.py:110
 #: mast/gtk4/hosts/window.py:252 mast/gtk4/languages/settings.py:147
@@ -587,39 +584,39 @@ msgstr "NTP設定更新成功"
 #: mast/qt6/hostname/window.py:134 mast/qt6/hosts/window.py:275
 #: mast/qt6/languages/settings.py:148
 msgid "Authentication failed or pkexec not available."
-msgstr "認證失敗或 pkexec 不可用。"
+msgstr ""
 
 #: mast/gtk4/flatpak/__init__.py:16 mast/qt6/flatpak/__init__.py:10
 msgid "Flatpak"
-msgstr "Flatpak"
+msgstr ""
 
 #: mast/gtk4/flatpak/install_action.py:20
 #: mast/gtk4/flatpak/install_action.py:22 mast/qt6/flatpak/install_action.py:16
 #: mast/qt6/flatpak/install_action.py:18
 msgid "Install Flatpak"
-msgstr "安裝 Flatpak"
+msgstr ""
 
 #: mast/gtk4/flatpak/install_action.py:21 mast/qt6/flatpak/install_action.py:17
 msgid "Installing Flatpak..."
-msgstr "正在安裝 Flatpak..."
+msgstr ""
 
 #: mast/gtk4/flatpak/install_action.py:24 mast/gtk4/flatpak/window.py:86
 #: mast/qt6/flatpak/install_action.py:20 mast/qt6/flatpak/window.py:89
 msgid "Flatpak installed successfully."
-msgstr "Flatpak 安裝成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:79 mast/gtk4/languages/manager.py:32
 #: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:113
 #: mast/qt6/flatpak/package_manager.py:78 mast/qt6/languages/manager.py:41
 #: mast/qt6/languages/manager.py:147 mast/qt6/languages/settings.py:107
 msgid "Install"
-msgstr "安裝"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:82
 #: mast/gtk4/flatpak/runtime_manager.py:31
 #: mast/qt6/flatpak/runtime_manager.py:36
 msgid "Remove"
-msgstr "移除"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:94
 #: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
@@ -631,7 +628,7 @@ msgstr "移除"
 #: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
 #: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
 msgid "Search"
-msgstr "搜尋"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:98
 #: mast/gtk4/flatpak/runtime_manager.py:47 mast/gtk4/git/window.py:75
@@ -640,7 +637,7 @@ msgstr "搜尋"
 #: mast/qt6/flatpak/runtime_manager.py:68 mast/qt6/git/window.py:82
 #: mast/tui/git/window.py:82
 msgid "Reset"
-msgstr "重置"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:102
 #: mast/gtk4/flatpak/package_manager.py:180
@@ -659,19 +656,19 @@ msgstr "重置"
 #: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:73
 #: mast/tui/snapshots/window.py:135
 msgid "Refresh"
-msgstr "重新整理"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:111
 #: mast/qt6/flatpak/package_manager.py:166
 #: mast/qt6/flatpak/package_manager.py:236
 msgid "Prev"
-msgstr "上一頁"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:118
 #: mast/qt6/flatpak/package_manager.py:174
 #: mast/qt6/flatpak/package_manager.py:244
 msgid "Next"
-msgstr "下一頁"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:128
 #: mast/gtk4/flatpak/package_manager.py:141
@@ -683,7 +680,7 @@ msgstr "下一頁"
 #: mast/qt6/repositories/repo_edit_dialog.py:31 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:83
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:129
 #: mast/gtk4/flatpak/package_manager.py:142
@@ -703,7 +700,7 @@ msgstr "ID"
 #: mast/tui/repositories/window.py:332 mast/tui/services/window.py:123
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:613
 msgid "Name"
-msgstr "名稱"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:130
 #: mast/gtk4/flatpak/package_manager.py:143
@@ -715,9 +712,8 @@ msgstr "名稱"
 #: mast/qt6/snapshots/window.py:77 mast/qt6/snapshots/window.py:168
 #: mast/tui/services/window.py:127 mast/tui/snapshots/window.py:70
 #: mast/tui/snapshots/window.py:87
-#, fuzzy
 msgid "Description"
-msgstr "編輯選項"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:131
 #: mast/gtk4/flatpak/package_manager.py:144
@@ -726,12 +722,12 @@ msgstr "編輯選項"
 #: mast/qt6/flatpak/package_manager.py:216
 #: mast/qt6/flatpak/runtime_manager.py:85
 msgid "Version"
-msgstr "版本"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:132
 #: mast/qt6/flatpak/package_manager.py:145
 msgid "Download Size"
-msgstr "下載大小"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:133
 #: mast/gtk4/flatpak/package_manager.py:146
@@ -740,7 +736,7 @@ msgstr "下載大小"
 #: mast/qt6/flatpak/package_manager.py:218
 #: mast/qt6/flatpak/runtime_manager.py:86
 msgid "Branch"
-msgstr "分支"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:134
 #: mast/gtk4/flatpak/package_manager.py:147
@@ -749,7 +745,7 @@ msgstr "分支"
 #: mast/qt6/flatpak/package_manager.py:219
 #: mast/qt6/flatpak/runtime_manager.py:88
 msgid "Remote"
-msgstr "遠端"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:135
 #: mast/gtk4/flatpak/package_manager.py:148
@@ -764,83 +760,83 @@ msgstr "遠端"
 #: mast/qt6/services/window.py:116 mast/tui/services/window.py:90
 #: mast/tui/services/window.py:124
 msgid "Scope"
-msgstr "範圍"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:136 mast/gtk4/flatpak/window.py:54
 #: mast/gtk4/languages/manager.py:89 mast/gtk4/languages/manager.py:120
 #: mast/qt6/flatpak/package_manager.py:149 mast/qt6/flatpak/window.py:58
 #: mast/qt6/languages/manager.py:78 mast/qt6/languages/manager.py:105
 msgid "Installed"
-msgstr "已安裝"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:145
 #: mast/gtk4/flatpak/runtime_manager.py:70
 #: mast/qt6/flatpak/package_manager.py:217
 #: mast/qt6/flatpak/runtime_manager.py:87
 msgid "Installed Size"
-msgstr "已安裝大小"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:175
 #: mast/gtk4/snapshots/window.py:179 mast/qt6/flatpak/package_manager.py:275
 #: mast/qt6/snapshots/window.py:99 mast/qt6/snapshots/window.py:103
 #: mast/tui/snapshots/window.py:109
 msgid "Loading..."
-msgstr "載入中..."
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:221
 #: mast/qt6/flatpak/package_manager.py:475
 #, python-brace-format
 msgid "Failed to load package catalog: {0}"
-msgstr "載入軟體套件目錄失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:242
 #: mast/qt6/flatpak/package_manager.py:491
 #, python-brace-format
 msgid "Failed to load Flatpak packages: {0}"
-msgstr "載入 Flatpak 軟體套件失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:300
 #: mast/qt6/flatpak/package_manager.py:347
 msgid "Please select a package from the list to install."
-msgstr "請從清單中選擇要安裝的軟體套件。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:308
 #: mast/qt6/flatpak/package_manager.py:351
 msgid "The selected package is already installed."
-msgstr "選取的軟體套件已安裝。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:314
 #: mast/qt6/flatpak/package_manager.py:82
 msgid "Package installed successfully."
-msgstr "軟體套件安裝成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:320
 #: mast/qt6/flatpak/package_manager.py:387
 #, python-brace-format
 msgid "Failed to install package: {0}"
-msgstr "安裝軟體套件失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:329
 #: mast/qt6/flatpak/package_manager.py:364
 msgid "Please select an installed package from the list."
-msgstr "請從清單中選擇已安裝的軟體套件。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:342
 #: mast/qt6/flatpak/package_manager.py:370
 #, python-brace-format
 msgid "Are you sure you want to remove package '{0}'?"
-msgstr "您確定要移除軟體套件 '{0}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/qt6/flatpak/package_manager.py:96
 msgid "Package removed successfully."
-msgstr "軟體套件移除成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:360
 #: mast/qt6/flatpak/package_manager.py:398
 #, python-brace-format
 msgid "Failed to remove package: {0}"
-msgstr "移除軟體套件失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
@@ -848,7 +844,7 @@ msgstr "移除軟體套件失敗：{0}"
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
 #: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
 msgid "Yes"
-msgstr "是"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
@@ -856,7 +852,7 @@ msgstr "是"
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
 #: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
 msgid "No"
-msgstr "否"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:53
 #: mast/gtk4/flatpak/remote_manager.py:194
@@ -867,289 +863,281 @@ msgstr "否"
 #: mast/qt6/repositories/repo_edit_dialog.py:58
 #: mast/qt6/repositories/window.py:70 mast/tui/repositories/window.py:80
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:81 mast/qt6/flatpak/remote_manager.py:74
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load Flatpak remotes: {0}"
-msgstr "加载主機名失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:112
 #: mast/qt6/flatpak/remote_manager.py:102
-#, fuzzy
 msgid "Please select a remote to edit."
-msgstr "請選擇要編輯的主機。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:123
 #: mast/qt6/flatpak/remote_manager.py:121
-#, fuzzy
 msgid "Please select a remote to delete."
-msgstr "請選擇要刪除的主機。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:136
 #: mast/qt6/flatpak/remote_manager.py:128
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Are you sure you want to delete remote '{0}'?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:156
 #: mast/qt6/flatpak/remote_manager.py:135
-#, fuzzy
 msgid "Remote deleted successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:163
 #: mast/qt6/flatpak/remote_manager.py:138
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to delete remote: {0}"
-msgstr "刪除軟體來源失敗：%s"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:168
 #: mast/qt6/flatpak/remote_manager.py:87
-#, fuzzy
 msgid "Add Remote"
-msgstr "新增軟體來源"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:220
 #: mast/qt6/flatpak/remote_manager.py:94
 msgid "Remote added successfully."
-msgstr "遠端新增成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:227
 #: mast/qt6/flatpak/remote_manager.py:97
 #, python-brace-format
 msgid "Failed to add remote: {0}"
-msgstr "新增遠端失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:282
 #: mast/qt6/flatpak/remote_manager.py:113
 msgid "Remote URL updated successfully."
-msgstr "遠端 URL 更新成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remote_manager.py:289
 #: mast/qt6/flatpak/remote_manager.py:116
 #, python-brace-format
 msgid "Failed to update remote URL: {0}"
-msgstr "更新遠端 URL 失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:20 mast/gtk4/flatpak/remove_action.py:22
 #: mast/qt6/flatpak/remove_action.py:17 mast/qt6/flatpak/remove_action.py:19
 msgid "Remove Flatpak"
-msgstr "移除 Flatpak"
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:21 mast/qt6/flatpak/remove_action.py:18
 msgid "Removing Flatpak..."
-msgstr "正在移除 Flatpak..."
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:24 mast/gtk4/flatpak/settings.py:44
 #: mast/qt6/flatpak/remove_action.py:21 mast/qt6/flatpak/window.py:100
 msgid "Flatpak removed successfully."
-msgstr "Flatpak 移除成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:40 mast/qt6/flatpak/remove_action.py:38
 msgid "Are you sure you want to remove Flatpak?"
-msgstr "您確定要移除 Flatpak 嗎？"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:91
 #: mast/qt6/flatpak/runtime_manager.py:160
 #, python-brace-format
 msgid "Failed to load Flatpak runtimes: {0}"
-msgstr "載入 Flatpak 執行時間失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:115
 #: mast/qt6/flatpak/runtime_manager.py:134
 msgid "Please select an installed runtime from the list."
-msgstr "請從清單中選擇已安裝的執行時間。"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:128
 #: mast/qt6/flatpak/runtime_manager.py:140
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Are you sure you want to remove runtime '{0}'?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:140
 #: mast/qt6/flatpak/runtime_manager.py:40
-#, fuzzy
 msgid "Runtime removed successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:146
 #: mast/qt6/flatpak/runtime_manager.py:154
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to remove runtime: {0}"
-msgstr "讀取公鑰失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/settings.py:51 mast/qt6/flatpak/window.py:106
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to remove Flatpak: {0}"
-msgstr "產生金鑰失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:33
-#, fuzzy
 msgid "Flatpak is not installed"
-msgstr "系統未安裝 Git。"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:55 mast/qt6/flatpak/window.py:59
 msgid "Runtimes"
-msgstr "執行時間"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:56 mast/qt6/flatpak/window.py:60
-#, fuzzy
 msgid "Remotes"
-msgstr "軟體來源"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:57 mast/qt6/flatpak/window.py:61
-#, fuzzy
 msgid "Settings"
-msgstr "建议"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:92 mast/qt6/flatpak/window.py:95
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to install Flatpak: {0}"
-msgstr "產生金鑰失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/git/__init__.py:16 mast/qt6/git/__init__.py:10
 #: mast/tui/git/__init__.py:12
 msgid "Git"
-msgstr "Git"
+msgstr ""
 
 #: mast/gtk4/git/window.py:33 mast/qt6/git/window.py:39
 msgid "Git is not installed on this system."
-msgstr "系統未安裝 Git。"
+msgstr ""
 
 #: mast/gtk4/git/window.py:50 mast/qt6/git/window.py:55
 #: mast/tui/git/window.py:72
 msgid "Core"
-msgstr "核心"
+msgstr ""
 
 #: mast/gtk4/git/window.py:54 mast/qt6/git/window.py:60
 #: mast/tui/git/window.py:74
 msgid "Commit"
-msgstr "提交"
+msgstr ""
 
 #: mast/gtk4/git/window.py:58 mast/qt6/git/window.py:65
 #: mast/tui/git/window.py:76
 msgid "Merge"
-msgstr "合并"
+msgstr ""
 
 #: mast/gtk4/git/window.py:62 mast/qt6/git/window.py:70
 #: mast/tui/git/window.py:78
 msgid "Other"
-msgstr "其他"
+msgstr ""
 
 #: mast/gtk4/git/window.py:93 mast/qt6/git/window.py:95
 #: mast/tui/git/window.py:88
 msgid "User Name"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/gtk4/git/window.py:93 mast/qt6/git/window.py:97
 #: mast/tui/git/window.py:89
 msgid "Enter your Git user name"
-msgstr "输入您的 Git 使用者名"
+msgstr ""
 
 #: mast/gtk4/git/window.py:96 mast/qt6/git/window.py:103
 #: mast/tui/git/window.py:91
 msgid "Email Address"
-msgstr "邮箱地址"
+msgstr ""
 
 #: mast/gtk4/git/window.py:96 mast/qt6/git/window.py:105
 #: mast/tui/git/window.py:92
 msgid "Enter your Git email address"
-msgstr "输入您的 Git 邮箱地址"
+msgstr ""
 
 #: mast/gtk4/git/window.py:99 mast/qt6/git/window.py:111
 #: mast/tui/git/window.py:94
 msgid "GPG Signing Key"
-msgstr "GPG 签名金鑰"
+msgstr ""
 
 #: mast/gtk4/git/window.py:99 mast/qt6/git/window.py:113
 #: mast/tui/git/window.py:95
 msgid "Enter GPG key ID"
-msgstr "输入 GPG 金鑰 ID"
+msgstr ""
 
 #: mast/gtk4/git/window.py:112 mast/qt6/git/window.py:126
 #: mast/tui/git/window.py:100
 msgid "Default Editor"
-msgstr "默认編輯器"
+msgstr ""
 
 #: mast/gtk4/git/window.py:112 mast/qt6/git/window.py:128
 #: mast/tui/git/window.py:101
 msgid "e.g., vim, nano, code"
-msgstr "例如：vim, nano, code"
+msgstr ""
 
 #: mast/gtk4/git/window.py:115 mast/qt6/git/window.py:134
 #: mast/tui/git/window.py:103
 msgid "Auto CRLF"
-msgstr "自動 CRLF"
+msgstr ""
 
 #: mast/gtk4/git/window.py:118 mast/qt6/git/window.py:143
 #: mast/tui/git/window.py:110
 msgid "Safe CRLF"
-msgstr "安全 CRLF"
+msgstr ""
 
 #: mast/gtk4/git/window.py:132 mast/qt6/git/window.py:159
 #: mast/tui/git/window.py:120
 msgid "Commit Template"
-msgstr "提交模板"
+msgstr ""
 
 #: mast/gtk4/git/window.py:138 mast/tui/git/window.py:121
 msgid "Path to commit template"
-msgstr "提交模板路徑"
+msgstr ""
 
 #: mast/gtk4/git/window.py:143 mast/qt6/git/window.py:162
 msgid "Browse"
-msgstr "浏览"
+msgstr ""
 
 #: mast/gtk4/git/window.py:150 mast/qt6/git/window.py:168
 #: mast/tui/git/window.py:122
 msgid "Sign commits with GPG"
-msgstr "使用 GPG 签名提交"
+msgstr ""
 
 #: mast/gtk4/git/window.py:165 mast/qt6/git/window.py:181
 #: mast/tui/git/window.py:127
 msgid "Conflict Style"
-msgstr "冲突样式"
+msgstr ""
 
 #: mast/gtk4/git/window.py:168 mast/qt6/git/window.py:190
 #: mast/tui/git/window.py:134
 msgid "Pull Rebase"
-msgstr "拉取時變基"
+msgstr ""
 
 #: mast/gtk4/git/window.py:181 mast/qt6/git/window.py:205
 #: mast/tui/git/window.py:143
 msgid "Enable color output"
-msgstr "启用彩色输出"
+msgstr ""
 
 #: mast/gtk4/git/window.py:186 mast/qt6/git/window.py:211
 #: mast/tui/git/window.py:145
 msgid "Default Branch Name"
-msgstr "默认分支名称"
+msgstr ""
 
 #: mast/gtk4/git/window.py:186 mast/qt6/git/window.py:213
 #: mast/tui/git/window.py:146
 msgid "e.g., main, master"
-msgstr "例如：main, master"
+msgstr ""
 
 #: mast/gtk4/git/window.py:189 mast/qt6/git/window.py:219
 #: mast/tui/git/window.py:148
 msgid "Credential Helper"
-msgstr "凭据助手"
+msgstr ""
 
 #: mast/gtk4/git/window.py:235 mast/qt6/git/window.py:233
 msgid "Select Commit Template"
-msgstr "選擇提交模板"
+msgstr ""
 
 #: mast/gtk4/git/window.py:256 mast/qt6/git/window.py:248
 msgid "User name and email are required."
-msgstr "使用者名和邮箱為必填项。"
+msgstr ""
 
 #: mast/gtk4/git/window.py:275 mast/qt6/git/window.py:269
 msgid "Git configuration saved successfully."
-msgstr "Git 設定儲存成功。"
+msgstr ""
 
 #: mast/gtk4/git/window.py:277 mast/qt6/git/window.py:274
 msgid "Failed to save Git configuration."
-msgstr "儲存 Git 設定失敗。"
+msgstr ""
 
 #: mast/gtk4/hostname/__init__.py:16 mast/gtk4/hostname/window.py:32
 #: mast/gtk4/hosts/window.py:90 mast/qt6/hostname/__init__.py:10
@@ -1157,137 +1145,135 @@ msgstr "儲存 Git 設定失敗。"
 #: mast/tui/hostname/__init__.py:12 mast/tui/hostname/window.py:66
 #: mast/tui/hosts/window.py:79 mast/tui/hosts/window.py:266
 msgid "Hostname"
-msgstr "主機名"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:38 mast/qt6/hostname/window.py:42
 #: mast/tui/hostname/window.py:67
 msgid "Enter hostname"
-msgstr "输入主機名"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:66 mast/qt6/hostname/window.py:66
 msgid "/etc/hostname not found."
-msgstr "/etc/hostname 未找到。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:68 mast/qt6/hostname/window.py:71
 msgid "Cannot read /etc/hostname. Root permission required."
-msgstr "无法讀取 /etc/hostname。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:70 mast/qt6/hostname/window.py:75
 #, python-brace-format
 msgid "Failed to load hostname: {0}"
-msgstr "加载主機名失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:77 mast/qt6/hostname/window.py:83
 msgid "Hostname cannot be empty."
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:82 mast/qt6/hostname/window.py:89
 msgid "Hostname is too long (maximum 253 characters)."
-msgstr "主機名過長（最多 253 個字符）。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:88 mast/qt6/hostname/window.py:97
 msgid "Hostname contains invalid characters."
-msgstr "主機名套件含无效字符。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:98 mast/qt6/hostname/window.py:111
 #, python-brace-format
 msgid "Are you sure you want to change the hostname from '{0}' to '{1}'?"
-msgstr "您確定要将主機名從 '{0}' 改為 '{1}' 吗？"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:105 mast/qt6/hostname/window.py:125
 #, python-brace-format
 msgid "Hostname changed successfully to '{0}'."
-msgstr "主機名已成功更改為 '{0}'。"
+msgstr ""
 
 #: mast/gtk4/hostname/window.py:112 mast/qt6/hostname/window.py:138
 #, python-brace-format
 msgid "Failed to set hostname: {0}"
-msgstr "设置主機名失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/hosts/__init__.py:16 mast/gtk4/ssh/window.py:32
 #: mast/qt6/hosts/__init__.py:10 mast/qt6/ssh/window.py:36
 #: mast/tui/hosts/__init__.py:12 mast/tui/ssh/window.py:250
 msgid "Hosts"
-msgstr "主機"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:83 mast/qt6/hosts/window.py:63
 #: mast/tui/hosts/window.py:79 mast/tui/hosts/window.py:263
 msgid "IP Address"
-msgstr "IP 地址"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:119 mast/gtk4/proxy/window.py:89
 #: mast/qt6/hosts/window.py:104 mast/qt6/proxy/window.py:88
 #, python-brace-format
 msgid "Cannot read {0}. Root permission required."
-msgstr "无法讀取 {0}。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:122 mast/gtk4/proxy/window.py:83
 #: mast/qt6/hosts/window.py:109 mast/qt6/proxy/window.py:83
 #, python-brace-format
 msgid "{0} not found."
-msgstr "{0} 未找到。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:176 mast/gtk4/hosts/window.py:212
 #: mast/qt6/hosts/window.py:179 mast/qt6/hosts/window.py:216
 msgid "IP address and hostname are required."
-msgstr "IP 地址和主機名是必要的。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:183 mast/gtk4/ssh/hosts_tab.py:159
 #: mast/qt6/hosts/window.py:187 mast/qt6/ssh/hosts_tab.py:148
 #: mast/tui/hosts/window.py:130
 msgid "Please select a host entry to edit."
-msgstr "請選擇要編輯的主機項目。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:219 mast/gtk4/ssh/hosts_tab.py:187
 #: mast/qt6/hosts/window.py:224 mast/qt6/ssh/hosts_tab.py:169
 #: mast/tui/hosts/window.py:149
 msgid "Please select a host entry to delete."
-msgstr "請選擇要刪除的主機項目。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:230 mast/gtk4/ssh/hosts_tab.py:206
 #: mast/qt6/hosts/window.py:229 mast/qt6/ssh/hosts_tab.py:181
 msgid "Are you sure you want to delete this entry?"
-msgstr "您確定要刪除此項目吗？"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:248 mast/qt6/hosts/window.py:264
 msgid "Hosts file saved successfully."
-msgstr "主機檔案儲存成功。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:250 mast/qt6/hosts/window.py:271
 #, python-brace-format
 msgid "Cannot write to {0}. Root permission required."
-msgstr "无法寫入 {0}。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:254 mast/qt6/hosts/window.py:278
 msgid "Failed to save hosts file."
-msgstr "儲存主機檔案失敗。"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:275 mast/qt6/hosts/dialogs.py:29
 msgid "Add/Edit Host Entry"
-msgstr "新增/編輯主機項目"
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:295 mast/qt6/hosts/dialogs.py:36
 msgid "IP Address:"
-msgstr "IP 地址："
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:307 mast/qt6/hosts/dialogs.py:45
 msgid "Hostname:"
-msgstr "主機名："
+msgstr ""
 
 #: mast/gtk4/hosts/window.py:319 mast/qt6/hosts/dialogs.py:52
 #: mast/qt6/ssh/keys_generate_dialog.py:123
 msgid "Comment:"
-msgstr "備註："
+msgstr ""
 
 #: mast/gtk4/journal/__init__.py:16 mast/qt6/journal/__init__.py:10
-#, fuzzy
 msgid "Journal"
-msgstr "URL"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:67 mast/qt6/journal/window.py:78
-#, fuzzy
 msgid "Configuration"
-msgstr "代理設定"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:78 mast/gtk4/journal/window.py:124
 #: mast/gtk4/journal/window.py:175
@@ -1297,7 +1283,7 @@ msgstr "代理設定"
 #: mast/qt6/repositories/window.py:70 mast/tui/repositories/window.py:80
 #: mast/tui/repositories/window.py:341
 msgid "Priority"
-msgstr "優先順序"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:80 mast/gtk4/journal/window.py:126
 #: mast/gtk4/services/window.py:55 mast/gtk4/services/window.py:66
@@ -1305,57 +1291,49 @@ msgstr "優先順序"
 #: mast/qt6/services/window.py:69 mast/tui/services/window.py:81
 #: mast/tui/services/window.py:93
 msgid "All"
-msgstr "全部"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:89 mast/gtk4/journal/window.py:135
 #: mast/qt6/journal/window.py:95
-#, fuzzy
 msgid "Search messages"
-msgstr "搜尋時區..."
+msgstr ""
 
 #: mast/gtk4/journal/window.py:101 mast/gtk4/journal/window.py:147
 #: mast/qt6/journal/window.py:106
-#, fuzzy
 msgid "Clear"
-msgstr "清理"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:169 mast/qt6/journal/window.py:115
-#, fuzzy
 msgid "Time"
-msgstr "時區"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:181 mast/qt6/journal/window.py:115
-#, fuzzy
 msgid "Unit"
-msgstr "解除安裝"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:187 mast/qt6/journal/window.py:115
-#, fuzzy
 msgid "Message"
-msgstr "合并"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:203 mast/qt6/journal/window.py:152
 msgid "Max File Size (e.g., 500M, 1G)"
 msgstr ""
 
 #: mast/gtk4/journal/window.py:205 mast/qt6/journal/window.py:154
-#, fuzzy
 msgid "SystemMaxUse"
-msgstr "系統語言"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:209 mast/qt6/journal/window.py:158
 msgid "Max Number of Files"
 msgstr ""
 
 #: mast/gtk4/journal/window.py:211 mast/qt6/journal/window.py:160
-#, fuzzy
 msgid "SystemMaxFiles"
-msgstr "系統"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:215 mast/qt6/journal/window.py:164
-#, fuzzy
 msgid "Compress"
-msgstr "核心"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:220 mast/qt6/journal/window.py:169
 msgid "Rate Limit Interval (e.g., 30s)"
@@ -1366,262 +1344,252 @@ msgid "RateLimitInterval"
 msgstr ""
 
 #: mast/gtk4/journal/window.py:226 mast/qt6/journal/window.py:175
-#, fuzzy
 msgid "Rate Limit Burst"
-msgstr "可用空間限制"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:228 mast/qt6/journal/window.py:177
 msgid "RateLimitBurst"
 msgstr ""
 
 #: mast/gtk4/journal/window.py:232 mast/qt6/journal/window.py:181
-#, fuzzy
 msgid "Save Configuration"
-msgstr "Snapper 設定"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:281 mast/qt6/journal/window.py:208
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load journal: {0}"
-msgstr "載入語言環境失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:339 mast/qt6/journal/window.py:272
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load configuration: {0}"
-msgstr "載入代理設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:356 mast/qt6/journal/window.py:289
-#, fuzzy
 msgid "Journal configuration saved successfully."
-msgstr "設定儲存成功。"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:362 mast/qt6/journal/window.py:295
-#, fuzzy
 msgid "Failed to save journal configuration."
-msgstr "儲存 Git 設定失敗。"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:368 mast/qt6/journal/window.py:301
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to save configuration: {0}"
-msgstr "儲存代理設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:377 mast/qt6/journal/window.py:307
 msgid "Clear Journal"
 msgstr ""
 
 #: mast/gtk4/journal/window.py:379 mast/qt6/journal/window.py:308
-#, fuzzy
 msgid "Are you sure you want to clear all journal logs?"
-msgstr "您確定要移除 Flatpak 嗎？"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:390 mast/qt6/journal/window.py:320
-#, fuzzy
 msgid "Journal cleared successfully."
-msgstr "快照建立成功。"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:397 mast/qt6/journal/window.py:327
-#, fuzzy
 msgid "Failed to clear journal."
-msgstr "儲存 SSH 設定失敗。"
+msgstr ""
 
 #: mast/gtk4/journal/window.py:403 mast/qt6/journal/window.py:333
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to clear journal: {0}"
-msgstr "讀取設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/languages/__init__.py:16 mast/qt6/languages/__init__.py:10
 #: mast/tui/languages/__init__.py:10
 msgid "Languages"
-msgstr "語言"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
 #: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
 msgid "Uninstall"
-msgstr "解除安裝"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:57 mast/qt6/languages/manager.py:56
 msgid "Code"
-msgstr "代碼"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:68 mast/gtk4/services/window.py:53
 #: mast/gtk4/services/window.py:133 mast/qt6/languages/manager.py:58
 #: mast/qt6/services/window.py:57 mast/qt6/services/window.py:116
 #: mast/tui/services/window.py:78 mast/tui/services/window.py:125
 msgid "Status"
-msgstr "狀態"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:120 mast/qt6/languages/manager.py:105
 msgid "Not Installed"
-msgstr "未安裝"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:131 mast/qt6/languages/manager.py:123
 #, python-brace-format
 msgid "Failed to load locales: {0}"
-msgstr "載入語言環境失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:148 mast/qt6/languages/manager.py:132
 msgid "Please select a locale to install."
-msgstr "請選擇要安裝的語言。"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:161
 #, python-brace-format
 msgid "Are you sure you want to install language '{0}' ({1})?"
-msgstr "您確定要安裝語言 '{0}' ({1}) 嗎？"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:114
 #: mast/qt6/languages/manager.py:148 mast/qt6/languages/settings.py:108
 msgid "Installing..."
-msgstr "正在安裝..."
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:170 mast/gtk4/languages/settings.py:115
 #: mast/qt6/languages/manager.py:149 mast/qt6/languages/settings.py:109
 msgid "Install Language"
-msgstr "安裝語言"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:172 mast/gtk4/languages/settings.py:117
 #: mast/qt6/languages/manager.py:151 mast/qt6/languages/settings.py:111
 #, python-brace-format
 msgid "Language '{0}' installed successfully."
-msgstr "語言 '{0}' 安裝成功。"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:182 mast/qt6/languages/manager.py:160
 msgid "Please select a language to uninstall."
-msgstr "請選擇要解除安裝的語言。"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:195 mast/qt6/languages/manager.py:169
 #, python-brace-format
 msgid "Are you sure you want to uninstall language '{0}' ({1})?"
-msgstr "您確定要解除安裝語言 '{0}' ({1}) 嗎？"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:203 mast/qt6/languages/manager.py:176
 msgid "Uninstalling..."
-msgstr "正在解除安裝..."
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:204 mast/qt6/languages/manager.py:177
 msgid "Uninstall Language"
-msgstr "解除安裝語言"
+msgstr ""
 
 #: mast/gtk4/languages/manager.py:206 mast/qt6/languages/manager.py:179
 #, python-brace-format
 msgid "Language '{0}' uninstalled successfully."
-msgstr "語言 '{0}' 解除安裝成功。"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:39 mast/qt6/languages/settings.py:47
 msgid "Language"
-msgstr "語言"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:52 mast/qt6/languages/settings.py:50
 msgid "Use UTF-8"
-msgstr "使用 UTF-8"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:88 mast/qt6/languages/settings.py:82
 #, python-brace-format
 msgid "Failed to load languages: {0}"
-msgstr "載入語言清單失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:98 mast/qt6/languages/settings.py:92
 msgid "Please select a language."
-msgstr "請選擇一種語言。"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:106 mast/qt6/languages/settings.py:100
 #, python-brace-format
 msgid "Language '{0}' not found."
-msgstr "語言 '{0}' 未找到。"
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:140 mast/qt6/languages/settings.py:137
 #, python-brace-format
-msgid ""
-"Language changed successfully to '{0}'. Changes will take effect after "
-"logout."
-msgstr "語言已成功更改為 '{0}'。變更將在登出後生效。"
+msgid "Language changed successfully to '{0}'. Changes will take effect after logout."
+msgstr ""
 
 #: mast/gtk4/languages/settings.py:149 mast/qt6/languages/settings.py:152
 #, python-brace-format
 msgid "Failed to set language: {0}"
-msgstr "設定語言失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/languages/window.py:33 mast/qt6/languages/window.py:38
 msgid "System Language"
-msgstr "系統語言"
+msgstr ""
 
 #: mast/gtk4/languages/window.py:36 mast/qt6/languages/window.py:41
 msgid "Language Management"
-msgstr "語言管理"
+msgstr ""
 
 #: mast/gtk4/packages/__init__.py:11 mast/qt6/packages/__init__.py:11
 #: mast/tui/packages/__init__.py:12
 msgid "Packages"
-msgstr "軟體套件"
+msgstr ""
 
 #: mast/gtk4/proxy/__init__.py:16 mast/qt6/proxy/__init__.py:10
 #: mast/tui/proxy/__init__.py:12
 msgid "Proxy"
-msgstr "代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:29 mast/qt6/proxy/window.py:38
 msgid "Enable Proxy"
-msgstr "啟用代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:32 mast/qt6/proxy/window.py:41
 #: mast/tui/proxy/window.py:73
 msgid "HTTP Proxy"
-msgstr "HTTP 代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:33 mast/qt6/proxy/window.py:42
 #: mast/tui/proxy/window.py:76
 msgid "HTTPS Proxy"
-msgstr "HTTPS 代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:34 mast/qt6/proxy/window.py:43
 #: mast/tui/proxy/window.py:79
 msgid "FTP Proxy"
-msgstr "FTP 代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:35 mast/qt6/proxy/window.py:44
 #: mast/tui/proxy/window.py:82
 msgid "SOCKS Proxy"
-msgstr "SOCKS 代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:37 mast/qt6/proxy/window.py:47
 #: mast/tui/proxy/window.py:85
 msgid "No Proxy"
-msgstr "不使用代理"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:95 mast/qt6/proxy/window.py:94
 #, python-brace-format
 msgid "Failed to load proxy configuration: {0}"
-msgstr "載入代理設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:111 mast/qt6/proxy/window.py:110
 msgid "Proxy configuration saved successfully."
-msgstr "代理設定已成功儲存。"
+msgstr ""
 
 #: mast/gtk4/proxy/window.py:124 mast/qt6/proxy/window.py:123
 #, python-brace-format
 msgid "Failed to save proxy configuration: {0}"
-msgstr "儲存代理設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/repositories/__init__.py:17 mast/qt6/repositories/__init__.py:11
 #: mast/tui/repositories/__init__.py:12
 msgid "Repositories"
-msgstr "軟體來源"
+msgstr ""
 
 #: mast/gtk4/repositories/import_repo_button.py:22
 #: mast/qt6/repositories/import_repo_button.py:21
-#, fuzzy
 msgid "Import"
-msgstr "連接埠"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:16
 #: mast/qt6/repositories/repo_edit_dialog.py:24
 #: mast/tui/repositories/window.py:133
 msgid "Add Repository"
-msgstr "新增軟體來源"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:16
 #: mast/qt6/repositories/repo_edit_dialog.py:24
 #: mast/tui/repositories/window.py:146
 msgid "Edit Repository"
-msgstr "編輯軟體來源"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:42
 #: mast/gtk4/repositories/window.py:110
@@ -1629,29 +1597,29 @@ msgstr "編輯軟體來源"
 #: mast/qt6/repositories/window.py:70 mast/tui/repositories/window.py:80
 #: mast/tui/repositories/window.py:354
 msgid "Auto Refresh"
-msgstr "自動刷新"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:47
 #: mast/qt6/repositories/repo_edit_dialog.py:51
 msgid "URL Type"
-msgstr "URL 類型"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:52
 #: mast/qt6/repositories/repo_edit_dialog.py:53
 #: mast/tui/repositories/window.py:335 mast/tui/repositories/window.py:336
 msgid "Base URL"
-msgstr "基礎 URL"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:53
 #: mast/qt6/repositories/repo_edit_dialog.py:53
 #: mast/tui/repositories/window.py:338
 msgid "Mirror List"
-msgstr "映像清單"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:61
 #: mast/qt6/repositories/repo_edit_dialog.py:68
 msgid "Path"
-msgstr "路徑"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:64
 #: mast/gtk4/snapshots/window.py:89
@@ -1660,22 +1628,22 @@ msgstr "路徑"
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:616
 #: mast/tui/users/window.py:169
 msgid "Type"
-msgstr "類型"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:81
 #: mast/qt6/repositories/repo_edit_dialog.py:83
 msgid "Check GPG signature"
-msgstr "檢查 GPG 簽章"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:85
 #: mast/qt6/repositories/repo_edit_dialog.py:88
 msgid "GPG Key URL"
-msgstr "GPG 金鑰 URL"
+msgstr ""
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:99
 #: mast/qt6/repositories/repo_edit_dialog.py:101
 msgid "Keep packages"
-msgstr "保留軟體套件"
+msgstr ""
 
 #: mast/gtk4/repositories/switch_mirror_dialog.py:17
 #: mast/gtk4/repositories/window.py:55
@@ -1683,640 +1651,611 @@ msgstr "保留軟體套件"
 #: mast/qt6/repositories/window.py:60 mast/tui/repositories/window.py:73
 #: mast/tui/repositories/window.py:477
 msgid "Switch Mirror"
-msgstr "切換鏡像"
+msgstr ""
 
 #: mast/gtk4/repositories/switch_mirror_dialog.py:35
 #: mast/qt6/repositories/switch_mirror_dialog.py:28
 #: mast/tui/repositories/window.py:479
 msgid "openSUSE"
-msgstr "openSUSE"
+msgstr ""
 
 #: mast/gtk4/repositories/switch_mirror_dialog.py:58
 #: mast/qt6/repositories/switch_mirror_dialog.py:48
 #: mast/tui/repositories/window.py:483
 msgid "Packman"
-msgstr "Packman"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:133 mast/qt6/repositories/window.py:135
 msgid "Cannot read repository directory. Root permission required."
-msgstr "無法讀取軟體來源目錄。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:195 mast/gtk4/repositories/window.py:276
 #: mast/qt6/repositories/window.py:184 mast/qt6/repositories/window.py:231
 msgid "Repository ID is required."
-msgstr "軟體來源 ID 是必要的。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:199 mast/gtk4/repositories/window.py:280
 #: mast/qt6/repositories/window.py:187 mast/qt6/repositories/window.py:234
 msgid "URL is required."
-msgstr "URL 是必要的。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:233 mast/qt6/repositories/window.py:107
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Repository '{}' already exists."
-msgstr "選項已存在。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:242 mast/qt6/repositories/window.py:114
-#, fuzzy, python-format
+#, python-format
 msgid "Failed to import repository: %s"
-msgstr "刪除軟體來源失敗：%s"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:249 mast/qt6/repositories/window.py:121
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Repository '{}' imported successfully."
-msgstr "金鑰產生成功。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:257 mast/qt6/repositories/window.py:219
 #: mast/tui/repositories/window.py:139
 msgid "Please select a repository to edit."
-msgstr "請選擇要編輯的軟體來源。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:311 mast/qt6/repositories/window.py:262
 #: mast/tui/repositories/window.py:156
 msgid "Please select a repository to delete."
-msgstr "請選擇要刪除的軟體來源。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:327 mast/qt6/repositories/window.py:270
 #, python-brace-format
 msgid "Are you sure you want to delete repository '{}'?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:366 mast/qt6/repositories/window.py:290
 #, python-brace-format
-msgid ""
-"Are you sure you want to switch mirrors?\n"
-"\n"
+msgid "Are you sure you want to switch mirrors?\n\n"
 "openSUSE mirror: {}\n"
 "Packman mirror: {}"
 msgstr ""
-"您確定要切換鏡像嗎？\n"
-"\n"
-"openSUSE 鏡像：{}\n"
-"Packman 鏡像：{}"
 
 #: mast/gtk4/repositories/window.py:379 mast/qt6/repositories/window.py:302
 #: mast/tui/repositories/window.py:176
 msgid "Mirror switching completed successfully."
-msgstr "鏡像切換已成功完成。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:388
 msgid "Cannot write to repository directory. Root permission required."
-msgstr "無法寫入軟體來源目錄。需要 root 權限。"
+msgstr ""
 
 #: mast/gtk4/repositories/window.py:392
 msgid "Failed to save repository configuration."
-msgstr "儲存軟體來源設定失敗。"
+msgstr ""
 
 #: mast/gtk4/services/__init__.py:16 mast/qt6/services/__init__.py:10
 #: mast/tui/services/__init__.py:12
 msgid "Services"
-msgstr "服務"
+msgstr ""
 
 #: mast/gtk4/services/window.py:56 mast/qt6/services/window.py:60
 #: mast/tui/services/window.py:82
 msgid "Active"
-msgstr "作用中"
+msgstr ""
 
 #: mast/gtk4/services/window.py:57 mast/qt6/services/window.py:61
 #: mast/tui/services/window.py:83
 msgid "Inactive"
-msgstr "非作用中"
+msgstr ""
 
 #: mast/gtk4/services/window.py:58 mast/qt6/services/window.py:62
 #: mast/tui/services/window.py:84
 msgid "Failed"
-msgstr "失敗"
+msgstr ""
 
 #: mast/gtk4/services/window.py:59 mast/qt6/services/window.py:63
 #: mast/tui/services/window.py:85
 msgid "Activating"
-msgstr "啟動中"
+msgstr ""
 
 #: mast/gtk4/services/window.py:75 mast/qt6/services/window.py:77
 #: mast/tui/services/window.py:101
 msgid "Service name or description"
-msgstr "服務名稱或描述"
+msgstr ""
 
 #: mast/gtk4/services/window.py:89 mast/gtk4/services/window.py:277
 #: mast/qt6/services/window.py:90 mast/qt6/services/window.py:231
 #: mast/tui/services/window.py:105
 msgid "Start"
-msgstr "啟動"
+msgstr ""
 
 #: mast/gtk4/services/window.py:93 mast/gtk4/services/window.py:278
 #: mast/qt6/services/window.py:94 mast/qt6/services/window.py:232
 #: mast/tui/services/window.py:106
 msgid "Stop"
-msgstr "停止"
+msgstr ""
 
 #: mast/gtk4/services/window.py:97 mast/gtk4/services/window.py:279
 #: mast/qt6/services/window.py:98 mast/qt6/services/window.py:233
 #: mast/tui/services/window.py:107
 msgid "Enable"
-msgstr "啟用"
+msgstr ""
 
 #: mast/gtk4/services/window.py:101 mast/gtk4/services/window.py:280
 #: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
 #: mast/tui/services/window.py:108
 msgid "Disable"
-msgstr "停用"
+msgstr ""
 
 #: mast/gtk4/services/window.py:105 mast/gtk4/services/window.py:310
 #: mast/qt6/services/window.py:106 mast/qt6/services/window.py:260
 #: mast/tui/services/window.py:109
 msgid "Logs"
-msgstr "記錄"
+msgstr ""
 
 #: mast/gtk4/services/window.py:184 mast/qt6/services/window.py:141
 #, python-brace-format
 msgid "Failed to load services: {0}"
-msgstr "載入服務失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/services/window.py:272 mast/gtk4/services/window.py:305
 #: mast/qt6/services/window.py:227 mast/qt6/services/window.py:256
 #: mast/tui/services/window.py:263 mast/tui/services/window.py:302
 msgid "Please select a service."
-msgstr "請選擇一項服務。"
+msgstr ""
 
 #: mast/gtk4/services/window.py:283 mast/qt6/services/window.py:237
 #: mast/tui/services/window.py:288
 msgid "started"
-msgstr "已啟動"
+msgstr ""
 
 #: mast/gtk4/services/window.py:284 mast/qt6/services/window.py:238
 #: mast/tui/services/window.py:291
 msgid "stopped"
-msgstr "已停止"
+msgstr ""
 
 #: mast/gtk4/services/window.py:285 mast/qt6/services/window.py:239
 #: mast/tui/services/window.py:294
 msgid "enabled"
-msgstr "已啟用"
+msgstr ""
 
 #: mast/gtk4/services/window.py:286 mast/qt6/services/window.py:240
 #: mast/tui/services/window.py:297
 msgid "disabled"
-msgstr "已停用"
+msgstr ""
 
 #: mast/gtk4/services/window.py:291 mast/qt6/services/window.py:245
 msgid "Working..."
-msgstr "處理中..."
+msgstr ""
 
 #: mast/gtk4/services/window.py:292 mast/qt6/services/window.py:246
 #, python-brace-format
 msgid "{0} Service"
-msgstr "{0} 服務"
+msgstr ""
 
 #: mast/gtk4/services/window.py:294 mast/qt6/services/window.py:248
 #, python-brace-format
 msgid "Service '{0}' {1} successfully."
-msgstr "服務 '{0}' {1} 成功。"
+msgstr ""
 
 #: mast/gtk4/services/window.py:311 mast/qt6/services/window.py:261
 msgid "Loading logs..."
-msgstr "載入記錄..."
+msgstr ""
 
 #: mast/gtk4/services/window.py:312 mast/qt6/services/window.py:262
 #: mast/tui/services/window.py:358
 #, python-brace-format
 msgid "Journal Logs: {0}"
-msgstr "系統記錄：{0}"
+msgstr ""
 
 #: mast/gtk4/services/window.py:314 mast/qt6/services/window.py:264
 msgid "End of journal output."
-msgstr "日誌輸出結束。"
+msgstr ""
 
 #: mast/gtk4/snapshots/__init__.py:16 mast/qt6/snapshots/__init__.py:10
 #: mast/tui/snapshots/__init__.py:12
 msgid "Snapshots"
-msgstr "快照"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:20
 #: mast/qt6/snapshots/config_dialog.py:24
 #: mast/tui/snapshots/config_screen.py:22
 msgid "Snapper Configuration"
-msgstr "Snapper 設定"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:47
 #: mast/qt6/snapshots/config_dialog.py:38
 #, python-brace-format
 msgid "Failed to read config: {0}"
-msgstr "讀取設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:53
 #: mast/qt6/snapshots/config_dialog.py:44
 msgid "Space Limit (fraction or absolute size)"
-msgstr "空間限制（分數或絕對大小）"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:61
 #: mast/qt6/snapshots/config_dialog.py:49
 msgid "Free Limit (fraction or absolute size)"
-msgstr "可用空間限制（分數或絕對大小）"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:69
 #: mast/qt6/snapshots/config_dialog.py:54
 #: mast/tui/snapshots/config_screen.py:34
 msgid "Allow Users"
-msgstr "允許使用者"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:77
 #: mast/qt6/snapshots/config_dialog.py:59
 #: mast/tui/snapshots/config_screen.py:39
 msgid "Allow Groups"
-msgstr "允許群組"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:85
 #: mast/qt6/snapshots/config_dialog.py:64
 #: mast/tui/snapshots/config_screen.py:44
 msgid "Sync ACL"
-msgstr "同步 ACL"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:90
 #: mast/qt6/snapshots/config_dialog.py:69
 #: mast/tui/snapshots/config_screen.py:48
 msgid "Background Comparison"
-msgstr "背景比較"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:95
 #: mast/qt6/snapshots/config_dialog.py:74
 #: mast/tui/snapshots/config_screen.py:52
 msgid "Number Cleanup"
-msgstr "數量清理"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:100
 #: mast/qt6/snapshots/config_dialog.py:79
 msgid "Number Min Age (seconds)"
-msgstr "數量最小年齡（秒）"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:108
 #: mast/qt6/snapshots/config_dialog.py:84
 #: mast/tui/snapshots/config_screen.py:61
 msgid "Number Limit"
-msgstr "數量限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:116
 #: mast/qt6/snapshots/config_dialog.py:89
 #: mast/tui/snapshots/config_screen.py:66
 msgid "Number Limit Important"
-msgstr "重要數量限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:124
 #: mast/qt6/snapshots/config_dialog.py:94
 #: mast/tui/snapshots/config_screen.py:71
 msgid "Timeline Create"
-msgstr "時間軸建立"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:129
 #: mast/qt6/snapshots/config_dialog.py:99
 #: mast/tui/snapshots/config_screen.py:75
 msgid "Timeline Cleanup"
-msgstr "時間軸清理"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:134
 #: mast/qt6/snapshots/config_dialog.py:104
 msgid "Timeline Min Age (seconds)"
-msgstr "時間軸最小年齡（秒）"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:142
 #: mast/qt6/snapshots/config_dialog.py:109
 msgid "Timeline Limit Hourly"
-msgstr "時間軸每小時限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:150
 #: mast/qt6/snapshots/config_dialog.py:114
 msgid "Timeline Limit Daily"
-msgstr "時間軸每日限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:158
 #: mast/qt6/snapshots/config_dialog.py:119
 msgid "Timeline Limit Weekly"
-msgstr "時間軸每週限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:166
 #: mast/qt6/snapshots/config_dialog.py:124
 msgid "Timeline Limit Monthly"
-msgstr "時間軸每月限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:174
 #: mast/qt6/snapshots/config_dialog.py:129
 msgid "Timeline Limit Yearly"
-msgstr "時間軸每年限制"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:221
 #: mast/qt6/snapshots/config_dialog.py:168 mast/tui/snapshots/window.py:245
 msgid "Configuration saved successfully."
-msgstr "設定儲存成功。"
+msgstr ""
 
 #: mast/gtk4/snapshots/config_dialog.py:228
 #: mast/qt6/snapshots/config_dialog.py:171
 #, python-brace-format
 msgid "Failed to write config: {0}"
-msgstr "寫入設定失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:62 mast/gtk4/snapshots/window.py:255
 #: mast/qt6/snapshots/window.py:59 mast/qt6/snapshots/window.py:179
 #: mast/qt6/users/groups_manager.py:253 mast/qt6/users/users_manager.py:331
 #: mast/tui/snapshots/window.py:71
 msgid "Create"
-msgstr "建立"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:70 mast/qt6/snapshots/window.py:67
 #: mast/tui/snapshots/window.py:74
 msgid "Configure"
-msgstr "設定"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:94 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:85
 msgid "Date"
-msgstr "日期"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:108 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:88
 msgid "Cleanup"
-msgstr "清理"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:143 mast/gtk4/snapshots/window.py:280
 #: mast/qt6/snapshots/window.py:196 mast/qt6/snapshots/window.py:205
 msgid "Delete Snapshot"
-msgstr "刪除快照"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:147 mast/qt6/snapshots/window.py:197
 #, python-brace-format
 msgid "Delete snapshot #{0}? This action cannot be undone."
-msgstr "刪除快照 #{0}？此操作無法撤銷。"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:180 mast/qt6/snapshots/window.py:104
 msgid "Load Snapshots"
-msgstr "載入快照"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:182 mast/qt6/snapshots/window.py:106
 msgid "Snapshots loaded successfully."
-msgstr "快照載入成功。"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:203 mast/qt6/snapshots/window.py:127
 #, python-brace-format
 msgid "Failed to parse snapshot data: {0}"
-msgstr "解析快照資料失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:209 mast/qt6/snapshots/window.py:133
 #, python-brace-format
 msgid "Failed to load snapshots: {0}"
-msgstr "載入快照失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:250 mast/qt6/snapshots/window.py:175
 #: mast/tui/snapshots/window.py:193
 msgid "Description cannot be empty."
-msgstr "描述不能為空。"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:256 mast/qt6/snapshots/window.py:180
 #: mast/qt6/users/groups_manager.py:254 mast/qt6/users/users_manager.py:332
 msgid "Creating..."
-msgstr "建立中..."
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:257 mast/qt6/snapshots/window.py:167
 #: mast/qt6/snapshots/window.py:181
 msgid "Create Snapshot"
-msgstr "建立快照"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:259 mast/qt6/snapshots/window.py:183
 #: mast/tui/snapshots/window.py:208
 msgid "Snapshot created successfully."
-msgstr "快照建立成功。"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:270 mast/qt6/snapshots/window.py:191
 #: mast/tui/snapshots/window.py:218
 msgid "Please select a snapshot."
-msgstr "請選擇一個快照。"
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:279 mast/gtk4/users/groups_manager.py:250
 #: mast/gtk4/users/users_manager.py:320 mast/qt6/snapshots/window.py:204
 #: mast/qt6/users/groups_manager.py:223 mast/qt6/users/users_manager.py:282
 msgid "Deleting..."
-msgstr "刪除中..."
+msgstr ""
 
 #: mast/gtk4/snapshots/window.py:282 mast/qt6/snapshots/window.py:207
 #: mast/tui/snapshots/window.py:233
 #, python-brace-format
 msgid "Snapshot #{0} deleted successfully."
-msgstr "快照 #{0} 刪除成功。"
+msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:20 mast/qt6/ssh/__init__.py:16
 #: mast/tui/ssh/__init__.py:12
 msgid "SSH Client"
-msgstr "SSH 用戶端"
+msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:48 mast/qt6/ssh/__init__.py:41
 msgid "SSH Permission Warning"
-msgstr "SSH 權限警告"
+msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:52 mast/qt6/ssh/__init__.py:43
 #, python-brace-format
-msgid ""
-"The following SSH items have insecure permissions:\n"
-"\n"
-"{0}\n"
-"\n"
+msgid "The following SSH items have insecure permissions:\n\n"
+"{0}\n\n"
 "Would you like to fix them now?"
 msgstr ""
-"以下 SSH 項目的權限不安全：\n"
-"\n"
-"{0}\n"
-"\n"
-"您要現在修復它們嗎？"
 
 #: mast/gtk4/ssh/__init__.py:76 mast/qt6/ssh/__init__.py:61
 #, python-brace-format
-msgid ""
-"Failed to fix permissions for the following items:\n"
-"\n"
+msgid "Failed to fix permissions for the following items:\n\n"
 "{0}"
 msgstr ""
-"修復以下項目的權限失敗：\n"
-"\n"
-"{0}"
 
 #: mast/gtk4/ssh/__init__.py:89 mast/qt6/ssh/__init__.py:68
 msgid "SSH permissions have been fixed successfully."
-msgstr "SSH 權限已成功修復。"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:18 mast/qt6/ssh/dialogs.py:26
 msgid "Edit SSH Options"
-msgstr "編輯 SSH 選項"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:57 mast/qt6/ssh/dialogs.py:55
 msgid "Option name"
-msgstr "選項名稱"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:59 mast/qt6/ssh/dialogs.py:57
 msgid "Option value"
-msgstr "選項值"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:99 mast/qt6/ssh/dialogs.py:86
 msgid "Option name is required."
-msgstr "選項名稱是必填的。"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:105 mast/qt6/ssh/dialogs.py:92
 msgid "Option already exists."
-msgstr "選項已存在。"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:136 mast/qt6/ssh/dialogs.py:119
 msgid "Add/Edit SSH Host"
-msgstr "新增/編輯 SSH 主機"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:158 mast/qt6/ssh/dialogs.py:128
 msgid "Host Pattern:"
-msgstr "主機模式："
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:169 mast/qt6/ssh/dialogs.py:134
 msgid "Edit Options"
-msgstr "編輯選項"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:195 mast/qt6/ssh/dialogs.py:162
 #, python-brace-format
 msgid "Options: {0}"
-msgstr "選項：{0}"
+msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:197 mast/qt6/ssh/dialogs.py:164
 msgid "No options set"
-msgstr "未設定選項"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:81 mast/qt6/ssh/hosts_tab.py:61
 #: mast/tui/ssh/window.py:288
 msgid "Host Pattern"
-msgstr "主機模式"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:88 mast/qt6/ssh/hosts_tab.py:61
 #: mast/tui/ssh/window.py:288
 msgid "Options"
-msgstr "選項"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:122 mast/qt6/ssh/hosts_tab.py:122
 #: mast/qt6/ssh/hosts_tab.py:213 mast/tui/ssh/window.py:327
 #, python-brace-format
 msgid " and {0} more"
-msgstr " 還有 {0} 個"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:152 mast/gtk4/ssh/hosts_tab.py:180
 #: mast/qt6/ssh/hosts_tab.py:141 mast/qt6/ssh/hosts_tab.py:162
 msgid "Host pattern is required."
-msgstr "主機模式是必要的。"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:195 mast/qt6/ssh/hosts_tab.py:176
 #: mast/tui/ssh/window.py:383
 msgid "Cannot delete the default host entry."
-msgstr "無法刪除預設主機項目。"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:224 mast/qt6/ssh/hosts_tab.py:222
 msgid "SSH config saved successfully."
-msgstr "SSH 設定儲存成功。"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:226 mast/qt6/ssh/hosts_tab.py:226
 msgid "Cannot write to SSH config. Check permissions."
-msgstr "無法寫入 SSH 設定。請檢查權限。"
+msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:228 mast/qt6/ssh/hosts_tab.py:229
 msgid "Failed to save SSH config."
-msgstr "儲存 SSH 設定失敗。"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:18
 #: mast/qt6/ssh/keys_generate_dialog.py:80 mast/tui/ssh/window.py:611
 msgid "Generate SSH Key"
-msgstr "產生 SSH 金鑰"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:27
 #: mast/qt6/ssh/keys_generate_dialog.py:159 mast/tui/ssh/window.py:268
 msgid "Generate"
-msgstr "產生"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:39 mast/gtk4/ssh/keys_tab.py:75
 #: mast/qt6/ssh/keys_tab.py:62
 msgid "Algorithm"
-msgstr "算法"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:52
 msgid "Key Size"
-msgstr "金鑰大小"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:70
 msgid "Optional comment (e.g., user@host)"
-msgstr "可選備註（如：user@host）"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:77 mast/gtk4/ssh/keys_tab.py:102
 #: mast/qt6/ssh/keys_tab.py:66 mast/tui/ssh/window.py:293
 msgid "Passphrase"
-msgstr "密碼短語"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:82
 msgid "Optional passphrase"
-msgstr "可選密碼短語"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:112
 #, python-brace-format
 msgid "Failed to generate key: {0}"
-msgstr "產生金鑰失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:37 mast/qt6/ssh/keys_tab.py:40
 msgid "Copy Public Key"
-msgstr "複製公鑰"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:82 mast/qt6/ssh/keys_tab.py:63
 msgid "Size"
-msgstr "大小"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:89 mast/qt6/ssh/keys_tab.py:64
 msgid "Fingerprint"
-msgstr "指紋"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:109 mast/qt6/ssh/keys_tab.py:67
 msgid "Public"
-msgstr "公鑰"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:116 mast/qt6/ssh/keys_tab.py:68
 msgid "Private"
-msgstr "私鑰"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:194 mast/qt6/ssh/keys_tab.py:174
 msgid "Public key copied to clipboard."
-msgstr "公鑰已複製到剪貼簿。"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:196 mast/qt6/ssh/keys_tab.py:177
 msgid "Cannot read public key file."
-msgstr "無法讀取公鑰檔案。"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:223 mast/qt6/ssh/keys_tab.py:200
 msgid "Confirm Delete"
-msgstr "確認刪除"
+msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:226 mast/qt6/ssh/keys_tab.py:201
 #, python-brace-format
-msgid ""
-"Are you sure you want to delete the following keys?\n"
-"\n"
+msgid "Are you sure you want to delete the following keys?\n\n"
 "{0}"
 msgstr ""
-"您確定要刪除以下金鑰嗎？\n"
-"\n"
-"{0}"
 
 #: mast/gtk4/ssh/keys_tab.py:243 mast/qt6/ssh/keys_tab.py:218
 #, python-brace-format
-msgid ""
-"Failed to delete some files:\n"
-"\n"
+msgid "Failed to delete some files:\n\n"
 "{0}"
 msgstr ""
-"刪除某些檔案失敗：\n"
-"\n"
-"{0}"
 
 #: mast/gtk4/ssh/keys_tab.py:246 mast/qt6/ssh/keys_tab.py:221
 msgid "Key deleted successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/gtk4/ssh/window.py:36 mast/qt6/ssh/window.py:40
 #: mast/tui/ssh/window.py:252
 msgid "Keys"
-msgstr "金鑰"
+msgstr ""
 
 #: mast/gtk4/users/__init__.py:10 mast/qt6/users/__init__.py:10
 #: mast/tui/users/__init__.py:12
@@ -2324,15 +2263,13 @@ msgid "Users & Groups"
 msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:93 mast/qt6/users/groups_manager.py:85
-#, fuzzy
 msgid "Group Name"
-msgstr "選項名稱"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:97 mast/gtk4/users/users_manager.py:89
 #: mast/qt6/users/groups_manager.py:90 mast/qt6/users/users_manager.py:91
-#, fuzzy
 msgid "GID"
-msgstr "ID"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:101 mast/qt6/users/groups_manager.py:95
 msgid "Members"
@@ -2340,113 +2277,86 @@ msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:146 mast/qt6/users/groups_manager.py:122
 #: mast/tui/users/window.py:200
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load groups: {0}"
-msgstr "載入語言清單失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:153 mast/qt6/users/groups_manager.py:127
-#, fuzzy
 msgid "System Groups"
-msgstr "系統語言"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:154 mast/qt6/users/groups_manager.py:131
-#, fuzzy
 msgid "User Groups"
-msgstr "允許群組"
-
-
-
-#: mast/gtk4/users/user_list.py:77 mast/qt6/users/user_list.py:62
-msgid "System Users"
-msgstr "系統使用者"
-
-#: mast/gtk4/users/user_list.py:78 mast/qt6/users/user_list.py:66
-msgid "Local Users"
-msgstr "本機使用者"
-
-#: mast/gtk4/users/user_form.py:298 mast/qt6/users/user_form.py:267
-msgid "No changes to save."
-msgstr "沒有需要儲存的變更。"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:241 mast/qt6/users/groups_manager.py:215
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Are you sure you want to delete group '{0}'?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:251 mast/qt6/users/groups_manager.py:224
-#, fuzzy
 msgid "Delete Group"
-msgstr "刪除"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:253 mast/qt6/users/groups_manager.py:226
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Group '{0}' deleted successfully."
-msgstr "快照 #{0} 刪除成功。"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:270 mast/qt6/users/groups_manager.py:235
-#, fuzzy
 msgid "Group name cannot be empty"
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:283
-msgid ""
-"Group name must start with a lowercase letter and can only contain "
-"lowercase letters, digits, hyphens, and underscores."
+msgid "Group name must start with a lowercase letter and can only contain lowercase letters, digits, hyphens, and underscores."
 msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:295 mast/qt6/users/groups_manager.py:249
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Group '{0}' created successfully."
-msgstr "金鑰產生成功。"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:296 mast/qt6/users/groups_manager.py:250
-#, fuzzy
 msgid "Create Group"
-msgstr "建立"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:299 mast/qt6/users/groups_manager.py:267
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Group '{0}' updated successfully."
-msgstr "遠端 URL 更新成功。"
+msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:300 mast/qt6/users/groups_manager.py:268
 msgid "Update Group"
 msgstr ""
 
 #: mast/gtk4/users/groups_manager.py:304 mast/gtk4/users/users_manager.py:395
-#, fuzzy
 msgid "Saving..."
-msgstr "載入中..."
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:84 mast/qt6/users/users_manager.py:86
-#, fuzzy
 msgid "UID"
-msgstr "ID"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:94 mast/qt6/users/users_manager.py:96
 #: mast/tui/ssh/window.py:520 mast/tui/users/window.py:161
 msgid "Username"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:99 mast/qt6/users/users_manager.py:101
-#, fuzzy
 msgid "Display Name"
-msgstr "顯示名称"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:101 mast/qt6/users/users_manager.py:103
-#, fuzzy
 msgid "Full name"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:104 mast/qt6/users/users_manager.py:106
-#, fuzzy
 msgid "Home Directory"
-msgstr "編輯軟體來源"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:106 mast/qt6/users/users_manager.py:108
-#, fuzzy
 msgid "/home/username"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:109 mast/qt6/users/users_manager.py:111
 msgid "Shell"
@@ -2469,62 +2379,55 @@ msgid "Leave empty to skip"
 msgstr ""
 
 #: mast/gtk4/users/users_manager.py:124 mast/qt6/users/users_manager.py:126
-#, fuzzy
 msgid "Additional Groups"
-msgstr "允許群組"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:170 mast/qt6/users/users_manager.py:152
 #: mast/tui/users/window.py:183
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load users: {0}"
-msgstr "載入服務失敗：{0}"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:299 mast/qt6/users/users_manager.py:268
 #: mast/tui/users/window.py:410
-#, fuzzy
 msgid "This user cannot be deleted."
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:311 mast/qt6/users/users_manager.py:274
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Are you sure you want to delete user '{0}'?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:321 mast/qt6/users/users_manager.py:283
-#, fuzzy
 msgid "Delete User"
-msgstr "刪除"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:323 mast/qt6/users/users_manager.py:285
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "User '{0}' deleted successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:340 mast/qt6/users/users_manager.py:294
-#, fuzzy
 msgid "Username cannot be empty"
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:354 mast/qt6/users/users_manager.py:301
-msgid ""
-"Username must start with a lowercase letter and can only contain "
-"lowercase letters, digits, hyphens, and underscores."
+msgid "Username must start with a lowercase letter and can only contain lowercase letters, digits, hyphens, and underscores."
 msgstr ""
 
 #: mast/gtk4/users/users_manager.py:379 mast/qt6/users/users_manager.py:327
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "User '{0}' created successfully."
-msgstr "服務 '{0}' {1} 成功。"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:380 mast/qt6/users/users_manager.py:328
-#, fuzzy
 msgid "Create User"
-msgstr "建立"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:390 mast/qt6/users/users_manager.py:351
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "User '{0}' updated successfully."
-msgstr "服務 '{0}' {1} 成功。"
+msgstr ""
 
 #: mast/gtk4/users/users_manager.py:391 mast/qt6/users/users_manager.py:352
 msgid "Update User"
@@ -2541,31 +2444,28 @@ msgstr ""
 
 #: mast/gtk4/users/users_manager.py:412 mast/qt6/users/users_manager.py:376
 #: mast/tui/users/window.py:461
-#, fuzzy
 msgid "Password set successfully."
-msgstr "SSH 設定儲存成功。"
+msgstr ""
 
 #: mast/gtk4/users/window.py:31 mast/qt6/users/window.py:34
 #: mast/tui/users/window.py:96
-#, fuzzy
 msgid "Users"
-msgstr "使用者"
+msgstr ""
 
 #: mast/gtk4/users/window.py:34 mast/qt6/users/window.py:37
 #: mast/tui/users/window.py:98
-#, fuzzy
 msgid "Groups"
-msgstr "允許群組"
+msgstr ""
 
 #: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:69
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Version: {}"
-msgstr "版本"
+msgstr ""
 
 #: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:70
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "License: {}"
-msgstr "時區"
+msgstr ""
 
 #: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:66
 msgid "About MaST"
@@ -2576,179 +2476,173 @@ msgid "Help"
 msgstr ""
 
 #: mast/qt6/datetime/window.py:154
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load hardware clock setting: {0}"
-msgstr "載入軟體套件目錄失敗：{0}"
+msgstr ""
 
 #: mast/qt6/datetime/window.py:162 mast/tui/datetime/window.py:151
 msgid "NTP synchronized"
-msgstr "NTP已同步"
+msgstr ""
 
 #: mast/qt6/datetime/window.py:164 mast/tui/datetime/window.py:153
 msgid "NTP not synchronized"
-msgstr "NTP未同步"
+msgstr ""
 
 #: mast/qt6/datetime/window.py:166
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Failed to load NTP status: {0}"
-msgstr "載入快照失敗：{0}"
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:79
 msgid "Installing package..."
-msgstr "安裝軟體套件中..."
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:80
 msgid "Install Flatpak Package"
-msgstr "安裝 Flatpak 軟體套件"
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:92
 msgid "Remove Package"
-msgstr "移除軟體套件"
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:93
 msgid "Removing package..."
-msgstr "移除軟體套件中..."
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:94
 msgid "Remove Flatpak Package"
-msgstr "移除 Flatpak 軟體套件"
+msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:37
 msgid "Removing runtime..."
-msgstr "移除執行時間中..."
+msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:38
 msgid "Remove Flatpak Runtime"
-msgstr "移除 Flatpak 執行時間"
+msgstr ""
 
 #: mast/qt6/flatpak/window.py:113
 msgid "Please wait"
-msgstr "請稍候"
+msgstr ""
 
 #: mast/qt6/flatpak/window.py:114
 msgid "A Flatpak operation is still running. Please wait for it to finish."
-msgstr "Flatpak 操作仍在執行中。請等待其完成。"
+msgstr ""
 
 #: mast/qt6/git/window.py:233
 msgid "All Files (*)"
-msgstr "所有檔案 (*)"
+msgstr ""
 
 #: mast/qt6/git/window.py:271 mast/qt6/hosts/window.py:266
 msgid "Saved successfully"
-msgstr "儲存成功"
+msgstr ""
 
 #: mast/qt6/git/window.py:302 mast/tui/git/window.py:219
 msgid "Reset to original values"
-msgstr "重設為原始值"
+msgstr ""
 
 #: mast/qt6/journal/window.py:115
-#, fuzzy
 msgid "PID"
-msgstr "ID"
+msgstr ""
 
 #: mast/qt6/languages/manager.py:141
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Are you sure you want to install locale '{0}' ({1})?"
-msgstr "您確定要刪除軟體來源 '{}' 嗎？"
+msgstr ""
 
 #: mast/qt6/repositories/window.py:213 mast/qt6/repositories/window.py:256
 #: mast/qt6/repositories/window.py:325
 #, python-format
 msgid "Failed to save repository: %s"
-msgstr "儲存軟體來源失敗：%s"
+msgstr ""
 
 #: mast/qt6/repositories/window.py:278
 #, python-format
 msgid "Failed to delete repository: %s"
-msgstr "刪除軟體來源失敗：%s"
+msgstr ""
 
 #: mast/qt6/repositories/window.py:306 mast/tui/repositories/window.py:179
-#, fuzzy
 msgid "Permission denied."
-msgstr "SSH 權限警告"
+msgstr ""
 
 #: mast/qt6/repositories/window.py:308 mast/tui/repositories/window.py:181
 msgid "Failed to obtain root privileges."
 msgstr ""
 
 #: mast/qt6/repositories/window.py:310 mast/tui/repositories/window.py:183
-#, fuzzy
 msgid "Failed to switch mirrors."
-msgstr "切換鏡像失敗：%s"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:90
 msgid "Key Name:"
-msgstr "金鑰名稱："
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:92
 msgid "e.g., id_ed25519"
-msgstr "例如：id_ed25519"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:98
 msgid "Key Type:"
-msgstr "金鑰類型："
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:110
 msgid "Key Size:"
-msgstr "金鑰大小："
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:125
 msgid "e.g., user@hostname"
-msgstr "例如：user@hostname"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:131
 msgid "Passphrase:"
-msgstr "密碼短語："
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:138
 #, python-brace-format
 msgid "The key will be saved to {0}"
-msgstr "金鑰將儲存到 {0}"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:143
 msgid "Public Key:"
-msgstr "公鑰："
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:177
 msgid "Key name is required."
-msgstr "金鑰名稱是必填的。"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:185
 msgid "Key names starting with 'id_' are recommended. Continue anyway?"
-msgstr "建議金鑰名稱以 'id_' 開頭。仍要繼續嗎？"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:195
 msgid "A key with this name already exists."
-msgstr "此名稱的金鑰已存在。"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:232
 msgid "SSH key generated successfully."
-msgstr "SSH 金鑰產生成功。"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:237
 #, python-brace-format
 msgid "Failed to read public key: {0}"
-msgstr "讀取公鑰失敗：{0}"
+msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:242
 #, python-brace-format
 msgid "Failed to generate SSH key: {0}"
-msgstr "產生 SSH 金鑰失敗：{0}"
+msgstr ""
 
 #: mast/qt6/users/groups_manager.py:271 mast/qt6/users/users_manager.py:355
-#, fuzzy
 msgid "Update"
-msgstr "日期"
+msgstr ""
 
 #: mast/qt6/users/groups_manager.py:272 mast/qt6/users/users_manager.py:356
-#, fuzzy
 msgid "Updating..."
-msgstr "刪除中..."
+msgstr ""
 
 #: mast/tui/main_window.py:64
-#, fuzzy
 msgid "License file not found."
-msgstr "語言 '{0}' 未找到。"
+msgstr ""
 
 #: mast/tui/main_window.py:72
 msgid "License Text:"
@@ -2756,64 +2650,62 @@ msgstr ""
 
 #: mast/tui/cron/window.py:211
 msgid "Cron job deleted."
-msgstr "排程工作已刪除。"
+msgstr ""
 
 #: mast/tui/cron/window.py:222
 msgid "Success: Cron jobs saved successfully."
-msgstr "成功：排程工作儲存成功。"
+msgstr ""
 
 #: mast/tui/cron/window.py:224 mast/tui/datetime/window.py:262
 #: mast/tui/hostname/window.py:135 mast/tui/languages/window.py:120
 #: mast/tui/proxy/window.py:158
 msgid "Error: Permission denied. Root permission required."
-msgstr "錯誤：權限遭拒。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/cron/window.py:234
 msgid "Cron job added."
-msgstr "排程工作已新增。"
+msgstr ""
 
 #: mast/tui/cron/window.py:246
 msgid "Cron job updated."
-msgstr "排程工作已更新。"
+msgstr ""
 
 #: mast/tui/cron/window.py:344
 msgid "Error: Command is required."
-msgstr "錯誤：命令是必要的。"
+msgstr ""
 
 #: mast/tui/datetime/window.py:94
-#, fuzzy
 msgid "Date & Time Configuration"
-msgstr "主機名設定"
+msgstr ""
 
 #: mast/tui/datetime/window.py:98
 msgid "Type to search..."
-msgstr "輸入搜尋..."
+msgstr ""
 
 #: mast/tui/datetime/window.py:110
-#, fuzzy
 msgid "Enter NTP servers"
-msgstr "NTP伺服器"
+msgstr ""
 
 #: mast/tui/datetime/window.py:136
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error loading timezone: {0}"
-msgstr "載入時區失敗"
+msgstr ""
 
 #: mast/tui/datetime/window.py:142
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error loading hardware clock: {0}"
-msgstr "載入硬體時鐘設定失敗"
+msgstr ""
 
 #: mast/tui/datetime/window.py:155
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error loading NTP status: {0}"
-msgstr "載入NTP狀態失敗"
+msgstr ""
 
 #: mast/tui/datetime/window.py:264 mast/tui/hostname/window.py:140
 #: mast/tui/hosts/window.py:169 mast/tui/languages/window.py:125
 #: mast/tui/repositories/window.py:268
 msgid "Error: Authentication failed or pkexec not available."
-msgstr "錯誤：認證失敗或 pkexec 不可用。"
+msgstr ""
 
 #: mast/tui/datetime/window.py:266 mast/tui/hostname/window.py:86
 #: mast/tui/hostname/window.py:144 mast/tui/languages/window.py:129
@@ -2821,430 +2713,424 @@ msgstr "錯誤：認證失敗或 pkexec 不可用。"
 #: mast/tui/users/window.py:517 mast/tui/users/window.py:519
 #, python-brace-format
 msgid "Error: {0}"
-msgstr "錯誤：{0}"
+msgstr ""
 
 #: mast/tui/git/window.py:158
 msgid "Error: Git is not installed on this system."
-msgstr "錯誤：此系統未安裝 Git。"
+msgstr ""
 
 #: mast/tui/git/window.py:239
 msgid "Error: User name and email are required."
-msgstr "錯誤：使用者名和邮箱是必要的。"
+msgstr ""
 
 #: mast/tui/git/window.py:258
 msgid "Success: Git configuration saved successfully."
-msgstr "成功：Git 設定儲存成功。"
+msgstr ""
 
 #: mast/tui/git/window.py:260
 msgid "Error: Failed to save Git configuration."
-msgstr "錯誤：儲存 Git 設定失敗。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:64
 msgid "Hostname Configuration"
-msgstr "主機名設定"
+msgstr ""
 
 #: mast/tui/hostname/window.py:79
 msgid "Error: /etc/hostname not found."
-msgstr "錯誤：未找到 /etc/hostname。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:82
 msgid "Error: Cannot read /etc/hostname. Root permission required."
-msgstr "錯誤：无法讀取 /etc/hostname。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:110
 msgid "Error: Hostname cannot be empty."
-msgstr "錯誤：主機名不能為空。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:115
 msgid "Error: Hostname is too long (maximum 253 characters)."
-msgstr "錯誤：主機名太長（最多 253 個字符）。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:122
 msgid "Error: Hostname contains invalid characters."
-msgstr "錯誤：主機名套件含无效字符。"
+msgstr ""
 
 #: mast/tui/hostname/window.py:129
 #, python-brace-format
 msgid "Success: Hostname changed successfully to '{0}'."
-msgstr "成功：主機名已成功更改為 '{0}'。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:92 mast/tui/proxy/window.py:109
 #, python-brace-format
 msgid "Error: Cannot read {0}. Root permission required."
-msgstr "錯誤：無法讀取 {0}。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:97 mast/tui/proxy/window.py:106
 #, python-brace-format
 msgid "Error: {0} not found."
-msgstr "錯誤：找不到 {0}。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:124 mast/tui/ssh/window.py:508
 msgid "Add Host Entry"
-msgstr "新增主機項目"
+msgstr ""
 
 #: mast/tui/hosts/window.py:137 mast/tui/ssh/window.py:508
 msgid "Edit Host Entry"
-msgstr "編輯主機項目"
+msgstr ""
 
 #: mast/tui/hosts/window.py:154
 msgid "Entry deleted."
-msgstr "項目已刪除。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:161
 msgid "Success: Hosts file saved successfully."
-msgstr "成功：主機檔案儲存成功。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:164
 #, python-brace-format
 msgid "Error: Cannot write to {0}. Root permission required."
-msgstr "錯誤：无法寫入 {0}。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:173
 msgid "Error: Failed to save hosts file."
-msgstr "錯誤：儲存主機檔案失敗。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:191
 msgid "Entry added."
-msgstr "項目已新增。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:193 mast/tui/hosts/window.py:212
 msgid "Error: IP address and hostname are required."
-msgstr "錯誤：IP 地址和主機名是必要的。"
+msgstr ""
 
 #: mast/tui/hosts/window.py:210
 msgid "Entry updated."
-msgstr "項目已更新。"
+msgstr ""
 
 #: mast/tui/languages/window.py:79
-#, fuzzy
 msgid "Error: Please select a language."
-msgstr "請選擇一個快照。"
+msgstr ""
 
 #: mast/tui/languages/window.py:87
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error: Language '{0}' not found."
-msgstr "錯誤：找不到 {0}。"
+msgstr ""
 
 #: mast/tui/languages/window.py:114
 #, python-brace-format
 msgid "Success: Language changed to '{0}'. Changes take effect after logout."
-msgstr "成功：語言已更改為 '{0}'。登出後變更生效。"
+msgstr ""
 
 #: mast/tui/packages/window.py:39
 msgid "Packages Management"
-msgstr "軟體套件管理"
+msgstr ""
 
 #: mast/tui/packages/window.py:40
 msgid "Package management functionality is not yet implemented in TUI mode."
-msgstr "軟體套件管理功能尚未在 TUI 模式下实现。"
+msgstr ""
 
 #: mast/tui/packages/window.py:41
 msgid "Please use the Qt6 GUI version for full package management features."
-msgstr "請使用 Qt6 GUI 版本以获得完整的軟體套件管理功能。"
+msgstr ""
 
 #: mast/tui/proxy/window.py:69
 msgid "Proxy Configuration"
-msgstr "代理設定"
+msgstr ""
 
 #: mast/tui/proxy/window.py:114
 #, python-brace-format
 msgid "Error: Failed to load proxy configuration: {0}"
-msgstr "錯誤：載入代理設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/proxy/window.py:120
 msgid "Disabled"
-msgstr "停用"
+msgstr ""
 
 #: mast/tui/proxy/window.py:121
 #, python-brace-format
 msgid "Proxy State: {0}"
-msgstr "代理狀態：{0}"
+msgstr ""
 
 #: mast/tui/proxy/window.py:154
 msgid "Success: Proxy configuration saved successfully."
-msgstr "成功：代理設定已成功儲存。"
+msgstr ""
 
 #: mast/tui/proxy/window.py:163
 #, python-brace-format
 msgid "Error: Failed to save proxy configuration: {0}"
-msgstr "錯誤：儲存代理設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/repositories/window.py:93
 msgid "Error: Cannot read repository directory. Root permission required."
-msgstr "錯誤：无法讀取軟體來源目錄。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:164
 msgid "Repository deleted."
-msgstr "軟體來源已刪除。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:191 mast/tui/repositories/window.py:229
 msgid "Error: Repository ID is required."
-msgstr "錯誤：軟體來源 ID 是必要的。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:194 mast/tui/repositories/window.py:232
 msgid "Error: URL is required."
-msgstr "錯誤：URL 是必要的。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:218
 msgid "Repository added."
-msgstr "軟體來源已新增。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:255
 msgid "Repository updated."
-msgstr "軟體來源已更新。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:263
 msgid "Error: Cannot write to repository directory. Root permission required."
-msgstr "錯誤：无法寫入軟體來源目錄。需要 root 權限。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:272
 msgid "Error: Failed to save repository configuration."
-msgstr "錯誤：儲存軟體來源設定失敗。"
+msgstr ""
 
 #: mast/tui/repositories/window.py:329
 msgid "Repository ID"
-msgstr "軟體來源 ID"
+msgstr ""
 
 #: mast/tui/repositories/window.py:330
 msgid "Unique repository ID"
-msgstr "唯一軟體來源 ID"
+msgstr ""
 
 #: mast/tui/repositories/window.py:333
 msgid "Display name"
-msgstr "顯示名称"
+msgstr ""
 
 #: mast/tui/repositories/window.py:339
 msgid "Mirror list URL"
-msgstr "映像清單 URL"
+msgstr ""
 
 #: mast/tui/repositories/window.py:342
 msgid "Priority (default 99)"
-msgstr "優先順序（默认 99）"
+msgstr ""
 
 #: mast/tui/repositories/window.py:351
 msgid "GPG Key"
-msgstr "GPG 金鑰"
+msgstr ""
 
 #: mast/tui/repositories/window.py:352
 msgid "GPG key URL"
-msgstr "GPG 金鑰 URL"
+msgstr ""
 
 #: mast/tui/repositories/window.py:355
 msgid "GPG Check"
-msgstr "GPG 检查"
+msgstr ""
 
 #: mast/tui/repositories/window.py:356
 msgid "Keep Packages"
-msgstr "保留軟體套件"
+msgstr ""
 
 #: mast/tui/services/window.py:157
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error: Failed to load services: {0}"
-msgstr "加载主機名失敗：{0}"
+msgstr ""
 
 #: mast/tui/services/window.py:271 mast/tui/snapshots/window.py:201
 #: mast/tui/snapshots/window.py:226
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error: Failed to execute command: {0}"
-msgstr "錯誤：儲存代理設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/services/window.py:278
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Service '{0}' {1}."
-msgstr "儲存成功"
+msgstr ""
 
 #: mast/tui/services/window.py:310
-#, fuzzy, python-brace-format
+#, python-brace-format
 msgid "Error: Failed to load logs: {0}"
-msgstr "錯誤：載入代理設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/services/window.py:315
 msgid "No logs available."
-msgstr "無可用記錄。"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:24
 msgid "Space Limit"
-msgstr "空間限制"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:29
 msgid "Free Limit"
-msgstr "可用空間限制"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:56
 msgid "Number Min Age"
-msgstr "數量最小年齡"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:79
 msgid "Timeline Min Age"
-msgstr "時間軸最小年齡"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:84
 msgid "Timeline Hourly"
-msgstr "時間軸每小時"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:89
 msgid "Timeline Daily"
-msgstr "時間軸每日"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:94
 msgid "Timeline Weekly"
-msgstr "時間軸每週"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:99
 msgid "Timeline Monthly"
-msgstr "時間軸每月"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:104
 msgid "Timeline Yearly"
-msgstr "時間軸每年"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:135
 #, python-brace-format
 msgid "Error: Failed to read config: {0}"
-msgstr "錯誤：讀取設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/snapshots/config_screen.py:164
 #, python-brace-format
 msgid "Error: Failed to write config: {0}"
-msgstr "錯誤：寫入設定失敗：{0}"
+msgstr ""
 
 #: mast/tui/snapshots/window.py:123
 msgid "Timeout waiting for snapshots"
-msgstr "等待快照逾時"
+msgstr ""
 
 #: mast/tui/snapshots/window.py:142
 #, python-brace-format
 msgid "Error: Failed to load snapshots: {0}"
-msgstr "錯誤：載入快照失敗：{0}"
+msgstr ""
 
 #: mast/tui/ssh/window.py:283
 msgid "Warning: Some SSH files have insecure permissions."
-msgstr "警告：某些 SSH 檔案權限不安全。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:619
 msgid "Bits"
-msgstr "位数"
+msgstr ""
 
 #: mast/tui/ssh/window.py:307
 msgid "Error: Cannot read SSH config."
-msgstr "錯誤：无法讀取 SSH 設定。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:368
 msgid "Please select a host to edit."
-msgstr "請選擇要編輯的主機。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:378
 msgid "Please select a host to delete."
-msgstr "請選擇要刪除的主機。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:388
 msgid "Host entry deleted."
-msgstr "主機項目已刪除。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:395
 msgid "Success: SSH config saved successfully."
-msgstr "成功：SSH 設定儲存成功。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:397
 msgid "Error: Cannot write to SSH config."
-msgstr "錯誤：无法寫入 SSH 設定。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:399
 msgid "Error: Failed to save SSH config."
-msgstr "錯誤：儲存 SSH 設定失敗。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:405
 msgid "Please select a key to delete."
-msgstr "請選擇要刪除的金鑰。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:413
 msgid "Key deleted."
-msgstr "金鑰已刪除。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:420 mast/tui/ssh/window.py:431
 msgid "Error: Host pattern is required."
-msgstr "錯誤：主機模式是必要的。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:426
 msgid "Host entry added."
-msgstr "主機項目已新增。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:442
 msgid "Host entry updated."
-msgstr "主機項目已更新。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:449
 msgid "Key generated successfully."
-msgstr "金鑰產生成功。"
+msgstr ""
 
 #: mast/tui/ssh/window.py:510
 msgid "Host"
-msgstr "主機"
+msgstr ""
 
 #: mast/tui/ssh/window.py:511
 msgid "Host pattern"
-msgstr "主機模式"
+msgstr ""
 
 #: mast/tui/ssh/window.py:513
 msgid "HostName"
-msgstr "主機名"
+msgstr ""
 
 #: mast/tui/ssh/window.py:514
 msgid "Real hostname"
-msgstr "實際主機名"
+msgstr ""
 
 #: mast/tui/ssh/window.py:516
 msgid "Port"
-msgstr "連接埠"
+msgstr ""
 
 #: mast/tui/ssh/window.py:517
 msgid "Port number"
-msgstr "連接埠号"
+msgstr ""
 
 #: mast/tui/ssh/window.py:522
 msgid "IdentityFile"
-msgstr "身份檔案"
+msgstr ""
 
 #: mast/tui/ssh/window.py:523
 msgid "Key file path"
-msgstr "金鑰檔案路徑"
+msgstr ""
 
 #: mast/tui/ssh/window.py:614
 msgid "Key filename"
-msgstr "金鑰檔案名"
+msgstr ""
 
 #: mast/tui/ssh/window.py:617
 msgid "rsa, ed25519, ecdsa"
-msgstr "rsa, ed25519, ecdsa"
+msgstr ""
 
 #: mast/tui/ssh/window.py:620
 msgid "Key bits"
-msgstr "金鑰位数"
+msgstr ""
 
 #: mast/tui/users/window.py:111
-#, fuzzy
 msgid "UID:"
-msgstr "ID"
+msgstr ""
 
 #: mast/tui/users/window.py:114
-#, fuzzy
 msgid "GID:"
-msgstr "ID"
+msgstr ""
 
 #: mast/tui/users/window.py:117
-#, fuzzy
 msgid "Username:"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/tui/users/window.py:120
-#, fuzzy
 msgid "Display Name:"
-msgstr "顯示名称"
+msgstr ""
 
 #: mast/tui/users/window.py:123
-#, fuzzy
 msgid "Home Directory:"
-msgstr "編輯軟體來源"
+msgstr ""
 
 #: mast/tui/users/window.py:126
 msgid "Shell:"
@@ -3255,28 +3141,24 @@ msgid "Primary Group:"
 msgstr ""
 
 #: mast/tui/users/window.py:132
-#, fuzzy
 msgid "Password:"
-msgstr "密碼短語："
+msgstr ""
 
 #: mast/tui/users/window.py:135
-#, fuzzy
 msgid "Additional Groups:"
-msgstr "允許群組"
+msgstr ""
 
 #: mast/tui/users/window.py:147
-#, fuzzy
 msgid "Group Name:"
-msgstr "選項名稱"
+msgstr ""
 
 #: mast/tui/users/window.py:149
 msgid "Members (use space to toggle):"
 msgstr ""
 
 #: mast/tui/users/window.py:161
-#, fuzzy
 msgid "Full Name"
-msgstr "使用者名"
+msgstr ""
 
 #: mast/tui/users/window.py:165 mast/tui/users/window.py:169
 #: mast/tui/users/window.py:260 mast/tui/users/window.py:436
@@ -3286,9 +3168,8 @@ msgstr ""
 #: mast/tui/users/window.py:165 mast/tui/users/window.py:262
 #: mast/tui/users/window.py:284 mast/tui/users/window.py:332
 #: mast/tui/users/window.py:334 mast/tui/users/window.py:435
-#, fuzzy
 msgid "Selected"
-msgstr "刪除"
+msgstr ""
 
 #: mast/tui/users/window.py:173 mast/tui/users/window.py:294
 #: mast/tui/users/window.py:302 mast/tui/users/window.py:359
@@ -3297,132 +3178,50 @@ msgid "Member"
 msgstr ""
 
 #: mast/tui/users/window.py:406
-#, fuzzy
 msgid "Please select a user to delete."
-msgstr "請選擇要刪除的金鑰。"
+msgstr ""
 
 #: mast/tui/users/window.py:414
-#, fuzzy
 msgid "User deleted successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/tui/users/window.py:419
-#, fuzzy
 msgid "Username cannot be empty."
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/tui/users/window.py:423
 msgid "Username must start with a lowercase letter."
 msgstr ""
 
 #: mast/tui/users/window.py:447
-#, fuzzy
 msgid "User created successfully."
-msgstr "快照建立成功。"
+msgstr ""
 
 #: mast/tui/users/window.py:457
-#, fuzzy
 msgid "User updated successfully."
-msgstr "遠端 URL 更新成功。"
+msgstr ""
 
 #: mast/tui/users/window.py:474
-#, fuzzy
 msgid "Please select a group to delete."
-msgstr "請選擇要刪除的主機。"
+msgstr ""
 
 #: mast/tui/users/window.py:478
-#, fuzzy
 msgid "Group deleted successfully."
-msgstr "金鑰刪除成功。"
+msgstr ""
 
 #: mast/tui/users/window.py:483
-#, fuzzy
 msgid "Group name cannot be empty."
-msgstr "主機名不能為空。"
+msgstr ""
 
 #: mast/tui/users/window.py:487
 msgid "Group name must start with a lowercase letter."
 msgstr ""
 
 #: mast/tui/users/window.py:498
-#, fuzzy
 msgid "Group created successfully."
-msgstr "快照建立成功。"
+msgstr ""
 
 #: mast/tui/users/window.py:501
-#, fuzzy
 msgid "Group updated successfully."
-msgstr "遠端 URL 更新成功。"
-
-#~ msgid "Snapshot description"
-#~ msgstr "編輯選項"
-
-#~ msgid "Number"
-#~ msgstr "連接埠号"
-
-#~ msgid "MaST"
-#~ msgstr "MaST"
-
-#~ msgid "Validation Error"
-#~ msgstr "驗證錯誤"
-
-#~ msgid "Failed to save cron jobs."
-#~ msgstr "儲存排程工作失敗。"
-
-#~ msgid "User Cron Jobs"
-#~ msgstr "使用者排程工作"
-
-#~ msgid "Root Cron Jobs"
-#~ msgstr "系統排程工作"
-
-#~ msgid "Save Timezone"
-#~ msgstr "儲存時區"
-
-#~ msgid "Save Hardware Clock"
-#~ msgstr "儲存硬體時鐘設定"
-
-#~ msgid "Save NTP Settings"
-#~ msgstr "儲存NTP設定"
-
-#~ msgid "Please select a timezone."
-#~ msgstr "請選擇一個時區"
-
-#~ msgid "Invalid timezone selected."
-#~ msgstr "選擇了無效的時區"
-
-#~ msgid "SSH"
-#~ msgstr "SSH"
-
-#~ msgid "User cron error: {0}"
-#~ msgstr "使用者排程工作錯誤：{0}"
-
-#~ msgid "Root cron error: {0}"
-#~ msgstr "系統排程工作錯誤：{0}"
-
-#~ msgid "Error: Failed to save cron jobs."
-#~ msgstr "錯誤：儲存排程工作失敗。"
-
-#~ msgid "Save NTP"
-#~ msgstr "儲存"
-
-#~ msgid "Error: Please select a timezone."
-#~ msgstr "請選擇一個時區"
-
-#~ msgid "Error: Invalid timezone selected."
-#~ msgstr "選擇了無效的時區"
-
-#~ msgid "Locale Management"
-#~ msgstr "軟體套件管理"
-
-#~ msgid "Search:"
-#~ msgstr "搜尋"
-
-#~ msgid "Search by code or name..."
-#~ msgstr ""
-
-#~ msgid "Packages module is not yet implemented."
-#~ msgstr "軟體套件模块尚未实现。"
-
-#~ msgid "Failed to launch package manager."
-#~ msgstr "啟動套件管理員失敗。"
+msgstr ""
 
