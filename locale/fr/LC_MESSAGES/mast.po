@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-07-18 05:32+0000\n"
-"PO-Revision-Date: 2026-07-30 07:34\n"
+"PO-Revision-Date: 2026-07-30 09:27\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "MIME-Version: 1.0\n"
@@ -43,11 +43,11 @@ msgstr ""
 #: mast/gtk4/command/dialog.py:53 mast/qt6/command/dialog.py:44
 #: mast/tui/packages/window.py:42 mast/tui/services/window.py:362
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: mast/gtk4/command/dialog.py:80 mast/qt6/command/dialog.py:60
 msgid "Command completed successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/command/dialog.py:82 mast/qt6/command/dialog.py:62
 msgid "Command failed. See output for details."
@@ -70,12 +70,12 @@ msgstr ""
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:193
 msgid "Edit Cron Job"
-msgstr ""
+msgstr "Modifier la tâche Cron"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:179
 msgid "Add Cron Job"
-msgstr ""
+msgstr "Ajouter une tâche Cron"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:29
 #: mast/gtk4/flatpak/remote_manager.py:172
@@ -90,7 +90,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:488 mast/tui/snapshots/config_screen.py:110
 #: mast/tui/ssh/window.py:526 mast/tui/ssh/window.py:626
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:30
 #: mast/gtk4/flatpak/remote_manager.py:173
@@ -120,7 +120,7 @@ msgstr ""
 #: mast/qt6/cron/cron_edit_dialog.py:46 mast/qt6/cron/manager.py:72
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:299
 msgid "Hour"
-msgstr ""
+msgstr "Heure"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/qt6/cron/cron_edit_dialog.py:45
 msgid "0-23 or *"
@@ -130,7 +130,7 @@ msgstr ""
 #: mast/qt6/cron/cron_edit_dialog.py:50 mast/qt6/cron/manager.py:73
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:303
 msgid "Day"
-msgstr ""
+msgstr "Jour"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/qt6/cron/cron_edit_dialog.py:49
 msgid "1-31 or *"
@@ -140,7 +140,7 @@ msgstr ""
 #: mast/qt6/cron/cron_edit_dialog.py:54 mast/qt6/cron/manager.py:74
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:307
 msgid "Month"
-msgstr ""
+msgstr "Mois"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/qt6/cron/cron_edit_dialog.py:53
 msgid "1-12 or *"
@@ -150,7 +150,7 @@ msgstr ""
 #: mast/qt6/cron/cron_edit_dialog.py:58 mast/qt6/cron/manager.py:75
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:311
 msgid "Weekday"
-msgstr ""
+msgstr "Jour de la semaine"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/qt6/cron/cron_edit_dialog.py:57
 msgid "0-7 or *"
@@ -160,12 +160,12 @@ msgstr ""
 #: mast/qt6/cron/cron_edit_dialog.py:62 mast/qt6/cron/manager.py:76
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:315
 msgid "Command"
-msgstr ""
+msgstr "Commande"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:53 mast/qt6/cron/cron_edit_dialog.py:61
 #: mast/tui/cron/window.py:317
 msgid "Command to execute"
-msgstr ""
+msgstr "Commande à exécuter"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:57 mast/gtk4/cron/manager.py:117
 #: mast/gtk4/hosts/window.py:97 mast/gtk4/ssh/keys_generate_dialog.py:65
@@ -181,7 +181,7 @@ msgstr ""
 #: mast/gtk4/cron/cron_edit_dialog.py:61 mast/qt6/cron/cron_edit_dialog.py:66
 #: mast/tui/cron/window.py:321 mast/tui/ssh/window.py:623
 msgid "Optional comment"
-msgstr ""
+msgstr "Commentaire optionnel"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:91 mast/gtk4/cron/cron_edit_dialog.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:93 mast/qt6/cron/cron_edit_dialog.py:99
@@ -290,7 +290,7 @@ msgstr ""
 #: mast/qt6/users/users_manager.py:268 mast/qt6/users/users_manager.py:294
 #: mast/qt6/users/users_manager.py:300
 msgid "Error"
-msgstr ""
+msgstr "Erreur"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:130 mast/qt6/cron/cron_edit_dialog.py:111
 msgid "Command cannot be empty"
@@ -309,7 +309,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:70 mast/tui/ssh/window.py:259
 #: mast/tui/users/window.py:105 mast/tui/users/window.py:141
 msgid "Add"
-msgstr ""
+msgstr "Ajouter"
 
 #: mast/gtk4/cron/manager.py:44 mast/gtk4/flatpak/remote_manager.py:32
 #: mast/gtk4/flatpak/remote_manager.py:233 mast/gtk4/hosts/window.py:37
@@ -320,7 +320,7 @@ msgstr ""
 #: mast/tui/cron/window.py:80 mast/tui/hosts/window.py:70
 #: mast/tui/repositories/window.py:71 mast/tui/ssh/window.py:260
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: mast/gtk4/cron/manager.py:49 mast/gtk4/flatpak/remote_manager.py:36
 #: mast/gtk4/hosts/window.py:41 mast/gtk4/repositories/window.py:51
@@ -340,7 +340,7 @@ msgstr ""
 #: mast/tui/ssh/window.py:269 mast/tui/users/window.py:106
 #: mast/tui/users/window.py:142
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: mast/gtk4/cron/manager.py:57 mast/gtk4/datetime/window.py:157
 #: mast/gtk4/git/window.py:70 mast/gtk4/hostname/window.py:48
@@ -359,7 +359,7 @@ msgstr ""
 #: mast/tui/ssh/window.py:262 mast/tui/users/window.py:107
 #: mast/tui/users/window.py:143
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: mast/gtk4/cron/manager.py:76 mast/gtk4/hosts/window.py:76
 #: mast/gtk4/repositories/repo_edit_dialog.py:38
@@ -462,7 +462,7 @@ msgstr ""
 #: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
 #: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
 msgid "Success"
-msgstr ""
+msgstr "Succès"
 
 #: mast/gtk4/cron/manager.py:249 mast/qt6/cron/manager.py:229
 msgid "Cron jobs saved successfully."
@@ -504,48 +504,48 @@ msgstr ""
 #: mast/gtk4/datetime/__init__.py:16 mast/qt6/datetime/__init__.py:12
 #: mast/tui/datetime/__init__.py:10
 msgid "Date & Time"
-msgstr ""
+msgstr "Date & Heure"
 
 #: mast/gtk4/datetime/window.py:47 mast/gtk4/datetime/window.py:58
 #: mast/qt6/datetime/window.py:63 mast/tui/datetime/window.py:97
 msgid "Timezone"
-msgstr ""
+msgstr "Fuseau horaire"
 
 #: mast/gtk4/datetime/window.py:73
 msgid "Search timezone..."
-msgstr ""
+msgstr "Rechercher un fuseau horaire..."
 
 #: mast/gtk4/datetime/window.py:84 mast/tui/datetime/window.py:102
 msgid "Hardware Clock"
-msgstr ""
+msgstr "Horloge matérielle"
 
 #: mast/gtk4/datetime/window.py:97 mast/qt6/datetime/window.py:83
 #: mast/tui/datetime/window.py:103
 msgid "Set hardware clock to UTC"
-msgstr ""
+msgstr "Définir l'horloge matérielle sur UTC"
 
 #: mast/gtk4/datetime/window.py:108 mast/tui/datetime/window.py:106
 msgid "NTP Synchronization"
-msgstr ""
+msgstr "Synchronisation NTP"
 
 #: mast/gtk4/datetime/window.py:119 mast/qt6/datetime/window.py:97
 #: mast/tui/datetime/window.py:107
 msgid "Enable NTP synchronization"
-msgstr ""
+msgstr "Activer la synchronisation NTP"
 
 #: mast/gtk4/datetime/window.py:126 mast/qt6/datetime/window.py:105
 #: mast/tui/datetime/window.py:109
 msgid "NTP Servers"
-msgstr ""
+msgstr "Serveurs NTP"
 
 #: mast/gtk4/datetime/window.py:132 mast/qt6/datetime/window.py:110
 msgid "Enter NTP servers separated by spaces"
-msgstr ""
+msgstr "Entrez les serveurs NTP séparés par des espaces"
 
 #: mast/gtk4/datetime/window.py:139 mast/qt6/datetime/window.py:118
 #: mast/tui/datetime/window.py:112
 msgid "Sync Now"
-msgstr ""
+msgstr "Synchroniser maintenant"
 
 #: mast/gtk4/datetime/window.py:178 mast/qt6/datetime/window.py:148
 #, python-brace-format
@@ -603,20 +603,20 @@ msgstr ""
 #: mast/gtk4/flatpak/install_action.py:24 mast/gtk4/flatpak/window.py:86
 #: mast/qt6/flatpak/install_action.py:20 mast/qt6/flatpak/window.py:89
 msgid "Flatpak installed successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/flatpak/package_manager.py:79 mast/gtk4/languages/manager.py:32
 #: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:113
 #: mast/qt6/flatpak/package_manager.py:78 mast/qt6/languages/manager.py:41
 #: mast/qt6/languages/manager.py:147 mast/qt6/languages/settings.py:107
 msgid "Install"
-msgstr ""
+msgstr "Paquets"
 
 #: mast/gtk4/flatpak/package_manager.py:82
 #: mast/gtk4/flatpak/runtime_manager.py:31
 #: mast/qt6/flatpak/runtime_manager.py:36
 msgid "Remove"
-msgstr ""
+msgstr "Dépôts"
 
 #: mast/gtk4/flatpak/package_manager.py:94
 #: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
@@ -628,7 +628,7 @@ msgstr ""
 #: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
 #: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
 msgid "Search"
-msgstr ""
+msgstr "Recherche"
 
 #: mast/gtk4/flatpak/package_manager.py:98
 #: mast/gtk4/flatpak/runtime_manager.py:47 mast/gtk4/git/window.py:75
@@ -760,21 +760,21 @@ msgstr ""
 #: mast/qt6/services/window.py:116 mast/tui/services/window.py:90
 #: mast/tui/services/window.py:124
 msgid "Scope"
-msgstr ""
+msgstr "Fermer"
 
 #: mast/gtk4/flatpak/package_manager.py:136 mast/gtk4/flatpak/window.py:54
 #: mast/gtk4/languages/manager.py:89 mast/gtk4/languages/manager.py:120
 #: mast/qt6/flatpak/package_manager.py:149 mast/qt6/flatpak/window.py:58
 #: mast/qt6/languages/manager.py:78 mast/qt6/languages/manager.py:105
 msgid "Installed"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/flatpak/package_manager.py:145
 #: mast/gtk4/flatpak/runtime_manager.py:70
 #: mast/qt6/flatpak/package_manager.py:217
 #: mast/qt6/flatpak/runtime_manager.py:87
 msgid "Installed Size"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:175
 #: mast/gtk4/snapshots/window.py:179 mast/qt6/flatpak/package_manager.py:275
@@ -808,7 +808,7 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:314
 #: mast/qt6/flatpak/package_manager.py:82
 msgid "Package installed successfully."
-msgstr ""
+msgstr "Clé générée avec succès."
 
 #: mast/gtk4/flatpak/package_manager.py:320
 #: mast/qt6/flatpak/package_manager.py:387
@@ -830,7 +830,7 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/qt6/flatpak/package_manager.py:96
 msgid "Package removed successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/flatpak/package_manager.py:360
 #: mast/qt6/flatpak/package_manager.py:398
@@ -889,7 +889,7 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:156
 #: mast/qt6/flatpak/remote_manager.py:135
 msgid "Remote deleted successfully."
-msgstr ""
+msgstr "Clé générée avec succès."
 
 #: mast/gtk4/flatpak/remote_manager.py:163
 #: mast/qt6/flatpak/remote_manager.py:138
@@ -905,7 +905,7 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:220
 #: mast/qt6/flatpak/remote_manager.py:94
 msgid "Remote added successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/flatpak/remote_manager.py:227
 #: mast/qt6/flatpak/remote_manager.py:97
@@ -916,7 +916,7 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:282
 #: mast/qt6/flatpak/remote_manager.py:113
 msgid "Remote URL updated successfully."
-msgstr ""
+msgstr "Clé générée avec succès."
 
 #: mast/gtk4/flatpak/remote_manager.py:289
 #: mast/qt6/flatpak/remote_manager.py:116
@@ -936,7 +936,7 @@ msgstr ""
 #: mast/gtk4/flatpak/remove_action.py:24 mast/gtk4/flatpak/settings.py:44
 #: mast/qt6/flatpak/remove_action.py:21 mast/qt6/flatpak/window.py:100
 msgid "Flatpak removed successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/flatpak/remove_action.py:40 mast/qt6/flatpak/remove_action.py:38
 msgid "Are you sure you want to remove Flatpak?"
@@ -962,7 +962,7 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:140
 #: mast/qt6/flatpak/runtime_manager.py:40
 msgid "Runtime removed successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/flatpak/runtime_manager.py:146
 #: mast/qt6/flatpak/runtime_manager.py:154
@@ -977,7 +977,7 @@ msgstr ""
 
 #: mast/gtk4/flatpak/window.py:33
 msgid "Flatpak is not installed"
-msgstr ""
+msgstr "Git n'est pas installé sur ce système."
 
 #: mast/gtk4/flatpak/window.py:55 mast/qt6/flatpak/window.py:59
 msgid "Runtimes"
@@ -985,11 +985,11 @@ msgstr ""
 
 #: mast/gtk4/flatpak/window.py:56 mast/qt6/flatpak/window.py:60
 msgid "Remotes"
-msgstr ""
+msgstr "Dépôts"
 
 #: mast/gtk4/flatpak/window.py:57 mast/qt6/flatpak/window.py:61
 msgid "Settings"
-msgstr ""
+msgstr "Suggestions"
 
 #: mast/gtk4/flatpak/window.py:92 mast/qt6/flatpak/window.py:95
 #, python-brace-format
@@ -1003,7 +1003,7 @@ msgstr ""
 
 #: mast/gtk4/git/window.py:33 mast/qt6/git/window.py:39
 msgid "Git is not installed on this system."
-msgstr ""
+msgstr "Git n'est pas installé sur ce système."
 
 #: mast/gtk4/git/window.py:50 mast/qt6/git/window.py:55
 #: mast/tui/git/window.py:72
@@ -1145,7 +1145,7 @@ msgstr ""
 #: mast/tui/hostname/__init__.py:12 mast/tui/hostname/window.py:66
 #: mast/tui/hosts/window.py:79 mast/tui/hosts/window.py:266
 msgid "Hostname"
-msgstr ""
+msgstr "Nom d'hôte"
 
 #: mast/gtk4/hostname/window.py:38 mast/qt6/hostname/window.py:42
 #: mast/tui/hostname/window.py:67
@@ -1167,15 +1167,15 @@ msgstr ""
 
 #: mast/gtk4/hostname/window.py:77 mast/qt6/hostname/window.py:83
 msgid "Hostname cannot be empty."
-msgstr ""
+msgstr "Le nom d'hôte ne peut pas être vide."
 
 #: mast/gtk4/hostname/window.py:82 mast/qt6/hostname/window.py:89
 msgid "Hostname is too long (maximum 253 characters)."
-msgstr ""
+msgstr "Le nom d'hôte est trop long (maximum 253 caractères)."
 
 #: mast/gtk4/hostname/window.py:88 mast/qt6/hostname/window.py:97
 msgid "Hostname contains invalid characters."
-msgstr ""
+msgstr "Le nom d'hôte contient des caractères invalides."
 
 #: mast/gtk4/hostname/window.py:98 mast/qt6/hostname/window.py:111
 #, python-brace-format
@@ -1185,7 +1185,7 @@ msgstr ""
 #: mast/gtk4/hostname/window.py:105 mast/qt6/hostname/window.py:125
 #, python-brace-format
 msgid "Hostname changed successfully to '{0}'."
-msgstr ""
+msgstr "Nom d'hôte changé avec succès en '{0}'."
 
 #: mast/gtk4/hostname/window.py:112 mast/qt6/hostname/window.py:138
 #, python-brace-format
@@ -1213,12 +1213,12 @@ msgstr ""
 #: mast/qt6/hosts/window.py:109 mast/qt6/proxy/window.py:83
 #, python-brace-format
 msgid "{0} not found."
-msgstr ""
+msgstr "{0} non trouvé."
 
 #: mast/gtk4/hosts/window.py:176 mast/gtk4/hosts/window.py:212
 #: mast/qt6/hosts/window.py:179 mast/qt6/hosts/window.py:216
 msgid "IP address and hostname are required."
-msgstr ""
+msgstr "Adresse IP et nom d'hôte requis."
 
 #: mast/gtk4/hosts/window.py:183 mast/gtk4/ssh/hosts_tab.py:159
 #: mast/qt6/hosts/window.py:187 mast/qt6/ssh/hosts_tab.py:148
@@ -1291,7 +1291,7 @@ msgstr ""
 #: mast/qt6/services/window.py:69 mast/tui/services/window.py:81
 #: mast/tui/services/window.py:93
 msgid "All"
-msgstr ""
+msgstr "Paquets"
 
 #: mast/gtk4/journal/window.py:89 mast/gtk4/journal/window.py:135
 #: mast/qt6/journal/window.py:95
@@ -1402,12 +1402,12 @@ msgstr ""
 #: mast/gtk4/languages/__init__.py:16 mast/qt6/languages/__init__.py:10
 #: mast/tui/languages/__init__.py:10
 msgid "Languages"
-msgstr ""
+msgstr "Langues"
 
 #: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
 #: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
 msgid "Uninstall"
-msgstr ""
+msgstr "Désinstaller"
 
 #: mast/gtk4/languages/manager.py:57 mast/qt6/languages/manager.py:56
 msgid "Code"
@@ -1422,104 +1422,104 @@ msgstr ""
 
 #: mast/gtk4/languages/manager.py:120 mast/qt6/languages/manager.py:105
 msgid "Not Installed"
-msgstr ""
+msgstr "Non installé"
 
 #: mast/gtk4/languages/manager.py:131 mast/qt6/languages/manager.py:123
 #, python-brace-format
 msgid "Failed to load locales: {0}"
-msgstr ""
+msgstr "Échec du chargement des paramètres régionaux : {0}"
 
 #: mast/gtk4/languages/manager.py:148 mast/qt6/languages/manager.py:132
 msgid "Please select a locale to install."
-msgstr ""
+msgstr "Veuillez sélectionner une langue à installer."
 
 #: mast/gtk4/languages/manager.py:161
 #, python-brace-format
 msgid "Are you sure you want to install language '{0}' ({1})?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir installer la langue '{0}' ({1}) ?"
 
 #: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:114
 #: mast/qt6/languages/manager.py:148 mast/qt6/languages/settings.py:108
 msgid "Installing..."
-msgstr ""
+msgstr "Installation en cours..."
 
 #: mast/gtk4/languages/manager.py:170 mast/gtk4/languages/settings.py:115
 #: mast/qt6/languages/manager.py:149 mast/qt6/languages/settings.py:109
 msgid "Install Language"
-msgstr ""
+msgstr "Installer la langue"
 
 #: mast/gtk4/languages/manager.py:172 mast/gtk4/languages/settings.py:117
 #: mast/qt6/languages/manager.py:151 mast/qt6/languages/settings.py:111
 #, python-brace-format
 msgid "Language '{0}' installed successfully."
-msgstr ""
+msgstr "La langue '{0}' a été installée avec succès."
 
 #: mast/gtk4/languages/manager.py:182 mast/qt6/languages/manager.py:160
 msgid "Please select a language to uninstall."
-msgstr ""
+msgstr "Veuillez sélectionner une langue à désinstaller."
 
 #: mast/gtk4/languages/manager.py:195 mast/qt6/languages/manager.py:169
 #, python-brace-format
 msgid "Are you sure you want to uninstall language '{0}' ({1})?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir désinstaller la langue '{0}' ({1}) ?"
 
 #: mast/gtk4/languages/manager.py:203 mast/qt6/languages/manager.py:176
 msgid "Uninstalling..."
-msgstr ""
+msgstr "Désinstallation en cours..."
 
 #: mast/gtk4/languages/manager.py:204 mast/qt6/languages/manager.py:177
 msgid "Uninstall Language"
-msgstr ""
+msgstr "Désinstaller la langue"
 
 #: mast/gtk4/languages/manager.py:206 mast/qt6/languages/manager.py:179
 #, python-brace-format
 msgid "Language '{0}' uninstalled successfully."
-msgstr ""
+msgstr "La langue '{0}' a été désinstallée avec succès."
 
 #: mast/gtk4/languages/settings.py:39 mast/qt6/languages/settings.py:47
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: mast/gtk4/languages/settings.py:52 mast/qt6/languages/settings.py:50
 msgid "Use UTF-8"
-msgstr ""
+msgstr "Utiliser UTF-8"
 
 #: mast/gtk4/languages/settings.py:88 mast/qt6/languages/settings.py:82
 #, python-brace-format
 msgid "Failed to load languages: {0}"
-msgstr ""
+msgstr "Échec du chargement des langues : {0}"
 
 #: mast/gtk4/languages/settings.py:98 mast/qt6/languages/settings.py:92
 msgid "Please select a language."
-msgstr ""
+msgstr "Veuillez sélectionner une langue."
 
 #: mast/gtk4/languages/settings.py:106 mast/qt6/languages/settings.py:100
 #, python-brace-format
 msgid "Language '{0}' not found."
-msgstr ""
+msgstr "La langue '{0}' n'a pas été trouvée."
 
 #: mast/gtk4/languages/settings.py:140 mast/qt6/languages/settings.py:137
 #, python-brace-format
 msgid "Language changed successfully to '{0}'. Changes will take effect after logout."
-msgstr ""
+msgstr "La langue a été changée avec succès en '{0}'. Les modifications prendront effet après la déconnexion."
 
 #: mast/gtk4/languages/settings.py:149 mast/qt6/languages/settings.py:152
 #, python-brace-format
 msgid "Failed to set language: {0}"
-msgstr ""
+msgstr "Échec de la définition de la langue : {0}"
 
 #: mast/gtk4/languages/window.py:33 mast/qt6/languages/window.py:38
 msgid "System Language"
-msgstr ""
+msgstr "Langue système"
 
 #: mast/gtk4/languages/window.py:36 mast/qt6/languages/window.py:41
 msgid "Language Management"
-msgstr ""
+msgstr "Gestion des langues"
 
 #: mast/gtk4/packages/__init__.py:11 mast/qt6/packages/__init__.py:11
 #: mast/tui/packages/__init__.py:12
 msgid "Packages"
-msgstr ""
+msgstr "Paquets"
 
 #: mast/gtk4/proxy/__init__.py:16 mast/qt6/proxy/__init__.py:10
 #: mast/tui/proxy/__init__.py:12
@@ -1528,56 +1528,56 @@ msgstr ""
 
 #: mast/gtk4/proxy/window.py:29 mast/qt6/proxy/window.py:38
 msgid "Enable Proxy"
-msgstr ""
+msgstr "Activer le proxy"
 
 #: mast/gtk4/proxy/window.py:32 mast/qt6/proxy/window.py:41
 #: mast/tui/proxy/window.py:73
 msgid "HTTP Proxy"
-msgstr ""
+msgstr "Proxy HTTP"
 
 #: mast/gtk4/proxy/window.py:33 mast/qt6/proxy/window.py:42
 #: mast/tui/proxy/window.py:76
 msgid "HTTPS Proxy"
-msgstr ""
+msgstr "Proxy HTTPS"
 
 #: mast/gtk4/proxy/window.py:34 mast/qt6/proxy/window.py:43
 #: mast/tui/proxy/window.py:79
 msgid "FTP Proxy"
-msgstr ""
+msgstr "Proxy FTP"
 
 #: mast/gtk4/proxy/window.py:35 mast/qt6/proxy/window.py:44
 #: mast/tui/proxy/window.py:82
 msgid "SOCKS Proxy"
-msgstr ""
+msgstr "Proxy SOCKS"
 
 #: mast/gtk4/proxy/window.py:37 mast/qt6/proxy/window.py:47
 #: mast/tui/proxy/window.py:85
 msgid "No Proxy"
-msgstr ""
+msgstr "Pas de proxy"
 
 #: mast/gtk4/proxy/window.py:95 mast/qt6/proxy/window.py:94
 #, python-brace-format
 msgid "Failed to load proxy configuration: {0}"
-msgstr ""
+msgstr "Echec du chargement de la configuration du proxy : {0}"
 
 #: mast/gtk4/proxy/window.py:111 mast/qt6/proxy/window.py:110
 msgid "Proxy configuration saved successfully."
-msgstr ""
+msgstr "La configuration du proxy a ete enregistree avec succes."
 
 #: mast/gtk4/proxy/window.py:124 mast/qt6/proxy/window.py:123
 #, python-brace-format
 msgid "Failed to save proxy configuration: {0}"
-msgstr ""
+msgstr "Echec de l'enregistrement de la configuration du proxy : {0}"
 
 #: mast/gtk4/repositories/__init__.py:17 mast/qt6/repositories/__init__.py:11
 #: mast/tui/repositories/__init__.py:12
 msgid "Repositories"
-msgstr ""
+msgstr "Dépôts"
 
 #: mast/gtk4/repositories/import_repo_button.py:22
 #: mast/qt6/repositories/import_repo_button.py:21
 msgid "Import"
-msgstr ""
+msgstr "Port"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:16
 #: mast/qt6/repositories/repo_edit_dialog.py:24
@@ -1663,7 +1663,7 @@ msgstr ""
 #: mast/qt6/repositories/switch_mirror_dialog.py:48
 #: mast/tui/repositories/window.py:483
 msgid "Packman"
-msgstr ""
+msgstr "Paquets"
 
 #: mast/gtk4/repositories/window.py:133 mast/qt6/repositories/window.py:135
 msgid "Cannot read repository directory. Root permission required."
@@ -1737,7 +1737,7 @@ msgstr ""
 #: mast/gtk4/services/window.py:56 mast/qt6/services/window.py:60
 #: mast/tui/services/window.py:82
 msgid "Active"
-msgstr ""
+msgstr "Enregistrer"
 
 #: mast/gtk4/services/window.py:57 mast/qt6/services/window.py:61
 #: mast/tui/services/window.py:83
@@ -1769,25 +1769,25 @@ msgstr ""
 #: mast/qt6/services/window.py:94 mast/qt6/services/window.py:232
 #: mast/tui/services/window.py:106
 msgid "Stop"
-msgstr ""
+msgstr "Fermer"
 
 #: mast/gtk4/services/window.py:97 mast/gtk4/services/window.py:279
 #: mast/qt6/services/window.py:98 mast/qt6/services/window.py:233
 #: mast/tui/services/window.py:107
 msgid "Enable"
-msgstr ""
+msgstr "Activer le proxy"
 
 #: mast/gtk4/services/window.py:101 mast/gtk4/services/window.py:280
 #: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
 #: mast/tui/services/window.py:108
 msgid "Disable"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/services/window.py:105 mast/gtk4/services/window.py:310
 #: mast/qt6/services/window.py:106 mast/qt6/services/window.py:260
 #: mast/tui/services/window.py:109
 msgid "Logs"
-msgstr ""
+msgstr "Fermer"
 
 #: mast/gtk4/services/window.py:184 mast/qt6/services/window.py:141
 #, python-brace-format
@@ -1803,22 +1803,22 @@ msgstr ""
 #: mast/gtk4/services/window.py:283 mast/qt6/services/window.py:237
 #: mast/tui/services/window.py:288
 msgid "started"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/services/window.py:284 mast/qt6/services/window.py:238
 #: mast/tui/services/window.py:291
 msgid "stopped"
-msgstr ""
+msgstr "Fermer"
 
 #: mast/gtk4/services/window.py:285 mast/qt6/services/window.py:239
 #: mast/tui/services/window.py:294
 msgid "enabled"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/services/window.py:286 mast/qt6/services/window.py:240
 #: mast/tui/services/window.py:297
 msgid "disabled"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/gtk4/services/window.py:291 mast/qt6/services/window.py:245
 msgid "Working..."
@@ -1857,7 +1857,7 @@ msgstr ""
 #: mast/qt6/snapshots/config_dialog.py:24
 #: mast/tui/snapshots/config_screen.py:22
 msgid "Snapper Configuration"
-msgstr ""
+msgstr "Configuration du nom d'hôte"
 
 #: mast/gtk4/snapshots/config_dialog.py:47
 #: mast/qt6/snapshots/config_dialog.py:38
@@ -1967,7 +1967,7 @@ msgstr ""
 #: mast/gtk4/snapshots/config_dialog.py:221
 #: mast/qt6/snapshots/config_dialog.py:168 mast/tui/snapshots/window.py:245
 msgid "Configuration saved successfully."
-msgstr ""
+msgstr "La configuration du proxy a ete enregistree avec succes."
 
 #: mast/gtk4/snapshots/config_dialog.py:228
 #: mast/qt6/snapshots/config_dialog.py:171
@@ -1980,7 +1980,7 @@ msgstr ""
 #: mast/qt6/users/groups_manager.py:253 mast/qt6/users/users_manager.py:331
 #: mast/tui/snapshots/window.py:71
 msgid "Create"
-msgstr ""
+msgstr "Dépôts"
 
 #: mast/gtk4/snapshots/window.py:70 mast/qt6/snapshots/window.py:67
 #: mast/tui/snapshots/window.py:74
@@ -1990,7 +1990,7 @@ msgstr ""
 #: mast/gtk4/snapshots/window.py:94 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:85
 msgid "Date"
-msgstr ""
+msgstr "Supprimer"
 
 #: mast/gtk4/snapshots/window.py:108 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:88
@@ -2013,7 +2013,7 @@ msgstr ""
 
 #: mast/gtk4/snapshots/window.py:182 mast/qt6/snapshots/window.py:106
 msgid "Snapshots loaded successfully."
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/gtk4/snapshots/window.py:203 mast/qt6/snapshots/window.py:127
 #, python-brace-format
@@ -2028,7 +2028,7 @@ msgstr ""
 #: mast/gtk4/snapshots/window.py:250 mast/qt6/snapshots/window.py:175
 #: mast/tui/snapshots/window.py:193
 msgid "Description cannot be empty."
-msgstr ""
+msgstr "Le nom d'hôte ne peut pas être vide."
 
 #: mast/gtk4/snapshots/window.py:256 mast/qt6/snapshots/window.py:180
 #: mast/qt6/users/groups_manager.py:254 mast/qt6/users/users_manager.py:332
@@ -2043,7 +2043,7 @@ msgstr ""
 #: mast/gtk4/snapshots/window.py:259 mast/qt6/snapshots/window.py:183
 #: mast/tui/snapshots/window.py:208
 msgid "Snapshot created successfully."
-msgstr ""
+msgstr "Clé SSH générée avec succès."
 
 #: mast/gtk4/snapshots/window.py:270 mast/qt6/snapshots/window.py:191
 #: mast/tui/snapshots/window.py:218
@@ -2184,11 +2184,11 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:52
 msgid "Key Size"
-msgstr ""
+msgstr "Taille de clé"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:70
 msgid "Optional comment (e.g., user@host)"
-msgstr ""
+msgstr "Commentaire optionnel (ex : user@host)"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:77 mast/gtk4/ssh/keys_tab.py:102
 #: mast/qt6/ssh/keys_tab.py:66 mast/tui/ssh/window.py:293
@@ -2197,7 +2197,7 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:82
 msgid "Optional passphrase"
-msgstr ""
+msgstr "Phrase secrète optionnelle"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:112
 #, python-brace-format
@@ -2340,7 +2340,7 @@ msgstr ""
 #: mast/gtk4/users/users_manager.py:94 mast/qt6/users/users_manager.py:96
 #: mast/tui/ssh/window.py:520 mast/tui/users/window.py:161
 msgid "Username"
-msgstr ""
+msgstr "Nom d'utilisateur"
 
 #: mast/gtk4/users/users_manager.py:99 mast/qt6/users/users_manager.py:101
 msgid "Display Name"
@@ -2482,11 +2482,11 @@ msgstr ""
 
 #: mast/qt6/datetime/window.py:162 mast/tui/datetime/window.py:151
 msgid "NTP synchronized"
-msgstr ""
+msgstr "NTP synchronisé"
 
 #: mast/qt6/datetime/window.py:164 mast/tui/datetime/window.py:153
 msgid "NTP not synchronized"
-msgstr ""
+msgstr "NTP non synchronisé"
 
 #: mast/qt6/datetime/window.py:166
 #, python-brace-format
@@ -2503,7 +2503,7 @@ msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:92
 msgid "Remove Package"
-msgstr ""
+msgstr "Garder les paquets"
 
 #: mast/qt6/flatpak/package_manager.py:93
 msgid "Removing package..."
@@ -2519,7 +2519,7 @@ msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:38
 msgid "Remove Flatpak Runtime"
-msgstr ""
+msgstr "Garder les paquets"
 
 #: mast/qt6/flatpak/window.py:113
 msgid "Please wait"
@@ -2531,15 +2531,15 @@ msgstr ""
 
 #: mast/qt6/git/window.py:233
 msgid "All Files (*)"
-msgstr ""
+msgstr "Tous les fichiers (*)"
 
 #: mast/qt6/git/window.py:271 mast/qt6/hosts/window.py:266
 msgid "Saved successfully"
-msgstr ""
+msgstr "Enregistré avec succès"
 
 #: mast/qt6/git/window.py:302 mast/tui/git/window.py:219
 msgid "Reset to original values"
-msgstr ""
+msgstr "Rétablir les valeurs d'origine"
 
 #: mast/qt6/journal/window.py:115
 msgid "PID"
@@ -2554,12 +2554,12 @@ msgstr ""
 #: mast/qt6/repositories/window.py:325
 #, python-format
 msgid "Failed to save repository: %s"
-msgstr ""
+msgstr "Échec de l'enregistrement du dépôt : %s"
 
 #: mast/qt6/repositories/window.py:278
 #, python-format
 msgid "Failed to delete repository: %s"
-msgstr ""
+msgstr "Échec de la suppression du dépôt : %s"
 
 #: mast/qt6/repositories/window.py:306 mast/tui/repositories/window.py:179
 msgid "Permission denied."
@@ -2575,62 +2575,62 @@ msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:90
 msgid "Key Name:"
-msgstr ""
+msgstr "Nom de la clé :"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:92
 msgid "e.g., id_ed25519"
-msgstr ""
+msgstr "p. ex., id_ed25519"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:98
 msgid "Key Type:"
-msgstr ""
+msgstr "Type de clé :"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:110
 msgid "Key Size:"
-msgstr ""
+msgstr "Taille de la clé :"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:125
 msgid "e.g., user@hostname"
-msgstr ""
+msgstr "p. ex., user@hostname"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:131
 msgid "Passphrase:"
-msgstr ""
+msgstr "Phrase de passe :"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:138
 #, python-brace-format
 msgid "The key will be saved to {0}"
-msgstr ""
+msgstr "La clé sera enregistrée dans {0}"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:143
 msgid "Public Key:"
-msgstr ""
+msgstr "Clé publique :"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:177
 msgid "Key name is required."
-msgstr ""
+msgstr "Le nom de la clé est requis."
 
 #: mast/qt6/ssh/keys_generate_dialog.py:185
 msgid "Key names starting with 'id_' are recommended. Continue anyway?"
-msgstr ""
+msgstr "Key names starting with 'id_' are recommended. Continue anyway?Les noms de clé commençant par 'id_' sont recommandés. Continuer quand même ?"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:195
 msgid "A key with this name already exists."
-msgstr ""
+msgstr "Une clé portant ce nom existe déjà."
 
 #: mast/qt6/ssh/keys_generate_dialog.py:232
 msgid "SSH key generated successfully."
-msgstr ""
+msgstr "Clé SSH générée avec succès."
 
 #: mast/qt6/ssh/keys_generate_dialog.py:237
 #, python-brace-format
 msgid "Failed to read public key: {0}"
-msgstr ""
+msgstr "Échec de la lecture de la clé publique : {0}"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:242
 #, python-brace-format
 msgid "Failed to generate SSH key: {0}"
-msgstr ""
+msgstr "Échec de la génération de la clé SSH : {0}"
 
 #: mast/qt6/users/groups_manager.py:271 mast/qt6/users/users_manager.py:355
 msgid "Update"
@@ -2660,7 +2660,7 @@ msgstr ""
 #: mast/tui/hostname/window.py:135 mast/tui/languages/window.py:120
 #: mast/tui/proxy/window.py:158
 msgid "Error: Permission denied. Root permission required."
-msgstr ""
+msgstr "Erreur : permission refusee. Les droits root sont requis."
 
 #: mast/tui/cron/window.py:234
 msgid "Cron job added."
@@ -2672,7 +2672,7 @@ msgstr ""
 
 #: mast/tui/cron/window.py:344
 msgid "Error: Command is required."
-msgstr ""
+msgstr "Erreur : Commande requise."
 
 #: mast/tui/datetime/window.py:94
 msgid "Date & Time Configuration"
@@ -2680,7 +2680,7 @@ msgstr ""
 
 #: mast/tui/datetime/window.py:98
 msgid "Type to search..."
-msgstr ""
+msgstr "Tapez pour rechercher..."
 
 #: mast/tui/datetime/window.py:110
 msgid "Enter NTP servers"
@@ -2713,7 +2713,7 @@ msgstr ""
 #: mast/tui/users/window.py:517 mast/tui/users/window.py:519
 #, python-brace-format
 msgid "Error: {0}"
-msgstr ""
+msgstr "Erreur : {0}"
 
 #: mast/tui/git/window.py:158
 msgid "Error: Git is not installed on this system."
@@ -2733,7 +2733,7 @@ msgstr ""
 
 #: mast/tui/hostname/window.py:64
 msgid "Hostname Configuration"
-msgstr ""
+msgstr "Configuration du nom d'hôte"
 
 #: mast/tui/hostname/window.py:79
 msgid "Error: /etc/hostname not found."
@@ -2763,12 +2763,12 @@ msgstr ""
 #: mast/tui/hosts/window.py:92 mast/tui/proxy/window.py:109
 #, python-brace-format
 msgid "Error: Cannot read {0}. Root permission required."
-msgstr ""
+msgstr "Erreur : impossible de lire {0}. Les droits root sont requis."
 
 #: mast/tui/hosts/window.py:97 mast/tui/proxy/window.py:106
 #, python-brace-format
 msgid "Error: {0} not found."
-msgstr ""
+msgstr "Erreur : {0} introuvable."
 
 #: mast/tui/hosts/window.py:124 mast/tui/ssh/window.py:508
 msgid "Add Host Entry"
@@ -2819,7 +2819,7 @@ msgstr ""
 #: mast/tui/languages/window.py:114
 #, python-brace-format
 msgid "Success: Language changed to '{0}'. Changes take effect after logout."
-msgstr ""
+msgstr "Succès : langue changée en '{0}'. Les modifications prennent effet après la déconnexion."
 
 #: mast/tui/packages/window.py:39
 msgid "Packages Management"
@@ -2835,30 +2835,30 @@ msgstr ""
 
 #: mast/tui/proxy/window.py:69
 msgid "Proxy Configuration"
-msgstr ""
+msgstr "Configuration du proxy"
 
 #: mast/tui/proxy/window.py:114
 #, python-brace-format
 msgid "Error: Failed to load proxy configuration: {0}"
-msgstr ""
+msgstr "Erreur : echec du chargement de la configuration du proxy : {0}"
 
 #: mast/tui/proxy/window.py:120
 msgid "Disabled"
-msgstr ""
+msgstr "Desactive"
 
 #: mast/tui/proxy/window.py:121
 #, python-brace-format
 msgid "Proxy State: {0}"
-msgstr ""
+msgstr "Etat du proxy : {0}"
 
 #: mast/tui/proxy/window.py:154
 msgid "Success: Proxy configuration saved successfully."
-msgstr ""
+msgstr "Succes : la configuration du proxy a ete enregistree avec succes."
 
 #: mast/tui/proxy/window.py:163
 #, python-brace-format
 msgid "Error: Failed to save proxy configuration: {0}"
-msgstr ""
+msgstr "Erreur : echec de l'enregistrement de la configuration du proxy : {0}"
 
 #: mast/tui/repositories/window.py:93
 msgid "Error: Cannot read repository directory. Root permission required."
@@ -2894,39 +2894,39 @@ msgstr ""
 
 #: mast/tui/repositories/window.py:329
 msgid "Repository ID"
-msgstr ""
+msgstr "ID du dépôt"
 
 #: mast/tui/repositories/window.py:330
 msgid "Unique repository ID"
-msgstr ""
+msgstr "ID de dépôt unique"
 
 #: mast/tui/repositories/window.py:333
 msgid "Display name"
-msgstr ""
+msgstr "Nom d'affichage"
 
 #: mast/tui/repositories/window.py:339
 msgid "Mirror list URL"
-msgstr ""
+msgstr "URL de la liste des miroirs"
 
 #: mast/tui/repositories/window.py:342
 msgid "Priority (default 99)"
-msgstr ""
+msgstr "Priorité (défaut 99)"
 
 #: mast/tui/repositories/window.py:351
 msgid "GPG Key"
-msgstr ""
+msgstr "Clé GPG"
 
 #: mast/tui/repositories/window.py:352
 msgid "GPG key URL"
-msgstr ""
+msgstr "URL de la clé GPG"
 
 #: mast/tui/repositories/window.py:355
 msgid "GPG Check"
-msgstr ""
+msgstr "Vérification GPG"
 
 #: mast/tui/repositories/window.py:356
 msgid "Keep Packages"
-msgstr ""
+msgstr "Garder les paquets"
 
 #: mast/tui/services/window.py:157
 #, python-brace-format
@@ -3050,7 +3050,7 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:413
 msgid "Key deleted."
-msgstr ""
+msgstr "Clé supprimée."
 
 #: mast/tui/ssh/window.py:420 mast/tui/ssh/window.py:431
 msgid "Error: Host pattern is required."
@@ -3066,23 +3066,23 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:449
 msgid "Key generated successfully."
-msgstr ""
+msgstr "Clé générée avec succès."
 
 #: mast/tui/ssh/window.py:510
 msgid "Host"
-msgstr ""
+msgstr "Hôte"
 
 #: mast/tui/ssh/window.py:511
 msgid "Host pattern"
-msgstr ""
+msgstr "Modèle d'hôte"
 
 #: mast/tui/ssh/window.py:513
 msgid "HostName"
-msgstr ""
+msgstr "Nom d'hôte"
 
 #: mast/tui/ssh/window.py:514
 msgid "Real hostname"
-msgstr ""
+msgstr "Nom d'hôte réel"
 
 #: mast/tui/ssh/window.py:516
 msgid "Port"
@@ -3094,11 +3094,11 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:522
 msgid "IdentityFile"
-msgstr ""
+msgstr "Fichier d'identité"
 
 #: mast/tui/ssh/window.py:523
 msgid "Key file path"
-msgstr ""
+msgstr "Chemin du fichier de clé"
 
 #: mast/tui/ssh/window.py:614
 msgid "Key filename"
@@ -3110,7 +3110,7 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:620
 msgid "Key bits"
-msgstr ""
+msgstr "Bits de clé"
 
 #: mast/tui/users/window.py:111
 msgid "UID:"
