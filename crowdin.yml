@@ -1,3 +1,0 @@
-files:
-  - source: /locale/template/LC_MESSAGES/mast.pot
-    translation: /locale/%osx_locale%/LC_MESSAGES/mast.pot
