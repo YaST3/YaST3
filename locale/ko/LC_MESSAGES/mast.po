@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-07-18 05:32+0000\n"
-"PO-Revision-Date: 2026-07-30 07:34\n"
+"PO-Revision-Date: 2026-07-30 09:27\n"
 "Last-Translator: \n"
 "Language-Team: Korean\n"
 "MIME-Version: 1.0\n"
@@ -34,24 +34,24 @@ msgstr ""
 
 #: mast/gtk4/module_button.py:51 mast/qt6/module_button.py:43
 msgid "Experimental"
-msgstr ""
+msgstr "실험적"
 
 #: mast/gtk4/command/dialog.py:30 mast/qt6/command/dialog.py:30
 msgid "Running command, please wait..."
-msgstr ""
+msgstr "명령을 실행 중입니다. 잠시 기다려 주십시오..."
 
 #: mast/gtk4/command/dialog.py:53 mast/qt6/command/dialog.py:44
 #: mast/tui/packages/window.py:42 mast/tui/services/window.py:362
 msgid "Close"
-msgstr ""
+msgstr "닫기"
 
 #: mast/gtk4/command/dialog.py:80 mast/qt6/command/dialog.py:60
 msgid "Command completed successfully."
-msgstr ""
+msgstr "명령이 성공적으로 완료되었습니다."
 
 #: mast/gtk4/command/dialog.py:82 mast/qt6/command/dialog.py:62
 msgid "Command failed. See output for details."
-msgstr ""
+msgstr "명령이 실패했습니다. 세부 정보는 출력을 확인하십시오."
 
 #: mast/gtk4/command/worker.py:55 mast/gtk4/flatpak/settings.py:51
 #: mast/gtk4/flatpak/window.py:92 mast/gtk4/snapshots/window.py:209
@@ -60,7 +60,7 @@ msgstr ""
 #: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:120
 #: mast/tui/snapshots/window.py:212 mast/tui/snapshots/window.py:239
 msgid "Unknown error"
-msgstr ""
+msgstr "알 수 없는 오류"
 
 #: mast/gtk4/cron/__init__.py:16 mast/qt6/cron/__init__.py:12
 #: mast/tui/cron/__init__.py:12
@@ -70,12 +70,12 @@ msgstr ""
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:193
 msgid "Edit Cron Job"
-msgstr ""
+msgstr "Cron 작업 편집"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
 #: mast/tui/cron/window.py:179
 msgid "Add Cron Job"
-msgstr ""
+msgstr "Cron 작업 추가"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:29
 #: mast/gtk4/flatpak/remote_manager.py:172
@@ -90,7 +90,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:488 mast/tui/snapshots/config_screen.py:110
 #: mast/tui/ssh/window.py:526 mast/tui/ssh/window.py:626
 msgid "Cancel"
-msgstr ""
+msgstr "취소"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:30
 #: mast/gtk4/flatpak/remote_manager.py:173
@@ -104,68 +104,68 @@ msgstr ""
 #: mast/tui/snapshots/config_screen.py:111 mast/tui/ssh/window.py:525
 #: mast/tui/ssh/window.py:625
 msgid "OK"
-msgstr ""
+msgstr "확인"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:43 mast/gtk4/cron/manager.py:82
 #: mast/qt6/cron/cron_edit_dialog.py:42 mast/qt6/cron/manager.py:71
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:295
 msgid "Minute"
-msgstr ""
+msgstr "분"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:43 mast/qt6/cron/cron_edit_dialog.py:41
 msgid "0-59 or *"
-msgstr ""
+msgstr "0-59 또는 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/gtk4/cron/manager.py:88
 #: mast/qt6/cron/cron_edit_dialog.py:46 mast/qt6/cron/manager.py:72
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:299
 msgid "Hour"
-msgstr ""
+msgstr "시"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/qt6/cron/cron_edit_dialog.py:45
 msgid "0-23 or *"
-msgstr ""
+msgstr "0-23 또는 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/gtk4/cron/manager.py:94
 #: mast/qt6/cron/cron_edit_dialog.py:50 mast/qt6/cron/manager.py:73
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:303
 msgid "Day"
-msgstr ""
+msgstr "일"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/qt6/cron/cron_edit_dialog.py:49
 msgid "1-31 or *"
-msgstr ""
+msgstr "1-31 또는 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/gtk4/cron/manager.py:100
 #: mast/qt6/cron/cron_edit_dialog.py:54 mast/qt6/cron/manager.py:74
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:307
 msgid "Month"
-msgstr ""
+msgstr "월"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/qt6/cron/cron_edit_dialog.py:53
 msgid "1-12 or *"
-msgstr ""
+msgstr "1-12 또는 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/gtk4/cron/manager.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:58 mast/qt6/cron/manager.py:75
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:311
 msgid "Weekday"
-msgstr ""
+msgstr "요일"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/qt6/cron/cron_edit_dialog.py:57
 msgid "0-7 or *"
-msgstr ""
+msgstr "0-7 또는 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:49 mast/gtk4/cron/manager.py:112
 #: mast/qt6/cron/cron_edit_dialog.py:62 mast/qt6/cron/manager.py:76
 #: mast/tui/cron/window.py:117 mast/tui/cron/window.py:315
 msgid "Command"
-msgstr ""
+msgstr "명령"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:53 mast/qt6/cron/cron_edit_dialog.py:61
 #: mast/tui/cron/window.py:317
 msgid "Command to execute"
-msgstr ""
+msgstr "실행할 명령"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:57 mast/gtk4/cron/manager.py:117
 #: mast/gtk4/hosts/window.py:97 mast/gtk4/ssh/keys_generate_dialog.py:65
@@ -176,17 +176,17 @@ msgstr ""
 #: mast/tui/hosts/window.py:269 mast/tui/ssh/window.py:293
 #: mast/tui/ssh/window.py:622
 msgid "Comment"
-msgstr ""
+msgstr "주석"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:61 mast/qt6/cron/cron_edit_dialog.py:66
 #: mast/tui/cron/window.py:321 mast/tui/ssh/window.py:623
 msgid "Optional comment"
-msgstr ""
+msgstr "선택적 주석"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:91 mast/gtk4/cron/cron_edit_dialog.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:93 mast/qt6/cron/cron_edit_dialog.py:99
 msgid "Suggestions"
-msgstr ""
+msgstr "제안"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:128 mast/gtk4/cron/manager.py:251
 #: mast/gtk4/datetime/window.py:178 mast/gtk4/datetime/window.py:227
@@ -290,7 +290,7 @@ msgstr ""
 #: mast/qt6/users/users_manager.py:268 mast/qt6/users/users_manager.py:294
 #: mast/qt6/users/users_manager.py:300
 msgid "Error"
-msgstr ""
+msgstr "오류"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:130 mast/qt6/cron/cron_edit_dialog.py:111
 msgid "Command cannot be empty"
@@ -309,7 +309,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:70 mast/tui/ssh/window.py:259
 #: mast/tui/users/window.py:105 mast/tui/users/window.py:141
 msgid "Add"
-msgstr ""
+msgstr "추가"
 
 #: mast/gtk4/cron/manager.py:44 mast/gtk4/flatpak/remote_manager.py:32
 #: mast/gtk4/flatpak/remote_manager.py:233 mast/gtk4/hosts/window.py:37
@@ -320,7 +320,7 @@ msgstr ""
 #: mast/tui/cron/window.py:80 mast/tui/hosts/window.py:70
 #: mast/tui/repositories/window.py:71 mast/tui/ssh/window.py:260
 msgid "Edit"
-msgstr ""
+msgstr "편집"
 
 #: mast/gtk4/cron/manager.py:49 mast/gtk4/flatpak/remote_manager.py:36
 #: mast/gtk4/hosts/window.py:41 mast/gtk4/repositories/window.py:51
@@ -340,7 +340,7 @@ msgstr ""
 #: mast/tui/ssh/window.py:269 mast/tui/users/window.py:106
 #: mast/tui/users/window.py:142
 msgid "Delete"
-msgstr ""
+msgstr "삭제"
 
 #: mast/gtk4/cron/manager.py:57 mast/gtk4/datetime/window.py:157
 #: mast/gtk4/git/window.py:70 mast/gtk4/hostname/window.py:48
@@ -359,7 +359,7 @@ msgstr ""
 #: mast/tui/ssh/window.py:262 mast/tui/users/window.py:107
 #: mast/tui/users/window.py:143
 msgid "Save"
-msgstr ""
+msgstr "저장"
 
 #: mast/gtk4/cron/manager.py:76 mast/gtk4/hosts/window.py:76
 #: mast/gtk4/repositories/repo_edit_dialog.py:38
@@ -371,7 +371,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:353 mast/tui/services/window.py:126
 #: mast/tui/ssh/window.py:288
 msgid "Enabled"
-msgstr ""
+msgstr "사용 중"
 
 #: mast/gtk4/cron/manager.py:187 mast/gtk4/cron/manager.py:217
 #: mast/gtk4/flatpak/package_manager.py:299
@@ -400,17 +400,17 @@ msgstr ""
 #: mast/qt6/snapshots/window.py:175 mast/qt6/snapshots/window.py:191
 #: mast/qt6/ssh/hosts_tab.py:148 mast/qt6/ssh/hosts_tab.py:169
 msgid "Information"
-msgstr ""
+msgstr "정보"
 
 #: mast/gtk4/cron/manager.py:187 mast/qt6/cron/manager.py:161
 #: mast/tui/cron/window.py:186
 msgid "Please select a cron job to edit."
-msgstr ""
+msgstr "편집할 cron 작업을 선택하십시오."
 
 #: mast/gtk4/cron/manager.py:217 mast/qt6/cron/manager.py:179
 #: mast/tui/cron/window.py:205
 msgid "Please select a cron job to delete."
-msgstr ""
+msgstr "삭제할 cron 작업을 선택하십시오."
 
 #: mast/gtk4/cron/manager.py:225 mast/gtk4/flatpak/package_manager.py:338
 #: mast/gtk4/flatpak/remote_manager.py:132
@@ -429,11 +429,11 @@ msgstr ""
 #: mast/qt6/ssh/keys_generate_dialog.py:184
 #: mast/qt6/users/groups_manager.py:214 mast/qt6/users/users_manager.py:273
 msgid "Confirm"
-msgstr ""
+msgstr "확인"
 
 #: mast/gtk4/cron/manager.py:227 mast/qt6/cron/manager.py:183
 msgid "Are you sure you want to delete this cron job?"
-msgstr ""
+msgstr "이 cron 작업을 삭제하시겠습니까?"
 
 #: mast/gtk4/cron/manager.py:249 mast/gtk4/datetime/window.py:229
 #: mast/gtk4/datetime/window.py:235 mast/gtk4/flatpak/package_manager.py:314
@@ -462,11 +462,11 @@ msgstr ""
 #: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
 #: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
 msgid "Success"
-msgstr ""
+msgstr "성공"
 
 #: mast/gtk4/cron/manager.py:249 mast/qt6/cron/manager.py:229
 msgid "Cron jobs saved successfully."
-msgstr ""
+msgstr "cron 작업이 성공적으로 저장되었습니다."
 
 #: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:238
 #: mast/gtk4/hostname/window.py:108 mast/gtk4/languages/settings.py:145
@@ -474,7 +474,7 @@ msgstr ""
 #: mast/qt6/datetime/window.py:211 mast/qt6/hostname/window.py:130
 #: mast/qt6/languages/settings.py:144 mast/qt6/proxy/window.py:117
 msgid "Permission denied. Root permission required."
-msgstr ""
+msgstr "권한이 거부되었습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/cron/window.py:31 mast/gtk4/flatpak/remote_manager.py:189
 #: mast/gtk4/git/window.py:46 mast/gtk4/journal/window.py:66
@@ -489,7 +489,7 @@ msgstr ""
 #: mast/tui/users/window.py:173 mast/tui/users/window.py:233
 #: mast/tui/users/window.py:494
 msgid "User"
-msgstr ""
+msgstr "사용자"
 
 #: mast/gtk4/cron/window.py:35 mast/gtk4/flatpak/remote_manager.py:188
 #: mast/gtk4/journal/window.py:65 mast/gtk4/services/window.py:67
@@ -499,53 +499,53 @@ msgstr ""
 #: mast/tui/cron/window.py:72 mast/tui/services/window.py:94
 #: mast/tui/services/window.py:188 mast/tui/users/window.py:233
 msgid "System"
-msgstr ""
+msgstr "시스템"
 
 #: mast/gtk4/datetime/__init__.py:16 mast/qt6/datetime/__init__.py:12
 #: mast/tui/datetime/__init__.py:10
 msgid "Date & Time"
-msgstr ""
+msgstr "날짜 및 시간"
 
 #: mast/gtk4/datetime/window.py:47 mast/gtk4/datetime/window.py:58
 #: mast/qt6/datetime/window.py:63 mast/tui/datetime/window.py:97
 msgid "Timezone"
-msgstr ""
+msgstr "시간대"
 
 #: mast/gtk4/datetime/window.py:73
 msgid "Search timezone..."
-msgstr ""
+msgstr "시간대 검색..."
 
 #: mast/gtk4/datetime/window.py:84 mast/tui/datetime/window.py:102
 msgid "Hardware Clock"
-msgstr ""
+msgstr "하드웨어 시계"
 
 #: mast/gtk4/datetime/window.py:97 mast/qt6/datetime/window.py:83
 #: mast/tui/datetime/window.py:103
 msgid "Set hardware clock to UTC"
-msgstr ""
+msgstr "하드웨어 시계를 UTC로 설정"
 
 #: mast/gtk4/datetime/window.py:108 mast/tui/datetime/window.py:106
 msgid "NTP Synchronization"
-msgstr ""
+msgstr "NTP 동기화"
 
 #: mast/gtk4/datetime/window.py:119 mast/qt6/datetime/window.py:97
 #: mast/tui/datetime/window.py:107
 msgid "Enable NTP synchronization"
-msgstr ""
+msgstr "NTP 동기화 활성화"
 
 #: mast/gtk4/datetime/window.py:126 mast/qt6/datetime/window.py:105
 #: mast/tui/datetime/window.py:109
 msgid "NTP Servers"
-msgstr ""
+msgstr "NTP 서버"
 
 #: mast/gtk4/datetime/window.py:132 mast/qt6/datetime/window.py:110
 msgid "Enter NTP servers separated by spaces"
-msgstr ""
+msgstr "스페이스로 구분하여 NTP 서버를 입력하세요"
 
 #: mast/gtk4/datetime/window.py:139 mast/qt6/datetime/window.py:118
 #: mast/tui/datetime/window.py:112
 msgid "Sync Now"
-msgstr ""
+msgstr "지금 동기화"
 
 #: mast/gtk4/datetime/window.py:178 mast/qt6/datetime/window.py:148
 #, python-brace-format
@@ -584,7 +584,7 @@ msgstr ""
 #: mast/qt6/hostname/window.py:134 mast/qt6/hosts/window.py:275
 #: mast/qt6/languages/settings.py:148
 msgid "Authentication failed or pkexec not available."
-msgstr ""
+msgstr "인증에 실패했거나 pkexec을 사용할 수 없습니다."
 
 #: mast/gtk4/flatpak/__init__.py:16 mast/qt6/flatpak/__init__.py:10
 msgid "Flatpak"
@@ -594,29 +594,29 @@ msgstr ""
 #: mast/gtk4/flatpak/install_action.py:22 mast/qt6/flatpak/install_action.py:16
 #: mast/qt6/flatpak/install_action.py:18
 msgid "Install Flatpak"
-msgstr ""
+msgstr "Flatpak 설치"
 
 #: mast/gtk4/flatpak/install_action.py:21 mast/qt6/flatpak/install_action.py:17
 msgid "Installing Flatpak..."
-msgstr ""
+msgstr "Flatpak 설치 중..."
 
 #: mast/gtk4/flatpak/install_action.py:24 mast/gtk4/flatpak/window.py:86
 #: mast/qt6/flatpak/install_action.py:20 mast/qt6/flatpak/window.py:89
 msgid "Flatpak installed successfully."
-msgstr ""
+msgstr "Flatpak이 성공적으로 설치되었습니다."
 
 #: mast/gtk4/flatpak/package_manager.py:79 mast/gtk4/languages/manager.py:32
 #: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:113
 #: mast/qt6/flatpak/package_manager.py:78 mast/qt6/languages/manager.py:41
 #: mast/qt6/languages/manager.py:147 mast/qt6/languages/settings.py:107
 msgid "Install"
-msgstr ""
+msgstr "설치"
 
 #: mast/gtk4/flatpak/package_manager.py:82
 #: mast/gtk4/flatpak/runtime_manager.py:31
 #: mast/qt6/flatpak/runtime_manager.py:36
 msgid "Remove"
-msgstr ""
+msgstr "제거"
 
 #: mast/gtk4/flatpak/package_manager.py:94
 #: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
@@ -628,7 +628,7 @@ msgstr ""
 #: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
 #: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
 msgid "Search"
-msgstr ""
+msgstr "검색"
 
 #: mast/gtk4/flatpak/package_manager.py:98
 #: mast/gtk4/flatpak/runtime_manager.py:47 mast/gtk4/git/window.py:75
@@ -637,7 +637,7 @@ msgstr ""
 #: mast/qt6/flatpak/runtime_manager.py:68 mast/qt6/git/window.py:82
 #: mast/tui/git/window.py:82
 msgid "Reset"
-msgstr ""
+msgstr "재설정"
 
 #: mast/gtk4/flatpak/package_manager.py:102
 #: mast/gtk4/flatpak/package_manager.py:180
@@ -656,7 +656,7 @@ msgstr ""
 #: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:73
 #: mast/tui/snapshots/window.py:135
 msgid "Refresh"
-msgstr ""
+msgstr "새로 고침"
 
 #: mast/gtk4/flatpak/package_manager.py:111
 #: mast/qt6/flatpak/package_manager.py:166
@@ -668,7 +668,7 @@ msgstr ""
 #: mast/qt6/flatpak/package_manager.py:174
 #: mast/qt6/flatpak/package_manager.py:244
 msgid "Next"
-msgstr ""
+msgstr "다음"
 
 #: mast/gtk4/flatpak/package_manager.py:128
 #: mast/gtk4/flatpak/package_manager.py:141
@@ -700,7 +700,7 @@ msgstr ""
 #: mast/tui/repositories/window.py:332 mast/tui/services/window.py:123
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:613
 msgid "Name"
-msgstr ""
+msgstr "이름"
 
 #: mast/gtk4/flatpak/package_manager.py:130
 #: mast/gtk4/flatpak/package_manager.py:143
@@ -713,7 +713,7 @@ msgstr ""
 #: mast/tui/services/window.py:127 mast/tui/snapshots/window.py:70
 #: mast/tui/snapshots/window.py:87
 msgid "Description"
-msgstr ""
+msgstr "설명"
 
 #: mast/gtk4/flatpak/package_manager.py:131
 #: mast/gtk4/flatpak/package_manager.py:144
@@ -722,12 +722,12 @@ msgstr ""
 #: mast/qt6/flatpak/package_manager.py:216
 #: mast/qt6/flatpak/runtime_manager.py:85
 msgid "Version"
-msgstr ""
+msgstr "버전"
 
 #: mast/gtk4/flatpak/package_manager.py:132
 #: mast/qt6/flatpak/package_manager.py:145
 msgid "Download Size"
-msgstr ""
+msgstr "다운로드 크기"
 
 #: mast/gtk4/flatpak/package_manager.py:133
 #: mast/gtk4/flatpak/package_manager.py:146
@@ -736,7 +736,7 @@ msgstr ""
 #: mast/qt6/flatpak/package_manager.py:218
 #: mast/qt6/flatpak/runtime_manager.py:86
 msgid "Branch"
-msgstr ""
+msgstr "브랜치"
 
 #: mast/gtk4/flatpak/package_manager.py:134
 #: mast/gtk4/flatpak/package_manager.py:147
@@ -745,7 +745,7 @@ msgstr ""
 #: mast/qt6/flatpak/package_manager.py:219
 #: mast/qt6/flatpak/runtime_manager.py:88
 msgid "Remote"
-msgstr ""
+msgstr "원격"
 
 #: mast/gtk4/flatpak/package_manager.py:135
 #: mast/gtk4/flatpak/package_manager.py:148
@@ -760,28 +760,28 @@ msgstr ""
 #: mast/qt6/services/window.py:116 mast/tui/services/window.py:90
 #: mast/tui/services/window.py:124
 msgid "Scope"
-msgstr ""
+msgstr "범위"
 
 #: mast/gtk4/flatpak/package_manager.py:136 mast/gtk4/flatpak/window.py:54
 #: mast/gtk4/languages/manager.py:89 mast/gtk4/languages/manager.py:120
 #: mast/qt6/flatpak/package_manager.py:149 mast/qt6/flatpak/window.py:58
 #: mast/qt6/languages/manager.py:78 mast/qt6/languages/manager.py:105
 msgid "Installed"
-msgstr ""
+msgstr "설치됨"
 
 #: mast/gtk4/flatpak/package_manager.py:145
 #: mast/gtk4/flatpak/runtime_manager.py:70
 #: mast/qt6/flatpak/package_manager.py:217
 #: mast/qt6/flatpak/runtime_manager.py:87
 msgid "Installed Size"
-msgstr ""
+msgstr "설치 크기"
 
 #: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:175
 #: mast/gtk4/snapshots/window.py:179 mast/qt6/flatpak/package_manager.py:275
 #: mast/qt6/snapshots/window.py:99 mast/qt6/snapshots/window.py:103
 #: mast/tui/snapshots/window.py:109
 msgid "Loading..."
-msgstr ""
+msgstr "로딩 중..."
 
 #: mast/gtk4/flatpak/package_manager.py:221
 #: mast/qt6/flatpak/package_manager.py:475
@@ -798,17 +798,17 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:300
 #: mast/qt6/flatpak/package_manager.py:347
 msgid "Please select a package from the list to install."
-msgstr ""
+msgstr "설치할 패키지를 목록에서 선택하십시오."
 
 #: mast/gtk4/flatpak/package_manager.py:308
 #: mast/qt6/flatpak/package_manager.py:351
 msgid "The selected package is already installed."
-msgstr ""
+msgstr "선택한 패키지는 이미 설치되어 있습니다."
 
 #: mast/gtk4/flatpak/package_manager.py:314
 #: mast/qt6/flatpak/package_manager.py:82
 msgid "Package installed successfully."
-msgstr ""
+msgstr "패키지가 성공적으로 설치되었습니다."
 
 #: mast/gtk4/flatpak/package_manager.py:320
 #: mast/qt6/flatpak/package_manager.py:387
@@ -819,18 +819,18 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:329
 #: mast/qt6/flatpak/package_manager.py:364
 msgid "Please select an installed package from the list."
-msgstr ""
+msgstr "이미 설치된 패키지를 목록에서 선택하십시오."
 
 #: mast/gtk4/flatpak/package_manager.py:342
 #: mast/qt6/flatpak/package_manager.py:370
 #, python-brace-format
 msgid "Are you sure you want to remove package '{0}'?"
-msgstr ""
+msgstr "패키지 '{0}'을 제거하시겠습니까?"
 
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/qt6/flatpak/package_manager.py:96
 msgid "Package removed successfully."
-msgstr ""
+msgstr "패키지가 성공적으로 제거되었습니다."
 
 #: mast/gtk4/flatpak/package_manager.py:360
 #: mast/qt6/flatpak/package_manager.py:398
@@ -844,7 +844,7 @@ msgstr ""
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
 #: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
 msgid "Yes"
-msgstr ""
+msgstr "예"
 
 #: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
@@ -852,7 +852,7 @@ msgstr ""
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
 #: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
 msgid "No"
-msgstr ""
+msgstr "아니오"
 
 #: mast/gtk4/flatpak/remote_manager.py:53
 #: mast/gtk4/flatpak/remote_manager.py:194
@@ -884,7 +884,7 @@ msgstr ""
 #: mast/qt6/flatpak/remote_manager.py:128
 #, python-brace-format
 msgid "Are you sure you want to delete remote '{0}'?"
-msgstr ""
+msgstr "원격 '{0}'을 삭제하시겠습니까?"
 
 #: mast/gtk4/flatpak/remote_manager.py:156
 #: mast/qt6/flatpak/remote_manager.py:135
@@ -900,12 +900,12 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:168
 #: mast/qt6/flatpak/remote_manager.py:87
 msgid "Add Remote"
-msgstr ""
+msgstr "원격 추가"
 
 #: mast/gtk4/flatpak/remote_manager.py:220
 #: mast/qt6/flatpak/remote_manager.py:94
 msgid "Remote added successfully."
-msgstr ""
+msgstr "원격이 성공적으로 추가되었습니다."
 
 #: mast/gtk4/flatpak/remote_manager.py:227
 #: mast/qt6/flatpak/remote_manager.py:97
@@ -916,7 +916,7 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:282
 #: mast/qt6/flatpak/remote_manager.py:113
 msgid "Remote URL updated successfully."
-msgstr ""
+msgstr "원격 URL이 성공적으로 업데이트되었습니다."
 
 #: mast/gtk4/flatpak/remote_manager.py:289
 #: mast/qt6/flatpak/remote_manager.py:116
@@ -927,20 +927,20 @@ msgstr ""
 #: mast/gtk4/flatpak/remove_action.py:20 mast/gtk4/flatpak/remove_action.py:22
 #: mast/qt6/flatpak/remove_action.py:17 mast/qt6/flatpak/remove_action.py:19
 msgid "Remove Flatpak"
-msgstr ""
+msgstr "Flatpak 제거"
 
 #: mast/gtk4/flatpak/remove_action.py:21 mast/qt6/flatpak/remove_action.py:18
 msgid "Removing Flatpak..."
-msgstr ""
+msgstr "Flatpak을 제거 중..."
 
 #: mast/gtk4/flatpak/remove_action.py:24 mast/gtk4/flatpak/settings.py:44
 #: mast/qt6/flatpak/remove_action.py:21 mast/qt6/flatpak/window.py:100
 msgid "Flatpak removed successfully."
-msgstr ""
+msgstr "Flatpak이 성공적으로 제거되었습니다."
 
 #: mast/gtk4/flatpak/remove_action.py:40 mast/qt6/flatpak/remove_action.py:38
 msgid "Are you sure you want to remove Flatpak?"
-msgstr ""
+msgstr "Flatpak을 제거하시겠습니까?"
 
 #: mast/gtk4/flatpak/runtime_manager.py:91
 #: mast/qt6/flatpak/runtime_manager.py:160
@@ -951,13 +951,13 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:115
 #: mast/qt6/flatpak/runtime_manager.py:134
 msgid "Please select an installed runtime from the list."
-msgstr ""
+msgstr "이미 설치된 런타임을 목록에서 선택하십시오."
 
 #: mast/gtk4/flatpak/runtime_manager.py:128
 #: mast/qt6/flatpak/runtime_manager.py:140
 #, python-brace-format
 msgid "Are you sure you want to remove runtime '{0}'?"
-msgstr ""
+msgstr "런타임 '{0}'을 제거하시겠습니까?"
 
 #: mast/gtk4/flatpak/runtime_manager.py:140
 #: mast/qt6/flatpak/runtime_manager.py:40
@@ -977,19 +977,19 @@ msgstr ""
 
 #: mast/gtk4/flatpak/window.py:33
 msgid "Flatpak is not installed"
-msgstr ""
+msgstr "Flatpak이 설치되지 않았습니다"
 
 #: mast/gtk4/flatpak/window.py:55 mast/qt6/flatpak/window.py:59
 msgid "Runtimes"
-msgstr ""
+msgstr "런타임"
 
 #: mast/gtk4/flatpak/window.py:56 mast/qt6/flatpak/window.py:60
 msgid "Remotes"
-msgstr ""
+msgstr "원격"
 
 #: mast/gtk4/flatpak/window.py:57 mast/qt6/flatpak/window.py:61
 msgid "Settings"
-msgstr ""
+msgstr "설정"
 
 #: mast/gtk4/flatpak/window.py:92 mast/qt6/flatpak/window.py:95
 #, python-brace-format
@@ -1003,62 +1003,62 @@ msgstr ""
 
 #: mast/gtk4/git/window.py:33 mast/qt6/git/window.py:39
 msgid "Git is not installed on this system."
-msgstr ""
+msgstr "이 시스템에 Git이 설치되지 않았습니다."
 
 #: mast/gtk4/git/window.py:50 mast/qt6/git/window.py:55
 #: mast/tui/git/window.py:72
 msgid "Core"
-msgstr ""
+msgstr "코어"
 
 #: mast/gtk4/git/window.py:54 mast/qt6/git/window.py:60
 #: mast/tui/git/window.py:74
 msgid "Commit"
-msgstr ""
+msgstr "커밋"
 
 #: mast/gtk4/git/window.py:58 mast/qt6/git/window.py:65
 #: mast/tui/git/window.py:76
 msgid "Merge"
-msgstr ""
+msgstr "병합"
 
 #: mast/gtk4/git/window.py:62 mast/qt6/git/window.py:70
 #: mast/tui/git/window.py:78
 msgid "Other"
-msgstr ""
+msgstr "기타"
 
 #: mast/gtk4/git/window.py:93 mast/qt6/git/window.py:95
 #: mast/tui/git/window.py:88
 msgid "User Name"
-msgstr ""
+msgstr "사용자 이름"
 
 #: mast/gtk4/git/window.py:93 mast/qt6/git/window.py:97
 #: mast/tui/git/window.py:89
 msgid "Enter your Git user name"
-msgstr ""
+msgstr "Git 사용자 이름을 입력하십시오"
 
 #: mast/gtk4/git/window.py:96 mast/qt6/git/window.py:103
 #: mast/tui/git/window.py:91
 msgid "Email Address"
-msgstr ""
+msgstr "이메일 주소"
 
 #: mast/gtk4/git/window.py:96 mast/qt6/git/window.py:105
 #: mast/tui/git/window.py:92
 msgid "Enter your Git email address"
-msgstr ""
+msgstr "Git 이메일 주소를 입력하십시오"
 
 #: mast/gtk4/git/window.py:99 mast/qt6/git/window.py:111
 #: mast/tui/git/window.py:94
 msgid "GPG Signing Key"
-msgstr ""
+msgstr "GPG 서명 키"
 
 #: mast/gtk4/git/window.py:99 mast/qt6/git/window.py:113
 #: mast/tui/git/window.py:95
 msgid "Enter GPG key ID"
-msgstr ""
+msgstr "GPG 키 ID를 입력하십시오"
 
 #: mast/gtk4/git/window.py:112 mast/qt6/git/window.py:126
 #: mast/tui/git/window.py:100
 msgid "Default Editor"
-msgstr ""
+msgstr "기본 편집기"
 
 #: mast/gtk4/git/window.py:112 mast/qt6/git/window.py:128
 #: mast/tui/git/window.py:101
@@ -1068,7 +1068,7 @@ msgstr ""
 #: mast/gtk4/git/window.py:115 mast/qt6/git/window.py:134
 #: mast/tui/git/window.py:103
 msgid "Auto CRLF"
-msgstr ""
+msgstr "자동 CRLF"
 
 #: mast/gtk4/git/window.py:118 mast/qt6/git/window.py:143
 #: mast/tui/git/window.py:110
@@ -1078,7 +1078,7 @@ msgstr ""
 #: mast/gtk4/git/window.py:132 mast/qt6/git/window.py:159
 #: mast/tui/git/window.py:120
 msgid "Commit Template"
-msgstr ""
+msgstr "커밋 템플릿"
 
 #: mast/gtk4/git/window.py:138 mast/tui/git/window.py:121
 msgid "Path to commit template"
@@ -1086,7 +1086,7 @@ msgstr ""
 
 #: mast/gtk4/git/window.py:143 mast/qt6/git/window.py:162
 msgid "Browse"
-msgstr ""
+msgstr "찾아보기"
 
 #: mast/gtk4/git/window.py:150 mast/qt6/git/window.py:168
 #: mast/tui/git/window.py:122
@@ -1096,7 +1096,7 @@ msgstr ""
 #: mast/gtk4/git/window.py:165 mast/qt6/git/window.py:181
 #: mast/tui/git/window.py:127
 msgid "Conflict Style"
-msgstr ""
+msgstr "충돌 스타일"
 
 #: mast/gtk4/git/window.py:168 mast/qt6/git/window.py:190
 #: mast/tui/git/window.py:134
@@ -1111,7 +1111,7 @@ msgstr ""
 #: mast/gtk4/git/window.py:186 mast/qt6/git/window.py:211
 #: mast/tui/git/window.py:145
 msgid "Default Branch Name"
-msgstr ""
+msgstr "기본 브랜치 이름"
 
 #: mast/gtk4/git/window.py:186 mast/qt6/git/window.py:213
 #: mast/tui/git/window.py:146
@@ -1121,7 +1121,7 @@ msgstr ""
 #: mast/gtk4/git/window.py:189 mast/qt6/git/window.py:219
 #: mast/tui/git/window.py:148
 msgid "Credential Helper"
-msgstr ""
+msgstr "자격 증명 도우미"
 
 #: mast/gtk4/git/window.py:235 mast/qt6/git/window.py:233
 msgid "Select Commit Template"
@@ -1133,11 +1133,11 @@ msgstr ""
 
 #: mast/gtk4/git/window.py:275 mast/qt6/git/window.py:269
 msgid "Git configuration saved successfully."
-msgstr ""
+msgstr "Git 구성이 성공적으로 저장되었습니다."
 
 #: mast/gtk4/git/window.py:277 mast/qt6/git/window.py:274
 msgid "Failed to save Git configuration."
-msgstr ""
+msgstr "Git 구성 저장에 실패했습니다."
 
 #: mast/gtk4/hostname/__init__.py:16 mast/gtk4/hostname/window.py:32
 #: mast/gtk4/hosts/window.py:90 mast/qt6/hostname/__init__.py:10
@@ -1145,20 +1145,20 @@ msgstr ""
 #: mast/tui/hostname/__init__.py:12 mast/tui/hostname/window.py:66
 #: mast/tui/hosts/window.py:79 mast/tui/hosts/window.py:266
 msgid "Hostname"
-msgstr ""
+msgstr "호스트 이름"
 
 #: mast/gtk4/hostname/window.py:38 mast/qt6/hostname/window.py:42
 #: mast/tui/hostname/window.py:67
 msgid "Enter hostname"
-msgstr ""
+msgstr "호스트 이름을 입력하십시오"
 
 #: mast/gtk4/hostname/window.py:66 mast/qt6/hostname/window.py:66
 msgid "/etc/hostname not found."
-msgstr ""
+msgstr "/etc/hostname을 찾을 수 없습니다."
 
 #: mast/gtk4/hostname/window.py:68 mast/qt6/hostname/window.py:71
 msgid "Cannot read /etc/hostname. Root permission required."
-msgstr ""
+msgstr "/etc/hostname을 읽을 수 없습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/hostname/window.py:70 mast/qt6/hostname/window.py:75
 #, python-brace-format
@@ -1180,7 +1180,7 @@ msgstr ""
 #: mast/gtk4/hostname/window.py:98 mast/qt6/hostname/window.py:111
 #, python-brace-format
 msgid "Are you sure you want to change the hostname from '{0}' to '{1}'?"
-msgstr ""
+msgstr "호스트 이름을 '{0}'에서 '{1}'로 변경하시겠습니까?"
 
 #: mast/gtk4/hostname/window.py:105 mast/qt6/hostname/window.py:125
 #, python-brace-format
@@ -1196,18 +1196,18 @@ msgstr ""
 #: mast/qt6/hosts/__init__.py:10 mast/qt6/ssh/window.py:36
 #: mast/tui/hosts/__init__.py:12 mast/tui/ssh/window.py:250
 msgid "Hosts"
-msgstr ""
+msgstr "호스트"
 
 #: mast/gtk4/hosts/window.py:83 mast/qt6/hosts/window.py:63
 #: mast/tui/hosts/window.py:79 mast/tui/hosts/window.py:263
 msgid "IP Address"
-msgstr ""
+msgstr "IP 주소"
 
 #: mast/gtk4/hosts/window.py:119 mast/gtk4/proxy/window.py:89
 #: mast/qt6/hosts/window.py:104 mast/qt6/proxy/window.py:88
 #, python-brace-format
 msgid "Cannot read {0}. Root permission required."
-msgstr ""
+msgstr "{0}을 읽을 수 없습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/hosts/window.py:122 mast/gtk4/proxy/window.py:83
 #: mast/qt6/hosts/window.py:109 mast/qt6/proxy/window.py:83
@@ -1235,7 +1235,7 @@ msgstr ""
 #: mast/gtk4/hosts/window.py:230 mast/gtk4/ssh/hosts_tab.py:206
 #: mast/qt6/hosts/window.py:229 mast/qt6/ssh/hosts_tab.py:181
 msgid "Are you sure you want to delete this entry?"
-msgstr ""
+msgstr "이 항목을 삭제하시겠습니까?"
 
 #: mast/gtk4/hosts/window.py:248 mast/qt6/hosts/window.py:264
 msgid "Hosts file saved successfully."
@@ -1244,7 +1244,7 @@ msgstr ""
 #: mast/gtk4/hosts/window.py:250 mast/qt6/hosts/window.py:271
 #, python-brace-format
 msgid "Cannot write to {0}. Root permission required."
-msgstr ""
+msgstr "{0}에 쓸 수 없습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/hosts/window.py:254 mast/qt6/hosts/window.py:278
 msgid "Failed to save hosts file."
@@ -1252,7 +1252,7 @@ msgstr ""
 
 #: mast/gtk4/hosts/window.py:275 mast/qt6/hosts/dialogs.py:29
 msgid "Add/Edit Host Entry"
-msgstr ""
+msgstr "호스트 항목 추가/편집"
 
 #: mast/gtk4/hosts/window.py:295 mast/qt6/hosts/dialogs.py:36
 msgid "IP Address:"
@@ -1265,7 +1265,7 @@ msgstr ""
 #: mast/gtk4/hosts/window.py:319 mast/qt6/hosts/dialogs.py:52
 #: mast/qt6/ssh/keys_generate_dialog.py:123
 msgid "Comment:"
-msgstr ""
+msgstr "주석:"
 
 #: mast/gtk4/journal/__init__.py:16 mast/qt6/journal/__init__.py:10
 msgid "Journal"
@@ -1283,7 +1283,7 @@ msgstr ""
 #: mast/qt6/repositories/window.py:70 mast/tui/repositories/window.py:80
 #: mast/tui/repositories/window.py:341
 msgid "Priority"
-msgstr ""
+msgstr "우선순위"
 
 #: mast/gtk4/journal/window.py:80 mast/gtk4/journal/window.py:126
 #: mast/gtk4/services/window.py:55 mast/gtk4/services/window.py:66
@@ -1291,7 +1291,7 @@ msgstr ""
 #: mast/qt6/services/window.py:69 mast/tui/services/window.py:81
 #: mast/tui/services/window.py:93
 msgid "All"
-msgstr ""
+msgstr "모두"
 
 #: mast/gtk4/journal/window.py:89 mast/gtk4/journal/window.py:135
 #: mast/qt6/journal/window.py:95
@@ -1402,148 +1402,148 @@ msgstr ""
 #: mast/gtk4/languages/__init__.py:16 mast/qt6/languages/__init__.py:10
 #: mast/tui/languages/__init__.py:10
 msgid "Languages"
-msgstr ""
+msgstr "언어"
 
 #: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
 #: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
 msgid "Uninstall"
-msgstr ""
+msgstr "제거"
 
 #: mast/gtk4/languages/manager.py:57 mast/qt6/languages/manager.py:56
 msgid "Code"
-msgstr ""
+msgstr "코드"
 
 #: mast/gtk4/languages/manager.py:68 mast/gtk4/services/window.py:53
 #: mast/gtk4/services/window.py:133 mast/qt6/languages/manager.py:58
 #: mast/qt6/services/window.py:57 mast/qt6/services/window.py:116
 #: mast/tui/services/window.py:78 mast/tui/services/window.py:125
 msgid "Status"
-msgstr ""
+msgstr "상태"
 
 #: mast/gtk4/languages/manager.py:120 mast/qt6/languages/manager.py:105
 msgid "Not Installed"
-msgstr ""
+msgstr "미설치"
 
 #: mast/gtk4/languages/manager.py:131 mast/qt6/languages/manager.py:123
 #, python-brace-format
 msgid "Failed to load locales: {0}"
-msgstr ""
+msgstr "로케일 로드에 실패했습니다: {0}"
 
 #: mast/gtk4/languages/manager.py:148 mast/qt6/languages/manager.py:132
 msgid "Please select a locale to install."
-msgstr ""
+msgstr "설치할 언어를 선택하십시오."
 
 #: mast/gtk4/languages/manager.py:161
 #, python-brace-format
 msgid "Are you sure you want to install language '{0}' ({1})?"
-msgstr ""
+msgstr "언어 '{0}' ({1})을 설치하시겠습니까?"
 
 #: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:114
 #: mast/qt6/languages/manager.py:148 mast/qt6/languages/settings.py:108
 msgid "Installing..."
-msgstr ""
+msgstr "설치 중..."
 
 #: mast/gtk4/languages/manager.py:170 mast/gtk4/languages/settings.py:115
 #: mast/qt6/languages/manager.py:149 mast/qt6/languages/settings.py:109
 msgid "Install Language"
-msgstr ""
+msgstr "언어 설치"
 
 #: mast/gtk4/languages/manager.py:172 mast/gtk4/languages/settings.py:117
 #: mast/qt6/languages/manager.py:151 mast/qt6/languages/settings.py:111
 #, python-brace-format
 msgid "Language '{0}' installed successfully."
-msgstr ""
+msgstr "언어 '{0}'이(가) 성공적으로 설치되었습니다."
 
 #: mast/gtk4/languages/manager.py:182 mast/qt6/languages/manager.py:160
 msgid "Please select a language to uninstall."
-msgstr ""
+msgstr "제거할 언어를 선택하십시오."
 
 #: mast/gtk4/languages/manager.py:195 mast/qt6/languages/manager.py:169
 #, python-brace-format
 msgid "Are you sure you want to uninstall language '{0}' ({1})?"
-msgstr ""
+msgstr "언어 '{0}' ({1})을 제거하시겠습니까?"
 
 #: mast/gtk4/languages/manager.py:203 mast/qt6/languages/manager.py:176
 msgid "Uninstalling..."
-msgstr ""
+msgstr "제거 중..."
 
 #: mast/gtk4/languages/manager.py:204 mast/qt6/languages/manager.py:177
 msgid "Uninstall Language"
-msgstr ""
+msgstr "언어 제거"
 
 #: mast/gtk4/languages/manager.py:206 mast/qt6/languages/manager.py:179
 #, python-brace-format
 msgid "Language '{0}' uninstalled successfully."
-msgstr ""
+msgstr "언어 '{0}'이(가) 성공적으로 제거되었습니다."
 
 #: mast/gtk4/languages/settings.py:39 mast/qt6/languages/settings.py:47
 msgid "Language"
-msgstr ""
+msgstr "언어"
 
 #: mast/gtk4/languages/settings.py:52 mast/qt6/languages/settings.py:50
 msgid "Use UTF-8"
-msgstr ""
+msgstr "UTF-8 사용"
 
 #: mast/gtk4/languages/settings.py:88 mast/qt6/languages/settings.py:82
 #, python-brace-format
 msgid "Failed to load languages: {0}"
-msgstr ""
+msgstr "언어 로드에 실패했습니다: {0}"
 
 #: mast/gtk4/languages/settings.py:98 mast/qt6/languages/settings.py:92
 msgid "Please select a language."
-msgstr ""
+msgstr "언어를 선택하십시오."
 
 #: mast/gtk4/languages/settings.py:106 mast/qt6/languages/settings.py:100
 #, python-brace-format
 msgid "Language '{0}' not found."
-msgstr ""
+msgstr "언어 '{0}'을(를) 찾을 수 없습니다."
 
 #: mast/gtk4/languages/settings.py:140 mast/qt6/languages/settings.py:137
 #, python-brace-format
 msgid "Language changed successfully to '{0}'. Changes will take effect after logout."
-msgstr ""
+msgstr "언어가 '{0}'으로 성공적으로 변경되었습니다. 변경사항은 로그아웃 후 적용됩니다."
 
 #: mast/gtk4/languages/settings.py:149 mast/qt6/languages/settings.py:152
 #, python-brace-format
 msgid "Failed to set language: {0}"
-msgstr ""
+msgstr "언어 설정에 실패했습니다: {0}"
 
 #: mast/gtk4/languages/window.py:33 mast/qt6/languages/window.py:38
 msgid "System Language"
-msgstr ""
+msgstr "시스템 언어"
 
 #: mast/gtk4/languages/window.py:36 mast/qt6/languages/window.py:41
 msgid "Language Management"
-msgstr ""
+msgstr "언어 관리"
 
 #: mast/gtk4/packages/__init__.py:11 mast/qt6/packages/__init__.py:11
 #: mast/tui/packages/__init__.py:12
 msgid "Packages"
-msgstr ""
+msgstr "패키지"
 
 #: mast/gtk4/proxy/__init__.py:16 mast/qt6/proxy/__init__.py:10
 #: mast/tui/proxy/__init__.py:12
 msgid "Proxy"
-msgstr ""
+msgstr "프록시"
 
 #: mast/gtk4/proxy/window.py:29 mast/qt6/proxy/window.py:38
 msgid "Enable Proxy"
-msgstr ""
+msgstr "프록시 활성화"
 
 #: mast/gtk4/proxy/window.py:32 mast/qt6/proxy/window.py:41
 #: mast/tui/proxy/window.py:73
 msgid "HTTP Proxy"
-msgstr ""
+msgstr "HTTP 프록시"
 
 #: mast/gtk4/proxy/window.py:33 mast/qt6/proxy/window.py:42
 #: mast/tui/proxy/window.py:76
 msgid "HTTPS Proxy"
-msgstr ""
+msgstr "HTTPS 프록시"
 
 #: mast/gtk4/proxy/window.py:34 mast/qt6/proxy/window.py:43
 #: mast/tui/proxy/window.py:79
 msgid "FTP Proxy"
-msgstr ""
+msgstr "FTP 프록시"
 
 #: mast/gtk4/proxy/window.py:35 mast/qt6/proxy/window.py:44
 #: mast/tui/proxy/window.py:82
@@ -1553,7 +1553,7 @@ msgstr ""
 #: mast/gtk4/proxy/window.py:37 mast/qt6/proxy/window.py:47
 #: mast/tui/proxy/window.py:85
 msgid "No Proxy"
-msgstr ""
+msgstr "프록시 없음"
 
 #: mast/gtk4/proxy/window.py:95 mast/qt6/proxy/window.py:94
 #, python-brace-format
@@ -1562,7 +1562,7 @@ msgstr ""
 
 #: mast/gtk4/proxy/window.py:111 mast/qt6/proxy/window.py:110
 msgid "Proxy configuration saved successfully."
-msgstr ""
+msgstr "프록시 구성이 성공적으로 저장되었습니다."
 
 #: mast/gtk4/proxy/window.py:124 mast/qt6/proxy/window.py:123
 #, python-brace-format
@@ -1572,24 +1572,24 @@ msgstr ""
 #: mast/gtk4/repositories/__init__.py:17 mast/qt6/repositories/__init__.py:11
 #: mast/tui/repositories/__init__.py:12
 msgid "Repositories"
-msgstr ""
+msgstr "저장소"
 
 #: mast/gtk4/repositories/import_repo_button.py:22
 #: mast/qt6/repositories/import_repo_button.py:21
 msgid "Import"
-msgstr ""
+msgstr "가져오기"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:16
 #: mast/qt6/repositories/repo_edit_dialog.py:24
 #: mast/tui/repositories/window.py:133
 msgid "Add Repository"
-msgstr ""
+msgstr "저장소 추가"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:16
 #: mast/qt6/repositories/repo_edit_dialog.py:24
 #: mast/tui/repositories/window.py:146
 msgid "Edit Repository"
-msgstr ""
+msgstr "저장소 편집"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:42
 #: mast/gtk4/repositories/window.py:110
@@ -1597,29 +1597,29 @@ msgstr ""
 #: mast/qt6/repositories/window.py:70 mast/tui/repositories/window.py:80
 #: mast/tui/repositories/window.py:354
 msgid "Auto Refresh"
-msgstr ""
+msgstr "자동 새로 고침"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:47
 #: mast/qt6/repositories/repo_edit_dialog.py:51
 msgid "URL Type"
-msgstr ""
+msgstr "URL 유형"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:52
 #: mast/qt6/repositories/repo_edit_dialog.py:53
 #: mast/tui/repositories/window.py:335 mast/tui/repositories/window.py:336
 msgid "Base URL"
-msgstr ""
+msgstr "기본 URL"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:53
 #: mast/qt6/repositories/repo_edit_dialog.py:53
 #: mast/tui/repositories/window.py:338
 msgid "Mirror List"
-msgstr ""
+msgstr "미러 목록"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:61
 #: mast/qt6/repositories/repo_edit_dialog.py:68
 msgid "Path"
-msgstr ""
+msgstr "경로"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:64
 #: mast/gtk4/snapshots/window.py:89
@@ -1628,17 +1628,17 @@ msgstr ""
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:616
 #: mast/tui/users/window.py:169
 msgid "Type"
-msgstr ""
+msgstr "유형"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:81
 #: mast/qt6/repositories/repo_edit_dialog.py:83
 msgid "Check GPG signature"
-msgstr ""
+msgstr "GPG 서명 확인"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:85
 #: mast/qt6/repositories/repo_edit_dialog.py:88
 msgid "GPG Key URL"
-msgstr ""
+msgstr "GPG 키 URL"
 
 #: mast/gtk4/repositories/repo_edit_dialog.py:99
 #: mast/qt6/repositories/repo_edit_dialog.py:101
@@ -1667,7 +1667,7 @@ msgstr ""
 
 #: mast/gtk4/repositories/window.py:133 mast/qt6/repositories/window.py:135
 msgid "Cannot read repository directory. Root permission required."
-msgstr ""
+msgstr "저장소 디렉토리를 읽을 수 없습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/repositories/window.py:195 mast/gtk4/repositories/window.py:276
 #: mast/qt6/repositories/window.py:184 mast/qt6/repositories/window.py:231
@@ -1707,7 +1707,7 @@ msgstr ""
 #: mast/gtk4/repositories/window.py:327 mast/qt6/repositories/window.py:270
 #, python-brace-format
 msgid "Are you sure you want to delete repository '{}'?"
-msgstr ""
+msgstr "저장소 '{}'을 삭제하시겠습니까?"
 
 #: mast/gtk4/repositories/window.py:366 mast/qt6/repositories/window.py:290
 #, python-brace-format
@@ -1719,40 +1719,40 @@ msgstr ""
 #: mast/gtk4/repositories/window.py:379 mast/qt6/repositories/window.py:302
 #: mast/tui/repositories/window.py:176
 msgid "Mirror switching completed successfully."
-msgstr ""
+msgstr "미러 전환이 성공적으로 완료되었습니다."
 
 #: mast/gtk4/repositories/window.py:388
 msgid "Cannot write to repository directory. Root permission required."
-msgstr ""
+msgstr "저장소 디렉토리에 쓸 수 없습니다. root 권한이 필요합니다."
 
 #: mast/gtk4/repositories/window.py:392
 msgid "Failed to save repository configuration."
-msgstr ""
+msgstr "저장소 구성 저장에 실패했습니다."
 
 #: mast/gtk4/services/__init__.py:16 mast/qt6/services/__init__.py:10
 #: mast/tui/services/__init__.py:12
 msgid "Services"
-msgstr ""
+msgstr "서비스"
 
 #: mast/gtk4/services/window.py:56 mast/qt6/services/window.py:60
 #: mast/tui/services/window.py:82
 msgid "Active"
-msgstr ""
+msgstr "활성"
 
 #: mast/gtk4/services/window.py:57 mast/qt6/services/window.py:61
 #: mast/tui/services/window.py:83
 msgid "Inactive"
-msgstr ""
+msgstr "비활성"
 
 #: mast/gtk4/services/window.py:58 mast/qt6/services/window.py:62
 #: mast/tui/services/window.py:84
 msgid "Failed"
-msgstr ""
+msgstr "실패"
 
 #: mast/gtk4/services/window.py:59 mast/qt6/services/window.py:63
 #: mast/tui/services/window.py:85
 msgid "Activating"
-msgstr ""
+msgstr "활성화 중"
 
 #: mast/gtk4/services/window.py:75 mast/qt6/services/window.py:77
 #: mast/tui/services/window.py:101
@@ -1763,31 +1763,31 @@ msgstr ""
 #: mast/qt6/services/window.py:90 mast/qt6/services/window.py:231
 #: mast/tui/services/window.py:105
 msgid "Start"
-msgstr ""
+msgstr "시작"
 
 #: mast/gtk4/services/window.py:93 mast/gtk4/services/window.py:278
 #: mast/qt6/services/window.py:94 mast/qt6/services/window.py:232
 #: mast/tui/services/window.py:106
 msgid "Stop"
-msgstr ""
+msgstr "중지"
 
 #: mast/gtk4/services/window.py:97 mast/gtk4/services/window.py:279
 #: mast/qt6/services/window.py:98 mast/qt6/services/window.py:233
 #: mast/tui/services/window.py:107
 msgid "Enable"
-msgstr ""
+msgstr "사용"
 
 #: mast/gtk4/services/window.py:101 mast/gtk4/services/window.py:280
 #: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
 #: mast/tui/services/window.py:108
 msgid "Disable"
-msgstr ""
+msgstr "사용 안 함"
 
 #: mast/gtk4/services/window.py:105 mast/gtk4/services/window.py:310
 #: mast/qt6/services/window.py:106 mast/qt6/services/window.py:260
 #: mast/tui/services/window.py:109
 msgid "Logs"
-msgstr ""
+msgstr "로그"
 
 #: mast/gtk4/services/window.py:184 mast/qt6/services/window.py:141
 #, python-brace-format
@@ -1798,31 +1798,31 @@ msgstr ""
 #: mast/qt6/services/window.py:227 mast/qt6/services/window.py:256
 #: mast/tui/services/window.py:263 mast/tui/services/window.py:302
 msgid "Please select a service."
-msgstr ""
+msgstr "서비스를 선택하십시오."
 
 #: mast/gtk4/services/window.py:283 mast/qt6/services/window.py:237
 #: mast/tui/services/window.py:288
 msgid "started"
-msgstr ""
+msgstr "시작됨"
 
 #: mast/gtk4/services/window.py:284 mast/qt6/services/window.py:238
 #: mast/tui/services/window.py:291
 msgid "stopped"
-msgstr ""
+msgstr "중지됨"
 
 #: mast/gtk4/services/window.py:285 mast/qt6/services/window.py:239
 #: mast/tui/services/window.py:294
 msgid "enabled"
-msgstr ""
+msgstr "사용 중"
 
 #: mast/gtk4/services/window.py:286 mast/qt6/services/window.py:240
 #: mast/tui/services/window.py:297
 msgid "disabled"
-msgstr ""
+msgstr "사용 안 함"
 
 #: mast/gtk4/services/window.py:291 mast/qt6/services/window.py:245
 msgid "Working..."
-msgstr ""
+msgstr "처리 중..."
 
 #: mast/gtk4/services/window.py:292 mast/qt6/services/window.py:246
 #, python-brace-format
@@ -1836,7 +1836,7 @@ msgstr ""
 
 #: mast/gtk4/services/window.py:311 mast/qt6/services/window.py:261
 msgid "Loading logs..."
-msgstr ""
+msgstr "로그 로드 중..."
 
 #: mast/gtk4/services/window.py:312 mast/qt6/services/window.py:262
 #: mast/tui/services/window.py:358
@@ -1846,18 +1846,18 @@ msgstr ""
 
 #: mast/gtk4/services/window.py:314 mast/qt6/services/window.py:264
 msgid "End of journal output."
-msgstr ""
+msgstr "저널 출력의 끝."
 
 #: mast/gtk4/snapshots/__init__.py:16 mast/qt6/snapshots/__init__.py:10
 #: mast/tui/snapshots/__init__.py:12
 msgid "Snapshots"
-msgstr ""
+msgstr "스냅샷"
 
 #: mast/gtk4/snapshots/config_dialog.py:20
 #: mast/qt6/snapshots/config_dialog.py:24
 #: mast/tui/snapshots/config_screen.py:22
 msgid "Snapper Configuration"
-msgstr ""
+msgstr "Snapper 구성"
 
 #: mast/gtk4/snapshots/config_dialog.py:47
 #: mast/qt6/snapshots/config_dialog.py:38
@@ -1868,106 +1868,106 @@ msgstr ""
 #: mast/gtk4/snapshots/config_dialog.py:53
 #: mast/qt6/snapshots/config_dialog.py:44
 msgid "Space Limit (fraction or absolute size)"
-msgstr ""
+msgstr "공간 제한(비율 또는 절대 크기)"
 
 #: mast/gtk4/snapshots/config_dialog.py:61
 #: mast/qt6/snapshots/config_dialog.py:49
 msgid "Free Limit (fraction or absolute size)"
-msgstr ""
+msgstr "사용 가능 공간 제한(비율 또는 절대 크기)"
 
 #: mast/gtk4/snapshots/config_dialog.py:69
 #: mast/qt6/snapshots/config_dialog.py:54
 #: mast/tui/snapshots/config_screen.py:34
 msgid "Allow Users"
-msgstr ""
+msgstr "사용자 허용"
 
 #: mast/gtk4/snapshots/config_dialog.py:77
 #: mast/qt6/snapshots/config_dialog.py:59
 #: mast/tui/snapshots/config_screen.py:39
 msgid "Allow Groups"
-msgstr ""
+msgstr "그룹 허용"
 
 #: mast/gtk4/snapshots/config_dialog.py:85
 #: mast/qt6/snapshots/config_dialog.py:64
 #: mast/tui/snapshots/config_screen.py:44
 msgid "Sync ACL"
-msgstr ""
+msgstr "ACL 동기화"
 
 #: mast/gtk4/snapshots/config_dialog.py:90
 #: mast/qt6/snapshots/config_dialog.py:69
 #: mast/tui/snapshots/config_screen.py:48
 msgid "Background Comparison"
-msgstr ""
+msgstr "백그라운드 비교"
 
 #: mast/gtk4/snapshots/config_dialog.py:95
 #: mast/qt6/snapshots/config_dialog.py:74
 #: mast/tui/snapshots/config_screen.py:52
 msgid "Number Cleanup"
-msgstr ""
+msgstr "개수 정리"
 
 #: mast/gtk4/snapshots/config_dialog.py:100
 #: mast/qt6/snapshots/config_dialog.py:79
 msgid "Number Min Age (seconds)"
-msgstr ""
+msgstr "최소 기간(초)"
 
 #: mast/gtk4/snapshots/config_dialog.py:108
 #: mast/qt6/snapshots/config_dialog.py:84
 #: mast/tui/snapshots/config_screen.py:61
 msgid "Number Limit"
-msgstr ""
+msgstr "개수 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:116
 #: mast/qt6/snapshots/config_dialog.py:89
 #: mast/tui/snapshots/config_screen.py:66
 msgid "Number Limit Important"
-msgstr ""
+msgstr "중요 개수 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:124
 #: mast/qt6/snapshots/config_dialog.py:94
 #: mast/tui/snapshots/config_screen.py:71
 msgid "Timeline Create"
-msgstr ""
+msgstr "타임라인 만들기"
 
 #: mast/gtk4/snapshots/config_dialog.py:129
 #: mast/qt6/snapshots/config_dialog.py:99
 #: mast/tui/snapshots/config_screen.py:75
 msgid "Timeline Cleanup"
-msgstr ""
+msgstr "타임라인 정리"
 
 #: mast/gtk4/snapshots/config_dialog.py:134
 #: mast/qt6/snapshots/config_dialog.py:104
 msgid "Timeline Min Age (seconds)"
-msgstr ""
+msgstr "타임라인 최소 기간(초)"
 
 #: mast/gtk4/snapshots/config_dialog.py:142
 #: mast/qt6/snapshots/config_dialog.py:109
 msgid "Timeline Limit Hourly"
-msgstr ""
+msgstr "타임라인 매시간 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:150
 #: mast/qt6/snapshots/config_dialog.py:114
 msgid "Timeline Limit Daily"
-msgstr ""
+msgstr "타임라인 매일 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:158
 #: mast/qt6/snapshots/config_dialog.py:119
 msgid "Timeline Limit Weekly"
-msgstr ""
+msgstr "타임라인 매주 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:166
 #: mast/qt6/snapshots/config_dialog.py:124
 msgid "Timeline Limit Monthly"
-msgstr ""
+msgstr "타임라인 매월 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:174
 #: mast/qt6/snapshots/config_dialog.py:129
 msgid "Timeline Limit Yearly"
-msgstr ""
+msgstr "타임라인 매년 제한"
 
 #: mast/gtk4/snapshots/config_dialog.py:221
 #: mast/qt6/snapshots/config_dialog.py:168 mast/tui/snapshots/window.py:245
 msgid "Configuration saved successfully."
-msgstr ""
+msgstr "구성이 성공적으로 저장되었습니다."
 
 #: mast/gtk4/snapshots/config_dialog.py:228
 #: mast/qt6/snapshots/config_dialog.py:171
@@ -1980,40 +1980,40 @@ msgstr ""
 #: mast/qt6/users/groups_manager.py:253 mast/qt6/users/users_manager.py:331
 #: mast/tui/snapshots/window.py:71
 msgid "Create"
-msgstr ""
+msgstr "만들기"
 
 #: mast/gtk4/snapshots/window.py:70 mast/qt6/snapshots/window.py:67
 #: mast/tui/snapshots/window.py:74
 msgid "Configure"
-msgstr ""
+msgstr "구성"
 
 #: mast/gtk4/snapshots/window.py:94 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:85
 msgid "Date"
-msgstr ""
+msgstr "날짜"
 
 #: mast/gtk4/snapshots/window.py:108 mast/qt6/snapshots/window.py:77
 #: mast/tui/snapshots/window.py:88
 msgid "Cleanup"
-msgstr ""
+msgstr "정리"
 
 #: mast/gtk4/snapshots/window.py:143 mast/gtk4/snapshots/window.py:280
 #: mast/qt6/snapshots/window.py:196 mast/qt6/snapshots/window.py:205
 msgid "Delete Snapshot"
-msgstr ""
+msgstr "스냅샷 삭제"
 
 #: mast/gtk4/snapshots/window.py:147 mast/qt6/snapshots/window.py:197
 #, python-brace-format
 msgid "Delete snapshot #{0}? This action cannot be undone."
-msgstr ""
+msgstr "스냅샷 #{0}을 삭제하시겠습니까? 이 작업은 취소할 수 없습니다."
 
 #: mast/gtk4/snapshots/window.py:180 mast/qt6/snapshots/window.py:104
 msgid "Load Snapshots"
-msgstr ""
+msgstr "스냅샷 로드"
 
 #: mast/gtk4/snapshots/window.py:182 mast/qt6/snapshots/window.py:106
 msgid "Snapshots loaded successfully."
-msgstr ""
+msgstr "스냅샷이 성공적으로 로드되었습니다."
 
 #: mast/gtk4/snapshots/window.py:203 mast/qt6/snapshots/window.py:127
 #, python-brace-format
@@ -2028,33 +2028,33 @@ msgstr ""
 #: mast/gtk4/snapshots/window.py:250 mast/qt6/snapshots/window.py:175
 #: mast/tui/snapshots/window.py:193
 msgid "Description cannot be empty."
-msgstr ""
+msgstr "설명은 비어 있을 수 없습니다."
 
 #: mast/gtk4/snapshots/window.py:256 mast/qt6/snapshots/window.py:180
 #: mast/qt6/users/groups_manager.py:254 mast/qt6/users/users_manager.py:332
 msgid "Creating..."
-msgstr ""
+msgstr "만들기 중..."
 
 #: mast/gtk4/snapshots/window.py:257 mast/qt6/snapshots/window.py:167
 #: mast/qt6/snapshots/window.py:181
 msgid "Create Snapshot"
-msgstr ""
+msgstr "스냅샷 만들기"
 
 #: mast/gtk4/snapshots/window.py:259 mast/qt6/snapshots/window.py:183
 #: mast/tui/snapshots/window.py:208
 msgid "Snapshot created successfully."
-msgstr ""
+msgstr "스냅샷이 성공적으로 만들어졌습니다."
 
 #: mast/gtk4/snapshots/window.py:270 mast/qt6/snapshots/window.py:191
 #: mast/tui/snapshots/window.py:218
 msgid "Please select a snapshot."
-msgstr ""
+msgstr "스냅샷을 선택하십시오."
 
 #: mast/gtk4/snapshots/window.py:279 mast/gtk4/users/groups_manager.py:250
 #: mast/gtk4/users/users_manager.py:320 mast/qt6/snapshots/window.py:204
 #: mast/qt6/users/groups_manager.py:223 mast/qt6/users/users_manager.py:282
 msgid "Deleting..."
-msgstr ""
+msgstr "삭제 중..."
 
 #: mast/gtk4/snapshots/window.py:282 mast/qt6/snapshots/window.py:207
 #: mast/tui/snapshots/window.py:233
@@ -2065,11 +2065,11 @@ msgstr ""
 #: mast/gtk4/ssh/__init__.py:20 mast/qt6/ssh/__init__.py:16
 #: mast/tui/ssh/__init__.py:12
 msgid "SSH Client"
-msgstr ""
+msgstr "SSH 클라이언트"
 
 #: mast/gtk4/ssh/__init__.py:48 mast/qt6/ssh/__init__.py:41
 msgid "SSH Permission Warning"
-msgstr ""
+msgstr "SSH 권한 경고"
 
 #: mast/gtk4/ssh/__init__.py:52 mast/qt6/ssh/__init__.py:43
 #, python-brace-format
@@ -2086,11 +2086,11 @@ msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:89 mast/qt6/ssh/__init__.py:68
 msgid "SSH permissions have been fixed successfully."
-msgstr ""
+msgstr "SSH 권한이 성공적으로 수정되었습니다."
 
 #: mast/gtk4/ssh/dialogs.py:18 mast/qt6/ssh/dialogs.py:26
 msgid "Edit SSH Options"
-msgstr ""
+msgstr "SSH 옵션 편집"
 
 #: mast/gtk4/ssh/dialogs.py:57 mast/qt6/ssh/dialogs.py:55
 msgid "Option name"
@@ -2110,7 +2110,7 @@ msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:136 mast/qt6/ssh/dialogs.py:119
 msgid "Add/Edit SSH Host"
-msgstr ""
+msgstr "SSH 호스트 추가/편집"
 
 #: mast/gtk4/ssh/dialogs.py:158 mast/qt6/ssh/dialogs.py:128
 msgid "Host Pattern:"
@@ -2118,7 +2118,7 @@ msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:169 mast/qt6/ssh/dialogs.py:134
 msgid "Edit Options"
-msgstr ""
+msgstr "옵션 편집"
 
 #: mast/gtk4/ssh/dialogs.py:195 mast/qt6/ssh/dialogs.py:162
 #, python-brace-format
@@ -2127,23 +2127,23 @@ msgstr ""
 
 #: mast/gtk4/ssh/dialogs.py:197 mast/qt6/ssh/dialogs.py:164
 msgid "No options set"
-msgstr ""
+msgstr "옵션이 설정되지 않았습니다"
 
 #: mast/gtk4/ssh/hosts_tab.py:81 mast/qt6/ssh/hosts_tab.py:61
 #: mast/tui/ssh/window.py:288
 msgid "Host Pattern"
-msgstr ""
+msgstr "호스트 패턴"
 
 #: mast/gtk4/ssh/hosts_tab.py:88 mast/qt6/ssh/hosts_tab.py:61
 #: mast/tui/ssh/window.py:288
 msgid "Options"
-msgstr ""
+msgstr "옵션"
 
 #: mast/gtk4/ssh/hosts_tab.py:122 mast/qt6/ssh/hosts_tab.py:122
 #: mast/qt6/ssh/hosts_tab.py:213 mast/tui/ssh/window.py:327
 #, python-brace-format
 msgid " and {0} more"
-msgstr ""
+msgstr " 그리고 {0} 개 더"
 
 #: mast/gtk4/ssh/hosts_tab.py:152 mast/gtk4/ssh/hosts_tab.py:180
 #: mast/qt6/ssh/hosts_tab.py:141 mast/qt6/ssh/hosts_tab.py:162
@@ -2153,7 +2153,7 @@ msgstr ""
 #: mast/gtk4/ssh/hosts_tab.py:195 mast/qt6/ssh/hosts_tab.py:176
 #: mast/tui/ssh/window.py:383
 msgid "Cannot delete the default host entry."
-msgstr ""
+msgstr "기본 호스트 항목은 삭제할 수 없습니다."
 
 #: mast/gtk4/ssh/hosts_tab.py:224 mast/qt6/ssh/hosts_tab.py:222
 msgid "SSH config saved successfully."
@@ -2161,7 +2161,7 @@ msgstr ""
 
 #: mast/gtk4/ssh/hosts_tab.py:226 mast/qt6/ssh/hosts_tab.py:226
 msgid "Cannot write to SSH config. Check permissions."
-msgstr ""
+msgstr "SSH 구성에 쓸 수 없습니다. 권한을 확인하십시오."
 
 #: mast/gtk4/ssh/hosts_tab.py:228 mast/qt6/ssh/hosts_tab.py:229
 msgid "Failed to save SSH config."
@@ -2175,12 +2175,12 @@ msgstr ""
 #: mast/gtk4/ssh/keys_generate_dialog.py:27
 #: mast/qt6/ssh/keys_generate_dialog.py:159 mast/tui/ssh/window.py:268
 msgid "Generate"
-msgstr ""
+msgstr "생성"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:39 mast/gtk4/ssh/keys_tab.py:75
 #: mast/qt6/ssh/keys_tab.py:62
 msgid "Algorithm"
-msgstr ""
+msgstr "알고리즘"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:52
 msgid "Key Size"
@@ -2193,7 +2193,7 @@ msgstr ""
 #: mast/gtk4/ssh/keys_generate_dialog.py:77 mast/gtk4/ssh/keys_tab.py:102
 #: mast/qt6/ssh/keys_tab.py:66 mast/tui/ssh/window.py:293
 msgid "Passphrase"
-msgstr ""
+msgstr "패스프레이즈"
 
 #: mast/gtk4/ssh/keys_generate_dialog.py:82
 msgid "Optional passphrase"
@@ -2206,11 +2206,11 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:37 mast/qt6/ssh/keys_tab.py:40
 msgid "Copy Public Key"
-msgstr ""
+msgstr "공개 키 복사"
 
 #: mast/gtk4/ssh/keys_tab.py:82 mast/qt6/ssh/keys_tab.py:63
 msgid "Size"
-msgstr ""
+msgstr "크기"
 
 #: mast/gtk4/ssh/keys_tab.py:89 mast/qt6/ssh/keys_tab.py:64
 msgid "Fingerprint"
@@ -2218,11 +2218,11 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:109 mast/qt6/ssh/keys_tab.py:67
 msgid "Public"
-msgstr ""
+msgstr "퍼블릭"
 
 #: mast/gtk4/ssh/keys_tab.py:116 mast/qt6/ssh/keys_tab.py:68
 msgid "Private"
-msgstr ""
+msgstr "프라이빗"
 
 #: mast/gtk4/ssh/keys_tab.py:194 mast/qt6/ssh/keys_tab.py:174
 msgid "Public key copied to clipboard."
@@ -2230,11 +2230,11 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:196 mast/qt6/ssh/keys_tab.py:177
 msgid "Cannot read public key file."
-msgstr ""
+msgstr "공개 키 파일을 읽을 수 없습니다."
 
 #: mast/gtk4/ssh/keys_tab.py:223 mast/qt6/ssh/keys_tab.py:200
 msgid "Confirm Delete"
-msgstr ""
+msgstr "삭제 확인"
 
 #: mast/gtk4/ssh/keys_tab.py:226 mast/qt6/ssh/keys_tab.py:201
 #, python-brace-format
@@ -2255,7 +2255,7 @@ msgstr ""
 #: mast/gtk4/ssh/window.py:36 mast/qt6/ssh/window.py:40
 #: mast/tui/ssh/window.py:252
 msgid "Keys"
-msgstr ""
+msgstr "키"
 
 #: mast/gtk4/users/__init__.py:10 mast/qt6/users/__init__.py:10
 #: mast/tui/users/__init__.py:12
@@ -2340,7 +2340,7 @@ msgstr ""
 #: mast/gtk4/users/users_manager.py:94 mast/qt6/users/users_manager.py:96
 #: mast/tui/ssh/window.py:520 mast/tui/users/window.py:161
 msgid "Username"
-msgstr ""
+msgstr "사용자 이름"
 
 #: mast/gtk4/users/users_manager.py:99 mast/qt6/users/users_manager.py:101
 msgid "Display Name"
@@ -2482,11 +2482,11 @@ msgstr ""
 
 #: mast/qt6/datetime/window.py:162 mast/tui/datetime/window.py:151
 msgid "NTP synchronized"
-msgstr ""
+msgstr "NTP 동기화됨"
 
 #: mast/qt6/datetime/window.py:164 mast/tui/datetime/window.py:153
 msgid "NTP not synchronized"
-msgstr ""
+msgstr "NTP 동기화되지 않음"
 
 #: mast/qt6/datetime/window.py:166
 #, python-brace-format
@@ -2495,43 +2495,43 @@ msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:79
 msgid "Installing package..."
-msgstr ""
+msgstr "패키지 설치 중..."
 
 #: mast/qt6/flatpak/package_manager.py:80
 msgid "Install Flatpak Package"
-msgstr ""
+msgstr "Flatpak 패키지 설치"
 
 #: mast/qt6/flatpak/package_manager.py:92
 msgid "Remove Package"
-msgstr ""
+msgstr "패키지 제거"
 
 #: mast/qt6/flatpak/package_manager.py:93
 msgid "Removing package..."
-msgstr ""
+msgstr "패키지 제거 중..."
 
 #: mast/qt6/flatpak/package_manager.py:94
 msgid "Remove Flatpak Package"
-msgstr ""
+msgstr "Flatpak 패키지 제거"
 
 #: mast/qt6/flatpak/runtime_manager.py:37
 msgid "Removing runtime..."
-msgstr ""
+msgstr "런타임 제거 중..."
 
 #: mast/qt6/flatpak/runtime_manager.py:38
 msgid "Remove Flatpak Runtime"
-msgstr ""
+msgstr "Flatpak 런타임 제거"
 
 #: mast/qt6/flatpak/window.py:113
 msgid "Please wait"
-msgstr ""
+msgstr "잠시 기다려 주십시오"
 
 #: mast/qt6/flatpak/window.py:114
 msgid "A Flatpak operation is still running. Please wait for it to finish."
-msgstr ""
+msgstr "Flatpak 작업이 아직 실행 중입니다. 완료될 때까지 기다려 주십시오."
 
 #: mast/qt6/git/window.py:233
 msgid "All Files (*)"
-msgstr ""
+msgstr "모든 파일 (*)"
 
 #: mast/qt6/git/window.py:271 mast/qt6/hosts/window.py:266
 msgid "Saved successfully"
@@ -2616,7 +2616,7 @@ msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:195
 msgid "A key with this name already exists."
-msgstr ""
+msgstr "이 이름의 키가 이미 존재합니다."
 
 #: mast/qt6/ssh/keys_generate_dialog.py:232
 msgid "SSH key generated successfully."
@@ -2650,7 +2650,7 @@ msgstr ""
 
 #: mast/tui/cron/window.py:211
 msgid "Cron job deleted."
-msgstr ""
+msgstr "Cron 작업이 삭제되었습니다."
 
 #: mast/tui/cron/window.py:222
 msgid "Success: Cron jobs saved successfully."
@@ -2664,11 +2664,11 @@ msgstr ""
 
 #: mast/tui/cron/window.py:234
 msgid "Cron job added."
-msgstr ""
+msgstr "Cron 작업이 추가되었습니다."
 
 #: mast/tui/cron/window.py:246
 msgid "Cron job updated."
-msgstr ""
+msgstr "Cron 작업이 업데이트되었습니다."
 
 #: mast/tui/cron/window.py:344
 msgid "Error: Command is required."
@@ -2680,7 +2680,7 @@ msgstr ""
 
 #: mast/tui/datetime/window.py:98
 msgid "Type to search..."
-msgstr ""
+msgstr "검색하려면 입력..."
 
 #: mast/tui/datetime/window.py:110
 msgid "Enter NTP servers"
@@ -2733,7 +2733,7 @@ msgstr ""
 
 #: mast/tui/hostname/window.py:64
 msgid "Hostname Configuration"
-msgstr ""
+msgstr "호스트 이름 구성"
 
 #: mast/tui/hostname/window.py:79
 msgid "Error: /etc/hostname not found."
@@ -2772,11 +2772,11 @@ msgstr ""
 
 #: mast/tui/hosts/window.py:124 mast/tui/ssh/window.py:508
 msgid "Add Host Entry"
-msgstr ""
+msgstr "호스트 항목 추가"
 
 #: mast/tui/hosts/window.py:137 mast/tui/ssh/window.py:508
 msgid "Edit Host Entry"
-msgstr ""
+msgstr "호스트 항목 편집"
 
 #: mast/tui/hosts/window.py:154
 msgid "Entry deleted."
@@ -2819,7 +2819,7 @@ msgstr ""
 #: mast/tui/languages/window.py:114
 #, python-brace-format
 msgid "Success: Language changed to '{0}'. Changes take effect after logout."
-msgstr ""
+msgstr "성공: 언어가 '{0}'로 변경되었습니다. 변경 내용은 로그아웃 후에 적용됩니다."
 
 #: mast/tui/packages/window.py:39
 msgid "Packages Management"
@@ -2835,7 +2835,7 @@ msgstr ""
 
 #: mast/tui/proxy/window.py:69
 msgid "Proxy Configuration"
-msgstr ""
+msgstr "프록시 구성"
 
 #: mast/tui/proxy/window.py:114
 #, python-brace-format
@@ -2844,7 +2844,7 @@ msgstr ""
 
 #: mast/tui/proxy/window.py:120
 msgid "Disabled"
-msgstr ""
+msgstr "사용 안 함"
 
 #: mast/tui/proxy/window.py:121
 #, python-brace-format
@@ -2902,7 +2902,7 @@ msgstr ""
 
 #: mast/tui/repositories/window.py:333
 msgid "Display name"
-msgstr ""
+msgstr "표시 이름"
 
 #: mast/tui/repositories/window.py:339
 msgid "Mirror list URL"
@@ -2918,7 +2918,7 @@ msgstr ""
 
 #: mast/tui/repositories/window.py:352
 msgid "GPG key URL"
-msgstr ""
+msgstr "GPG 키 URL"
 
 #: mast/tui/repositories/window.py:355
 msgid "GPG Check"
@@ -2951,43 +2951,43 @@ msgstr ""
 
 #: mast/tui/services/window.py:315
 msgid "No logs available."
-msgstr ""
+msgstr "사용 가능한 로그가 없습니다."
 
 #: mast/tui/snapshots/config_screen.py:24
 msgid "Space Limit"
-msgstr ""
+msgstr "공간 제한"
 
 #: mast/tui/snapshots/config_screen.py:29
 msgid "Free Limit"
-msgstr ""
+msgstr "사용 가능 공간 제한"
 
 #: mast/tui/snapshots/config_screen.py:56
 msgid "Number Min Age"
-msgstr ""
+msgstr "최소 기간"
 
 #: mast/tui/snapshots/config_screen.py:79
 msgid "Timeline Min Age"
-msgstr ""
+msgstr "타임라인 최소 기간"
 
 #: mast/tui/snapshots/config_screen.py:84
 msgid "Timeline Hourly"
-msgstr ""
+msgstr "타임라인 매시간"
 
 #: mast/tui/snapshots/config_screen.py:89
 msgid "Timeline Daily"
-msgstr ""
+msgstr "타임라인 매일"
 
 #: mast/tui/snapshots/config_screen.py:94
 msgid "Timeline Weekly"
-msgstr ""
+msgstr "타임라인 매주"
 
 #: mast/tui/snapshots/config_screen.py:99
 msgid "Timeline Monthly"
-msgstr ""
+msgstr "타임라인 매월"
 
 #: mast/tui/snapshots/config_screen.py:104
 msgid "Timeline Yearly"
-msgstr ""
+msgstr "타임라인 매년"
 
 #: mast/tui/snapshots/config_screen.py:135
 #, python-brace-format
@@ -3001,7 +3001,7 @@ msgstr ""
 
 #: mast/tui/snapshots/window.py:123
 msgid "Timeout waiting for snapshots"
-msgstr ""
+msgstr "스냅샷 대기 중 시간 초과"
 
 #: mast/tui/snapshots/window.py:142
 #, python-brace-format
@@ -3010,11 +3010,11 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:283
 msgid "Warning: Some SSH files have insecure permissions."
-msgstr ""
+msgstr "경고: 일부 SSH 파일의 권한이 안전하지 않습니다."
 
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:619
 msgid "Bits"
-msgstr ""
+msgstr "비트"
 
 #: mast/tui/ssh/window.py:307
 msgid "Error: Cannot read SSH config."
@@ -3070,11 +3070,11 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:510
 msgid "Host"
-msgstr ""
+msgstr "호스트"
 
 #: mast/tui/ssh/window.py:511
 msgid "Host pattern"
-msgstr ""
+msgstr "호스트 패턴"
 
 #: mast/tui/ssh/window.py:513
 msgid "HostName"
@@ -3086,11 +3086,11 @@ msgstr ""
 
 #: mast/tui/ssh/window.py:516
 msgid "Port"
-msgstr ""
+msgstr "포트"
 
 #: mast/tui/ssh/window.py:517
 msgid "Port number"
-msgstr ""
+msgstr "포트 번호"
 
 #: mast/tui/ssh/window.py:522
 msgid "IdentityFile"
