@@ -52,6 +52,10 @@ python3 -m mast.gtk4
 python3 -m mast.tui
 ```
 
+## Translations
+
+Contribute to translations on [Crowdin](https://crowdin.com/project/mast)
+
 ## FAQ
 
 ### Distribution support
