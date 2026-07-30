@@ -1,5 +1,7 @@
 # MaST
 
+[![Crowdin](https://badges.crowdin.net/mast/localized.svg)](https://crowdin.com/project/mast)
+
 MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaST with Python & Qt6 / GTK4 / TUI. Our mission is to help GNU/Linux users to set up their systems easily without remembering complex commands.
 
 ## Modules
