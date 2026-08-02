@@ -7,6 +7,7 @@ from PySide6.QtWidgets import (
     QAbstractItemView,
     QCheckBox,
     QHBoxLayout,
+    QHeaderView,
     QLineEdit,
     QPushButton,
     QTableWidget,
@@ -72,15 +73,19 @@ class PackagesTab(QWidget):
         layout.addLayout(action_layout)
 
         self.package_table = QTableWidget()
-        self.package_table.setColumnCount(4)
+        self.package_table.setColumnCount(3)
         self.package_table.setHorizontalHeaderLabels([
-            _("Package"),
-            _("Name"),
+            _("ID"),
             _("Version"),
             _("Type"),
         ])
         self.package_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.package_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
+        self.package_table.setWordWrap(False)
+        self.package_table.setTextElideMode(Qt.TextElideMode.ElideNone)
+        self.package_table.horizontalHeader().setSectionResizeMode(
+            0, QHeaderView.ResizeMode.ResizeToContents
+        )
         self.package_table.horizontalHeader().setStretchLastSection(True)
         layout.addWidget(self.package_table)
 

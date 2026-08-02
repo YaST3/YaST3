@@ -162,10 +162,11 @@ class AndroidWindow(QMainWindow):
         def worker():
             try:
                 devices = list_devices()
+                # Release busy first so auto-selection can trigger package load.
+                self.update_busy.emit(False)
                 self.devices_loaded.emit(devices)
             except Exception as e:
                 self.show_message.emit("error", _("Error"), str(e))
-            finally:
                 self.update_busy.emit(False)
 
         threading.Thread(target=worker, daemon=True).start()
@@ -248,7 +249,9 @@ class AndroidWindow(QMainWindow):
         def worker():
             try:
                 packages = list_packages(device.serial)
-                packages.sort(key=lambda p: (not is_in_blacklist(p.package_name), p.app_name.lower()))
+                packages.sort(
+                    key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower())
+                )
                 self.packages_loaded.emit(packages)
             except Exception as e:
                 self.show_message.emit("error", _("Error"), str(e))
@@ -283,7 +286,7 @@ class AndroidWindow(QMainWindow):
                 continue
 
             if search_text:
-                haystack = f"{pkg.package_name} {pkg.app_name}".lower()
+                haystack = pkg.package_name.lower()
                 if search_text not in haystack:
                     continue
 
@@ -294,10 +297,11 @@ class AndroidWindow(QMainWindow):
             row = table.rowCount()
             table.insertRow(row)
 
-            table.setItem(row, 0, QTableWidgetItem(pkg.package_name))
-            table.setItem(row, 1, QTableWidgetItem(pkg.app_name))
-            table.setItem(row, 2, QTableWidgetItem(pkg.version_name))
-            table.setItem(row, 3, QTableWidgetItem(pkg_type))
+            pkg_id_item = QTableWidgetItem(pkg.package_name)
+            pkg_id_item.setToolTip(pkg.package_name)
+            table.setItem(row, 0, pkg_id_item)
+            table.setItem(row, 1, QTableWidgetItem(pkg.version_name))
+            table.setItem(row, 2, QTableWidgetItem(pkg_type))
 
         self.packages_tab.uninstall_btn.setEnabled(False)
 
@@ -316,11 +320,10 @@ class AndroidWindow(QMainWindow):
             return
 
         pkg_item = table.item(row, 0)
-        app_item = table.item(row, 1)
-        if pkg_item is None or app_item is None:
+        if pkg_item is None:
             return
         pkg_name = pkg_item.text()
-        app_name = app_item.text()
+        app_name = pkg_name
 
         blacklist_info = get_blacklist_info(pkg_name)
         if blacklist_info:

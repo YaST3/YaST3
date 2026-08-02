@@ -2,10 +2,14 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from typing import Any
 
 ADB_TIMEOUT = 60
+PACKAGE_NAME_RE = re.compile(
+    r"^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)+$"
+)
 
 
 @dataclass(slots=True)
@@ -52,6 +56,21 @@ def _run_adb_command(serial: str | None, args: list[str]) -> str:
         # handled directly via adbutils client APIs where needed.
         raise ValueError("Host adb commands should use adbutils client APIs directly")
     return str(output).strip()
+
+
+def _parse_pm_package_line(line: str) -> tuple[str, str] | None:
+    if not line.startswith("package:") or "=" not in line:
+        return None
+
+    try:
+        payload = line[len("package:") :]
+        path, pkg_name = payload.rsplit("=", 1)
+        pkg_name = pkg_name.strip()
+        if not PACKAGE_NAME_RE.match(pkg_name):
+            return None
+        return path.strip(), pkg_name
+    except ValueError:
+        return None
 
 
 def list_devices() -> list[DeviceInfo]:
@@ -163,8 +182,9 @@ def list_packages(serial: str) -> list[PackageInfo]:
 
     for line in disabled_output.splitlines():
         line = line.strip()
-        if line.startswith("package:") and "=" in line:
-            pkg_name = line.split("=")[1].strip()
+        parsed = _parse_pm_package_line(line)
+        if parsed:
+            _, pkg_name = parsed
             disabled_pkgs.add(pkg_name)
 
     pm_output = str(
@@ -175,47 +195,58 @@ def list_packages(serial: str) -> list[PackageInfo]:
 
     for line in pm_output.splitlines():
         line = line.strip()
-        if not line.startswith("package:") or "=" not in line:
+        parsed = _parse_pm_package_line(line)
+        if not parsed:
             continue
 
-        try:
-            path_part, pkg_name = line.split("=", 1)
-            path = path_part[8:]
-            path_by_pkg[pkg_name] = path
-            is_system_by_pkg[pkg_name] = path.startswith("/system/") or path.startswith(
-                "/product/"
-            )
-        except ValueError:
-            continue
+        path, pkg_name = parsed
+        path_by_pkg[pkg_name] = path
+        is_system_by_pkg[pkg_name] = path.startswith("/system/") or path.startswith(
+            "/product/"
+        )
 
-    dumpsys_output = str(
-        _get_device(serial).shell(["dumpsys", "package"], timeout=ADB_TIMEOUT)
-    ).strip()
+    # Build a stable baseline from `pm list packages -f`, which is consistent
+    # across Android versions.
+    packages_by_name: dict[str, PackageInfo] = {}
+    for pkg_name, path in path_by_pkg.items():
+        packages_by_name[pkg_name] = PackageInfo(
+            package_name=pkg_name,
+            app_name=pkg_name,
+            version_name="",
+            version_code="",
+            is_system=is_system_by_pkg.get(pkg_name, False),
+            is_disabled=pkg_name in disabled_pkgs,
+        )
 
-    packages: list[PackageInfo] = []
+    # Best-effort metadata enrichment from dumpsys. If format differs or command
+    # output is unavailable, we still return the baseline package list above.
+    try:
+        dumpsys_output = str(
+            _get_device(serial).shell(["dumpsys", "package"], timeout=ADB_TIMEOUT)
+        ).strip()
+    except Exception:
+        return sorted(packages_by_name.values(), key=lambda p: p.package_name)
+
     current_pkg = None
-    app_name = ""
     version_name = ""
     version_code = ""
+
+    header_pattern = re.compile(r"^Package \[([^\]]+)\]")
+
+    def _flush_current_package() -> None:
+        if current_pkg and current_pkg in packages_by_name:
+            pkg = packages_by_name[current_pkg]
+            pkg.version_name = version_name
+            pkg.version_code = version_code
 
     for line in dumpsys_output.splitlines():
         line = line.strip()
 
-        if line.startswith("Package [") and line.endswith("]"):
-            if current_pkg and current_pkg in path_by_pkg:
-                packages.append(
-                    PackageInfo(
-                        package_name=current_pkg,
-                        app_name=app_name or current_pkg,
-                        version_name=version_name,
-                        version_code=version_code,
-                        is_system=is_system_by_pkg.get(current_pkg, False),
-                        is_disabled=current_pkg in disabled_pkgs,
-                    )
-                )
+        header_match = header_pattern.match(line)
+        if header_match:
+            _flush_current_package()
 
-            current_pkg = line[9:-1].strip()
-            app_name = ""
+            current_pkg = header_match.group(1).strip()
             version_name = ""
             version_code = ""
             continue
@@ -227,26 +258,10 @@ def list_packages(serial: str) -> list[PackageInfo]:
             version_name = line.split("=", 1)[1]
         elif line.startswith("versionCode="):
             version_code = line.split("=", 1)[1]
-        elif "label=" in line and not app_name:
-            if "label=" in line:
-                label_part = line.split("label=", 1)[1]
-                if "=" in label_part:
-                    label_part = label_part.split("=", 1)[1]
-                app_name = label_part.strip().strip('"')
 
-    if current_pkg and current_pkg in path_by_pkg:
-        packages.append(
-            PackageInfo(
-                package_name=current_pkg,
-                app_name=app_name or current_pkg,
-                version_name=version_name,
-                version_code=version_code,
-                is_system=is_system_by_pkg.get(current_pkg, False),
-                is_disabled=current_pkg in disabled_pkgs,
-            )
-        )
+    _flush_current_package()
 
-    return packages
+    return sorted(packages_by_name.values(), key=lambda p: p.package_name)
 
 
 def uninstall_package(serial: str, package_name: str, keep_data: bool = False) -> bool:

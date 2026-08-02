@@ -184,29 +184,24 @@ class AndroidWindow(Gtk.ApplicationWindow):
         action_box.append(Gtk.Box(hexpand=True))
         self.packages_tab.append(action_box)
 
-        self.package_list_store = Gtk.ListStore(str, str, str, str, bool, bool)
+        self.package_list_store = Gtk.ListStore(str, str, str, bool, bool)
         self.package_tree = Gtk.TreeView(model=self.package_list_store)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Package"), renderer, text=0)
+        column = Gtk.TreeViewColumn(_("ID"), renderer, text=0)
         column.set_resizable(True)
         column.set_min_width(280)
+        column.set_expand(True)
         self.package_tree.append_column(column)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Name"), renderer, text=1)
-        column.set_resizable(True)
-        column.set_min_width(180)
-        self.package_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Version"), renderer, text=2)
+        column = Gtk.TreeViewColumn(_("Version"), renderer, text=1)
         column.set_resizable(True)
         column.set_min_width(120)
         self.package_tree.append_column(column)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Type"), renderer, text=3)
+        column = Gtk.TreeViewColumn(_("Type"), renderer, text=2)
         column.set_resizable(True)
         column.set_min_width(80)
         self.package_tree.append_column(column)
@@ -253,10 +248,11 @@ class AndroidWindow(Gtk.ApplicationWindow):
         def worker():
             try:
                 devices = list_devices()
+                # Release busy first so auto-selection can trigger package load.
+                GLib.idle_add(self._set_busy, False)
                 GLib.idle_add(self._on_devices_loaded, devices)
             except Exception as e:
                 GLib.idle_add(self._show_error, str(e))
-            finally:
                 GLib.idle_add(self._set_busy, False)
 
         threading.Thread(target=worker, daemon=True).start()
@@ -350,7 +346,9 @@ class AndroidWindow(Gtk.ApplicationWindow):
         def worker():
             try:
                 packages = list_packages(device.serial)
-                packages.sort(key=lambda p: (not is_in_blacklist(p.package_name), p.app_name.lower()))
+                packages.sort(
+                    key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower())
+                )
                 GLib.idle_add(self._on_packages_loaded, packages)
             except Exception as e:
                 GLib.idle_add(self._show_error, str(e))
@@ -386,7 +384,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
                 continue
 
             if search_text:
-                haystack = f"{pkg.package_name} {pkg.app_name}".lower()
+                haystack = pkg.package_name.lower()
                 if search_text not in haystack:
                     continue
 
@@ -396,7 +394,6 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
             self.package_list_store.append([
                 pkg.package_name,
-                pkg.app_name,
                 pkg.version_name,
                 pkg_type,
                 pkg.is_system,
@@ -439,7 +436,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
             return
 
         pkg_name = self.package_list_store[path][0]
-        app_name = self.package_list_store[path][1]
+        app_name = pkg_name
 
         dialog = Gtk.MessageDialog(
             transient_for=self,
