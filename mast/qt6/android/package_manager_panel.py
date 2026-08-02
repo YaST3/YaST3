@@ -1,4 +1,4 @@
-"""Packages tab component for Android module."""
+"""Package manager panel component for Android module."""
 
 from __future__ import annotations
 
@@ -18,11 +18,11 @@ from PySide6.QtWidgets import (
 from mast.core.i18n import _
 
 
-class PackagesTab(QWidget):
+class PackageManagerPanel(QWidget):
     """Component for managing and displaying package lists and filters."""
 
     search_changed = Signal(str)
-    filter_changed = Signal(int)  # state change for checkboxes
+    filter_changed = Signal(int)
     uninstall_clicked = Signal()
     install_clicked = Signal()
     refresh_clicked = Signal()
@@ -74,11 +74,7 @@ class PackagesTab(QWidget):
 
         self.package_table = QTableWidget()
         self.package_table.setColumnCount(3)
-        self.package_table.setHorizontalHeaderLabels([
-            _("ID"),
-            _("Version"),
-            _("Type"),
-        ])
+        self.package_table.setHorizontalHeaderLabels([_("ID"), _("Version"), _("Type")])
         self.package_table.setSelectionMode(QAbstractItemView.SelectionMode.SingleSelection)
         self.package_table.setSelectionBehavior(QAbstractItemView.SelectionBehavior.SelectRows)
         self.package_table.setWordWrap(False)

@@ -35,7 +35,8 @@ from mast.core.android import (
 from mast.core.i18n import _
 
 from mast.qt6.android.device_panel import DevicePanel
-from mast.qt6.android.packages_tab import PackagesTab
+from mast.qt6.android.device_info_panel import DeviceInfoPanel
+from mast.qt6.android.package_manager_panel import PackageManagerPanel
 
 
 class AndroidWindow(QMainWindow):
@@ -81,44 +82,13 @@ class AndroidWindow(QMainWindow):
         self.tab_widget = QTabWidget()
         splitter.addWidget(self.tab_widget)
 
-        # 设备信息 Tab
-        self.info_tab = QWidget()
-        self.tab_widget.addTab(self.info_tab, _("Device Info"))
-        self._build_info_tab()
+        # 设备信息组件
+        self.device_info_panel = DeviceInfoPanel()
+        self.tab_widget.addTab(self.device_info_panel, _("Device Info"))
 
-        # 实例化应用列表 Tab 组件
-        self.packages_tab = PackagesTab()
+        # 软件包管理组件
+        self.packages_tab = PackageManagerPanel()
         self.tab_widget.addTab(self.packages_tab, _("Packages"))
-
-    def _build_info_tab(self) -> None:
-        layout = QVBoxLayout(self.info_tab)
-        layout.setSpacing(8)
-        layout.setContentsMargins(16, 16, 16, 16)
-
-        labels = [
-            (_("Serial"), 0),
-            (_("Name"), 1),
-            (_("Model"), 2),
-            (_("Manufacturer"), 3),
-            (_("Android Version"), 4),
-            (_("API Level"), 5),
-            (_("Status"), 6),
-        ]
-
-        self.info_labels: list[QLabel] = []
-
-        for i, (label_text, _row) in enumerate(labels):
-            row_layout = QHBoxLayout()
-            label = QLabel(label_text + ":")
-            label.setFixedWidth(120)
-            row_layout.addWidget(label)
-            value_label = QLabel("")
-            value_label.setWordWrap(True)
-            row_layout.addWidget(value_label)
-            self.info_labels.append(value_label)
-            layout.addLayout(row_layout)
-
-        layout.addStretch()
 
     def _connect_signals(self) -> None:
         # 绑定子组件信号
@@ -196,8 +166,7 @@ class AndroidWindow(QMainWindow):
 
     def _clear_device_selection(self) -> None:
         self.selected_device = None
-        for label in self.info_labels:
-            label.setText("")
+        self.device_info_panel.clear()
         self.packages_tab.package_table.setRowCount(0)
         self.packages_tab.uninstall_btn.setEnabled(False)
 
@@ -218,21 +187,7 @@ class AndroidWindow(QMainWindow):
             self.packages_tab.uninstall_btn.setEnabled(False)
 
     def _update_device_info(self, device: DeviceInfo) -> None:
-        self.info_labels[0].setText(device.serial)
-        self.info_labels[1].setText(device.name)
-        self.info_labels[2].setText(device.model)
-        self.info_labels[3].setText(device.manufacturer)
-        self.info_labels[4].setText(device.android_version)
-        self.info_labels[5].setText(device.api_level)
-
-        status_text = device.status
-        if device.status == "device":
-            status_text = _("Connected")
-        elif device.status == "offline":
-            status_text = _("Offline")
-        elif device.status == "unauthorized":
-            status_text = _("Unauthorized")
-        self.info_labels[6].setText(status_text)
+        self.device_info_panel.set_device(device)
 
     def _load_packages(self) -> None:
         if not self.selected_device or self.selected_device.status != "device":
