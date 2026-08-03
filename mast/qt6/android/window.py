@@ -61,7 +61,6 @@ class AndroidWindow(QMainWindow):
         splitter = QSplitter(Qt.Orientation.Horizontal)
         splitter.setStretchFactor(0, 1)
         splitter.setStretchFactor(1, 3)
-        splitter.setHandleWidth(10)
         main_layout.addWidget(splitter)
 
         # 实例化左侧设备面板组件
