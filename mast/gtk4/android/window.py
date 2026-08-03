@@ -11,10 +11,12 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import GLib, Gtk
 
 from mast.core.android import (
+    APP_TYPE_ALL,
     DeviceInfo,
     PackageInfo,
     is_adb_available,
     list_packages,
+    matches_app_type,
 )
 from mast.core.i18n import _
 from mast.gtk4.android.device_info_panel import DeviceInfoPanel
@@ -155,14 +157,12 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _apply_package_filters(self) -> None:
         search_text = self.packages_tab.search_entry.get_text().strip().lower()
-        app_type = self.packages_tab.app_type_combo.get_active_id() or "all"
+        app_type = self.packages_tab.app_type_combo.get_active_id() or APP_TYPE_ALL
 
         self.packages_tab.package_list_store.clear()
 
         for pkg in self.packages:
-            if app_type == "system" and not pkg.is_system:
-                continue
-            if app_type == "user" and pkg.is_system:
+            if not matches_app_type(pkg.is_system, app_type):
                 continue
 
             if search_text:

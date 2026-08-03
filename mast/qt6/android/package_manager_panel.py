@@ -26,8 +26,12 @@ from PySide6.QtWidgets import (
 )
 
 from mast.core.android import (
+    APP_TYPE_ALL,
+    APP_TYPE_FILTER_IDS,
+    APP_TYPE_FILTER_LABELS,
     DeviceInfo,
     PackageInfo,
+    matches_app_type,
 )
 from mast.core.i18n import _
 
@@ -101,9 +105,9 @@ class PackageManagerPanel(QWidget):
         filter_layout.addStretch()
 
         self.app_type_combo = QComboBox()
-        self.app_type_combo.addItem(_("All apps"), "all")
-        self.app_type_combo.addItem(_("System apps"), "system")
-        self.app_type_combo.addItem(_("User apps"), "user")
+        for app_type in APP_TYPE_FILTER_IDS:
+            self.app_type_combo.addItem(_(APP_TYPE_FILTER_LABELS[app_type]), app_type)
+        self.app_type_combo.setCurrentIndex(self.app_type_combo.findData(APP_TYPE_ALL))
         filter_layout.addWidget(self.app_type_combo)
 
         layout.addLayout(filter_layout)
@@ -212,9 +216,7 @@ class PackageManagerPanel(QWidget):
         self.package_table.setRowCount(0)
 
         for pkg in self._packages:
-            if app_type == "system" and not pkg.is_system:
-                continue
-            if app_type == "user" and pkg.is_system:
+            if not matches_app_type(pkg.is_system, app_type):
                 continue
 
             if search_text and search_text not in pkg.package_name.lower():
