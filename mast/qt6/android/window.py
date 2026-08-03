@@ -2,12 +2,10 @@
 
 from __future__ import annotations
 
-import os
 import threading
 
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
-    QFileDialog,
     QHBoxLayout,
     QLabel,
     QListWidgetItem,
@@ -15,22 +13,15 @@ from PySide6.QtWidgets import (
     QMessageBox,
     QSplitter,
     QTabWidget,
-    QTableWidgetItem,
     QVBoxLayout,
     QWidget,
 )
 
 from mast.core.android import (
     DeviceInfo,
-    PackageInfo,
-    get_blacklist_info,
-    install_apk,
     is_adb_available,
-    is_dangerous,
-    is_in_blacklist,
     list_devices,
     list_packages,
-    uninstall_package,
 )
 from mast.core.i18n import _
 
@@ -49,12 +40,10 @@ class AndroidWindow(QMainWindow):
         super().__init__()
 
         self.devices: list[DeviceInfo] = []
-        self.packages: list[PackageInfo] = []
         self.selected_device: DeviceInfo | None = None
         self._busy = False
 
-        self.setWindowTitle(_("Android Device Manager"))
-        self.setMinimumSize(1280, 720)
+        self.setMinimumSize(960, 640)
 
         if not is_adb_available():
             self._show_adb_not_found()
@@ -95,12 +84,10 @@ class AndroidWindow(QMainWindow):
         self.device_panel.refresh_clicked.connect(self._load_devices)
         self.device_panel.device_selection_changed.connect(self._on_device_selected)
 
-        self.packages_tab.search_changed.connect(self._apply_package_filters)
-        self.packages_tab.filter_changed.connect(self._apply_package_filters)
-        self.packages_tab.uninstall_clicked.connect(self._uninstall_selected)
-        self.packages_tab.install_clicked.connect(self._install_apk)
         self.packages_tab.refresh_clicked.connect(self._load_packages)
-        self.packages_tab.selection_changed.connect(self._on_package_selected)
+        self.packages_tab.packages_refresh_requested.connect(self._load_packages)
+        self.packages_tab.show_message.connect(self._show_message_dialog)
+        self.packages_tab.busy_changed.connect(self._set_busy)
 
         # 绑定内部异步/跨线程信号
         self.devices_loaded.connect(self._on_devices_loaded)
@@ -167,8 +154,8 @@ class AndroidWindow(QMainWindow):
     def _clear_device_selection(self) -> None:
         self.selected_device = None
         self.device_info_panel.clear()
-        self.packages_tab.package_table.setRowCount(0)
-        self.packages_tab.uninstall_btn.setEnabled(False)
+        self.packages_tab.set_selected_device(None)
+        self.packages_tab.clear_packages()
 
     @Slot(int)
     def _on_device_selected(self, row: int) -> None:
@@ -178,13 +165,13 @@ class AndroidWindow(QMainWindow):
 
         device = self.devices[row]
         self.selected_device = device
+        self.packages_tab.set_selected_device(device)
         self._update_device_info(device)
 
         if device.status == "device":
             self._load_packages()
         else:
-            self.packages_tab.package_table.setRowCount(0)
-            self.packages_tab.uninstall_btn.setEnabled(False)
+            self.packages_tab.clear_packages()
 
     def _update_device_info(self, device: DeviceInfo) -> None:
         self.device_info_panel.set_device(device)
@@ -204,9 +191,6 @@ class AndroidWindow(QMainWindow):
         def worker():
             try:
                 packages = list_packages(device.serial)
-                packages.sort(
-                    key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower())
-                )
                 self.packages_loaded.emit(packages)
             except Exception as e:
                 self.show_message.emit("error", _("Error"), str(e))
@@ -216,156 +200,17 @@ class AndroidWindow(QMainWindow):
         threading.Thread(target=worker, daemon=True).start()
 
     @Slot(list)
-    def _on_packages_loaded(self, packages: list[PackageInfo]) -> None:
-        self.packages = packages
-        self._apply_package_filters()
-
-    def _apply_package_filters(self, *_x) -> None:
-        search_text = self.packages_tab.search_entry.text().strip().lower()
-        show_blacklist = self.packages_tab.blacklist_only.isChecked()
-        show_system = self.packages_tab.system_only.isChecked()
-        show_user = self.packages_tab.user_only.isChecked()
-
-        table = self.packages_tab.package_table
-        table.setRowCount(0)
-
-        for pkg in self.packages:
-            if show_blacklist and not is_in_blacklist(pkg.package_name):
-                continue
-
-            if show_system and show_user:
-                pass
-            elif show_system and not pkg.is_system:
-                continue
-            elif show_user and pkg.is_system:
-                continue
-
-            if search_text:
-                haystack = pkg.package_name.lower()
-                if search_text not in haystack:
-                    continue
-
-            pkg_type = _("System") if pkg.is_system else _("User")
-            if is_in_blacklist(pkg.package_name):
-                pkg_type = _("Blacklist")
-
-            row = table.rowCount()
-            table.insertRow(row)
-
-            pkg_id_item = QTableWidgetItem(pkg.package_name)
-            pkg_id_item.setToolTip(pkg.package_name)
-            table.setItem(row, 0, pkg_id_item)
-            table.setItem(row, 1, QTableWidgetItem(pkg.version_name))
-            table.setItem(row, 2, QTableWidgetItem(pkg_type))
-
-        self.packages_tab.uninstall_btn.setEnabled(False)
-
-    def _on_package_selected(self) -> None:
-        selected = self.packages_tab.package_table.selectedItems()
-        self.packages_tab.uninstall_btn.setEnabled(len(selected) > 0)
-
-    def _uninstall_selected(self) -> None:
-        table = self.packages_tab.package_table
-        selected = table.selectedItems()
-        if not selected:
-            return
-
-        row = selected[0].row()
-        if row < 0 or row >= table.rowCount():
-            return
-
-        pkg_item = table.item(row, 0)
-        if pkg_item is None:
-            return
-        pkg_name = pkg_item.text()
-        app_name = pkg_name
-
-        blacklist_info = get_blacklist_info(pkg_name)
-        if blacklist_info:
-            if is_dangerous(pkg_name):
-                msg = _('Are you sure you want to uninstall "{0}" ({1})?\n\nWARNING: This package is marked as dangerous. Uninstalling it may cause system instability or prevent the device from booting!').format(app_name, pkg_name)
-            else:
-                msg = _('Are you sure you want to uninstall "{0}" ({1})?\n\nThis is a known bloatware package and can be safely removed.').format(app_name, pkg_name)
-        else:
-            msg = _('Are you sure you want to uninstall "{0}" ({1})?\n\nThis may affect system functionality.').format(app_name, pkg_name)
-
-        reply = QMessageBox.question(
-            self,
-            _("Uninstall Package"),
-            msg,
-            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
-        )
-
-        if reply == QMessageBox.StandardButton.Yes:
-            self._do_uninstall(pkg_name)
-
-    def _do_uninstall(self, pkg_name: str) -> None:
-        device = self.selected_device
-        if not device:
-            return
-
-        if self._busy:
-            return
-        self._busy = True
-
-        def worker():
-            try:
-                success = uninstall_package(device.serial, pkg_name)
-                if success:
-                    self.show_message.emit("success", _("Success"), _('Package "{0}" uninstalled successfully.').format(pkg_name))
-                    self._load_packages()
-                else:
-                    self.show_message.emit("error", _("Error"), _('Failed to uninstall "{0}". Device may require root access.').format(pkg_name))
-            except Exception as e:
-                self.show_message.emit("error", _("Error"), str(e))
-            finally:
-                self.update_busy.emit(False)
-
-        threading.Thread(target=worker, daemon=True).start()
-
-    def _install_apk(self) -> None:
-        file_path, _filter = QFileDialog.getOpenFileName(
-            self,
-            _("Select APK File"),
-            "",
-            _("APK Files (*.apk);;All Files (*)"),
-        )
-
-        if not file_path or not os.path.exists(file_path):
-            return
-
-        self._do_install(file_path)
-
-    def _do_install(self, apk_path: str) -> None:
-        device = self.selected_device
-        if not device:
-            return
-
-        if self._busy:
-            return
-        self._busy = True
-
-        def worker():
-            try:
-                success = install_apk(device.serial, apk_path)
-                if success:
-                    self.show_message.emit("success", _("Success"), _('APK "{0}" installed successfully.').format(os.path.basename(apk_path)))
-                    self._load_packages()
-                else:
-                    self.show_message.emit("error", _("Error"), _('Failed to install "{0}".').format(os.path.basename(apk_path)))
-            except Exception as e:
-                self.show_message.emit("error", _("Error"), str(e))
-            finally:
-                self.update_busy.emit(False)
-
-        threading.Thread(target=worker, daemon=True).start()
+    def _on_packages_loaded(self, packages: list) -> None:
+        self.packages_tab.set_packages(packages)
 
     @Slot(bool)
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
         self.device_panel.refresh_btn.setEnabled(not busy)
-        self.packages_tab.refresh_pkgs_btn.setEnabled(not busy)
-        self.packages_tab.install_btn.setEnabled(not busy and self.selected_device is not None and self.selected_device.status == "device")
+        has_selected_device = (
+            self.selected_device is not None and self.selected_device.status == "device"
+        )
+        self.packages_tab.set_busy_state(busy, has_selected_device)
 
     @Slot(str, str, str)
     def _show_message_dialog(self, msg_type: str, title: str, message: str) -> None:

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import os
 import threading
 
 import gi
@@ -14,14 +13,10 @@ from gi.repository import GLib, Gtk
 from mast.core.android import (
     DeviceInfo,
     PackageInfo,
-    get_blacklist_info,
-    install_apk,
     is_adb_available,
-    is_dangerous,
     is_in_blacklist,
     list_devices,
     list_packages,
-    uninstall_package,
 )
 from mast.core.i18n import _
 from mast.gtk4.android.device_info_panel import DeviceInfoPanel
@@ -76,9 +71,10 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.packages_tab.blacklist_only.connect("toggled", self._on_search_changed)
         self.packages_tab.system_only.connect("toggled", self._on_search_changed)
         self.packages_tab.user_only.connect("toggled", self._on_search_changed)
-        self.packages_tab.uninstall_btn.connect("clicked", lambda _: self._uninstall_selected())
-        self.packages_tab.install_btn.connect("clicked", lambda _: self._install_apk())
-        self.packages_tab.refresh_pkgs_btn.connect("clicked", lambda _: self._load_packages())
+        self.packages_tab.connect("refresh-clicked", lambda _x: self._load_packages())
+        self.packages_tab.connect("packages-refresh-requested", lambda _x: self._load_packages())
+        self.packages_tab.connect("show-message", self._on_panel_show_message)
+        self.packages_tab.connect("busy-changed", self._on_panel_busy_changed)
         self.packages_tab.package_selection.connect("changed", self._on_package_selected)
 
     def _show_adb_not_found(self) -> None:
@@ -131,6 +127,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
     def _clear_device_selection(self) -> None:
         self.selected_device = None
         self.device_info_panel.clear()
+        self.packages_tab.set_selected_device(None)
         self.packages_tab.clear_packages()
 
     def _on_device_selected(self, _selection) -> None:
@@ -152,6 +149,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
         device = self.devices[index]
         self.selected_device = device
+        self.packages_tab.set_selected_device(device)
         self._update_device_info(device)
 
         if device.status == "device":
@@ -234,149 +232,26 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.packages_tab.uninstall_btn.set_sensitive(False)
 
     def _on_package_selected(self, _selection) -> None:
-        model, tree_iter = self.packages_tab.package_selection.get_selected()
-        if tree_iter is None:
-            self.packages_tab.uninstall_btn.set_sensitive(False)
-            return
-
-        path = model.get_path(tree_iter)
-        path_str = path.to_string() if path else None
-        if not path_str:
-            self.packages_tab.uninstall_btn.set_sensitive(False)
-            return
-
-        index = int(path_str)
-        if index < 0 or index >= len(self.packages_tab.package_list_store):
-            self.packages_tab.uninstall_btn.set_sensitive(False)
-            return
-
-        self.packages_tab.uninstall_btn.set_sensitive(True)
-
-    def _uninstall_selected(self) -> None:
-        model, tree_iter = self.packages_tab.package_selection.get_selected()
-        if tree_iter is None:
-            return
-
-        path = model.get_path(tree_iter)
-        path_str = path.to_string() if path else None
-        if not path_str:
-            return
-
-        index = int(path_str)
-        if index < 0 or index >= len(self.packages_tab.package_list_store):
-            return
-
-        pkg_name = self.packages_tab.package_list_store[path][0]
-        app_name = pkg_name
-
-        dialog = Gtk.MessageDialog(
-            transient_for=self,
-            modal=True,
-            message_type=Gtk.MessageType.QUESTION,
-            buttons=Gtk.ButtonsType.YES_NO,
-            text=_("Uninstall Package"),
+        self.packages_tab.set_busy_state(
+            self._busy,
+            self.selected_device is not None and self.selected_device.status == "device",
         )
 
-        blacklist_info = get_blacklist_info(pkg_name)
-        if blacklist_info:
-            if is_dangerous(pkg_name):
-                secondary = _('Are you sure you want to uninstall "{0}" ({1})?\n\nWARNING: This package is marked as dangerous. Uninstalling it may cause system instability or prevent the device from booting!').format(app_name, pkg_name)
-            else:
-                secondary = _('Are you sure you want to uninstall "{0}" ({1})?\n\nThis is a known bloatware package and can be safely removed.').format(app_name, pkg_name)
+    def _on_panel_show_message(self, _panel, msg_type: str, title: str, message: str) -> None:
+        if msg_type == "error":
+            self._show_message(Gtk.MessageType.ERROR, title, message)
         else:
-            secondary = _('Are you sure you want to uninstall "{0}" ({1})?\n\nThis may affect system functionality.').format(app_name, pkg_name)
+            self._show_message(Gtk.MessageType.INFO, title, message)
 
-        dialog.set_property("secondary-text", secondary)
-
-        def on_response(d, response):
-            if response == Gtk.ResponseType.YES:
-                self._do_uninstall(pkg_name)
-            d.destroy()
-
-        dialog.connect("response", on_response)
-        dialog.present()
-
-    def _do_uninstall(self, pkg_name: str) -> None:
-        device = self.selected_device
-        if not device:
-            return
-
-        if self._busy:
-            return
-        self._busy = True
-
-        def worker():
-            try:
-                success = uninstall_package(device.serial, pkg_name)
-                GLib.idle_add(self._on_uninstall_done, success, pkg_name)
-            except Exception as e:
-                GLib.idle_add(self._show_error, str(e))
-            finally:
-                GLib.idle_add(self._set_busy, False)
-
-        threading.Thread(target=worker, daemon=True).start()
-
-    def _on_uninstall_done(self, success: bool, pkg_name: str) -> None:
-        if success:
-            self._show_message(Gtk.MessageType.INFO, _("Success"), _('Package "{0}" uninstalled successfully.').format(pkg_name))
-            self._load_packages()
-        else:
-            self._show_message(Gtk.MessageType.ERROR, _("Error"), _('Failed to uninstall "{0}". Device may require root access.').format(pkg_name))
-
-    def _install_apk(self) -> None:
-        dialog = Gtk.FileDialog(title=_("Select APK File"))
-        filter_apk = Gtk.FileFilter()
-        filter_apk.set_name(_("APK Files"))
-        filter_apk.add_pattern("*.apk")
-        dialog.set_default_filter(filter_apk)
-
-        def on_response(d, result):
-            try:
-                file = d.open_finish(result)
-                if file is None:
-                    return
-
-                apk_path = file.get_path()
-                if apk_path and os.path.exists(apk_path):
-                    self._do_install(apk_path)
-            except Exception:
-                pass
-
-        dialog.open(self, None, on_response)
-
-    def _do_install(self, apk_path: str) -> None:
-        device = self.selected_device
-        if not device:
-            return
-
-        if self._busy:
-            return
-        self._busy = True
-
-        def worker():
-            try:
-                success = install_apk(device.serial, apk_path)
-                GLib.idle_add(self._on_install_done, success, apk_path)
-            except Exception as e:
-                GLib.idle_add(self._show_error, str(e))
-            finally:
-                GLib.idle_add(self._set_busy, False)
-
-        threading.Thread(target=worker, daemon=True).start()
-
-    def _on_install_done(self, success: bool, apk_path: str) -> None:
-        if success:
-            self._show_message(Gtk.MessageType.INFO, _("Success"), _('APK "{0}" installed successfully.').format(os.path.basename(apk_path)))
-            self._load_packages()
-        else:
-            self._show_message(Gtk.MessageType.ERROR, _("Error"), _('Failed to install "{0}".').format(os.path.basename(apk_path)))
+    def _on_panel_busy_changed(self, _panel, busy: bool) -> None:
+        self._set_busy(busy)
 
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
         self.device_panel.refresh_btn.set_sensitive(not busy)
-        self.packages_tab.refresh_pkgs_btn.set_sensitive(not busy)
-        self.packages_tab.install_btn.set_sensitive(
-            not busy and self.selected_device is not None and self.selected_device.status == "device"
+        self.packages_tab.set_busy_state(
+            busy,
+            self.selected_device is not None and self.selected_device.status == "device",
         )
 
     def _show_error(self, message: str) -> None:
