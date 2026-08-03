@@ -239,6 +239,16 @@ class PackageManagerPanel(QWidget):
                 return pkg.is_disabled
         return False
 
+    def _selected_package_is_system(self) -> bool:
+        pkg_name = self.selected_package_name()
+        if not pkg_name:
+            return False
+
+        for pkg in self._packages:
+            if pkg.package_name == pkg_name:
+                return pkg.is_system
+        return False
+
     def _sync_controls(self) -> None:
         busy = self._external_busy or self._operation_in_progress
         has_device = self._device is not None
@@ -378,9 +388,14 @@ class PackageManagerPanel(QWidget):
         if not pkg_name:
             return
 
-        msg = _(
-            'Are you sure you want to uninstall "{0}"?\n\nThis may affect system functionality.'
-        ).format(pkg_name)
+        if self._selected_package_is_system():
+            msg = _(
+                'Are you sure you want to uninstall "{0}"?\n\nThis is a system app. Removing it may cause missing or unstable system functionality.'
+            ).format(pkg_name)
+        else:
+            msg = _(
+                'Are you sure you want to uninstall "{0}"?\n\nAll app data for this user will be removed.'
+            ).format(pkg_name)
 
         reply = QMessageBox.question(
             self,

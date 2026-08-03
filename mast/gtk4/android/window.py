@@ -177,6 +177,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
                 pkg.version_name,
                 pkg_type,
                 pkg.is_disabled,
+                pkg.is_system,
             ])
 
         self.packages_tab.uninstall_btn.set_sensitive(False)

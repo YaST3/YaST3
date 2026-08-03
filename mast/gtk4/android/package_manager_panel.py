@@ -126,7 +126,7 @@ class PackageManagerPanel(Gtk.Box):
         action_box.append(Gtk.Box(hexpand=True))
         self.append(action_box)
 
-        self.package_list_store = Gtk.ListStore(str, str, str, bool)
+        self.package_list_store = Gtk.ListStore(str, str, str, bool, bool)
         self.package_tree = Gtk.TreeView(model=self.package_list_store)
 
         renderer = Gtk.CellRendererText()
@@ -223,6 +223,10 @@ class PackageManagerPanel(Gtk.Box):
         if self._device is None:
             return
 
+        model, tree_iter = self.package_selection.get_selected()
+        if tree_iter is None:
+            return
+
         pkg_name = self._get_selected_package_name()
         if not pkg_name:
             return
@@ -238,9 +242,15 @@ class PackageManagerPanel(Gtk.Box):
             text=_("Uninstall Package"),
         )
 
-        secondary = _(
-            'Are you sure you want to uninstall "{0}"?\n\nThis may affect system functionality.'
-        ).format(pkg_name)
+        is_system_app = bool(model.get_value(tree_iter, 4))
+        if is_system_app:
+            secondary = _(
+                'Are you sure you want to uninstall "{0}"?\n\nThis is a system app. Removing it may cause missing or unstable system functionality.'
+            ).format(pkg_name)
+        else:
+            secondary = _(
+                'Are you sure you want to uninstall "{0}"?\n\nAll app data for this user will be removed.'
+            ).format(pkg_name)
 
         dialog.set_property("secondary-text", secondary)
 
