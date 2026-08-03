@@ -101,11 +101,14 @@ def list_devices() -> list[DeviceInfo]:
 
         try:
             props = get_device_properties(serial)
+            market_name = props.get("ro.product.marketname") or ""
+            resolved_model = props.get("ro.product.model") or model
+            resolved_name = market_name or resolved_model or name
             devices.append(
                 DeviceInfo(
                     serial=serial,
-                    name=name,
-                    model=props.get("ro.product.model") or model,
+                    name=resolved_name,
+                    model=resolved_model,
                     manufacturer=props.get("ro.product.manufacturer") or "",
                     android_version=props.get("ro.build.version.release") or "",
                     api_level=props.get("ro.build.version.sdk") or "",
@@ -160,13 +163,16 @@ def get_device_info(serial: str) -> DeviceInfo:
             device = (info.tags or {}).get("device", "")
             break
 
+    market_name = props.get("ro.product.marketname") or ""
+    resolved_model = props.get("ro.product.model") or model
+
     return DeviceInfo(
         serial=serial,
-        name=device or model or props.get("ro.product.device", ""),
-        model=props.get("ro.product.model", model),
-        manufacturer=props.get("ro.product.manufacturer", ""),
-        android_version=props.get("ro.build.version.release", ""),
-        api_level=props.get("ro.build.version.sdk", ""),
+        name=market_name or resolved_model or device or props.get("ro.product.device", ""),
+        model=resolved_model,
+        manufacturer=props.get("ro.product.manufacturer") or "",
+        android_version=props.get("ro.build.version.release") or "",
+        api_level=props.get("ro.build.version.sdk") or "",
         status="device",
     )
 
