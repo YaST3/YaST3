@@ -55,6 +55,20 @@ def _uninstall_package_with_adbutils(
         return False
 
 
+def _disable_package_with_adbutils(serial: str, package_name: str) -> bool:
+    args = ["pm", "disable-user", "--user", "0", package_name]
+
+    try:
+        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+    except Exception:
+        return False
+
+    lower = output.lower()
+    if "unknown package" in lower or "error" in lower or "exception" in lower:
+        return False
+    return "disabled-user" in lower or "already" in lower or bool(output)
+
+
 class PackageManagerPanel(QWidget):
     """Component for managing and displaying package lists and filters."""
 
@@ -100,6 +114,10 @@ class PackageManagerPanel(QWidget):
         self.uninstall_btn.setEnabled(False)
         action_layout.addWidget(self.uninstall_btn)
 
+        self.disable_btn = QPushButton(_("Disable"))
+        self.disable_btn.setEnabled(False)
+        action_layout.addWidget(self.disable_btn)
+
         self.install_btn = QPushButton(_("Install APK"))
         action_layout.addWidget(self.install_btn)
 
@@ -130,6 +148,7 @@ class PackageManagerPanel(QWidget):
         self.search_entry.textChanged.connect(self._apply_filters)
         self.app_type_combo.currentIndexChanged.connect(self._apply_filters)
         self.uninstall_btn.clicked.connect(self._uninstall_selected)
+        self.disable_btn.clicked.connect(self._disable_selected)
         self.install_btn.clicked.connect(self._install_apk)
         self.install_fdroid_btn.clicked.connect(self._install_fdroid)
         self.refresh_pkgs_btn.clicked.connect(self.refresh_clicked)
@@ -210,6 +229,16 @@ class PackageManagerPanel(QWidget):
     def _update_selection_state(self) -> None:
         self._sync_controls()
 
+    def _selected_package_is_disabled(self) -> bool:
+        pkg_name = self.selected_package_name()
+        if not pkg_name:
+            return False
+
+        for pkg in self._packages:
+            if pkg.package_name == pkg_name:
+                return pkg.is_disabled
+        return False
+
     def _sync_controls(self) -> None:
         busy = self._external_busy or self._operation_in_progress
         has_device = self._device is not None
@@ -219,9 +248,76 @@ class PackageManagerPanel(QWidget):
         should_show_fdroid = has_device and self._fdroid_installed is False
         self.install_fdroid_btn.setVisible(should_show_fdroid)
         self.install_fdroid_btn.setEnabled(not busy and should_show_fdroid)
+        self.disable_btn.setEnabled(
+            not busy
+            and has_device
+            and self.selected_package_name() is not None
+            and not self._selected_package_is_disabled()
+        )
         self.uninstall_btn.setEnabled(
             not busy and has_device and self.selected_package_name() is not None
         )
+
+    def _disable_selected(self) -> None:
+        if self._device is None:
+            return
+
+        pkg_name = self.selected_package_name()
+        if not pkg_name:
+            return
+
+        if self._selected_package_is_disabled():
+            return
+
+        msg = _(
+            'Are you sure you want to disable "{0}"?\n\nThe package will remain installed but will be unavailable until re-enabled.'
+        ).format(pkg_name)
+
+        reply = QMessageBox.question(
+            self,
+            _("Disable Package"),
+            msg,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+        )
+
+        if reply == QMessageBox.StandardButton.Yes:
+            self._do_disable(pkg_name)
+
+    def _do_disable(self, pkg_name: str) -> None:
+        if self._device is None:
+            return
+        if self._operation_in_progress:
+            return
+
+        self._operation_in_progress = True
+        self._sync_controls()
+        self.busy_changed.emit(True)
+
+        serial = self._device.serial
+
+        def worker() -> None:
+            try:
+                success = _disable_package_with_adbutils(serial, pkg_name)
+                if success:
+                    self.show_message.emit(
+                        "success",
+                        _("Success"),
+                        _('Package "{0}" disabled successfully.').format(pkg_name),
+                    )
+                    self.packages_refresh_requested.emit()
+                else:
+                    self.show_message.emit(
+                        "error",
+                        _("Error"),
+                        _('Failed to disable "{0}".').format(pkg_name),
+                    )
+            except Exception as e:
+                self.show_message.emit("error", _("Error"), str(e))
+            finally:
+                self._operation_in_progress = False
+                self.busy_changed.emit(False)
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def _install_fdroid(self) -> None:
         if self._device is None:

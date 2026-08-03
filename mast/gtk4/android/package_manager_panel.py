@@ -44,6 +44,20 @@ def _uninstall_package_with_adbutils(
         return False
 
 
+def _disable_package_with_adbutils(serial: str, package_name: str) -> bool:
+    args = ["pm", "disable-user", "--user", "0", package_name]
+
+    try:
+        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+    except Exception:
+        return False
+
+    lower = output.lower()
+    if "unknown package" in lower or "error" in lower or "exception" in lower:
+        return False
+    return "disabled-user" in lower or "already" in lower or bool(output)
+
+
 class PackageManagerPanel(Gtk.Box):
     """Component for managing and displaying package lists and filters."""
 
@@ -91,6 +105,11 @@ class PackageManagerPanel(Gtk.Box):
         self.uninstall_btn.connect("clicked", lambda _: self._uninstall_selected())
         action_box.append(self.uninstall_btn)
 
+        self.disable_btn = Gtk.Button(label=_("Disable"))
+        self.disable_btn.set_sensitive(False)
+        self.disable_btn.connect("clicked", lambda _: self._disable_selected())
+        action_box.append(self.disable_btn)
+
         self.install_btn = Gtk.Button(label=_("Install APK"))
         self.install_btn.connect("clicked", lambda _: self._install_apk())
         action_box.append(self.install_btn)
@@ -107,7 +126,7 @@ class PackageManagerPanel(Gtk.Box):
         action_box.append(Gtk.Box(hexpand=True))
         self.append(action_box)
 
-        self.package_list_store = Gtk.ListStore(str, str, str)
+        self.package_list_store = Gtk.ListStore(str, str, str, bool)
         self.package_tree = Gtk.TreeView(model=self.package_list_store)
 
         renderer = Gtk.CellRendererText()
@@ -175,6 +194,13 @@ class PackageManagerPanel(Gtk.Box):
 
         model, tree_iter = self.package_selection.get_selected()
         has_selection = tree_iter is not None
+        selected_disabled = False
+        if has_selection and tree_iter is not None:
+            selected_disabled = bool(model.get_value(tree_iter, 3))
+
+        self.disable_btn.set_sensitive(
+            not busy and has_device and has_selection and not selected_disabled
+        )
         self.uninstall_btn.set_sensitive(not busy and has_device and has_selection)
 
     def _get_selected_package_name(self) -> str | None:
@@ -225,6 +251,85 @@ class PackageManagerPanel(Gtk.Box):
 
         dialog.connect("response", on_response)
         dialog.present()
+
+    def _disable_selected(self) -> None:
+        if self._device is None:
+            return
+
+        model, tree_iter = self.package_selection.get_selected()
+        if tree_iter is None:
+            return
+
+        if bool(model.get_value(tree_iter, 3)):
+            return
+
+        pkg_name = self._get_selected_package_name()
+        if not pkg_name:
+            return
+
+        root = self.get_root()
+        parent_window = root if isinstance(root, Gtk.Window) else None
+
+        dialog = Gtk.MessageDialog(
+            transient_for=parent_window,
+            modal=True,
+            message_type=Gtk.MessageType.QUESTION,
+            buttons=Gtk.ButtonsType.YES_NO,
+            text=_("Disable Package"),
+        )
+        secondary = _(
+            'Are you sure you want to disable "{0}"?\n\nThe package will remain installed but will be unavailable until re-enabled.'
+        ).format(pkg_name)
+        dialog.set_property("secondary-text", secondary)
+
+        def on_response(dlg, response):
+            if response == Gtk.ResponseType.YES:
+                self._do_disable(pkg_name)
+            dlg.destroy()
+
+        dialog.connect("response", on_response)
+        dialog.present()
+
+    def _do_disable(self, pkg_name: str) -> None:
+        if self._device is None:
+            return
+        if self._operation_in_progress:
+            return
+
+        self._operation_in_progress = True
+        self._sync_controls()
+        self.emit("busy-changed", True)
+
+        serial = self._device.serial
+
+        def worker() -> None:
+            try:
+                success = _disable_package_with_adbutils(serial, pkg_name)
+                GLib.idle_add(self._on_disable_finished, success, pkg_name)
+            except Exception as e:
+                GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
+                GLib.idle_add(self._finish_operation)
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _on_disable_finished(self, success: bool, pkg_name: str) -> bool:
+        if success:
+            self.emit(
+                "show-message",
+                "success",
+                _("Success"),
+                _('Package "{0}" disabled successfully.').format(pkg_name),
+            )
+            self.emit("packages-refresh-requested")
+        else:
+            self.emit(
+                "show-message",
+                "error",
+                _("Error"),
+                _('Failed to disable "{0}".').format(pkg_name),
+            )
+        self._finish_operation()
+        return False
 
     def _do_uninstall(self, pkg_name: str) -> None:
         if self._device is None:
