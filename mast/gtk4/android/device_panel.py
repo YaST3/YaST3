@@ -47,7 +47,7 @@ class DevicePanel(Gtk.Box):
         device_header.append(self.refresh_btn)
         self.append(device_header)
 
-        self.device_list_store = Gtk.ListStore(str, str, str)
+        self.device_list_store = Gtk.ListStore(str, str)
         self.device_tree = Gtk.TreeView(model=self.device_list_store)
 
         renderer = Gtk.CellRendererText()
@@ -56,12 +56,7 @@ class DevicePanel(Gtk.Box):
         self.device_tree.append_column(column)
 
         renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Model"), renderer, text=1)
-        column.set_resizable(True)
-        self.device_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Status"), renderer, text=2)
+        column = Gtk.TreeViewColumn(_("Status"), renderer, text=1)
         column.set_resizable(True)
         self.device_tree.append_column(column)
 
@@ -117,7 +112,7 @@ class DevicePanel(Gtk.Box):
             elif device.status == "unauthorized":
                 status_text = _("Unauthorized")
 
-            self.device_list_store.append([device.name, device.model, status_text])
+            self.device_list_store.append([device.name, f"[{status_text}]"])
 
         # Release busy before auto-selection so package auto-load is not blocked
         # by window-level busy guards.

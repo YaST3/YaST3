@@ -95,7 +95,7 @@ class DevicePanel(QWidget):
             elif device.status == "unauthorized":
                 status_text = _("Unauthorized")
 
-            item_text = f"{device.name} ({device.model}) - {status_text}"
+            item_text = f"{device.name} [{status_text}]"
             item = QListWidgetItem(item_text)
             self.device_list.addItem(item)
 
