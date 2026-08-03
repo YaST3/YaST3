@@ -95,8 +95,8 @@ def list_devices() -> list[DeviceInfo]:
             )
             continue
 
-        model = tags.get("model", "")
-        device = tags.get("device", "")
+        model = tags.get("model") or ""
+        device = tags.get("device") or ""
         name = device or model
 
         try:
@@ -105,10 +105,10 @@ def list_devices() -> list[DeviceInfo]:
                 DeviceInfo(
                     serial=serial,
                     name=name,
-                    model=props.get("ro.product.model", model),
-                    manufacturer=props.get("ro.product.manufacturer", ""),
-                    android_version=props.get("ro.build.version.release", ""),
-                    api_level=props.get("ro.build.version.sdk", ""),
+                    model=props.get("ro.product.model") or model,
+                    manufacturer=props.get("ro.product.manufacturer") or "",
+                    android_version=props.get("ro.build.version.release") or "",
+                    api_level=props.get("ro.build.version.sdk") or "",
                     status=status,
                 )
             )
@@ -272,14 +272,6 @@ def uninstall_package(serial: str, package_name: str, keep_data: bool = False) -
 
     output = str(_get_device(serial).shell(args, timeout=ADB_TIMEOUT)).strip()
     return "Success" in output
-
-
-def install_apk(serial: str, apk_path: str) -> bool:
-    try:
-        _get_device(serial).install(apk_path, silent=True, flags=["-r"])
-        return True
-    except Exception:
-        return False
 
 
 def is_adb_available() -> bool:

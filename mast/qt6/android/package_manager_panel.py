@@ -7,6 +7,8 @@ import tempfile
 import threading
 import urllib.request
 
+import adbutils
+
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
     QAbstractItemView,
@@ -27,12 +29,19 @@ from mast.core.android import (
     DeviceInfo,
     PackageInfo,
     get_blacklist_info,
-    install_apk,
     is_dangerous,
     is_in_blacklist,
     uninstall_package,
 )
 from mast.core.i18n import _
+
+
+def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
+    try:
+        adbutils.adb.device(serial=serial).install(apk_path, silent=True, flags=["-r"])
+        return True
+    except Exception:
+        return False
 
 
 class PackageManagerPanel(QWidget):
@@ -246,7 +255,7 @@ class PackageManagerPanel(QWidget):
                     with open(apk_path, "wb") as out_file:
                         out_file.write(response.read())
 
-                success = install_apk(serial, apk_path)
+                success = _install_apk_with_adbutils(serial, apk_path)
                 if success:
                     self.show_message.emit(
                         "success",
@@ -375,7 +384,7 @@ class PackageManagerPanel(QWidget):
 
         def worker() -> None:
             try:
-                success = install_apk(serial, apk_path)
+                success = _install_apk_with_adbutils(serial, apk_path)
                 if success:
                     self.show_message.emit(
                         "success",

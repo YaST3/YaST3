@@ -7,6 +7,8 @@ import tempfile
 import threading
 import urllib.request
 
+import adbutils
+
 import gi
 
 gi.require_version("Gtk", "4.0")
@@ -16,11 +18,18 @@ from gi.repository import GLib, GObject, Gtk
 from mast.core.android import (
     DeviceInfo,
     get_blacklist_info,
-    install_apk,
     is_dangerous,
     uninstall_package,
 )
 from mast.core.i18n import _
+
+
+def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
+    try:
+        adbutils.adb.device(serial=serial).install(apk_path, silent=True, flags=["-r"])
+        return True
+    except Exception:
+        return False
 
 
 class PackageManagerPanel(Gtk.Box):
@@ -305,7 +314,7 @@ class PackageManagerPanel(Gtk.Box):
 
         def worker() -> None:
             try:
-                success = install_apk(serial, apk_path)
+                success = _install_apk_with_adbutils(serial, apk_path)
                 GLib.idle_add(self._on_install_finished, success, apk_path)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
@@ -339,7 +348,7 @@ class PackageManagerPanel(Gtk.Box):
                     with open(apk_path, "wb") as out_file:
                         out_file.write(response.read())
 
-                success = install_apk(serial, apk_path)
+                success = _install_apk_with_adbutils(serial, apk_path)
                 GLib.idle_add(self._on_fdroid_install_finished, success)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
