@@ -8,7 +8,6 @@ from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QLabel,
-    QListWidgetItem,
     QMainWindow,
     QMessageBox,
     QSplitter,
@@ -20,7 +19,6 @@ from PySide6.QtWidgets import (
 from mast.core.android import (
     DeviceInfo,
     is_adb_available,
-    list_devices,
     list_packages,
 )
 from mast.core.i18n import _
@@ -31,7 +29,6 @@ from mast.qt6.android.package_manager_panel import PackageManagerPanel
 
 
 class AndroidWindow(QMainWindow):
-    devices_loaded = Signal(list)
     packages_loaded = Signal(list)
     show_message = Signal(str, str, str)
     update_busy = Signal(bool)
@@ -39,7 +36,6 @@ class AndroidWindow(QMainWindow):
     def __init__(self):
         super().__init__()
 
-        self.devices: list[DeviceInfo] = []
         self.selected_device: DeviceInfo | None = None
         self._busy = False
 
@@ -51,7 +47,7 @@ class AndroidWindow(QMainWindow):
 
         self._build_ui()
         self._connect_signals()
-        self._load_devices()
+        self.device_panel.load_devices()
 
     def _build_ui(self) -> None:
         central_widget = QWidget()
@@ -80,8 +76,9 @@ class AndroidWindow(QMainWindow):
 
     def _connect_signals(self) -> None:
         # 绑定子组件信号
-        self.device_panel.refresh_clicked.connect(self._load_devices)
-        self.device_panel.device_selection_changed.connect(self._on_device_selected)
+        self.device_panel.selected_device_changed.connect(self._on_device_selected)
+        self.device_panel.show_message.connect(self._show_message_dialog)
+        self.device_panel.busy_changed.connect(self._set_busy)
 
         self.packages_tab.refresh_clicked.connect(self._load_packages)
         self.packages_tab.packages_refresh_requested.connect(self._load_packages)
@@ -89,7 +86,6 @@ class AndroidWindow(QMainWindow):
         self.packages_tab.busy_changed.connect(self._set_busy)
 
         # 绑定内部异步/跨线程信号
-        self.devices_loaded.connect(self._on_devices_loaded)
         self.packages_loaded.connect(self._on_packages_loaded)
         self.show_message.connect(self._show_message_dialog)
         self.update_busy.connect(self._set_busy)
@@ -109,60 +105,18 @@ class AndroidWindow(QMainWindow):
         desc.setWordWrap(True)
         layout.addWidget(desc)
 
-    def _load_devices(self) -> None:
-        if self._busy:
-            return
-        self._busy = True
-        self.device_panel.refresh_btn.setEnabled(False)
-
-        def worker():
-            try:
-                devices = list_devices()
-                # Release busy first so auto-selection can trigger package load.
-                self.update_busy.emit(False)
-                self.devices_loaded.emit(devices)
-            except Exception as e:
-                self.show_message.emit("error", _("Error"), str(e))
-                self.update_busy.emit(False)
-
-        threading.Thread(target=worker, daemon=True).start()
-
-    @Slot(list)
-    def _on_devices_loaded(self, devices: list[DeviceInfo]) -> None:
-        self.devices = devices
-        self.device_panel.device_list.clear()
-
-        for device in devices:
-            status_text = device.status
-            if device.status == "device":
-                status_text = _("Connected")
-            elif device.status == "offline":
-                status_text = _("Offline")
-            elif device.status == "unauthorized":
-                status_text = _("Unauthorized")
-
-            item_text = f"{device.name} ({device.model}) - {status_text}"
-            item = QListWidgetItem(item_text)
-            self.device_panel.device_list.addItem(item)
-
-        if devices:
-            self.device_panel.device_list.setCurrentRow(0)
-        else:
-            self._clear_device_selection()
-
     def _clear_device_selection(self) -> None:
         self.selected_device = None
         self.device_info_panel.clear()
         self.packages_tab.set_selected_device(None)
         self.packages_tab.clear_packages()
 
-    @Slot(int)
-    def _on_device_selected(self, row: int) -> None:
-        if row < 0 or row >= len(self.devices):
+    @Slot(object)
+    def _on_device_selected(self, device: DeviceInfo | None) -> None:
+        if device is None:
             self._clear_device_selection()
             return
 
-        device = self.devices[row]
         self.selected_device = device
         self.packages_tab.set_selected_device(device)
         self._update_device_info(device)
@@ -205,7 +159,7 @@ class AndroidWindow(QMainWindow):
     @Slot(bool)
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
-        self.device_panel.refresh_btn.setEnabled(not busy)
+        self.device_panel.set_external_busy(busy)
         has_selected_device = (
             self.selected_device is not None and self.selected_device.status == "device"
         )

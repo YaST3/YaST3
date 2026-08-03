@@ -15,7 +15,6 @@ from mast.core.android import (
     PackageInfo,
     is_adb_available,
     is_in_blacklist,
-    list_devices,
     list_packages,
 )
 from mast.core.i18n import _
@@ -28,7 +27,6 @@ class AndroidWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.devices: list[DeviceInfo] = []
         self.packages: list[PackageInfo] = []
         self.selected_device: DeviceInfo | None = None
         self._busy = False
@@ -41,7 +39,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
         self._build_ui()
         self._connect_signals()
-        self._load_devices()
+        self.device_panel.load_devices()
 
     def _build_ui(self) -> None:
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
@@ -64,8 +62,9 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.notebook.append_page(self.packages_tab, Gtk.Label(label=_("Packages")))
 
     def _connect_signals(self) -> None:
-        self.device_panel.refresh_btn.connect("clicked", lambda _: self._load_devices())
-        self.device_panel.device_selection.connect("changed", self._on_device_selected)
+        self.device_panel.connect("selected-device-changed", self._on_device_selected)
+        self.device_panel.connect("show-message", self._on_panel_show_message)
+        self.device_panel.connect("busy-changed", self._on_panel_busy_changed)
 
         self.packages_tab.search_entry.connect("changed", self._on_search_changed)
         self.packages_tab.blacklist_only.connect("toggled", self._on_search_changed)
@@ -100,54 +99,17 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
         self.set_child(content)
 
-    def _load_devices(self) -> None:
-        if self._busy:
-            return
-        self._busy = True
-        self.device_panel.refresh_btn.set_sensitive(False)
-
-        def worker():
-            try:
-                devices = list_devices()
-                GLib.idle_add(self._set_busy, False)
-                GLib.idle_add(self._on_devices_loaded, devices)
-            except Exception as e:
-                GLib.idle_add(self._show_error, str(e))
-                GLib.idle_add(self._set_busy, False)
-
-        threading.Thread(target=worker, daemon=True).start()
-
-    def _on_devices_loaded(self, devices: list[DeviceInfo]) -> None:
-        self.devices = devices
-        self.device_panel.set_devices(devices)
-
-        if not devices:
-            self._clear_device_selection()
-
     def _clear_device_selection(self) -> None:
         self.selected_device = None
         self.device_info_panel.clear()
         self.packages_tab.set_selected_device(None)
         self.packages_tab.clear_packages()
 
-    def _on_device_selected(self, _selection) -> None:
-        model, tree_iter = self.device_panel.device_selection.get_selected()
-        if tree_iter is None:
+    def _on_device_selected(self, _panel, device: DeviceInfo | None) -> None:
+        if device is None:
             self._clear_device_selection()
             return
 
-        path = model.get_path(tree_iter)
-        path_str = path.to_string() if path else None
-        if not path_str:
-            self._clear_device_selection()
-            return
-
-        index = int(path_str)
-        if index < 0 or index >= len(self.devices):
-            self._clear_device_selection()
-            return
-
-        device = self.devices[index]
         self.selected_device = device
         self.packages_tab.set_selected_device(device)
         self._update_device_info(device)
@@ -248,7 +210,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
-        self.device_panel.refresh_btn.set_sensitive(not busy)
+        self.device_panel.set_external_busy(busy)
         self.packages_tab.set_busy_state(
             busy,
             self.selected_device is not None and self.selected_device.status == "device",
