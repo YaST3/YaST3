@@ -65,6 +65,7 @@ class AndroidWindow(QMainWindow):
 
         self.tab_widget = QTabWidget()
         splitter.addWidget(self.tab_widget)
+        splitter.setSizes([240, 720])
 
         # 设备信息组件
         self.device_info_panel = DeviceInfoPanel()

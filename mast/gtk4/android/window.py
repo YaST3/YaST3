@@ -30,7 +30,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.selected_device: DeviceInfo | None = None
         self._busy = False
 
-        self.set_default_size(1280, 720)
+        self.set_default_size(960, 640)
 
         if not is_adb_available():
             self._show_adb_not_found()
@@ -45,7 +45,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.set_child(main_box)
 
         paned = Gtk.Paned(orientation=Gtk.Orientation.HORIZONTAL)
-        paned.set_position(280)
+        paned.set_position(240)
         main_box.append(paned)
 
         self.device_panel = DevicePanel()
