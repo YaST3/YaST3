@@ -31,7 +31,6 @@ from mast.core.android import (
     get_blacklist_info,
     is_dangerous,
     is_in_blacklist,
-    uninstall_package,
 )
 from mast.core.i18n import _
 
@@ -40,6 +39,21 @@ def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
     try:
         adbutils.adb.device(serial=serial).install(apk_path, silent=True, flags=["-r"])
         return True
+    except Exception:
+        return False
+
+
+def _uninstall_package_with_adbutils(
+    serial: str, package_name: str, keep_data: bool = False
+) -> bool:
+    args = ["pm", "uninstall"]
+    if keep_data:
+        args.append("-k")
+    args.append(package_name)
+
+    try:
+        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+        return "Success" in output
     except Exception:
         return False
 
@@ -328,7 +342,7 @@ class PackageManagerPanel(QWidget):
 
         def worker() -> None:
             try:
-                success = uninstall_package(serial, pkg_name)
+                success = _uninstall_package_with_adbutils(serial, pkg_name)
                 if success:
                     self.show_message.emit(
                         "success",

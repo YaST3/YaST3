@@ -7,7 +7,6 @@ from mast.core.android.adb import (
     is_adb_available,
     list_devices,
     list_packages,
-    uninstall_package,
 )
 from mast.core.android.blacklist import (
     BLACKLIST,
@@ -29,5 +28,4 @@ __all__ = [
     "is_in_blacklist",
     "list_devices",
     "list_packages",
-    "uninstall_package",
 ]

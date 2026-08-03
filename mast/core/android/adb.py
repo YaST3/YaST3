@@ -262,18 +262,6 @@ def list_packages(serial: str) -> list[PackageInfo]:
     _flush_current_package()
 
     return sorted(packages_by_name.values(), key=lambda p: p.package_name)
-
-
-def uninstall_package(serial: str, package_name: str, keep_data: bool = False) -> bool:
-    args = ["pm", "uninstall"]
-    if keep_data:
-        args.append("-k")
-    args.append(package_name)
-
-    output = str(_get_device(serial).shell(args, timeout=ADB_TIMEOUT)).strip()
-    return "Success" in output
-
-
 def is_adb_available() -> bool:
     try:
         _get_adb_client().server_version()
