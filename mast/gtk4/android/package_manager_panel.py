@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import os
+import tempfile
 import threading
+import urllib.request
 
 import gi
 
@@ -34,6 +36,7 @@ class PackageManagerPanel(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=8, **kwargs)
         self._device: DeviceInfo | None = None
+        self._fdroid_installed: bool | None = None
         self._external_busy = False
         self._operation_in_progress = False
         self._build_ui()
@@ -72,6 +75,11 @@ class PackageManagerPanel(Gtk.Box):
         self.install_btn = Gtk.Button(label=_("Install APK"))
         self.install_btn.connect("clicked", lambda _: self._install_apk())
         action_box.append(self.install_btn)
+
+        self.install_fdroid_btn = Gtk.Button(label=_("Install F-Droid"))
+        self.install_fdroid_btn.connect("clicked", lambda _: self._install_fdroid())
+        self.install_fdroid_btn.set_visible(False)
+        action_box.append(self.install_fdroid_btn)
 
         self.refresh_pkgs_btn = Gtk.Button(label=_("Refresh"))
         self.refresh_pkgs_btn.connect("clicked", lambda _: self.emit("refresh-clicked"))
@@ -112,11 +120,22 @@ class PackageManagerPanel(Gtk.Box):
         self.append(scrolled)
 
     def clear_packages(self) -> None:
+        self._fdroid_installed = None
         self.package_list_store.clear()
         self.uninstall_btn.set_sensitive(False)
+        self._sync_controls()
 
     def set_selected_device(self, device: DeviceInfo | None) -> None:
-        self._device = device if device and device.status == "device" else None
+        new_device = device if device and device.status == "device" else None
+        prev_serial = self._device.serial if self._device is not None else None
+        new_serial = new_device.serial if new_device is not None else None
+        if prev_serial != new_serial:
+            self._fdroid_installed = None
+        self._device = new_device
+        self._sync_controls()
+
+    def set_fdroid_installed(self, installed: bool) -> None:
+        self._fdroid_installed = installed
         self._sync_controls()
 
     def set_busy_state(self, busy: bool, has_selected_device: bool) -> None:
@@ -131,6 +150,9 @@ class PackageManagerPanel(Gtk.Box):
 
         self.refresh_pkgs_btn.set_sensitive(not busy)
         self.install_btn.set_sensitive(not busy and has_device)
+        should_show_fdroid = has_device and self._fdroid_installed is False
+        self.install_fdroid_btn.set_visible(should_show_fdroid)
+        self.install_fdroid_btn.set_sensitive(not busy and should_show_fdroid)
 
         model, tree_iter = self.package_selection.get_selected()
         has_selection = tree_iter is not None
@@ -290,6 +312,65 @@ class PackageManagerPanel(Gtk.Box):
                 GLib.idle_add(self._finish_operation)
 
         threading.Thread(target=worker, daemon=True).start()
+
+    def _install_fdroid(self) -> None:
+        if self._device is None:
+            return
+        if self._operation_in_progress:
+            return
+        if self._fdroid_installed is True:
+            return
+
+        self._operation_in_progress = True
+        self._sync_controls()
+        self.emit("busy-changed", True)
+
+        serial = self._device.serial
+
+        def worker() -> None:
+            apk_path = ""
+            try:
+                with tempfile.NamedTemporaryFile(
+                    prefix="fdroid-", suffix=".apk", delete=False
+                ) as tmp:
+                    apk_path = tmp.name
+
+                with urllib.request.urlopen("https://f-droid.org/F-Droid.apk", timeout=60) as response:
+                    with open(apk_path, "wb") as out_file:
+                        out_file.write(response.read())
+
+                success = install_apk(serial, apk_path)
+                GLib.idle_add(self._on_fdroid_install_finished, success)
+            except Exception as e:
+                GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
+                GLib.idle_add(self._finish_operation)
+            finally:
+                if apk_path and os.path.exists(apk_path):
+                    try:
+                        os.remove(apk_path)
+                    except OSError:
+                        pass
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _on_fdroid_install_finished(self, success: bool) -> bool:
+        if success:
+            self.emit(
+                "show-message",
+                "success",
+                _("Success"),
+                _("F-Droid installed successfully."),
+            )
+            self.emit("packages-refresh-requested")
+        else:
+            self.emit(
+                "show-message",
+                "error",
+                _("Error"),
+                _("Failed to install F-Droid."),
+            )
+        self._finish_operation()
+        return False
 
     def _on_install_finished(self, success: bool, apk_path: str) -> bool:
         if success:

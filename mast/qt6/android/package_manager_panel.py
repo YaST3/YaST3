@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import os
+import tempfile
 import threading
+import urllib.request
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
@@ -45,6 +47,7 @@ class PackageManagerPanel(QWidget):
         super().__init__(parent)
         self._packages: list[PackageInfo] = []
         self._device: DeviceInfo | None = None
+        self._fdroid_installed: bool | None = None
         self._external_busy = False
         self._operation_in_progress = False
         self._init_ui()
@@ -83,6 +86,10 @@ class PackageManagerPanel(QWidget):
         self.install_btn = QPushButton(_("Install APK"))
         action_layout.addWidget(self.install_btn)
 
+        self.install_fdroid_btn = QPushButton(_("Install F-Droid"))
+        self.install_fdroid_btn.setVisible(False)
+        action_layout.addWidget(self.install_fdroid_btn)
+
         self.refresh_pkgs_btn = QPushButton(_("Refresh"))
         action_layout.addWidget(self.refresh_pkgs_btn)
 
@@ -109,11 +116,17 @@ class PackageManagerPanel(QWidget):
         self.user_only.stateChanged.connect(self._apply_filters)
         self.uninstall_btn.clicked.connect(self._uninstall_selected)
         self.install_btn.clicked.connect(self._install_apk)
+        self.install_fdroid_btn.clicked.connect(self._install_fdroid)
         self.refresh_pkgs_btn.clicked.connect(self.refresh_clicked)
         self.package_table.itemSelectionChanged.connect(self._update_selection_state)
 
     def set_selected_device(self, device: DeviceInfo | None) -> None:
-        self._device = device if device and device.status == "device" else None
+        new_device = device if device and device.status == "device" else None
+        prev_serial = self._device.serial if self._device is not None else None
+        new_serial = new_device.serial if new_device is not None else None
+        if prev_serial != new_serial:
+            self._fdroid_installed = None
+        self._device = new_device
         self._sync_controls()
 
     def set_packages(self, packages: list[PackageInfo]) -> None:
@@ -121,12 +134,18 @@ class PackageManagerPanel(QWidget):
             packages,
             key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower()),
         )
+        self._fdroid_installed = any(
+            pkg.package_name == "org.fdroid.fdroid" for pkg in self._packages
+        )
         self._apply_filters()
+        self._sync_controls()
 
     def clear_packages(self) -> None:
         self._packages = []
+        self._fdroid_installed = None
         self.package_table.setRowCount(0)
         self.uninstall_btn.setEnabled(False)
+        self._sync_controls()
 
     def selected_package_name(self) -> str | None:
         selected = self.package_table.selectedItems()
@@ -194,9 +213,63 @@ class PackageManagerPanel(QWidget):
 
         self.refresh_pkgs_btn.setEnabled(not busy)
         self.install_btn.setEnabled(not busy and has_device)
+        should_show_fdroid = has_device and self._fdroid_installed is False
+        self.install_fdroid_btn.setVisible(should_show_fdroid)
+        self.install_fdroid_btn.setEnabled(not busy and should_show_fdroid)
         self.uninstall_btn.setEnabled(
             not busy and has_device and self.selected_package_name() is not None
         )
+
+    def _install_fdroid(self) -> None:
+        if self._device is None:
+            return
+        if self._operation_in_progress:
+            return
+        if self._fdroid_installed is True:
+            return
+
+        self._operation_in_progress = True
+        self._sync_controls()
+        self.busy_changed.emit(True)
+
+        serial = self._device.serial
+
+        def worker() -> None:
+            apk_path = ""
+            try:
+                with tempfile.NamedTemporaryFile(
+                    prefix="fdroid-", suffix=".apk", delete=False
+                ) as tmp:
+                    apk_path = tmp.name
+
+                with urllib.request.urlopen("https://f-droid.org/F-Droid.apk", timeout=60) as response:
+                    with open(apk_path, "wb") as out_file:
+                        out_file.write(response.read())
+
+                success = install_apk(serial, apk_path)
+                if success:
+                    self.show_message.emit(
+                        "success",
+                        _("Success"),
+                        _("F-Droid installed successfully."),
+                    )
+                    self.packages_refresh_requested.emit()
+                else:
+                    self.show_message.emit(
+                        "error",
+                        _("Error"),
+                        _("Failed to install F-Droid."),
+                    )
+            except Exception as e:
+                self.show_message.emit("error", _("Error"), str(e))
+            finally:
+                if apk_path and os.path.exists(apk_path):
+                    try:
+                        os.remove(apk_path)
+                    except OSError:
+                        pass
+                self._operation_in_progress = False
+                self.busy_changed.emit(False)
 
     def _uninstall_selected(self) -> None:
         if self._device is None:

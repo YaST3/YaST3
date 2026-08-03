@@ -150,6 +150,9 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _on_packages_loaded(self, packages: list[PackageInfo]) -> None:
         self.packages = packages
+        self.packages_tab.set_fdroid_installed(
+            any(pkg.package_name == "org.fdroid.fdroid" for pkg in packages)
+        )
         self._apply_package_filters()
 
     def _on_search_changed(self, _widget) -> None:
