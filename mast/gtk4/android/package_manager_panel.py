@@ -27,7 +27,7 @@ class PackageManagerPanel(Gtk.Box):
         filter_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
 
         self.search_entry = Gtk.Entry()
-        self.search_entry.set_placeholder_text(_("Search packages"))
+        self.search_entry.set_placeholder_text(_("Search"))
         self.search_entry.set_hexpand(True)
         filter_box.append(self.search_entry)
 

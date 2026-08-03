@@ -41,7 +41,7 @@ class PackageManagerPanel(QWidget):
         filter_layout = QHBoxLayout()
 
         self.search_entry = QLineEdit()
-        self.search_entry.setPlaceholderText(_("Search packages"))
+        self.search_entry.setPlaceholderText(_("Search"))
         filter_layout.addWidget(self.search_entry)
 
         filter_layout.addStretch()
