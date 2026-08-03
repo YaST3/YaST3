@@ -16,6 +16,7 @@ PACKAGE_NAME_RE = re.compile(
 class DeviceInfo:
     serial: str
     name: str
+    code_name: str
     model: str
     manufacturer: str
     android_version: str
@@ -86,6 +87,7 @@ def list_devices() -> list[DeviceInfo]:
                 DeviceInfo(
                     serial=serial,
                     name=tags.get("device", ""),
+                    code_name=tags.get("device", "") or "",
                     model=tags.get("model", ""),
                     manufacturer="",
                     android_version="",
@@ -102,12 +104,14 @@ def list_devices() -> list[DeviceInfo]:
         try:
             props = get_device_properties(serial)
             market_name = props.get("ro.product.marketname") or ""
+            code_name = props.get("ro.product.device") or device
             resolved_model = props.get("ro.product.model") or model
             resolved_name = market_name or resolved_model or name
             devices.append(
                 DeviceInfo(
                     serial=serial,
                     name=resolved_name,
+                    code_name=code_name,
                     model=resolved_model,
                     manufacturer=props.get("ro.product.manufacturer") or "",
                     android_version=props.get("ro.build.version.release") or "",
@@ -120,6 +124,7 @@ def list_devices() -> list[DeviceInfo]:
                 DeviceInfo(
                     serial=serial,
                     name=name,
+                    code_name=device,
                     model=model,
                     manufacturer="",
                     android_version="",
@@ -164,11 +169,13 @@ def get_device_info(serial: str) -> DeviceInfo:
             break
 
     market_name = props.get("ro.product.marketname") or ""
+    code_name = props.get("ro.product.device") or device
     resolved_model = props.get("ro.product.model") or model
 
     return DeviceInfo(
         serial=serial,
         name=market_name or resolved_model or device or props.get("ro.product.device", ""),
+        code_name=code_name,
         model=resolved_model,
         manufacturer=props.get("ro.product.manufacturer") or "",
         android_version=props.get("ro.build.version.release") or "",

@@ -24,6 +24,7 @@ class DeviceInfoPanel(QWidget):
         labels = [
             _("Serial"),
             _("Name"),
+            _("Code Name"),
             _("Model"),
             _("Manufacturer"),
             _("Android Version"),
@@ -53,10 +54,11 @@ class DeviceInfoPanel(QWidget):
     def set_device(self, device: DeviceInfo) -> None:
         self._info_labels[0].setText(device.serial)
         self._info_labels[1].setText(device.name)
-        self._info_labels[2].setText(device.model)
-        self._info_labels[3].setText(device.manufacturer)
-        self._info_labels[4].setText(device.android_version)
-        self._info_labels[5].setText(device.api_level)
+        self._info_labels[2].setText(device.code_name)
+        self._info_labels[3].setText(device.model)
+        self._info_labels[4].setText(device.manufacturer)
+        self._info_labels[5].setText(device.android_version)
+        self._info_labels[6].setText(device.api_level)
 
         status_text = device.status
         if device.status == "device":
@@ -66,4 +68,4 @@ class DeviceInfoPanel(QWidget):
         elif device.status == "unauthorized":
             status_text = _("Unauthorized")
 
-        self._info_labels[6].setText(status_text)
+        self._info_labels[7].setText(status_text)

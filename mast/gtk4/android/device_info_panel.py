@@ -31,6 +31,7 @@ class DeviceInfoPanel(Gtk.Box):
         labels = [
             _("Serial"),
             _("Name"),
+            _("Code Name"),
             _("Model"),
             _("Manufacturer"),
             _("Android Version"),
@@ -57,10 +58,11 @@ class DeviceInfoPanel(Gtk.Box):
     def set_device(self, device: DeviceInfo) -> None:
         self.info_labels[0].set_label(device.serial)
         self.info_labels[1].set_label(device.name)
-        self.info_labels[2].set_label(device.model)
-        self.info_labels[3].set_label(device.manufacturer)
-        self.info_labels[4].set_label(device.android_version)
-        self.info_labels[5].set_label(device.api_level)
+        self.info_labels[2].set_label(device.code_name)
+        self.info_labels[3].set_label(device.model)
+        self.info_labels[4].set_label(device.manufacturer)
+        self.info_labels[5].set_label(device.android_version)
+        self.info_labels[6].set_label(device.api_level)
 
         status_text = device.status
         if device.status == "device":
@@ -70,4 +72,4 @@ class DeviceInfoPanel(Gtk.Box):
         elif device.status == "unauthorized":
             status_text = _("Unauthorized")
 
-        self.info_labels[6].set_label(status_text)
+        self.info_labels[7].set_label(status_text)
