@@ -139,9 +139,16 @@ class PackageManagerPanel(QWidget):
         self.package_table.setWordWrap(False)
         self.package_table.setTextElideMode(Qt.TextElideMode.ElideNone)
         self.package_table.horizontalHeader().setSectionResizeMode(
-            0, QHeaderView.ResizeMode.ResizeToContents
+            0, QHeaderView.ResizeMode.Stretch
         )
-        self.package_table.horizontalHeader().setStretchLastSection(True)
+        self.package_table.horizontalHeader().setSectionResizeMode(
+            1, QHeaderView.ResizeMode.Fixed
+        )
+        self.package_table.horizontalHeader().setSectionResizeMode(
+            2, QHeaderView.ResizeMode.ResizeToContents
+        )
+        self.package_table.setColumnWidth(1, 64)
+        self.package_table.horizontalHeader().setStretchLastSection(False)
         layout.addWidget(self.package_table)
 
     def _connect_signals(self) -> None:
