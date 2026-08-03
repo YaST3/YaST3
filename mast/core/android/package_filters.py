@@ -12,11 +12,11 @@ APP_TYPE_FILTER_IDS = (
     APP_TYPE_USER,
 )
 
-APP_TYPE_FILTER_LABELS = {
-    APP_TYPE_ALL: "All",
-    APP_TYPE_SYSTEM: "System",
-    APP_TYPE_USER: "User",
-}
+APP_TYPE_FILTER_OPTIONS = [
+    (APP_TYPE_ALL, "All"),
+    (APP_TYPE_SYSTEM, "System"),
+    (APP_TYPE_USER, "User"),
+]
 
 
 def matches_app_type(is_system: bool, app_type: str | None) -> bool:

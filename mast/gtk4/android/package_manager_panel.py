@@ -17,8 +17,7 @@ from gi.repository import GLib, GObject, Gtk
 
 from mast.core.android import (
     APP_TYPE_ALL,
-    APP_TYPE_FILTER_IDS,
-    APP_TYPE_FILTER_LABELS,
+    APP_TYPE_FILTER_OPTIONS,
     DeviceInfo,
 )
 from mast.core.i18n import _
@@ -93,8 +92,8 @@ class PackageManagerPanel(Gtk.Box):
         filter_box.append(self.search_entry)
 
         self.app_type_combo = Gtk.ComboBoxText()
-        for app_type in APP_TYPE_FILTER_IDS:
-            self.app_type_combo.append(app_type, _(APP_TYPE_FILTER_LABELS[app_type]))
+        for app_type, label in APP_TYPE_FILTER_OPTIONS:
+            self.app_type_combo.append(app_type, _(label))
         self.app_type_combo.set_active_id(APP_TYPE_ALL)
         filter_box.append(self.app_type_combo)
 

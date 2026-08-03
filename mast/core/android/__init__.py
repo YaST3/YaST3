@@ -11,7 +11,7 @@ from mast.core.android.adb import (
 from mast.core.android.package_filters import (
     APP_TYPE_ALL,
     APP_TYPE_FILTER_IDS,
-    APP_TYPE_FILTER_LABELS,
+    APP_TYPE_FILTER_OPTIONS,
     APP_TYPE_SYSTEM,
     APP_TYPE_USER,
     matches_app_type,
@@ -28,6 +28,6 @@ __all__ = [
     "APP_TYPE_SYSTEM",
     "APP_TYPE_USER",
     "APP_TYPE_FILTER_IDS",
-    "APP_TYPE_FILTER_LABELS",
+    "APP_TYPE_FILTER_OPTIONS",
     "matches_app_type",
 ]

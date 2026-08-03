@@ -27,8 +27,7 @@ from PySide6.QtWidgets import (
 
 from mast.core.android import (
     APP_TYPE_ALL,
-    APP_TYPE_FILTER_IDS,
-    APP_TYPE_FILTER_LABELS,
+    APP_TYPE_FILTER_OPTIONS,
     DeviceInfo,
     PackageInfo,
     matches_app_type,
@@ -105,8 +104,8 @@ class PackageManagerPanel(QWidget):
         filter_layout.addStretch()
 
         self.app_type_combo = QComboBox()
-        for app_type in APP_TYPE_FILTER_IDS:
-            self.app_type_combo.addItem(_(APP_TYPE_FILTER_LABELS[app_type]), app_type)
+        for app_type, label in APP_TYPE_FILTER_OPTIONS:
+            self.app_type_combo.addItem(_(label), app_type)
         self.app_type_combo.setCurrentIndex(self.app_type_combo.findData(APP_TYPE_ALL))
         filter_layout.addWidget(self.app_type_combo)
 
