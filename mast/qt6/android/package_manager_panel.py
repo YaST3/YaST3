@@ -12,7 +12,7 @@ import adbutils
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
     QAbstractItemView,
-    QCheckBox,
+    QComboBox,
     QFileDialog,
     QHBoxLayout,
     QHeaderView,
@@ -28,9 +28,6 @@ from PySide6.QtWidgets import (
 from mast.core.android import (
     DeviceInfo,
     PackageInfo,
-    get_blacklist_info,
-    is_dangerous,
-    is_in_blacklist,
 )
 from mast.core.i18n import _
 
@@ -89,14 +86,11 @@ class PackageManagerPanel(QWidget):
 
         filter_layout.addStretch()
 
-        self.blacklist_only = QCheckBox(_("Blacklist only"))
-        filter_layout.addWidget(self.blacklist_only)
-
-        self.system_only = QCheckBox(_("System apps"))
-        filter_layout.addWidget(self.system_only)
-
-        self.user_only = QCheckBox(_("User apps"))
-        filter_layout.addWidget(self.user_only)
+        self.app_type_combo = QComboBox()
+        self.app_type_combo.addItem(_("All apps"), "all")
+        self.app_type_combo.addItem(_("System apps"), "system")
+        self.app_type_combo.addItem(_("User apps"), "user")
+        filter_layout.addWidget(self.app_type_combo)
 
         layout.addLayout(filter_layout)
 
@@ -134,9 +128,7 @@ class PackageManagerPanel(QWidget):
 
     def _connect_signals(self) -> None:
         self.search_entry.textChanged.connect(self._apply_filters)
-        self.blacklist_only.stateChanged.connect(self._apply_filters)
-        self.system_only.stateChanged.connect(self._apply_filters)
-        self.user_only.stateChanged.connect(self._apply_filters)
+        self.app_type_combo.currentIndexChanged.connect(self._apply_filters)
         self.uninstall_btn.clicked.connect(self._uninstall_selected)
         self.install_btn.clicked.connect(self._install_apk)
         self.install_fdroid_btn.clicked.connect(self._install_fdroid)
@@ -153,10 +145,7 @@ class PackageManagerPanel(QWidget):
         self._sync_controls()
 
     def set_packages(self, packages: list[PackageInfo]) -> None:
-        self._packages = sorted(
-            packages,
-            key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower()),
-        )
+        self._packages = sorted(packages, key=lambda p: p.package_name.lower())
         self._fdroid_installed = any(
             pkg.package_name == "org.fdroid.fdroid" for pkg in self._packages
         )
@@ -192,29 +181,20 @@ class PackageManagerPanel(QWidget):
 
     def _apply_filters(self, *_args) -> None:
         search_text = self.search_entry.text().strip().lower()
-        show_blacklist = self.blacklist_only.isChecked()
-        show_system = self.system_only.isChecked()
-        show_user = self.user_only.isChecked()
+        app_type = self.app_type_combo.currentData()
 
         self.package_table.setRowCount(0)
 
         for pkg in self._packages:
-            if show_blacklist and not is_in_blacklist(pkg.package_name):
+            if app_type == "system" and not pkg.is_system:
                 continue
-
-            if show_system and show_user:
-                pass
-            elif show_system and not pkg.is_system:
-                continue
-            elif show_user and pkg.is_system:
+            if app_type == "user" and pkg.is_system:
                 continue
 
             if search_text and search_text not in pkg.package_name.lower():
                 continue
 
             pkg_type = _("System") if pkg.is_system else _("User")
-            if is_in_blacklist(pkg.package_name):
-                pkg_type = _("Blacklist")
 
             row = self.package_table.rowCount()
             self.package_table.insertRow(row)
@@ -302,21 +282,9 @@ class PackageManagerPanel(QWidget):
         if not pkg_name:
             return
 
-        blacklist_info = get_blacklist_info(pkg_name)
-        app_name = pkg_name
-        if blacklist_info:
-            if is_dangerous(pkg_name):
-                msg = _(
-                    'Are you sure you want to uninstall "{0}" ({1})?\n\nWARNING: This package is marked as dangerous. Uninstalling it may cause system instability or prevent the device from booting!'
-                ).format(app_name, pkg_name)
-            else:
-                msg = _(
-                    'Are you sure you want to uninstall "{0}" ({1})?\n\nThis is a known bloatware package and can be safely removed.'
-                ).format(app_name, pkg_name)
-        else:
-            msg = _(
-                'Are you sure you want to uninstall "{0}" ({1})?\n\nThis may affect system functionality.'
-            ).format(app_name, pkg_name)
+        msg = _(
+            'Are you sure you want to uninstall "{0}"?\n\nThis may affect system functionality.'
+        ).format(pkg_name)
 
         reply = QMessageBox.question(
             self,

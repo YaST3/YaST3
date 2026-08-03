@@ -17,8 +17,6 @@ from gi.repository import GLib, GObject, Gtk
 
 from mast.core.android import (
     DeviceInfo,
-    get_blacklist_info,
-    is_dangerous,
 )
 from mast.core.i18n import _
 
@@ -77,14 +75,12 @@ class PackageManagerPanel(Gtk.Box):
         self.search_entry.set_hexpand(True)
         filter_box.append(self.search_entry)
 
-        self.blacklist_only = Gtk.CheckButton(label=_("Blacklist only"))
-        filter_box.append(self.blacklist_only)
-
-        self.system_only = Gtk.CheckButton(label=_("System apps"))
-        filter_box.append(self.system_only)
-
-        self.user_only = Gtk.CheckButton(label=_("User apps"))
-        filter_box.append(self.user_only)
+        self.app_type_combo = Gtk.ComboBoxText()
+        self.app_type_combo.append("all", _("All apps"))
+        self.app_type_combo.append("system", _("System apps"))
+        self.app_type_combo.append("user", _("User apps"))
+        self.app_type_combo.set_active_id("all")
+        filter_box.append(self.app_type_combo)
 
         self.append(filter_box)
 
@@ -111,7 +107,7 @@ class PackageManagerPanel(Gtk.Box):
         action_box.append(Gtk.Box(hexpand=True))
         self.append(action_box)
 
-        self.package_list_store = Gtk.ListStore(str, str, str, bool, bool)
+        self.package_list_store = Gtk.ListStore(str, str, str)
         self.package_tree = Gtk.TreeView(model=self.package_list_store)
 
         renderer = Gtk.CellRendererText()
@@ -208,7 +204,6 @@ class PackageManagerPanel(Gtk.Box):
         root = self.get_root()
         parent_window = root if isinstance(root, Gtk.Window) else None
 
-        app_name = pkg_name
         dialog = Gtk.MessageDialog(
             transient_for=parent_window,
             modal=True,
@@ -217,20 +212,9 @@ class PackageManagerPanel(Gtk.Box):
             text=_("Uninstall Package"),
         )
 
-        blacklist_info = get_blacklist_info(pkg_name)
-        if blacklist_info:
-            if is_dangerous(pkg_name):
-                secondary = _(
-                    'Are you sure you want to uninstall "{0}" ({1})?\n\nWARNING: This package is marked as dangerous. Uninstalling it may cause system instability or prevent the device from booting!'
-                ).format(app_name, pkg_name)
-            else:
-                secondary = _(
-                    'Are you sure you want to uninstall "{0}" ({1})?\n\nThis is a known bloatware package and can be safely removed.'
-                ).format(app_name, pkg_name)
-        else:
-            secondary = _(
-                'Are you sure you want to uninstall "{0}" ({1})?\n\nThis may affect system functionality.'
-            ).format(app_name, pkg_name)
+        secondary = _(
+            'Are you sure you want to uninstall "{0}"?\n\nThis may affect system functionality.'
+        ).format(pkg_name)
 
         dialog.set_property("secondary-text", secondary)
 

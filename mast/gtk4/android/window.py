@@ -14,7 +14,6 @@ from mast.core.android import (
     DeviceInfo,
     PackageInfo,
     is_adb_available,
-    is_in_blacklist,
     list_packages,
 )
 from mast.core.i18n import _
@@ -67,9 +66,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.device_panel.connect("busy-changed", self._on_panel_busy_changed)
 
         self.packages_tab.search_entry.connect("changed", self._on_search_changed)
-        self.packages_tab.blacklist_only.connect("toggled", self._on_search_changed)
-        self.packages_tab.system_only.connect("toggled", self._on_search_changed)
-        self.packages_tab.user_only.connect("toggled", self._on_search_changed)
+        self.packages_tab.app_type_combo.connect("changed", self._on_search_changed)
         self.packages_tab.connect("refresh-clicked", lambda _x: self._load_packages())
         self.packages_tab.connect("packages-refresh-requested", lambda _x: self._load_packages())
         self.packages_tab.connect("show-message", self._on_panel_show_message)
@@ -137,9 +134,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         def worker():
             try:
                 packages = list_packages(device.serial)
-                packages.sort(
-                    key=lambda p: (not is_in_blacklist(p.package_name), p.package_name.lower())
-                )
+                packages.sort(key=lambda p: p.package_name.lower())
                 GLib.idle_add(self._on_packages_loaded, packages)
             except Exception as e:
                 GLib.idle_add(self._show_error, str(e))
@@ -160,21 +155,14 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _apply_package_filters(self) -> None:
         search_text = self.packages_tab.search_entry.get_text().strip().lower()
-        show_blacklist = self.packages_tab.blacklist_only.get_active()
-        show_system = self.packages_tab.system_only.get_active()
-        show_user = self.packages_tab.user_only.get_active()
+        app_type = self.packages_tab.app_type_combo.get_active_id() or "all"
 
         self.packages_tab.package_list_store.clear()
 
         for pkg in self.packages:
-            if show_blacklist and not is_in_blacklist(pkg.package_name):
+            if app_type == "system" and not pkg.is_system:
                 continue
-
-            if show_system and show_user:
-                pass
-            elif show_system and not pkg.is_system:
-                continue
-            elif show_user and pkg.is_system:
+            if app_type == "user" and pkg.is_system:
                 continue
 
             if search_text:
@@ -183,15 +171,11 @@ class AndroidWindow(Gtk.ApplicationWindow):
                     continue
 
             pkg_type = _("System") if pkg.is_system else _("User")
-            if is_in_blacklist(pkg.package_name):
-                pkg_type = _("Blacklist")
 
             self.packages_tab.package_list_store.append([
                 pkg.package_name,
                 pkg.version_name,
                 pkg_type,
-                pkg.is_system,
-                is_in_blacklist(pkg.package_name),
             ])
 
         self.packages_tab.uninstall_btn.set_sensitive(False)

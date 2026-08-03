@@ -8,6 +8,7 @@ MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaS
 
 | Name         | Core | Qt6 | GTK4 | TUI |
 |--------------|:----:|:---:|:----:|:---:|
+| Android      | ✅   | ✅  | ✅   | ❌  |
 | Cron         | 🚧   | 🚧  | 🚧   | 🚧  |
 | DateTime     | ✅   | ✅  | ✅   | ✅  |
 | Flatpak      | ✅   | ✅  | ✅   | ❌  |
