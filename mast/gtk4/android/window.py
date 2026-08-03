@@ -14,7 +14,6 @@ from gi.repository import GLib, Gtk
 from mast.core.android import (
     DeviceInfo,
     PackageInfo,
-    get_device_info,
     get_blacklist_info,
     install_apk,
     is_adb_available,
@@ -25,6 +24,9 @@ from mast.core.android import (
     uninstall_package,
 )
 from mast.core.i18n import _
+from mast.gtk4.android.device_info_panel import DeviceInfoPanel
+from mast.gtk4.android.device_panel import DevicePanel
+from mast.gtk4.android.package_manager_panel import PackageManagerPanel
 
 
 class AndroidWindow(Gtk.ApplicationWindow):
@@ -36,11 +38,6 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.selected_device: DeviceInfo | None = None
         self._busy = False
 
-        self.info_labels: list[Gtk.Label] = []
-        for _ in range(7):
-            label = Gtk.Label(label="", xalign=0)
-            self.info_labels.append(label)
-
         self.set_default_size(1280, 720)
 
         if not is_adb_available():
@@ -48,6 +45,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
             return
 
         self._build_ui()
+        self._connect_signals()
         self._load_devices()
 
     def _build_ui(self) -> None:
@@ -58,163 +56,30 @@ class AndroidWindow(Gtk.ApplicationWindow):
         paned.set_position(280)
         main_box.append(paned)
 
-        left_panel = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        left_panel.set_margin_start(8)
-        left_panel.set_margin_top(8)
-        left_panel.set_margin_bottom(8)
-        paned.set_start_child(left_panel)
-
-        device_header = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        device_header.append(Gtk.Label(label=_("Devices"), xalign=0))
-        self.refresh_btn = Gtk.Button(label=_("Refresh"))
-        self.refresh_btn.connect("clicked", lambda _: self._load_devices())
-        device_header.append(self.refresh_btn)
-        left_panel.append(device_header)
-
-        self.device_list_store = Gtk.ListStore(str, str, str)
-        self.device_tree = Gtk.TreeView(model=self.device_list_store)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Name"), renderer, text=0)
-        column.set_resizable(True)
-        self.device_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Model"), renderer, text=1)
-        column.set_resizable(True)
-        self.device_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Status"), renderer, text=2)
-        column.set_resizable(True)
-        self.device_tree.append_column(column)
-
-        self.device_selection = self.device_tree.get_selection()
-        self.device_selection.set_mode(Gtk.SelectionMode.SINGLE)
-        self.device_selection.connect("changed", self._on_device_selected)
-
-        scrolled = Gtk.ScrolledWindow()
-        scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-        scrolled.set_vexpand(True)
-        scrolled.set_child(self.device_tree)
-        left_panel.append(scrolled)
+        self.device_panel = DevicePanel()
+        paned.set_start_child(self.device_panel)
 
         self.notebook = Gtk.Notebook()
         paned.set_end_child(self.notebook)
 
-        self.info_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
-        self.info_tab.set_margin_start(16)
-        self.info_tab.set_margin_end(16)
-        self.info_tab.set_margin_top(16)
-        self.info_tab.set_margin_bottom(16)
-        self.notebook.append_page(self.info_tab, Gtk.Label(label=_("Device Info")))
+        self.device_info_panel = DeviceInfoPanel()
+        self.notebook.append_page(self.device_info_panel, Gtk.Label(label=_("Device Info")))
 
-        self._build_info_tab()
-
-        self.packages_tab = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
-        self.packages_tab.set_margin_start(8)
-        self.packages_tab.set_margin_end(8)
-        self.packages_tab.set_margin_top(8)
-        self.packages_tab.set_margin_bottom(8)
+        self.packages_tab = PackageManagerPanel()
         self.notebook.append_page(self.packages_tab, Gtk.Label(label=_("Packages")))
 
-        self._build_packages_tab()
+    def _connect_signals(self) -> None:
+        self.device_panel.refresh_btn.connect("clicked", lambda _: self._load_devices())
+        self.device_panel.device_selection.connect("changed", self._on_device_selected)
 
-    def _build_info_tab(self) -> None:
-        grid = Gtk.Grid(column_spacing=16, row_spacing=8)
-
-        labels = [
-            (_("Serial"), 0),
-            (_("Name"), 1),
-            (_("Model"), 2),
-            (_("Manufacturer"), 3),
-            (_("Android Version"), 4),
-            (_("API Level"), 5),
-            (_("Status"), 6),
-        ]
-
-        for i, (label_text, row) in enumerate(labels):
-            label = Gtk.Label(label=label_text + ":", xalign=0)
-            grid.attach(label, 0, row, 1, 1)
-            value_label = self.info_labels[i]
-            value_label.set_hexpand(True)
-            grid.attach(value_label, 1, row, 1, 1)
-
-        self.info_tab.append(grid)
-        self.info_tab.append(Gtk.Box(vexpand=True))
-
-    def _build_packages_tab(self) -> None:
-        filter_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-
-        self.search_entry = Gtk.Entry()
-        self.search_entry.set_placeholder_text(_("Search packages"))
-        self.search_entry.set_hexpand(True)
-        self.search_entry.connect("changed", self._on_search_changed)
-        filter_box.append(self.search_entry)
-
-        self.blacklist_only = Gtk.CheckButton(label=_("Blacklist only"))
-        self.blacklist_only.connect("toggled", self._on_search_changed)
-        filter_box.append(self.blacklist_only)
-
-        self.system_only = Gtk.CheckButton(label=_("System apps"))
-        self.system_only.connect("toggled", self._on_search_changed)
-        filter_box.append(self.system_only)
-
-        self.user_only = Gtk.CheckButton(label=_("User apps"))
-        self.user_only.connect("toggled", self._on_search_changed)
-        filter_box.append(self.user_only)
-
-        self.packages_tab.append(filter_box)
-
-        action_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-
-        self.uninstall_btn = Gtk.Button(label=_("Uninstall"))
-        self.uninstall_btn.connect("clicked", lambda _: self._uninstall_selected())
-        self.uninstall_btn.set_sensitive(False)
-        action_box.append(self.uninstall_btn)
-
-        self.install_btn = Gtk.Button(label=_("Install APK"))
-        self.install_btn.connect("clicked", lambda _: self._install_apk())
-        action_box.append(self.install_btn)
-
-        self.refresh_pkgs_btn = Gtk.Button(label=_("Refresh"))
-        self.refresh_pkgs_btn.connect("clicked", lambda _: self._load_packages())
-        action_box.append(self.refresh_pkgs_btn)
-
-        action_box.append(Gtk.Box(hexpand=True))
-        self.packages_tab.append(action_box)
-
-        self.package_list_store = Gtk.ListStore(str, str, str, bool, bool)
-        self.package_tree = Gtk.TreeView(model=self.package_list_store)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("ID"), renderer, text=0)
-        column.set_resizable(True)
-        column.set_min_width(280)
-        column.set_expand(True)
-        self.package_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Version"), renderer, text=1)
-        column.set_resizable(True)
-        column.set_min_width(120)
-        self.package_tree.append_column(column)
-
-        renderer = Gtk.CellRendererText()
-        column = Gtk.TreeViewColumn(_("Type"), renderer, text=2)
-        column.set_resizable(True)
-        column.set_min_width(80)
-        self.package_tree.append_column(column)
-
-        self.package_selection = self.package_tree.get_selection()
-        self.package_selection.set_mode(Gtk.SelectionMode.SINGLE)
-        self.package_selection.connect("changed", self._on_package_selected)
-
-        scrolled = Gtk.ScrolledWindow()
-        scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
-        scrolled.set_vexpand(True)
-        scrolled.set_child(self.package_tree)
-        self.packages_tab.append(scrolled)
+        self.packages_tab.search_entry.connect("changed", self._on_search_changed)
+        self.packages_tab.blacklist_only.connect("toggled", self._on_search_changed)
+        self.packages_tab.system_only.connect("toggled", self._on_search_changed)
+        self.packages_tab.user_only.connect("toggled", self._on_search_changed)
+        self.packages_tab.uninstall_btn.connect("clicked", lambda _: self._uninstall_selected())
+        self.packages_tab.install_btn.connect("clicked", lambda _: self._install_apk())
+        self.packages_tab.refresh_pkgs_btn.connect("clicked", lambda _: self._load_packages())
+        self.packages_tab.package_selection.connect("changed", self._on_package_selected)
 
     def _show_adb_not_found(self) -> None:
         content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
@@ -243,12 +108,11 @@ class AndroidWindow(Gtk.ApplicationWindow):
         if self._busy:
             return
         self._busy = True
-        self.refresh_btn.set_sensitive(False)
+        self.device_panel.refresh_btn.set_sensitive(False)
 
         def worker():
             try:
                 devices = list_devices()
-                # Release busy first so auto-selection can trigger package load.
                 GLib.idle_add(self._set_busy, False)
                 GLib.idle_add(self._on_devices_loaded, devices)
             except Exception as e:
@@ -259,35 +123,18 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _on_devices_loaded(self, devices: list[DeviceInfo]) -> None:
         self.devices = devices
-        self.device_list_store.clear()
+        self.device_panel.set_devices(devices)
 
-        for device in devices:
-            status_text = device.status
-            if device.status == "device":
-                status_text = _("Connected")
-            elif device.status == "offline":
-                status_text = _("Offline")
-            elif device.status == "unauthorized":
-                status_text = _("Unauthorized")
-
-            self.device_list_store.append([device.name, device.model, status_text])
-
-        if devices:
-            path = Gtk.TreePath.new_from_string("0")
-            if path:
-                self.device_selection.select_path(path)
-        else:
+        if not devices:
             self._clear_device_selection()
 
     def _clear_device_selection(self) -> None:
         self.selected_device = None
-        for label in self.info_labels:
-            label.set_label("")
-        self.package_list_store.clear()
-        self.uninstall_btn.set_sensitive(False)
+        self.device_info_panel.clear()
+        self.packages_tab.clear_packages()
 
     def _on_device_selected(self, _selection) -> None:
-        model, tree_iter = self.device_selection.get_selected()
+        model, tree_iter = self.device_panel.device_selection.get_selected()
         if tree_iter is None:
             self._clear_device_selection()
             return
@@ -297,39 +144,23 @@ class AndroidWindow(Gtk.ApplicationWindow):
         if not path_str:
             self._clear_device_selection()
             return
+
         index = int(path_str)
         if index < 0 or index >= len(self.devices):
             self._clear_device_selection()
             return
 
         device = self.devices[index]
-        if device.status != "device":
-            self.selected_device = device
-            self._update_device_info(device)
-            self.package_list_store.clear()
-            self.uninstall_btn.set_sensitive(False)
-            return
-
         self.selected_device = device
         self._update_device_info(device)
-        self._load_packages()
+
+        if device.status == "device":
+            self._load_packages()
+        else:
+            self.packages_tab.clear_packages()
 
     def _update_device_info(self, device: DeviceInfo) -> None:
-        self.info_labels[0].set_label(device.serial)
-        self.info_labels[1].set_label(device.name)
-        self.info_labels[2].set_label(device.model)
-        self.info_labels[3].set_label(device.manufacturer)
-        self.info_labels[4].set_label(device.android_version)
-        self.info_labels[5].set_label(device.api_level)
-
-        status_text = device.status
-        if device.status == "device":
-            status_text = _("Connected")
-        elif device.status == "offline":
-            status_text = _("Offline")
-        elif device.status == "unauthorized":
-            status_text = _("Unauthorized")
-        self.info_labels[6].set_label(status_text)
+        self.device_info_panel.set_device(device)
 
     def _load_packages(self) -> None:
         if not self.selected_device or self.selected_device.status != "device":
@@ -338,8 +169,8 @@ class AndroidWindow(Gtk.ApplicationWindow):
         if self._busy:
             return
         self._busy = True
-        self.refresh_pkgs_btn.set_sensitive(False)
-        self.install_btn.set_sensitive(False)
+        self.packages_tab.refresh_pkgs_btn.set_sensitive(False)
+        self.packages_tab.install_btn.set_sensitive(False)
 
         device = self.selected_device
 
@@ -365,12 +196,12 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self._apply_package_filters()
 
     def _apply_package_filters(self) -> None:
-        search_text = self.search_entry.get_text().strip().lower()
-        show_blacklist = self.blacklist_only.get_active()
-        show_system = self.system_only.get_active()
-        show_user = self.user_only.get_active()
+        search_text = self.packages_tab.search_entry.get_text().strip().lower()
+        show_blacklist = self.packages_tab.blacklist_only.get_active()
+        show_system = self.packages_tab.system_only.get_active()
+        show_user = self.packages_tab.user_only.get_active()
 
-        self.package_list_store.clear()
+        self.packages_tab.package_list_store.clear()
 
         for pkg in self.packages:
             if show_blacklist and not is_in_blacklist(pkg.package_name):
@@ -392,7 +223,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
             if is_in_blacklist(pkg.package_name):
                 pkg_type = _("Blacklist")
 
-            self.package_list_store.append([
+            self.packages_tab.package_list_store.append([
                 pkg.package_name,
                 pkg.version_name,
                 pkg_type,
@@ -400,29 +231,29 @@ class AndroidWindow(Gtk.ApplicationWindow):
                 is_in_blacklist(pkg.package_name),
             ])
 
-        self.uninstall_btn.set_sensitive(False)
+        self.packages_tab.uninstall_btn.set_sensitive(False)
 
     def _on_package_selected(self, _selection) -> None:
-        model, tree_iter = self.package_selection.get_selected()
+        model, tree_iter = self.packages_tab.package_selection.get_selected()
         if tree_iter is None:
-            self.uninstall_btn.set_sensitive(False)
+            self.packages_tab.uninstall_btn.set_sensitive(False)
             return
 
         path = model.get_path(tree_iter)
         path_str = path.to_string() if path else None
         if not path_str:
-            self.uninstall_btn.set_sensitive(False)
+            self.packages_tab.uninstall_btn.set_sensitive(False)
             return
+
         index = int(path_str)
-
-        if index < 0 or index >= len(self.package_list_store):
-            self.uninstall_btn.set_sensitive(False)
+        if index < 0 or index >= len(self.packages_tab.package_list_store):
+            self.packages_tab.uninstall_btn.set_sensitive(False)
             return
 
-        self.uninstall_btn.set_sensitive(True)
+        self.packages_tab.uninstall_btn.set_sensitive(True)
 
     def _uninstall_selected(self) -> None:
-        model, tree_iter = self.package_selection.get_selected()
+        model, tree_iter = self.packages_tab.package_selection.get_selected()
         if tree_iter is None:
             return
 
@@ -430,12 +261,12 @@ class AndroidWindow(Gtk.ApplicationWindow):
         path_str = path.to_string() if path else None
         if not path_str:
             return
-        index = int(path_str)
 
-        if index < 0 or index >= len(self.package_list_store):
+        index = int(path_str)
+        if index < 0 or index >= len(self.packages_tab.package_list_store):
             return
 
-        pkg_name = self.package_list_store[path][0]
+        pkg_name = self.packages_tab.package_list_store[path][0]
         app_name = pkg_name
 
         dialog = Gtk.MessageDialog(
@@ -542,9 +373,11 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
-        self.refresh_btn.set_sensitive(not busy)
-        self.refresh_pkgs_btn.set_sensitive(not busy)
-        self.install_btn.set_sensitive(not busy and self.selected_device is not None and self.selected_device.status == "device")
+        self.device_panel.refresh_btn.set_sensitive(not busy)
+        self.packages_tab.refresh_pkgs_btn.set_sensitive(not busy)
+        self.packages_tab.install_btn.set_sensitive(
+            not busy and self.selected_device is not None and self.selected_device.status == "device"
+        )
 
     def _show_error(self, message: str) -> None:
         self._show_message(Gtk.MessageType.ERROR, _("Error"), message)
