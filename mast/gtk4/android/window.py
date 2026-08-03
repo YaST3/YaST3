@@ -11,12 +11,12 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import GLib, Gtk
 
 from mast.core.android import (
-    APP_TYPE_ALL,
     DeviceInfo,
     PackageInfo,
     is_adb_available,
     list_packages,
-    matches_app_type,
+    matches_package_type,
+    PACKAGE_TYPE_ALL,
 )
 from mast.core.i18n import _
 from mast.gtk4.android.device_info_panel import DeviceInfoPanel
@@ -68,7 +68,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.device_panel.connect("busy-changed", self._on_panel_busy_changed)
 
         self.packages_tab.search_entry.connect("changed", self._on_search_changed)
-        self.packages_tab.app_type_combo.connect("changed", self._on_search_changed)
+        self.packages_tab.package_type_combo.connect("changed", self._on_search_changed)
         self.packages_tab.connect("refresh-clicked", lambda _x: self._load_packages())
         self.packages_tab.connect("packages-refresh-requested", lambda _x: self._load_packages())
         self.packages_tab.connect("show-message", self._on_panel_show_message)
@@ -157,12 +157,12 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _apply_package_filters(self) -> None:
         search_text = self.packages_tab.search_entry.get_text().strip().lower()
-        app_type = self.packages_tab.app_type_combo.get_active_id() or APP_TYPE_ALL
+        package_type = self.packages_tab.package_type_combo.get_active_id() or PACKAGE_TYPE_ALL
 
         self.packages_tab.package_list_store.clear()
 
         for pkg in self.packages:
-            if not matches_app_type(pkg.is_system, app_type):
+            if not matches_package_type(pkg.is_system, package_type):
                 continue
 
             if search_text:

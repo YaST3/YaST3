@@ -27,7 +27,7 @@ class DeviceInfo:
 @dataclass(slots=True)
 class PackageInfo:
     package_name: str
-    app_name: str
+    package_label: str
     version_name: str
     version_code: str
     is_system: bool
@@ -224,7 +224,7 @@ def list_packages(serial: str) -> list[PackageInfo]:
     for pkg_name, path in path_by_pkg.items():
         packages_by_name[pkg_name] = PackageInfo(
             package_name=pkg_name,
-            app_name=pkg_name,
+            package_label=pkg_name,
             version_name="",
             version_code="",
             is_system=is_system_by_pkg.get(pkg_name, False),

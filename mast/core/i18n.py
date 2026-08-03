@@ -70,3 +70,5 @@ def init_i18n() -> None:
     except FileNotFoundError:
         translation = gettext.NullTranslations()
         _.set_gettext(translation.gettext)
+
+init_i18n()  # Initialize translations at module load time

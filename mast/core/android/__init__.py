@@ -9,12 +9,12 @@ from mast.core.android.adb import (
     list_packages,
 )
 from mast.core.android.package_filters import (
-    APP_TYPE_ALL,
-    APP_TYPE_FILTER_IDS,
-    APP_TYPE_FILTER_OPTIONS,
-    APP_TYPE_SYSTEM,
-    APP_TYPE_USER,
-    matches_app_type,
+    PACKAGE_TYPE_ALL,
+    PACKAGE_TYPE_FILTER_IDS,
+    PACKAGE_TYPE_FILTER_OPTIONS,
+    PACKAGE_TYPE_SYSTEM,
+    PACKAGE_TYPE_USER,
+    matches_package_type,
 )
 
 __all__ = [
@@ -24,10 +24,10 @@ __all__ = [
     "is_adb_available",
     "list_devices",
     "list_packages",
-    "APP_TYPE_ALL",
-    "APP_TYPE_SYSTEM",
-    "APP_TYPE_USER",
-    "APP_TYPE_FILTER_IDS",
-    "APP_TYPE_FILTER_OPTIONS",
-    "matches_app_type",
+    "PACKAGE_TYPE_ALL",
+    "PACKAGE_TYPE_SYSTEM",
+    "PACKAGE_TYPE_USER",
+    "PACKAGE_TYPE_FILTER_IDS",
+    "PACKAGE_TYPE_FILTER_OPTIONS",
+    "matches_package_type",
 ]

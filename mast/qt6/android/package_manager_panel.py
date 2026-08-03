@@ -26,11 +26,11 @@ from PySide6.QtWidgets import (
 )
 
 from mast.core.android import (
-    APP_TYPE_ALL,
-    APP_TYPE_FILTER_OPTIONS,
+    PACKAGE_TYPE_ALL,
+    PACKAGE_TYPE_FILTER_OPTIONS,
     DeviceInfo,
     PackageInfo,
-    matches_app_type,
+    matches_package_type,
 )
 from mast.core.i18n import _
 
@@ -103,11 +103,13 @@ class PackageManagerPanel(QWidget):
 
         filter_layout.addStretch()
 
-        self.app_type_combo = QComboBox()
-        for app_type, label in APP_TYPE_FILTER_OPTIONS:
-            self.app_type_combo.addItem(_(label), app_type)
-        self.app_type_combo.setCurrentIndex(self.app_type_combo.findData(APP_TYPE_ALL))
-        filter_layout.addWidget(self.app_type_combo)
+        self.package_type_combo = QComboBox()
+        for package_type, label in PACKAGE_TYPE_FILTER_OPTIONS:
+            self.package_type_combo.addItem(label, package_type)
+        self.package_type_combo.setCurrentIndex(
+            self.package_type_combo.findData(PACKAGE_TYPE_ALL)
+        )
+        filter_layout.addWidget(self.package_type_combo)
 
         layout.addLayout(filter_layout)
 
@@ -156,7 +158,7 @@ class PackageManagerPanel(QWidget):
 
     def _connect_signals(self) -> None:
         self.search_entry.textChanged.connect(self._apply_filters)
-        self.app_type_combo.currentIndexChanged.connect(self._apply_filters)
+        self.package_type_combo.currentIndexChanged.connect(self._apply_filters)
         self.uninstall_btn.clicked.connect(self._uninstall_selected)
         self.disable_btn.clicked.connect(self._disable_selected)
         self.install_btn.clicked.connect(self._install_apk)
@@ -210,12 +212,12 @@ class PackageManagerPanel(QWidget):
 
     def _apply_filters(self, *_args) -> None:
         search_text = self.search_entry.text().strip().lower()
-        app_type = self.app_type_combo.currentData()
+        package_type = self.package_type_combo.currentData()
 
         self.package_table.setRowCount(0)
 
         for pkg in self._packages:
-            if not matches_app_type(pkg.is_system, app_type):
+            if not matches_package_type(pkg.is_system, package_type):
                 continue
 
             if search_text and search_text not in pkg.package_name.lower():
@@ -398,11 +400,11 @@ class PackageManagerPanel(QWidget):
 
         if self._selected_package_is_system():
             msg = _(
-                'Are you sure you want to uninstall "{0}"?\n\nThis is a system app. Removing it may cause missing or unstable system functionality.'
+                'Are you sure you want to uninstall "{0}"?\n\nThis is a system package. Removing it may cause missing or unstable system functionality.'
             ).format(pkg_name)
         else:
             msg = _(
-                'Are you sure you want to uninstall "{0}"?\n\nAll app data for this user will be removed.'
+                'Are you sure you want to uninstall "{0}"?\n\nAll package data for this user will be removed.'
             ).format(pkg_name)
 
         reply = QMessageBox.question(

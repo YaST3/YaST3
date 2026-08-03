@@ -16,8 +16,8 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import GLib, GObject, Gtk
 
 from mast.core.android import (
-    APP_TYPE_ALL,
-    APP_TYPE_FILTER_OPTIONS,
+    PACKAGE_TYPE_ALL,
+    PACKAGE_TYPE_FILTER_OPTIONS,
     DeviceInfo,
 )
 from mast.core.i18n import _
@@ -91,11 +91,11 @@ class PackageManagerPanel(Gtk.Box):
         self.search_entry.set_hexpand(True)
         filter_box.append(self.search_entry)
 
-        self.app_type_combo = Gtk.ComboBoxText()
-        for app_type, label in APP_TYPE_FILTER_OPTIONS:
-            self.app_type_combo.append(app_type, _(label))
-        self.app_type_combo.set_active_id(APP_TYPE_ALL)
-        filter_box.append(self.app_type_combo)
+        self.package_type_combo = Gtk.ComboBoxText()
+        for package_type, label in PACKAGE_TYPE_FILTER_OPTIONS:
+            self.package_type_combo.append(package_type, label)
+        self.package_type_combo.set_active_id(PACKAGE_TYPE_ALL)
+        filter_box.append(self.package_type_combo)
 
         self.append(filter_box)
 
@@ -244,14 +244,14 @@ class PackageManagerPanel(Gtk.Box):
             text=_("Uninstall Package"),
         )
 
-        is_system_app = bool(model.get_value(tree_iter, 4))
-        if is_system_app:
+        is_system_package = bool(model.get_value(tree_iter, 4))
+        if is_system_package:
             secondary = _(
-                'Are you sure you want to uninstall "{0}"?\n\nThis is a system app. Removing it may cause missing or unstable system functionality.'
+                'Are you sure you want to uninstall "{0}"?\n\nThis is a system package. Removing it may cause missing or unstable system functionality.'
             ).format(pkg_name)
         else:
             secondary = _(
-                'Are you sure you want to uninstall "{0}"?\n\nAll app data for this user will be removed.'
+                'Are you sure you want to uninstall "{0}"?\n\nAll package data for this user will be removed.'
             ).format(pkg_name)
 
         dialog.set_property("secondary-text", secondary)

@@ -1,27 +1,27 @@
 """Shared package filter definitions for Android package views."""
 
-from __future__ import annotations
+from mast.core.i18n import _
 
-APP_TYPE_ALL = "all"
-APP_TYPE_SYSTEM = "system"
-APP_TYPE_USER = "user"
+PACKAGE_TYPE_ALL = "all"
+PACKAGE_TYPE_SYSTEM = "system"
+PACKAGE_TYPE_USER = "user"
 
-APP_TYPE_FILTER_IDS = (
-    APP_TYPE_ALL,
-    APP_TYPE_SYSTEM,
-    APP_TYPE_USER,
+PACKAGE_TYPE_FILTER_IDS = (
+    PACKAGE_TYPE_ALL,
+    PACKAGE_TYPE_SYSTEM,
+    PACKAGE_TYPE_USER,
 )
 
-APP_TYPE_FILTER_OPTIONS = [
-    (APP_TYPE_ALL, "All"),
-    (APP_TYPE_SYSTEM, "System"),
-    (APP_TYPE_USER, "User"),
+PACKAGE_TYPE_FILTER_OPTIONS = [
+    (PACKAGE_TYPE_ALL, _("All")),
+    (PACKAGE_TYPE_SYSTEM, _("System")),
+    (PACKAGE_TYPE_USER, _("User")),
 ]
 
 
-def matches_app_type(is_system: bool, app_type: str | None) -> bool:
-    if app_type == APP_TYPE_SYSTEM:
+def matches_package_type(is_system: bool, package_type: str | None) -> bool:
+    if package_type == PACKAGE_TYPE_SYSTEM:
         return is_system
-    if app_type == APP_TYPE_USER:
+    if package_type == PACKAGE_TYPE_USER:
         return not is_system
     return True
