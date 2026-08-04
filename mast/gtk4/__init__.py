@@ -1,5 +1,6 @@
 """MaST GTK4 GUI application."""
 
+from mast.gtk4.android import AndroidModule
 from mast.gtk4.cron import CronModule
 from mast.gtk4.datetime import DateTimeModule
 from mast.gtk4.flatpak import FlatpakModule
@@ -17,6 +18,7 @@ from mast.gtk4.ssh import SSHClientModule
 from mast.gtk4.users import UsersModule
 
 __all__ = [
+    "AndroidModule",
     "CronModule",
     "DateTimeModule",
     "FlatpakModule",

@@ -1,5 +1,6 @@
 """MaST Qt6 GUI application."""
 
+from mast.qt6.android import AndroidModule
 from mast.qt6.cron import CronModule
 from mast.qt6.datetime import DateTimeModule
 from mast.qt6.flatpak import FlatpakModule
@@ -17,6 +18,7 @@ from mast.qt6.ssh import SSHClientModule
 from mast.qt6.users import UsersModule
 
 __all__ = [
+    "AndroidModule",
     "CronModule",
     "DateTimeModule",
     "FlatpakModule",

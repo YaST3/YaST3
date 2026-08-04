@@ -13,6 +13,7 @@ from PySide6.QtWidgets import (
 
 from mast.core.i18n import _
 from mast.qt6 import (
+    AndroidModule,
     CronModule,
     DateTimeModule,
     FlatpakModule,
@@ -37,6 +38,7 @@ class MainWindow(QMainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.modules = (
+            AndroidModule(),
             CronModule(),
             DateTimeModule(),
             FlatpakModule(),

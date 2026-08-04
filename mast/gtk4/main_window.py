@@ -4,6 +4,7 @@ from gi.repository import Gio, Gtk
 
 from mast.core.i18n import _
 from mast.gtk4 import (
+    AndroidModule,
     CronModule,
     DateTimeModule,
     FlatpakModule,
@@ -29,6 +30,7 @@ class MainWindow(Gtk.ApplicationWindow):
         super().__init__(**kwargs)
 
         self.modules = (
+            AndroidModule(),
             CronModule(),
             DateTimeModule(),
             FlatpakModule(),

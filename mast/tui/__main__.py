@@ -5,9 +5,6 @@ from mast.tui.main_window import MainWindow
 
 
 def main() -> int:
-    # Initialize internationalization
-    init_i18n()
-
     app = MainWindow()
     return app.run()
 

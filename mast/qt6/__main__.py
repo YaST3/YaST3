@@ -7,9 +7,6 @@ from mast.qt6.main_window import MainWindow
 
 
 def main() -> int:
-    # Initialize internationalization
-    init_i18n()
-
     app = QApplication([])
     app.setApplicationName("MaST Qt6")
     app.setDesktopFileName("me.guoyunhe.mast.qt6")
