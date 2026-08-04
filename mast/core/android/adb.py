@@ -57,16 +57,6 @@ def install_apk(adb_device: Any, apk_path: str) -> bool:
         return False
 
 
-def _run_adb_command(serial: str | None, args: list[str]) -> str:
-    if serial:
-        output = _get_device(serial).shell(args, timeout=ADB_TIMEOUT)
-    else:
-        # Keep this helper for backward compatibility; host-side commands are
-        # handled directly via adbutils client APIs where needed.
-        raise ValueError("Host adb commands should use adbutils client APIs directly")
-    return str(output).strip()
-
-
 def _parse_pm_package_line(line: str) -> tuple[str, str] | None:
     if not line.startswith("package:") or "=" not in line:
         return None
