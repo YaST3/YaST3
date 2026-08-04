@@ -49,6 +49,14 @@ def _get_device(serial: str) -> Any:
     return _get_adb_client().device(serial=serial)
 
 
+def install_apk(adb_device: Any, apk_path: str) -> bool:
+    try:
+        adb_device.install(apk_path, silent=True, flags=["-r"])
+        return True
+    except Exception:
+        return False
+
+
 def _run_adb_command(serial: str | None, args: list[str]) -> str:
     if serial:
         output = _get_device(serial).shell(args, timeout=ADB_TIMEOUT)
@@ -275,6 +283,8 @@ def list_packages(serial: str) -> list[PackageInfo]:
     _flush_current_package()
 
     return sorted(packages_by_name.values(), key=lambda p: p.package_name)
+
+
 def is_adb_available() -> bool:
     try:
         _get_adb_client().server_version()

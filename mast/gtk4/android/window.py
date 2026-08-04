@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import threading
 
+import adbutils
+
 import gi
 
 gi.require_version("Gtk", "4.0")
@@ -30,6 +32,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
         self.packages: list[PackageInfo] = []
         self.selected_device: DeviceInfo | None = None
+        self.selected_adb_device = None
         self._busy = False
 
         self.set_default_size(960, 640)
@@ -100,6 +103,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
 
     def _clear_device_selection(self) -> None:
         self.selected_device = None
+        self.selected_adb_device = None
         self.device_info_panel.clear()
         self.packages_tab.set_selected_device(None)
         self.packages_tab.clear_packages()
@@ -110,7 +114,19 @@ class AndroidWindow(Gtk.ApplicationWindow):
             return
 
         self.selected_device = device
-        self.packages_tab.set_selected_device(device)
+        if device.status == "device":
+            try:
+                self.selected_adb_device = adbutils.adb.device(serial=device.serial)
+            except Exception:
+                self.selected_adb_device = None
+                self.packages_tab.set_selected_device(None)
+                self.packages_tab.clear_packages()
+                self._show_error(_("Failed to connect to the selected Android device."))
+                return
+        else:
+            self.selected_adb_device = None
+
+        self.packages_tab.set_selected_device(device, self.selected_adb_device)
         self._update_device_info(device)
 
         if device.status == "device":

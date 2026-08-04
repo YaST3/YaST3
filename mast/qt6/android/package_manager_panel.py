@@ -7,7 +7,7 @@ import tempfile
 import threading
 import urllib.request
 
-import adbutils
+from adbutils import AdbDevice
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
@@ -30,21 +30,14 @@ from mast.core.android import (
     PACKAGE_TYPE_FILTER_OPTIONS,
     DeviceInfo,
     PackageInfo,
+    install_apk,
     matches_package_type,
 )
 from mast.core.i18n import _
 
 
-def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
-    try:
-        adbutils.adb.device(serial=serial).install(apk_path, silent=True, flags=["-r"])
-        return True
-    except Exception:
-        return False
-
-
 def _uninstall_package_with_adbutils(
-    serial: str, package_name: str, keep_data: bool = False
+    adb_device: AdbDevice, package_name: str, keep_data: bool = False
 ) -> bool:
     args = ["pm", "uninstall", "--user", "0"]
     if keep_data:
@@ -52,17 +45,17 @@ def _uninstall_package_with_adbutils(
     args.append(package_name)
 
     try:
-        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+        output = str(adb_device.shell(args, timeout=60)).strip()
         return "Success" in output
     except Exception:
         return False
 
 
-def _disable_package_with_adbutils(serial: str, package_name: str) -> bool:
+def _disable_package_with_adbutils(adb_device: AdbDevice, package_name: str) -> bool:
     args = ["pm", "disable-user", "--user", "0", package_name]
 
     try:
-        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+        output = str(adb_device.shell(args, timeout=60)).strip()
     except Exception:
         return False
 
@@ -84,6 +77,7 @@ class PackageManagerPanel(QWidget):
         super().__init__(parent)
         self._packages: list[PackageInfo] = []
         self._device: DeviceInfo | None = None
+        self._adb_device: AdbDevice | None = None
         self._fdroid_installed: bool | None = None
         self._external_busy = False
         self._operation_in_progress = False
@@ -166,13 +160,18 @@ class PackageManagerPanel(QWidget):
         self.refresh_pkgs_btn.clicked.connect(self.refresh_clicked)
         self.package_table.itemSelectionChanged.connect(self._update_selection_state)
 
-    def set_selected_device(self, device: DeviceInfo | None) -> None:
+    def set_selected_device(
+        self,
+        device: DeviceInfo | None,
+        adb_device: AdbDevice | None = None,
+    ) -> None:
         new_device = device if device and device.status == "device" else None
         prev_serial = self._device.serial if self._device is not None else None
         new_serial = new_device.serial if new_device is not None else None
         if prev_serial != new_serial:
             self._fdroid_installed = None
         self._device = new_device
+        self._adb_device = adb_device if new_device is not None else None
         self._sync_controls()
 
     def set_packages(self, packages: list[PackageInfo]) -> None:
@@ -208,6 +207,7 @@ class PackageManagerPanel(QWidget):
         self._external_busy = busy
         if not has_selected_device:
             self._device = None
+            self._adb_device = None
         self._sync_controls()
 
     def _apply_filters(self, *_args) -> None:
@@ -304,7 +304,7 @@ class PackageManagerPanel(QWidget):
             self._do_disable(pkg_name)
 
     def _do_disable(self, pkg_name: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -313,11 +313,11 @@ class PackageManagerPanel(QWidget):
         self._sync_controls()
         self.busy_changed.emit(True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             try:
-                success = _disable_package_with_adbutils(serial, pkg_name)
+                success = _disable_package_with_adbutils(adb_device, pkg_name)
                 if success:
                     self.show_message.emit(
                         "success",
@@ -340,7 +340,7 @@ class PackageManagerPanel(QWidget):
         threading.Thread(target=worker, daemon=True).start()
 
     def _install_fdroid(self) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -351,7 +351,7 @@ class PackageManagerPanel(QWidget):
         self._sync_controls()
         self.busy_changed.emit(True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             apk_path = ""
@@ -365,7 +365,7 @@ class PackageManagerPanel(QWidget):
                     with open(apk_path, "wb") as out_file:
                         out_file.write(response.read())
 
-                success = _install_apk_with_adbutils(serial, apk_path)
+                success = install_apk(adb_device, apk_path)
                 if success:
                     self.show_message.emit(
                         "success",
@@ -418,7 +418,7 @@ class PackageManagerPanel(QWidget):
             self._do_uninstall(pkg_name)
 
     def _do_uninstall(self, pkg_name: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -427,12 +427,12 @@ class PackageManagerPanel(QWidget):
         self._sync_controls()
         self.busy_changed.emit(True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             should_refresh = False
             try:
-                success = _uninstall_package_with_adbutils(serial, pkg_name)
+                success = _uninstall_package_with_adbutils(adb_device, pkg_name)
                 if success:
                     self.show_message.emit(
                         "success",
@@ -477,7 +477,7 @@ class PackageManagerPanel(QWidget):
         self._do_install(file_path)
 
     def _do_install(self, apk_path: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -486,11 +486,11 @@ class PackageManagerPanel(QWidget):
         self._sync_controls()
         self.busy_changed.emit(True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             try:
-                success = _install_apk_with_adbutils(serial, apk_path)
+                success = install_apk(adb_device, apk_path)
                 if success:
                     self.show_message.emit(
                         "success",

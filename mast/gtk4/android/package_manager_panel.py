@@ -7,7 +7,7 @@ import tempfile
 import threading
 import urllib.request
 
-import adbutils
+from adbutils import AdbDevice
 
 import gi
 
@@ -19,20 +19,13 @@ from mast.core.android import (
     PACKAGE_TYPE_ALL,
     PACKAGE_TYPE_FILTER_OPTIONS,
     DeviceInfo,
+    install_apk,
 )
 from mast.core.i18n import _
 
 
-def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
-    try:
-        adbutils.adb.device(serial=serial).install(apk_path, silent=True, flags=["-r"])
-        return True
-    except Exception:
-        return False
-
-
 def _uninstall_package_with_adbutils(
-    serial: str, package_name: str, keep_data: bool = False
+    adb_device: AdbDevice, package_name: str, keep_data: bool = False
 ) -> bool:
     args = ["pm", "uninstall", "--user", "0"]
     if keep_data:
@@ -40,17 +33,17 @@ def _uninstall_package_with_adbutils(
     args.append(package_name)
 
     try:
-        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+        output = str(adb_device.shell(args, timeout=60)).strip()
         return "Success" in output
     except Exception:
         return False
 
 
-def _disable_package_with_adbutils(serial: str, package_name: str) -> bool:
+def _disable_package_with_adbutils(adb_device: AdbDevice, package_name: str) -> bool:
     args = ["pm", "disable-user", "--user", "0", package_name]
 
     try:
-        output = str(adbutils.adb.device(serial=serial).shell(args, timeout=60)).strip()
+        output = str(adb_device.shell(args, timeout=60)).strip()
     except Exception:
         return False
 
@@ -73,6 +66,7 @@ class PackageManagerPanel(Gtk.Box):
     def __init__(self, **kwargs):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=8, **kwargs)
         self._device: DeviceInfo | None = None
+        self._adb_device: AdbDevice | None = None
         self._fdroid_installed: bool | None = None
         self._external_busy = False
         self._operation_in_progress = False
@@ -165,13 +159,18 @@ class PackageManagerPanel(Gtk.Box):
         self.uninstall_btn.set_sensitive(False)
         self._sync_controls()
 
-    def set_selected_device(self, device: DeviceInfo | None) -> None:
+    def set_selected_device(
+        self,
+        device: DeviceInfo | None,
+        adb_device: AdbDevice | None = None,
+    ) -> None:
         new_device = device if device and device.status == "device" else None
         prev_serial = self._device.serial if self._device is not None else None
         new_serial = new_device.serial if new_device is not None else None
         if prev_serial != new_serial:
             self._fdroid_installed = None
         self._device = new_device
+        self._adb_device = adb_device if new_device is not None else None
         self._sync_controls()
 
     def set_fdroid_installed(self, installed: bool) -> None:
@@ -182,6 +181,7 @@ class PackageManagerPanel(Gtk.Box):
         self._external_busy = busy
         if not has_selected_device:
             self._device = None
+            self._adb_device = None
         self._sync_controls()
 
     def _sync_controls(self) -> None:
@@ -303,7 +303,7 @@ class PackageManagerPanel(Gtk.Box):
         dialog.present()
 
     def _do_disable(self, pkg_name: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -312,11 +312,11 @@ class PackageManagerPanel(Gtk.Box):
         self._sync_controls()
         self.emit("busy-changed", True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             try:
-                success = _disable_package_with_adbutils(serial, pkg_name)
+                success = _disable_package_with_adbutils(adb_device, pkg_name)
                 GLib.idle_add(self._on_disable_finished, success, pkg_name)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
@@ -344,7 +344,7 @@ class PackageManagerPanel(Gtk.Box):
         return False
 
     def _do_uninstall(self, pkg_name: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -353,11 +353,11 @@ class PackageManagerPanel(Gtk.Box):
         self._sync_controls()
         self.emit("busy-changed", True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             try:
-                success = _uninstall_package_with_adbutils(serial, pkg_name)
+                success = _uninstall_package_with_adbutils(adb_device, pkg_name)
                 GLib.idle_add(self._on_uninstall_finished, success, pkg_name)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
@@ -416,7 +416,7 @@ class PackageManagerPanel(Gtk.Box):
         dialog.open(parent_window, None, on_response)
 
     def _do_install(self, apk_path: str) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -425,11 +425,11 @@ class PackageManagerPanel(Gtk.Box):
         self._sync_controls()
         self.emit("busy-changed", True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             try:
-                success = _install_apk_with_adbutils(serial, apk_path)
+                success = install_apk(adb_device, apk_path)
                 GLib.idle_add(self._on_install_finished, success, apk_path)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
@@ -438,7 +438,7 @@ class PackageManagerPanel(Gtk.Box):
         threading.Thread(target=worker, daemon=True).start()
 
     def _install_fdroid(self) -> None:
-        if self._device is None:
+        if self._device is None or self._adb_device is None:
             return
         if self._operation_in_progress:
             return
@@ -449,7 +449,7 @@ class PackageManagerPanel(Gtk.Box):
         self._sync_controls()
         self.emit("busy-changed", True)
 
-        serial = self._device.serial
+        adb_device = self._adb_device
 
         def worker() -> None:
             apk_path = ""
@@ -463,7 +463,7 @@ class PackageManagerPanel(Gtk.Box):
                     with open(apk_path, "wb") as out_file:
                         out_file.write(response.read())
 
-                success = _install_apk_with_adbutils(serial, apk_path)
+                success = install_apk(adb_device, apk_path)
                 GLib.idle_add(self._on_fdroid_install_finished, success)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
