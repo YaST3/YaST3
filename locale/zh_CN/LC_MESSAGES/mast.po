@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-07-18 05:32+0000\n"
-"PO-Revision-Date: 2026-07-30 09:27\n"
+"PO-Revision-Date: 2026-08-04 09:53\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -1783,7 +1783,7 @@ msgstr "启用开机启动"
 #: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
 #: mast/tui/services/window.py:108
 msgid "Disable"
-msgstr "禁用开机启动"
+msgstr "禁用"
 
 #: mast/gtk4/services/window.py:105 mast/gtk4/services/window.py:310
 #: mast/qt6/services/window.py:106 mast/qt6/services/window.py:260
@@ -2851,7 +2851,7 @@ msgstr "错误：加载代理配置失败：{0}"
 
 #: mast/tui/proxy/window.py:120
 msgid "Disabled"
-msgstr "禁用"
+msgstr "已禁用"
 
 #: mast/tui/proxy/window.py:121
 #, python-brace-format
