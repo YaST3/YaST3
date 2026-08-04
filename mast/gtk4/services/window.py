@@ -280,10 +280,10 @@ class ServicesWindow(Gtk.ApplicationWindow):
             "disable": _("Disable"),
         }[action_name]
         action_result = {
-            "start": _("started"),
-            "stop": _("stopped"),
-            "enable": _("enabled"),
-            "disable": _("disabled"),
+            "start": _("Started"),
+            "stop": _("Stopped"),
+            "enable": _("Enabled"),
+            "disable": _("Disabled"),
         }[action_name]
 
         self.current_action = self._create_action(

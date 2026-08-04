@@ -285,16 +285,16 @@ class ServicesWindow(Screen):
         self.show_message(error_text, error=True)
 
     def action_start_service(self) -> None:
-        self._run_service_action("start", _("started"))
+        self._run_service_action("start", _("Started"))
 
     def action_stop_service(self) -> None:
-        self._run_service_action("stop", _("stopped"))
+        self._run_service_action("stop", _("Stopped"))
 
     def action_enable_service(self) -> None:
-        self._run_service_action("enable", _("enabled"))
+        self._run_service_action("enable", _("Enabled"))
 
     def action_disable_service(self) -> None:
-        self._run_service_action("disable", _("disabled"))
+        self._run_service_action("disable", _("Disabled"))
 
     def action_view_logs(self) -> None:
         service = self.selected_service()
