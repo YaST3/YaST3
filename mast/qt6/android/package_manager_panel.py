@@ -13,11 +13,14 @@ from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
     QAbstractItemView,
     QComboBox,
+    QDialog,
     QFileDialog,
     QHBoxLayout,
     QHeaderView,
+    QLabel,
     QLineEdit,
     QMessageBox,
+    QProgressBar,
     QPushButton,
     QTableWidget,
     QTableWidgetItem,
@@ -52,10 +55,42 @@ class PackageManagerPanel(QWidget):
         self._device: DeviceInfo | None = None
         self._adb_device: AdbDevice | None = None
         self._fdroid_installed: bool | None = None
+        self._install_progress_dialog: QDialog | None = None
         self._external_busy = False
         self._operation_in_progress = False
         self._init_ui()
         self._connect_signals()
+
+    def _show_install_progress_dialog(self, message: str) -> None:
+        if self._install_progress_dialog is not None:
+            return
+
+        dialog = QDialog(self)
+        dialog.setWindowTitle(_("Installing"))
+        dialog.setModal(True)
+        dialog.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, False)
+
+        layout = QVBoxLayout(dialog)
+        layout.setContentsMargins(16, 16, 16, 16)
+        layout.setSpacing(10)
+
+        label = QLabel(message)
+        label.setWordWrap(True)
+        layout.addWidget(label)
+
+        progress = QProgressBar()
+        progress.setRange(0, 0)
+        layout.addWidget(progress)
+
+        dialog.setMinimumWidth(360)
+        dialog.show()
+        self._install_progress_dialog = dialog
+
+    def _close_install_progress_dialog(self) -> None:
+        if self._install_progress_dialog is None:
+            return
+        self._install_progress_dialog.close()
+        self._install_progress_dialog = None
 
     def _init_ui(self) -> None:
         layout = QVBoxLayout(self)
@@ -323,6 +358,7 @@ class PackageManagerPanel(QWidget):
         self._operation_in_progress = True
         self._sync_controls()
         self.busy_changed.emit(True)
+        self._show_install_progress_dialog(_("Installing F-Droid..."))
 
         adb_device = self._adb_device
 
@@ -361,6 +397,7 @@ class PackageManagerPanel(QWidget):
                     except OSError:
                         pass
                 self._operation_in_progress = False
+                self._close_install_progress_dialog()
                 self.busy_changed.emit(False)
 
     def _uninstall_selected(self) -> None:
@@ -458,6 +495,9 @@ class PackageManagerPanel(QWidget):
         self._operation_in_progress = True
         self._sync_controls()
         self.busy_changed.emit(True)
+        self._show_install_progress_dialog(
+            _('Installing "{0}"...').format(os.path.basename(apk_path))
+        )
 
         adb_device = self._adb_device
 
@@ -483,6 +523,7 @@ class PackageManagerPanel(QWidget):
                 self.show_message.emit("error", _("Error"), str(e))
             finally:
                 self._operation_in_progress = False
+                self._close_install_progress_dialog()
                 self.busy_changed.emit(False)
 
         threading.Thread(target=worker, daemon=True).start()

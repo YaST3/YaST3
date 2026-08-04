@@ -41,9 +41,45 @@ class PackageManagerPanel(Gtk.Box):
         self._device: DeviceInfo | None = None
         self._adb_device: AdbDevice | None = None
         self._fdroid_installed: bool | None = None
+        self._install_progress_dialog: Gtk.Window | None = None
         self._external_busy = False
         self._operation_in_progress = False
         self._build_ui()
+
+    def _show_install_progress_dialog(self, message: str) -> None:
+        if self._install_progress_dialog is not None:
+            return
+
+        root = self.get_root()
+        parent_window = root if isinstance(root, Gtk.Window) else None
+
+        dialog = Gtk.Window(title=_("Installing"), modal=True, transient_for=parent_window)
+        dialog.set_resizable(False)
+
+        box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
+        box.set_margin_start(20)
+        box.set_margin_end(20)
+        box.set_margin_top(20)
+        box.set_margin_bottom(20)
+
+        spinner = Gtk.Spinner()
+        spinner.start()
+        box.append(spinner)
+
+        label = Gtk.Label(label=message)
+        label.set_wrap(True)
+        label.set_justify(Gtk.Justification.CENTER)
+        box.append(label)
+
+        dialog.set_child(box)
+        dialog.present()
+        self._install_progress_dialog = dialog
+
+    def _close_install_progress_dialog(self) -> None:
+        if self._install_progress_dialog is None:
+            return
+        self._install_progress_dialog.close()
+        self._install_progress_dialog = None
 
     def _build_ui(self) -> None:
         self.set_margin_start(8)
@@ -397,6 +433,9 @@ class PackageManagerPanel(Gtk.Box):
         self._operation_in_progress = True
         self._sync_controls()
         self.emit("busy-changed", True)
+        self._show_install_progress_dialog(
+            _('Installing "{0}"...').format(os.path.basename(apk_path))
+        )
 
         adb_device = self._adb_device
 
@@ -421,6 +460,7 @@ class PackageManagerPanel(Gtk.Box):
         self._operation_in_progress = True
         self._sync_controls()
         self.emit("busy-changed", True)
+        self._show_install_progress_dialog(_("Installing F-Droid..."))
 
         adb_device = self._adb_device
 
@@ -489,6 +529,7 @@ class PackageManagerPanel(Gtk.Box):
         return False
 
     def _finish_operation(self) -> bool:
+        self._close_install_progress_dialog()
         self._operation_in_progress = False
         self.emit("busy-changed", False)
         self._sync_controls()
