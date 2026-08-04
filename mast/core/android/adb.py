@@ -6,6 +6,8 @@ import re
 from dataclasses import dataclass
 from typing import Any
 
+from adbutils import adb, AdbDevice
+
 ADB_TIMEOUT = 60
 PACKAGE_NAME_RE = re.compile(
     r"^[A-Za-z][A-Za-z0-9_]*(\.[A-Za-z][A-Za-z0-9_]*)+$"
@@ -34,19 +36,8 @@ class PackageInfo:
     is_disabled: bool
 
 
-def _get_adb_client() -> Any:
-    try:
-        import adbutils
-    except ModuleNotFoundError as exc:
-        raise RuntimeError(
-            "adbutils is not available. Please install adbutils and its dependencies."
-        ) from exc
-
-    return adbutils.adb
-
-
-def _get_device(serial: str) -> Any:
-    return _get_adb_client().device(serial=serial)
+def _get_device(serial: str) -> AdbDevice:
+    return adb.device(serial=serial)
 
 
 def install_apk(adb_device: Any, apk_path: str) -> bool:
@@ -102,7 +93,7 @@ def _parse_pm_package_line(line: str) -> tuple[str, str] | None:
 def list_devices() -> list[DeviceInfo]:
     devices: list[DeviceInfo] = []
 
-    for info in _get_adb_client().list(extended=True):
+    for info in adb.list(extended=True):
         serial = info.serial
         status = info.state
         tags = info.tags or {}
@@ -184,7 +175,7 @@ def get_device_properties(serial: str) -> dict[str, str]:
 def get_device_info(serial: str) -> DeviceInfo:
     props = get_device_properties(serial)
 
-    output = _get_adb_client().list(extended=True)
+    output = adb.list(extended=True)
     model = ""
     device = ""
     for info in output:
@@ -304,7 +295,7 @@ def list_packages(serial: str) -> list[PackageInfo]:
 
 def is_adb_available() -> bool:
     try:
-        _get_adb_client().server_version()
+        adb.server_version()
         return True
     except Exception:
         return False
