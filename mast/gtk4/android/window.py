@@ -162,7 +162,7 @@ class AndroidWindow(Gtk.ApplicationWindow):
         self.packages_tab.package_list_store.clear()
 
         for pkg in self.packages:
-            if not matches_package_type(pkg.is_system, package_type):
+            if not matches_package_type(pkg.is_system, package_type, pkg.package_name):
                 continue
 
             if search_text:

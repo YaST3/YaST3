@@ -217,7 +217,7 @@ class PackageManagerPanel(QWidget):
         self.package_table.setRowCount(0)
 
         for pkg in self._packages:
-            if not matches_package_type(pkg.is_system, package_type):
+            if not matches_package_type(pkg.is_system, package_type, pkg.package_name):
                 continue
 
             if search_text and search_text not in pkg.package_name.lower():
