@@ -49,6 +49,7 @@ mast-tui = "mast.tui.__main__:main"
 [tool.setuptools]
 packages = [
     "mast.core",
+    "mast.core.android",
     "mast.core.cron",
     "mast.core.datetime",
     "mast.core.distro",
@@ -66,6 +67,7 @@ packages = [
     "mast.core.ssh",
     "mast.core.users",
     "mast.gtk4",
+    "mast.gtk4.android",
     "mast.gtk4.command",
     "mast.gtk4.cron",
     "mast.gtk4.datetime",
@@ -83,6 +85,7 @@ packages = [
     "mast.gtk4.ssh",
     "mast.gtk4.users",
     "mast.qt6",
+    "mast.qt6.android",
     "mast.qt6.command",
     "mast.qt6.cron",
     "mast.qt6.datetime",
