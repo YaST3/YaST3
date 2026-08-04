@@ -1,6 +1,6 @@
 # The default target of this Makefile is...
 .PHONY: all
-all:: mo
+all:: pot mo
 
 INSTALL = install
 FIND = find
@@ -46,9 +46,8 @@ dist:: clean
 clean::
 	$(FIND) $(PYTHON_DIRS) -name '*.py[cod]' -print0 | $(XARGS) -0 $(RM)
 
-po::
+pot::
 	pybabel extract -F babel.cfg -o locale/template/LC_MESSAGES/mast.pot mast/
-	pybabel update -i locale/template/LC_MESSAGES/mast.pot -d locale -D mast
 
 mo::
 	pybabel compile -d locale -D mast
