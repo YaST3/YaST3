@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.25 - 2026-08-04
+
+- fix(pyproject): fixed pyproject installation
+
 ## 0.0.24 - 2026-08-04
 
 - feat(android): added android module to install apk, F-Droid, and uninstall bloatware.
