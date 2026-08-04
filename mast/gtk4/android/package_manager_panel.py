@@ -34,7 +34,7 @@ def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
 def _uninstall_package_with_adbutils(
     serial: str, package_name: str, keep_data: bool = False
 ) -> bool:
-    args = ["pm", "uninstall"]
+    args = ["pm", "uninstall", "--user", "0"]
     if keep_data:
         args.append("-k")
     args.append(package_name)

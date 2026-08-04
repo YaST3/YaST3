@@ -46,7 +46,7 @@ def _install_apk_with_adbutils(serial: str, apk_path: str) -> bool:
 def _uninstall_package_with_adbutils(
     serial: str, package_name: str, keep_data: bool = False
 ) -> bool:
-    args = ["pm", "uninstall"]
+    args = ["pm", "uninstall", "--user", "0"]
     if keep_data:
         args.append("-k")
     args.append(package_name)
@@ -430,6 +430,7 @@ class PackageManagerPanel(QWidget):
         serial = self._device.serial
 
         def worker() -> None:
+            should_refresh = False
             try:
                 success = _uninstall_package_with_adbutils(serial, pkg_name)
                 if success:
@@ -438,7 +439,7 @@ class PackageManagerPanel(QWidget):
                         _("Success"),
                         _('Package "{0}" uninstalled successfully.').format(pkg_name),
                     )
-                    self.packages_refresh_requested.emit()
+                    should_refresh = True
                 else:
                     self.show_message.emit(
                         "error",
@@ -452,6 +453,8 @@ class PackageManagerPanel(QWidget):
             finally:
                 self._operation_in_progress = False
                 self.busy_changed.emit(False)
+                if should_refresh:
+                    self.packages_refresh_requested.emit()
 
         threading.Thread(target=worker, daemon=True).start()
 
