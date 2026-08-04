@@ -1,8 +1,9 @@
 """Shared package filter definitions for Android package views."""
 
+from fnmatch import fnmatchcase
+
 from mast.core.android.bloatware_config import (
-    BLOATWARE_PACKAGE_IDS,
-    BLOATWARE_PACKAGE_PREFIXES,
+    BLOATWARE_PACKAGE_PATTERNS,
 )
 from mast.core.i18n import _
 
@@ -27,9 +28,10 @@ PACKAGE_TYPE_FILTER_OPTIONS = [
 
 
 def is_bloatware_package(package_name: str) -> bool:
-    if package_name in BLOATWARE_PACKAGE_IDS:
-        return True
-    return package_name.startswith(BLOATWARE_PACKAGE_PREFIXES)
+    return any(
+        fnmatchcase(package_name, pattern)
+        for pattern in BLOATWARE_PACKAGE_PATTERNS
+    )
 
 
 def matches_package_type(
