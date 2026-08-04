@@ -1,39 +1,551 @@
-# Czech translations for PROJECT.
-# Copyright (C) 2026 ORGANIZATION
-# This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: PROJECT VERSION\n"
+"Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-07-18 05:32+0000\n"
-"PO-Revision-Date: 2026-07-14 23:48+0800\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: cs\n"
-"Language-Team: cs <LL@li.org>\n"
-"Plural-Forms: nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2);\n"
+"POT-Creation-Date: 2026-08-04 09:57+0000\n"
+"PO-Revision-Date: 2026-08-04 10:02\n"
+"Last-Translator: \n"
+"Language-Team: Czech\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
+"Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 3;\n"
+"X-Crowdin-Project: mast\n"
+"X-Crowdin-Project-ID: 916991\n"
+"X-Crowdin-Language: cs\n"
+"X-Crowdin-File: /main/locale/template/LC_MESSAGES/mast.pot\n"
+"X-Crowdin-File-ID: 60391\n"
+"Language: cs_CZ\n"
+
+#: mast/core/android/package_filters.py:23 mast/gtk4/journal/window.py:80
+#: mast/gtk4/journal/window.py:126 mast/gtk4/services/window.py:55
+#: mast/gtk4/services/window.py:66 mast/qt6/journal/window.py:89
+#: mast/qt6/services/window.py:59 mast/qt6/services/window.py:69
+#: mast/tui/services/window.py:81 mast/tui/services/window.py:93
+msgid "All"
+msgstr ""
+
+#: mast/core/android/package_filters.py:24 mast/gtk4/android/window.py:189
+#: mast/gtk4/cron/window.py:35 mast/gtk4/flatpak/remote_manager.py:188
+#: mast/gtk4/journal/window.py:65 mast/gtk4/services/window.py:67
+#: mast/gtk4/services/window.py:225
+#: mast/qt6/android/package_manager_panel.py:234 mast/qt6/cron/window.py:34
+#: mast/qt6/flatpak/remote_dialog.py:57 mast/qt6/journal/window.py:66
+#: mast/qt6/services/window.py:70 mast/qt6/services/window.py:188
+#: mast/tui/cron/window.py:72 mast/tui/services/window.py:94
+#: mast/tui/services/window.py:188 mast/tui/users/window.py:233
+msgid "System"
+msgstr ""
+
+#: mast/core/android/package_filters.py:25 mast/gtk4/android/window.py:189
+#: mast/gtk4/cron/window.py:31 mast/gtk4/flatpak/remote_manager.py:189
+#: mast/gtk4/git/window.py:46 mast/gtk4/journal/window.py:66
+#: mast/gtk4/services/window.py:68 mast/gtk4/services/window.py:225
+#: mast/gtk4/snapshots/window.py:99
+#: mast/qt6/android/package_manager_panel.py:234 mast/qt6/cron/window.py:31
+#: mast/qt6/flatpak/remote_dialog.py:58 mast/qt6/git/window.py:50
+#: mast/qt6/journal/window.py:72 mast/qt6/services/window.py:71
+#: mast/qt6/services/window.py:188 mast/qt6/snapshots/window.py:77
+#: mast/tui/cron/window.py:70 mast/tui/git/window.py:70
+#: mast/tui/services/window.py:95 mast/tui/services/window.py:188
+#: mast/tui/snapshots/window.py:86 mast/tui/ssh/window.py:519
+#: mast/tui/users/window.py:173 mast/tui/users/window.py:233
+#: mast/tui/users/window.py:494
+msgid "User"
+msgstr ""
+
+#: mast/core/android/package_filters.py:26
+msgid "Bloatware"
+msgstr ""
 
 #: mast/gtk4/about_dialog.py:22
 msgid "GitHub"
 msgstr ""
 
-#: mast/gtk4/main_window.py:93 mast/qt6/main_window.py:62
+#: mast/gtk4/main_window.py:95 mast/qt6/main_window.py:64
 #: mast/tui/main_window.py:126
 msgid "About"
 msgstr ""
 
-#: mast/gtk4/module.py:33 mast/qt6/module.py:29
+#: mast/gtk4/module.py:33 mast/qt6/module.py:31
 #, python-brace-format
 msgid "{name} — MaST"
 msgstr ""
 
 #: mast/gtk4/module_button.py:51 mast/qt6/module_button.py:43
 msgid "Experimental"
+msgstr ""
+
+#: mast/gtk4/android/__init__.py:16 mast/qt6/android/__init__.py:10
+msgid "Android"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:32
+#: mast/qt6/android/device_info_panel.py:25
+msgid "Serial"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:33
+#: mast/gtk4/android/device_panel.py:54
+#: mast/gtk4/flatpak/package_manager.py:129
+#: mast/gtk4/flatpak/package_manager.py:142
+#: mast/gtk4/flatpak/remote_manager.py:52
+#: mast/gtk4/flatpak/remote_manager.py:192
+#: mast/gtk4/flatpak/remote_manager.py:257
+#: mast/gtk4/flatpak/runtime_manager.py:66 mast/gtk4/languages/manager.py:62
+#: mast/gtk4/repositories/repo_edit_dialog.py:36
+#: mast/gtk4/repositories/window.py:81 mast/gtk4/services/window.py:121
+#: mast/gtk4/ssh/keys_tab.py:68 mast/qt6/android/device_info_panel.py:26
+#: mast/qt6/flatpak/package_manager.py:142
+#: mast/qt6/flatpak/package_manager.py:214 mast/qt6/flatpak/remote_dialog.py:42
+#: mast/qt6/flatpak/remote_dialog.py:45 mast/qt6/flatpak/remote_manager.py:58
+#: mast/qt6/flatpak/runtime_manager.py:83 mast/qt6/languages/manager.py:57
+#: mast/qt6/repositories/repo_edit_dialog.py:37
+#: mast/qt6/repositories/window.py:70 mast/qt6/services/window.py:116
+#: mast/qt6/ssh/keys_tab.py:61 mast/tui/repositories/window.py:80
+#: mast/tui/repositories/window.py:332 mast/tui/services/window.py:123
+#: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:613
+msgid "Name"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:34
+#: mast/qt6/android/device_info_panel.py:27
+msgid "Code Name"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:35
+#: mast/qt6/android/device_info_panel.py:28
+msgid "Model"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:36
+#: mast/qt6/android/device_info_panel.py:29
+msgid "Manufacturer"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:37
+#: mast/qt6/android/device_info_panel.py:30
+msgid "Android Version"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:38
+#: mast/qt6/android/device_info_panel.py:31
+msgid "API Level"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:39
+#: mast/gtk4/android/device_panel.py:59 mast/gtk4/languages/manager.py:68
+#: mast/gtk4/services/window.py:53 mast/gtk4/services/window.py:133
+#: mast/qt6/android/device_info_panel.py:32 mast/qt6/languages/manager.py:58
+#: mast/qt6/services/window.py:57 mast/qt6/services/window.py:116
+#: mast/tui/services/window.py:78 mast/tui/services/window.py:125
+msgid "Status"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:69
+#: mast/gtk4/android/device_panel.py:109
+#: mast/qt6/android/device_info_panel.py:65 mast/qt6/android/device_panel.py:92
+msgid "Connected"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:71
+#: mast/gtk4/android/device_panel.py:111
+#: mast/qt6/android/device_info_panel.py:67 mast/qt6/android/device_panel.py:94
+msgid "Offline"
+msgstr ""
+
+#: mast/gtk4/android/device_info_panel.py:73
+#: mast/gtk4/android/device_panel.py:113
+#: mast/qt6/android/device_info_panel.py:69 mast/qt6/android/device_panel.py:96
+msgid "Unauthorized"
+msgstr ""
+
+#: mast/gtk4/android/device_panel.py:44 mast/qt6/android/device_panel.py:46
+msgid "Devices"
+msgstr ""
+
+#: mast/gtk4/android/device_panel.py:46
+#: mast/gtk4/android/package_manager_panel.py:126
+#: mast/gtk4/flatpak/package_manager.py:102
+#: mast/gtk4/flatpak/package_manager.py:180
+#: mast/gtk4/flatpak/remote_manager.py:40
+#: mast/gtk4/flatpak/runtime_manager.py:51 mast/gtk4/journal/window.py:94
+#: mast/gtk4/journal/window.py:140 mast/gtk4/services/window.py:80
+#: mast/gtk4/snapshots/window.py:58 mast/gtk4/snapshots/window.py:178
+#: mast/gtk4/snapshots/window.py:193 mast/gtk4/ssh/keys_tab.py:47
+#: mast/qt6/android/device_panel.py:50
+#: mast/qt6/android/package_manager_panel.py:135
+#: mast/qt6/flatpak/package_manager.py:131
+#: mast/qt6/flatpak/package_manager.py:203
+#: mast/qt6/flatpak/package_manager.py:277
+#: mast/qt6/flatpak/remote_manager.py:49 mast/qt6/flatpak/runtime_manager.py:72
+#: mast/qt6/journal/window.py:98 mast/qt6/services/window.py:81
+#: mast/qt6/snapshots/window.py:55 mast/qt6/snapshots/window.py:102
+#: mast/qt6/snapshots/window.py:117 mast/qt6/ssh/keys_tab.py:50
+#: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:73
+#: mast/tui/snapshots/window.py:135
+msgid "Refresh"
+msgstr ""
+
+#: mast/gtk4/android/device_panel.py:95
+#: mast/gtk4/android/package_manager_panel.py:331
+#: mast/gtk4/android/package_manager_panel.py:349
+#: mast/gtk4/android/package_manager_panel.py:372
+#: mast/gtk4/android/package_manager_panel.py:390
+#: mast/gtk4/android/package_manager_panel.py:447
+#: mast/gtk4/android/package_manager_panel.py:482
+#: mast/gtk4/android/package_manager_panel.py:506
+#: mast/gtk4/android/package_manager_panel.py:525
+#: mast/gtk4/android/window.py:225 mast/gtk4/cron/cron_edit_dialog.py:128
+#: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:178
+#: mast/gtk4/datetime/window.py:227 mast/gtk4/datetime/window.py:238
+#: mast/gtk4/datetime/window.py:240 mast/gtk4/datetime/window.py:242
+#: mast/gtk4/flatpak/package_manager.py:220
+#: mast/gtk4/flatpak/package_manager.py:241
+#: mast/gtk4/flatpak/package_manager.py:319
+#: mast/gtk4/flatpak/package_manager.py:359
+#: mast/gtk4/flatpak/remote_manager.py:80
+#: mast/gtk4/flatpak/remote_manager.py:162
+#: mast/gtk4/flatpak/remote_manager.py:226
+#: mast/gtk4/flatpak/remote_manager.py:288
+#: mast/gtk4/flatpak/runtime_manager.py:90
+#: mast/gtk4/flatpak/runtime_manager.py:145 mast/gtk4/flatpak/settings.py:50
+#: mast/gtk4/flatpak/window.py:91 mast/gtk4/git/window.py:256
+#: mast/gtk4/git/window.py:277 mast/gtk4/hostname/window.py:66
+#: mast/gtk4/hostname/window.py:68 mast/gtk4/hostname/window.py:70
+#: mast/gtk4/hostname/window.py:77 mast/gtk4/hostname/window.py:82
+#: mast/gtk4/hostname/window.py:88 mast/gtk4/hostname/window.py:108
+#: mast/gtk4/hostname/window.py:110 mast/gtk4/hostname/window.py:112
+#: mast/gtk4/hosts/window.py:119 mast/gtk4/hosts/window.py:122
+#: mast/gtk4/hosts/window.py:176 mast/gtk4/hosts/window.py:212
+#: mast/gtk4/hosts/window.py:250 mast/gtk4/hosts/window.py:252
+#: mast/gtk4/hosts/window.py:254 mast/gtk4/journal/window.py:280
+#: mast/gtk4/journal/window.py:338 mast/gtk4/journal/window.py:361
+#: mast/gtk4/journal/window.py:367 mast/gtk4/journal/window.py:396
+#: mast/gtk4/journal/window.py:402 mast/gtk4/languages/manager.py:131
+#: mast/gtk4/languages/settings.py:88 mast/gtk4/languages/settings.py:98
+#: mast/gtk4/languages/settings.py:106 mast/gtk4/languages/settings.py:145
+#: mast/gtk4/languages/settings.py:147 mast/gtk4/languages/settings.py:149
+#: mast/gtk4/proxy/window.py:82 mast/gtk4/proxy/window.py:88
+#: mast/gtk4/proxy/window.py:94 mast/gtk4/proxy/window.py:117
+#: mast/gtk4/proxy/window.py:123 mast/gtk4/repositories/window.py:133
+#: mast/gtk4/repositories/window.py:195 mast/gtk4/repositories/window.py:199
+#: mast/gtk4/repositories/window.py:241 mast/gtk4/repositories/window.py:276
+#: mast/gtk4/repositories/window.py:280 mast/gtk4/repositories/window.py:388
+#: mast/gtk4/repositories/window.py:390 mast/gtk4/repositories/window.py:392
+#: mast/gtk4/services/window.py:183 mast/gtk4/snapshots/config_dialog.py:46
+#: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:202
+#: mast/gtk4/snapshots/window.py:208 mast/gtk4/ssh/__init__.py:72
+#: mast/gtk4/ssh/dialogs.py:120 mast/gtk4/ssh/hosts_tab.py:109
+#: mast/gtk4/ssh/hosts_tab.py:152 mast/gtk4/ssh/hosts_tab.py:180
+#: mast/gtk4/ssh/hosts_tab.py:195 mast/gtk4/ssh/hosts_tab.py:226
+#: mast/gtk4/ssh/hosts_tab.py:228 mast/gtk4/ssh/keys_generate_dialog.py:110
+#: mast/gtk4/ssh/keys_tab.py:196 mast/gtk4/ssh/keys_tab.py:242
+#: mast/gtk4/users/group_form.py:133 mast/gtk4/users/group_form.py:146
+#: mast/gtk4/users/group_manager.py:57 mast/gtk4/users/user_form.py:229
+#: mast/gtk4/users/user_form.py:243 mast/gtk4/users/user_form.py:296
+#: mast/gtk4/users/user_list.py:134 mast/gtk4/users/user_manager.py:57
+#: mast/qt6/android/device_panel.py:80
+#: mast/qt6/android/package_manager_panel.py:339
+#: mast/qt6/android/package_manager_panel.py:343
+#: mast/qt6/android/package_manager_panel.py:388
+#: mast/qt6/android/package_manager_panel.py:392
+#: mast/qt6/android/package_manager_panel.py:456
+#: mast/qt6/android/package_manager_panel.py:462
+#: mast/qt6/android/package_manager_panel.py:519
+#: mast/qt6/android/package_manager_panel.py:523 mast/qt6/android/window.py:136
+#: mast/qt6/android/window.py:171 mast/qt6/cron/cron_edit_dialog.py:111
+#: mast/qt6/cron/manager.py:232 mast/qt6/datetime/window.py:148
+#: mast/qt6/datetime/window.py:154 mast/qt6/datetime/window.py:166
+#: mast/qt6/datetime/window.py:200 mast/qt6/datetime/window.py:211
+#: mast/qt6/datetime/window.py:213 mast/qt6/datetime/window.py:215
+#: mast/qt6/flatpak/package_manager.py:387
+#: mast/qt6/flatpak/package_manager.py:398
+#: mast/qt6/flatpak/package_manager.py:475
+#: mast/qt6/flatpak/package_manager.py:491
+#: mast/qt6/flatpak/remote_manager.py:74 mast/qt6/flatpak/remote_manager.py:97
+#: mast/qt6/flatpak/remote_manager.py:116
+#: mast/qt6/flatpak/remote_manager.py:138
+#: mast/qt6/flatpak/runtime_manager.py:154
+#: mast/qt6/flatpak/runtime_manager.py:160 mast/qt6/flatpak/window.py:94
+#: mast/qt6/flatpak/window.py:105 mast/qt6/git/window.py:248
+#: mast/qt6/git/window.py:274 mast/qt6/hostname/window.py:66
+#: mast/qt6/hostname/window.py:70 mast/qt6/hostname/window.py:75
+#: mast/qt6/hostname/window.py:83 mast/qt6/hostname/window.py:89
+#: mast/qt6/hostname/window.py:97 mast/qt6/hostname/window.py:130
+#: mast/qt6/hostname/window.py:134 mast/qt6/hostname/window.py:138
+#: mast/qt6/hosts/window.py:103 mast/qt6/hosts/window.py:109
+#: mast/qt6/hosts/window.py:179 mast/qt6/hosts/window.py:216
+#: mast/qt6/hosts/window.py:270 mast/qt6/hosts/window.py:275
+#: mast/qt6/hosts/window.py:278 mast/qt6/journal/window.py:207
+#: mast/qt6/journal/window.py:271 mast/qt6/journal/window.py:294
+#: mast/qt6/journal/window.py:300 mast/qt6/journal/window.py:326
+#: mast/qt6/journal/window.py:332 mast/qt6/languages/manager.py:123
+#: mast/qt6/languages/settings.py:82 mast/qt6/languages/settings.py:92
+#: mast/qt6/languages/settings.py:100 mast/qt6/languages/settings.py:144
+#: mast/qt6/languages/settings.py:148 mast/qt6/languages/settings.py:152
+#: mast/qt6/proxy/window.py:83 mast/qt6/proxy/window.py:87
+#: mast/qt6/proxy/window.py:93 mast/qt6/proxy/window.py:116
+#: mast/qt6/proxy/window.py:122 mast/qt6/repositories/window.py:114
+#: mast/qt6/repositories/window.py:134 mast/qt6/repositories/window.py:184
+#: mast/qt6/repositories/window.py:187 mast/qt6/repositories/window.py:213
+#: mast/qt6/repositories/window.py:231 mast/qt6/repositories/window.py:234
+#: mast/qt6/repositories/window.py:256 mast/qt6/repositories/window.py:278
+#: mast/qt6/repositories/window.py:306 mast/qt6/repositories/window.py:308
+#: mast/qt6/repositories/window.py:310 mast/qt6/repositories/window.py:325
+#: mast/qt6/services/window.py:140 mast/qt6/snapshots/config_dialog.py:38
+#: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:126
+#: mast/qt6/snapshots/window.py:132 mast/qt6/ssh/__init__.py:59
+#: mast/qt6/ssh/dialogs.py:86 mast/qt6/ssh/dialogs.py:92
+#: mast/qt6/ssh/hosts_tab.py:90 mast/qt6/ssh/hosts_tab.py:141
+#: mast/qt6/ssh/hosts_tab.py:162 mast/qt6/ssh/hosts_tab.py:176
+#: mast/qt6/ssh/hosts_tab.py:226 mast/qt6/ssh/hosts_tab.py:229
+#: mast/qt6/ssh/keys_generate_dialog.py:177
+#: mast/qt6/ssh/keys_generate_dialog.py:195
+#: mast/qt6/ssh/keys_generate_dialog.py:237
+#: mast/qt6/ssh/keys_generate_dialog.py:242 mast/qt6/ssh/keys_tab.py:177
+#: mast/qt6/ssh/keys_tab.py:217 mast/qt6/users/group_form.py:115
+#: mast/qt6/users/group_manager.py:57 mast/qt6/users/user_form.py:211
+#: mast/qt6/users/user_form.py:217 mast/qt6/users/user_form.py:267
+#: mast/qt6/users/user_list.py:128 mast/qt6/users/user_manager.py:57
+msgid "Error"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:56
+#: mast/qt6/android/package_manager_panel.py:69
+msgid "Installing"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:93
+#: mast/gtk4/flatpak/package_manager.py:94
+#: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
+#: mast/gtk4/journal/window.py:87 mast/gtk4/journal/window.py:133
+#: mast/gtk4/languages/manager.py:26 mast/gtk4/services/window.py:73
+#: mast/qt6/android/package_manager_panel.py:103
+#: mast/qt6/flatpak/package_manager.py:123
+#: mast/qt6/flatpak/package_manager.py:195
+#: mast/qt6/flatpak/runtime_manager.py:64 mast/qt6/flatpak/window.py:57
+#: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
+#: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
+msgid "Search"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:107
+#: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
+#: mast/qt6/android/package_manager_panel.py:120
+#: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
+msgid "Uninstall"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:112
+#: mast/gtk4/services/window.py:101 mast/gtk4/services/window.py:280
+#: mast/qt6/android/package_manager_panel.py:124
+#: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
+#: mast/tui/services/window.py:108
+msgid "Disable"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:117
+#: mast/qt6/android/package_manager_panel.py:128
+msgid "Install APK"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:121
+#: mast/qt6/android/package_manager_panel.py:131
+msgid "Install F-Droid"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:137
+#: mast/gtk4/flatpak/package_manager.py:128
+#: mast/gtk4/flatpak/package_manager.py:141
+#: mast/gtk4/flatpak/runtime_manager.py:65
+#: mast/gtk4/repositories/repo_edit_dialog.py:34
+#: mast/gtk4/snapshots/window.py:84
+#: mast/qt6/android/package_manager_panel.py:143
+#: mast/qt6/flatpak/package_manager.py:141
+#: mast/qt6/flatpak/package_manager.py:213
+#: mast/qt6/flatpak/runtime_manager.py:82
+#: mast/qt6/repositories/repo_edit_dialog.py:31 mast/qt6/snapshots/window.py:77
+#: mast/tui/snapshots/window.py:83
+msgid "ID"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:144
+#: mast/gtk4/flatpak/package_manager.py:131
+#: mast/gtk4/flatpak/package_manager.py:144
+#: mast/gtk4/flatpak/runtime_manager.py:68
+#: mast/qt6/android/package_manager_panel.py:143
+#: mast/qt6/flatpak/package_manager.py:144
+#: mast/qt6/flatpak/package_manager.py:216
+#: mast/qt6/flatpak/runtime_manager.py:85
+msgid "Version"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:151
+#: mast/gtk4/repositories/repo_edit_dialog.py:64
+#: mast/gtk4/snapshots/window.py:89
+#: mast/qt6/android/package_manager_panel.py:143
+#: mast/qt6/repositories/repo_edit_dialog.py:74 mast/qt6/snapshots/window.py:77
+#: mast/tui/repositories/window.py:344 mast/tui/snapshots/window.py:84
+#: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:616
+#: mast/tui/users/window.py:169
+msgid "Type"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:253
+#: mast/qt6/android/package_manager_panel.py:422
+msgid "Uninstall Package"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:259
+#: mast/qt6/android/package_manager_panel.py:413
+#, python-brace-format
+msgid "Are you sure you want to uninstall \"{0}\"?\n\n"
+"This is a system package. Removing it may cause missing or unstable system functionality."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:263
+#: mast/qt6/android/package_manager_panel.py:417
+#, python-brace-format
+msgid "Are you sure you want to uninstall \"{0}\"?\n\n"
+"All package data for this user will be removed."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:299
+#: mast/qt6/android/package_manager_panel.py:306
+msgid "Disable Package"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:302
+#: mast/qt6/android/package_manager_panel.py:301
+#, python-brace-format
+msgid "Are you sure you want to disable \"{0}\"?\n\n"
+"The package will remain installed but will be unavailable until re-enabled."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:341
+#: mast/gtk4/android/package_manager_panel.py:382
+#: mast/gtk4/android/package_manager_panel.py:498
+#: mast/gtk4/android/package_manager_panel.py:517 mast/gtk4/cron/manager.py:249
+#: mast/gtk4/datetime/window.py:229 mast/gtk4/datetime/window.py:235
+#: mast/gtk4/flatpak/package_manager.py:314
+#: mast/gtk4/flatpak/package_manager.py:354
+#: mast/gtk4/flatpak/remote_manager.py:155
+#: mast/gtk4/flatpak/remote_manager.py:219
+#: mast/gtk4/flatpak/remote_manager.py:281
+#: mast/gtk4/flatpak/runtime_manager.py:140 mast/gtk4/flatpak/settings.py:44
+#: mast/gtk4/flatpak/window.py:86 mast/gtk4/git/window.py:275
+#: mast/gtk4/hostname/window.py:105 mast/gtk4/hosts/window.py:248
+#: mast/gtk4/journal/window.py:355 mast/gtk4/journal/window.py:389
+#: mast/gtk4/languages/settings.py:140 mast/gtk4/proxy/window.py:110
+#: mast/gtk4/repositories/window.py:248 mast/gtk4/repositories/window.py:379
+#: mast/gtk4/snapshots/config_dialog.py:220 mast/gtk4/ssh/__init__.py:87
+#: mast/gtk4/ssh/hosts_tab.py:224 mast/gtk4/ssh/keys_tab.py:194
+#: mast/gtk4/ssh/keys_tab.py:246 mast/qt6/android/package_manager_panel.py:332
+#: mast/qt6/android/package_manager_panel.py:381
+#: mast/qt6/android/package_manager_panel.py:449
+#: mast/qt6/android/package_manager_panel.py:510 mast/qt6/cron/manager.py:229
+#: mast/qt6/datetime/window.py:202 mast/qt6/datetime/window.py:208
+#: mast/qt6/flatpak/remote_manager.py:94 mast/qt6/flatpak/remote_manager.py:113
+#: mast/qt6/flatpak/remote_manager.py:135 mast/qt6/flatpak/window.py:89
+#: mast/qt6/flatpak/window.py:100 mast/qt6/git/window.py:269
+#: mast/qt6/hostname/window.py:124 mast/qt6/hosts/window.py:264
+#: mast/qt6/journal/window.py:288 mast/qt6/journal/window.py:319
+#: mast/qt6/languages/settings.py:136 mast/qt6/proxy/window.py:109
+#: mast/qt6/repositories/window.py:120 mast/qt6/repositories/window.py:301
+#: mast/qt6/snapshots/config_dialog.py:168 mast/qt6/ssh/__init__.py:67
+#: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
+#: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
+msgid "Success"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:342
+#: mast/qt6/android/package_manager_panel.py:333
+#, python-brace-format
+msgid "Package \"{0}\" disabled successfully."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:350
+#: mast/qt6/android/package_manager_panel.py:340
+#, python-brace-format
+msgid "Failed to disable \"{0}\"."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:383
+#: mast/qt6/android/package_manager_panel.py:450
+#, python-brace-format
+msgid "Package \"{0}\" uninstalled successfully."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:391
+#: mast/qt6/android/package_manager_panel.py:457
+#, python-brace-format
+msgid "Failed to uninstall \"{0}\". Device may require root access."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:407
+#: mast/qt6/android/package_manager_panel.py:479
+msgid "Select APK File"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:409
+msgid "APK Files"
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:437
+#: mast/qt6/android/package_manager_panel.py:499
+#, python-brace-format
+msgid "Installing \"{0}\"..."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:463
+#: mast/qt6/android/package_manager_panel.py:361
+msgid "Installing F-Droid..."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:499
+#: mast/qt6/android/package_manager_panel.py:382
+msgid "F-Droid installed successfully."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:507
+#: mast/qt6/android/package_manager_panel.py:389
+msgid "Failed to install F-Droid."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:518
+#: mast/qt6/android/package_manager_panel.py:511
+#, python-brace-format
+msgid "APK \"{0}\" installed successfully."
+msgstr ""
+
+#: mast/gtk4/android/package_manager_panel.py:526
+#: mast/qt6/android/package_manager_panel.py:520
+#, python-brace-format
+msgid "Failed to install \"{0}\"."
+msgstr ""
+
+#: mast/gtk4/android/window.py:63 mast/qt6/android/window.py:76
+msgid "Device Info"
+msgstr ""
+
+#: mast/gtk4/android/window.py:66 mast/gtk4/packages/__init__.py:11
+#: mast/qt6/android/window.py:80 mast/qt6/packages/__init__.py:11
+#: mast/tui/packages/__init__.py:12
+msgid "Packages"
+msgstr ""
+
+#: mast/gtk4/android/window.py:92 mast/qt6/android/window.py:105
+msgid "ADB Not Found"
+msgstr ""
+
+#: mast/gtk4/android/window.py:97 mast/qt6/android/window.py:109
+msgid "ADB (Android Debug Bridge) is not installed or not in PATH. Please install Android SDK platform tools."
+msgstr ""
+
+#: mast/gtk4/android/window.py:124 mast/qt6/android/window.py:137
+msgid "Failed to connect to the selected Android device."
 msgstr ""
 
 #: mast/gtk4/command/dialog.py:30 mast/qt6/command/dialog.py:30
@@ -188,110 +700,6 @@ msgstr ""
 msgid "Suggestions"
 msgstr ""
 
-#: mast/gtk4/cron/cron_edit_dialog.py:128 mast/gtk4/cron/manager.py:251
-#: mast/gtk4/datetime/window.py:178 mast/gtk4/datetime/window.py:227
-#: mast/gtk4/datetime/window.py:238 mast/gtk4/datetime/window.py:240
-#: mast/gtk4/datetime/window.py:242 mast/gtk4/flatpak/package_manager.py:220
-#: mast/gtk4/flatpak/package_manager.py:241
-#: mast/gtk4/flatpak/package_manager.py:319
-#: mast/gtk4/flatpak/package_manager.py:359
-#: mast/gtk4/flatpak/remote_manager.py:80
-#: mast/gtk4/flatpak/remote_manager.py:162
-#: mast/gtk4/flatpak/remote_manager.py:226
-#: mast/gtk4/flatpak/remote_manager.py:288
-#: mast/gtk4/flatpak/runtime_manager.py:90
-#: mast/gtk4/flatpak/runtime_manager.py:145 mast/gtk4/flatpak/settings.py:50
-#: mast/gtk4/flatpak/window.py:91 mast/gtk4/git/window.py:256
-#: mast/gtk4/git/window.py:277 mast/gtk4/hostname/window.py:66
-#: mast/gtk4/hostname/window.py:68 mast/gtk4/hostname/window.py:70
-#: mast/gtk4/hostname/window.py:77 mast/gtk4/hostname/window.py:82
-#: mast/gtk4/hostname/window.py:88 mast/gtk4/hostname/window.py:108
-#: mast/gtk4/hostname/window.py:110 mast/gtk4/hostname/window.py:112
-#: mast/gtk4/hosts/window.py:119 mast/gtk4/hosts/window.py:122
-#: mast/gtk4/hosts/window.py:176 mast/gtk4/hosts/window.py:212
-#: mast/gtk4/hosts/window.py:250 mast/gtk4/hosts/window.py:252
-#: mast/gtk4/hosts/window.py:254 mast/gtk4/journal/window.py:280
-#: mast/gtk4/journal/window.py:338 mast/gtk4/journal/window.py:361
-#: mast/gtk4/journal/window.py:367 mast/gtk4/journal/window.py:396
-#: mast/gtk4/journal/window.py:402 mast/gtk4/languages/manager.py:131
-#: mast/gtk4/languages/settings.py:88 mast/gtk4/languages/settings.py:98
-#: mast/gtk4/languages/settings.py:106 mast/gtk4/languages/settings.py:145
-#: mast/gtk4/languages/settings.py:147 mast/gtk4/languages/settings.py:149
-#: mast/gtk4/proxy/window.py:82 mast/gtk4/proxy/window.py:88
-#: mast/gtk4/proxy/window.py:94 mast/gtk4/proxy/window.py:117
-#: mast/gtk4/proxy/window.py:123 mast/gtk4/repositories/window.py:133
-#: mast/gtk4/repositories/window.py:195 mast/gtk4/repositories/window.py:199
-#: mast/gtk4/repositories/window.py:241 mast/gtk4/repositories/window.py:276
-#: mast/gtk4/repositories/window.py:280 mast/gtk4/repositories/window.py:388
-#: mast/gtk4/repositories/window.py:390 mast/gtk4/repositories/window.py:392
-#: mast/gtk4/services/window.py:183 mast/gtk4/snapshots/config_dialog.py:46
-#: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:202
-#: mast/gtk4/snapshots/window.py:208 mast/gtk4/ssh/__init__.py:72
-#: mast/gtk4/ssh/dialogs.py:120 mast/gtk4/ssh/hosts_tab.py:109
-#: mast/gtk4/ssh/hosts_tab.py:152 mast/gtk4/ssh/hosts_tab.py:180
-#: mast/gtk4/ssh/hosts_tab.py:195 mast/gtk4/ssh/hosts_tab.py:226
-#: mast/gtk4/ssh/hosts_tab.py:228 mast/gtk4/ssh/keys_generate_dialog.py:110
-#: mast/gtk4/ssh/keys_tab.py:196 mast/gtk4/ssh/keys_tab.py:242
-#: mast/gtk4/users/groups_manager.py:144 mast/gtk4/users/groups_manager.py:268
-#: mast/gtk4/users/groups_manager.py:281 mast/gtk4/users/users_manager.py:168
-#: mast/gtk4/users/users_manager.py:297 mast/gtk4/users/users_manager.py:338
-#: mast/gtk4/users/users_manager.py:352 mast/qt6/cron/cron_edit_dialog.py:111
-#: mast/qt6/cron/manager.py:232 mast/qt6/datetime/window.py:148
-#: mast/qt6/datetime/window.py:154 mast/qt6/datetime/window.py:166
-#: mast/qt6/datetime/window.py:200 mast/qt6/datetime/window.py:211
-#: mast/qt6/datetime/window.py:213 mast/qt6/datetime/window.py:215
-#: mast/qt6/flatpak/package_manager.py:387
-#: mast/qt6/flatpak/package_manager.py:398
-#: mast/qt6/flatpak/package_manager.py:475
-#: mast/qt6/flatpak/package_manager.py:491
-#: mast/qt6/flatpak/remote_manager.py:74 mast/qt6/flatpak/remote_manager.py:97
-#: mast/qt6/flatpak/remote_manager.py:116
-#: mast/qt6/flatpak/remote_manager.py:138
-#: mast/qt6/flatpak/runtime_manager.py:154
-#: mast/qt6/flatpak/runtime_manager.py:160 mast/qt6/flatpak/window.py:94
-#: mast/qt6/flatpak/window.py:105 mast/qt6/git/window.py:248
-#: mast/qt6/git/window.py:274 mast/qt6/hostname/window.py:66
-#: mast/qt6/hostname/window.py:70 mast/qt6/hostname/window.py:75
-#: mast/qt6/hostname/window.py:83 mast/qt6/hostname/window.py:89
-#: mast/qt6/hostname/window.py:97 mast/qt6/hostname/window.py:130
-#: mast/qt6/hostname/window.py:134 mast/qt6/hostname/window.py:138
-#: mast/qt6/hosts/window.py:103 mast/qt6/hosts/window.py:109
-#: mast/qt6/hosts/window.py:179 mast/qt6/hosts/window.py:216
-#: mast/qt6/hosts/window.py:270 mast/qt6/hosts/window.py:275
-#: mast/qt6/hosts/window.py:278 mast/qt6/journal/window.py:207
-#: mast/qt6/journal/window.py:271 mast/qt6/journal/window.py:294
-#: mast/qt6/journal/window.py:300 mast/qt6/journal/window.py:326
-#: mast/qt6/journal/window.py:332 mast/qt6/languages/manager.py:123
-#: mast/qt6/languages/settings.py:82 mast/qt6/languages/settings.py:92
-#: mast/qt6/languages/settings.py:100 mast/qt6/languages/settings.py:144
-#: mast/qt6/languages/settings.py:148 mast/qt6/languages/settings.py:152
-#: mast/qt6/proxy/window.py:83 mast/qt6/proxy/window.py:87
-#: mast/qt6/proxy/window.py:93 mast/qt6/proxy/window.py:116
-#: mast/qt6/proxy/window.py:122 mast/qt6/repositories/window.py:114
-#: mast/qt6/repositories/window.py:134 mast/qt6/repositories/window.py:184
-#: mast/qt6/repositories/window.py:187 mast/qt6/repositories/window.py:213
-#: mast/qt6/repositories/window.py:231 mast/qt6/repositories/window.py:234
-#: mast/qt6/repositories/window.py:256 mast/qt6/repositories/window.py:278
-#: mast/qt6/repositories/window.py:306 mast/qt6/repositories/window.py:308
-#: mast/qt6/repositories/window.py:310 mast/qt6/repositories/window.py:325
-#: mast/qt6/services/window.py:140 mast/qt6/snapshots/config_dialog.py:38
-#: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:126
-#: mast/qt6/snapshots/window.py:132 mast/qt6/ssh/__init__.py:59
-#: mast/qt6/ssh/dialogs.py:86 mast/qt6/ssh/dialogs.py:92
-#: mast/qt6/ssh/hosts_tab.py:90 mast/qt6/ssh/hosts_tab.py:141
-#: mast/qt6/ssh/hosts_tab.py:162 mast/qt6/ssh/hosts_tab.py:176
-#: mast/qt6/ssh/hosts_tab.py:226 mast/qt6/ssh/hosts_tab.py:229
-#: mast/qt6/ssh/keys_generate_dialog.py:177
-#: mast/qt6/ssh/keys_generate_dialog.py:195
-#: mast/qt6/ssh/keys_generate_dialog.py:237
-#: mast/qt6/ssh/keys_generate_dialog.py:242 mast/qt6/ssh/keys_tab.py:177
-#: mast/qt6/ssh/keys_tab.py:217 mast/qt6/users/groups_manager.py:122
-#: mast/qt6/users/groups_manager.py:235 mast/qt6/users/users_manager.py:152
-#: mast/qt6/users/users_manager.py:268 mast/qt6/users/users_manager.py:294
-#: mast/qt6/users/users_manager.py:300
-msgid "Error"
-msgstr ""
-
 #: mast/gtk4/cron/cron_edit_dialog.py:130 mast/qt6/cron/cron_edit_dialog.py:111
 msgid "Command cannot be empty"
 msgstr ""
@@ -299,15 +707,15 @@ msgstr ""
 #: mast/gtk4/cron/manager.py:40 mast/gtk4/flatpak/remote_manager.py:28
 #: mast/gtk4/hosts/window.py:33 mast/gtk4/repositories/window.py:40
 #: mast/gtk4/ssh/dialogs.py:60 mast/gtk4/ssh/hosts_tab.py:33
-#: mast/gtk4/ssh/keys_tab.py:33 mast/gtk4/users/groups_manager.py:67
-#: mast/gtk4/users/users_manager.py:58 mast/qt6/cron/manager.py:45
+#: mast/gtk4/ssh/keys_tab.py:33 mast/gtk4/users/group_list.py:61
+#: mast/gtk4/users/user_list.py:59 mast/qt6/cron/manager.py:45
 #: mast/qt6/flatpak/remote_manager.py:37 mast/qt6/hosts/window.py:40
 #: mast/qt6/repositories/window.py:44 mast/qt6/ssh/dialogs.py:58
 #: mast/qt6/ssh/hosts_tab.py:38 mast/qt6/ssh/keys_tab.py:36
-#: mast/qt6/users/groups_manager.py:60 mast/qt6/users/users_manager.py:61
+#: mast/qt6/users/group_list.py:44 mast/qt6/users/user_list.py:44
 #: mast/tui/cron/window.py:79 mast/tui/hosts/window.py:69
 #: mast/tui/repositories/window.py:70 mast/tui/ssh/window.py:259
-#: mast/tui/users/window.py:105 mast/tui/users/window.py:141
+#: mast/tui/users/window.py:105 mast/tui/users/window.py:138
 msgid "Add"
 msgstr ""
 
@@ -326,19 +734,19 @@ msgstr ""
 #: mast/gtk4/hosts/window.py:41 mast/gtk4/repositories/window.py:51
 #: mast/gtk4/snapshots/window.py:66 mast/gtk4/snapshots/window.py:150
 #: mast/gtk4/snapshots/window.py:278 mast/gtk4/ssh/hosts_tab.py:41
-#: mast/gtk4/ssh/keys_tab.py:42 mast/gtk4/users/groups_manager.py:71
-#: mast/gtk4/users/groups_manager.py:249 mast/gtk4/users/users_manager.py:62
-#: mast/gtk4/users/users_manager.py:319 mast/qt6/cron/manager.py:54
+#: mast/gtk4/ssh/keys_tab.py:42 mast/gtk4/users/group_list.py:65
+#: mast/gtk4/users/group_list.py:137 mast/gtk4/users/user_list.py:63
+#: mast/gtk4/users/user_list.py:156 mast/qt6/cron/manager.py:54
 #: mast/qt6/flatpak/remote_manager.py:45 mast/qt6/hosts/window.py:47
 #: mast/qt6/repositories/window.py:56 mast/qt6/snapshots/window.py:63
 #: mast/qt6/snapshots/window.py:203 mast/qt6/ssh/hosts_tab.py:46
-#: mast/qt6/ssh/keys_tab.py:45 mast/qt6/users/groups_manager.py:64
-#: mast/qt6/users/groups_manager.py:222 mast/qt6/users/users_manager.py:65
-#: mast/qt6/users/users_manager.py:281 mast/tui/cron/window.py:81
+#: mast/qt6/ssh/keys_tab.py:45 mast/qt6/users/group_list.py:48
+#: mast/qt6/users/group_list.py:121 mast/qt6/users/user_list.py:48
+#: mast/qt6/users/user_list.py:141 mast/tui/cron/window.py:81
 #: mast/tui/hosts/window.py:71 mast/tui/repositories/window.py:72
 #: mast/tui/snapshots/window.py:72 mast/tui/ssh/window.py:261
 #: mast/tui/ssh/window.py:269 mast/tui/users/window.py:106
-#: mast/tui/users/window.py:142
+#: mast/tui/users/window.py:139
 msgid "Delete"
 msgstr ""
 
@@ -346,29 +754,33 @@ msgstr ""
 #: mast/gtk4/git/window.py:70 mast/gtk4/hostname/window.py:48
 #: mast/gtk4/hosts/window.py:48 mast/gtk4/languages/settings.py:65
 #: mast/gtk4/proxy/window.py:44 mast/gtk4/ssh/hosts_tab.py:48
-#: mast/gtk4/users/groups_manager.py:120 mast/gtk4/users/groups_manager.py:303
-#: mast/gtk4/users/users_manager.py:144 mast/gtk4/users/users_manager.py:394
-#: mast/qt6/cron/manager.py:61 mast/qt6/datetime/window.py:134
-#: mast/qt6/git/window.py:78 mast/qt6/hostname/window.py:51
-#: mast/qt6/hosts/window.py:53 mast/qt6/languages/settings.py:57
-#: mast/qt6/proxy/window.py:55 mast/qt6/ssh/hosts_tab.py:52
-#: mast/qt6/users/groups_manager.py:106 mast/qt6/users/users_manager.py:136
+#: mast/gtk4/users/group_form.py:70 mast/gtk4/users/group_form.py:168
+#: mast/gtk4/users/user_form.py:99 mast/gtk4/users/user_form.py:280
+#: mast/gtk4/users/user_form.py:315 mast/qt6/cron/manager.py:61
+#: mast/qt6/datetime/window.py:134 mast/qt6/git/window.py:78
+#: mast/qt6/hostname/window.py:51 mast/qt6/hosts/window.py:53
+#: mast/qt6/languages/settings.py:57 mast/qt6/proxy/window.py:55
+#: mast/qt6/ssh/hosts_tab.py:52 mast/qt6/users/group_form.py:63
+#: mast/qt6/users/group_form.py:140 mast/qt6/users/user_form.py:96
+#: mast/qt6/users/user_form.py:254 mast/qt6/users/user_form.py:282
 #: mast/tui/cron/window.py:82 mast/tui/datetime/window.py:116
 #: mast/tui/git/window.py:81 mast/tui/hostname/window.py:69
 #: mast/tui/hosts/window.py:72 mast/tui/proxy/window.py:91
 #: mast/tui/ssh/window.py:262 mast/tui/users/window.py:107
-#: mast/tui/users/window.py:143
+#: mast/tui/users/window.py:140
 msgid "Save"
 msgstr ""
 
 #: mast/gtk4/cron/manager.py:76 mast/gtk4/hosts/window.py:76
 #: mast/gtk4/repositories/repo_edit_dialog.py:38
 #: mast/gtk4/repositories/window.py:102 mast/gtk4/services/window.py:139
-#: mast/gtk4/ssh/hosts_tab.py:74 mast/qt6/repositories/repo_edit_dialog.py:42
+#: mast/gtk4/services/window.py:285 mast/gtk4/ssh/hosts_tab.py:74
+#: mast/qt6/repositories/repo_edit_dialog.py:42
 #: mast/qt6/repositories/window.py:70 mast/qt6/services/window.py:116
-#: mast/tui/cron/window.py:117 mast/tui/hosts/window.py:79
-#: mast/tui/proxy/window.py:120 mast/tui/repositories/window.py:80
-#: mast/tui/repositories/window.py:353 mast/tui/services/window.py:126
+#: mast/qt6/services/window.py:239 mast/tui/cron/window.py:117
+#: mast/tui/hosts/window.py:79 mast/tui/proxy/window.py:120
+#: mast/tui/repositories/window.py:80 mast/tui/repositories/window.py:353
+#: mast/tui/services/window.py:126 mast/tui/services/window.py:294
 #: mast/tui/ssh/window.py:288
 msgid "Enabled"
 msgstr ""
@@ -419,49 +831,20 @@ msgstr ""
 #: mast/gtk4/hosts/window.py:228 mast/gtk4/languages/manager.py:159
 #: mast/gtk4/languages/manager.py:193 mast/gtk4/repositories/window.py:324
 #: mast/gtk4/repositories/window.py:363 mast/gtk4/ssh/hosts_tab.py:204
-#: mast/gtk4/users/groups_manager.py:239 mast/gtk4/users/users_manager.py:309
+#: mast/gtk4/users/group_list.py:127 mast/gtk4/users/user_list.py:146
 #: mast/qt6/cron/manager.py:183 mast/qt6/flatpak/package_manager.py:369
 #: mast/qt6/flatpak/remote_manager.py:127 mast/qt6/flatpak/remove_action.py:37
 #: mast/qt6/flatpak/runtime_manager.py:139 mast/qt6/hostname/window.py:109
 #: mast/qt6/hosts/window.py:229 mast/qt6/languages/manager.py:140
 #: mast/qt6/languages/manager.py:168 mast/qt6/repositories/window.py:269
 #: mast/qt6/repositories/window.py:289 mast/qt6/ssh/hosts_tab.py:181
-#: mast/qt6/ssh/keys_generate_dialog.py:184
-#: mast/qt6/users/groups_manager.py:214 mast/qt6/users/users_manager.py:273
+#: mast/qt6/ssh/keys_generate_dialog.py:184 mast/qt6/users/group_list.py:113
+#: mast/qt6/users/user_list.py:133
 msgid "Confirm"
 msgstr ""
 
 #: mast/gtk4/cron/manager.py:227 mast/qt6/cron/manager.py:183
 msgid "Are you sure you want to delete this cron job?"
-msgstr ""
-
-#: mast/gtk4/cron/manager.py:249 mast/gtk4/datetime/window.py:229
-#: mast/gtk4/datetime/window.py:235 mast/gtk4/flatpak/package_manager.py:314
-#: mast/gtk4/flatpak/package_manager.py:354
-#: mast/gtk4/flatpak/remote_manager.py:155
-#: mast/gtk4/flatpak/remote_manager.py:219
-#: mast/gtk4/flatpak/remote_manager.py:281
-#: mast/gtk4/flatpak/runtime_manager.py:140 mast/gtk4/flatpak/settings.py:44
-#: mast/gtk4/flatpak/window.py:86 mast/gtk4/git/window.py:275
-#: mast/gtk4/hostname/window.py:105 mast/gtk4/hosts/window.py:248
-#: mast/gtk4/journal/window.py:355 mast/gtk4/journal/window.py:389
-#: mast/gtk4/languages/settings.py:140 mast/gtk4/proxy/window.py:110
-#: mast/gtk4/repositories/window.py:248 mast/gtk4/repositories/window.py:379
-#: mast/gtk4/snapshots/config_dialog.py:220 mast/gtk4/ssh/__init__.py:87
-#: mast/gtk4/ssh/hosts_tab.py:224 mast/gtk4/ssh/keys_tab.py:194
-#: mast/gtk4/ssh/keys_tab.py:246 mast/qt6/cron/manager.py:229
-#: mast/qt6/datetime/window.py:202 mast/qt6/datetime/window.py:208
-#: mast/qt6/flatpak/remote_manager.py:94 mast/qt6/flatpak/remote_manager.py:113
-#: mast/qt6/flatpak/remote_manager.py:135 mast/qt6/flatpak/window.py:89
-#: mast/qt6/flatpak/window.py:100 mast/qt6/git/window.py:269
-#: mast/qt6/hostname/window.py:124 mast/qt6/hosts/window.py:264
-#: mast/qt6/journal/window.py:288 mast/qt6/journal/window.py:319
-#: mast/qt6/languages/settings.py:136 mast/qt6/proxy/window.py:109
-#: mast/qt6/repositories/window.py:120 mast/qt6/repositories/window.py:301
-#: mast/qt6/snapshots/config_dialog.py:168 mast/qt6/ssh/__init__.py:67
-#: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
-#: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
-msgid "Success"
 msgstr ""
 
 #: mast/gtk4/cron/manager.py:249 mast/qt6/cron/manager.py:229
@@ -474,31 +857,6 @@ msgstr ""
 #: mast/qt6/datetime/window.py:211 mast/qt6/hostname/window.py:130
 #: mast/qt6/languages/settings.py:144 mast/qt6/proxy/window.py:117
 msgid "Permission denied. Root permission required."
-msgstr ""
-
-#: mast/gtk4/cron/window.py:31 mast/gtk4/flatpak/remote_manager.py:189
-#: mast/gtk4/git/window.py:46 mast/gtk4/journal/window.py:66
-#: mast/gtk4/services/window.py:68 mast/gtk4/services/window.py:225
-#: mast/gtk4/snapshots/window.py:99 mast/qt6/cron/window.py:31
-#: mast/qt6/flatpak/remote_dialog.py:58 mast/qt6/git/window.py:50
-#: mast/qt6/journal/window.py:72 mast/qt6/services/window.py:71
-#: mast/qt6/services/window.py:188 mast/qt6/snapshots/window.py:77
-#: mast/tui/cron/window.py:70 mast/tui/git/window.py:70
-#: mast/tui/services/window.py:95 mast/tui/services/window.py:188
-#: mast/tui/snapshots/window.py:86 mast/tui/ssh/window.py:519
-#: mast/tui/users/window.py:173 mast/tui/users/window.py:233
-#: mast/tui/users/window.py:494
-msgid "User"
-msgstr ""
-
-#: mast/gtk4/cron/window.py:35 mast/gtk4/flatpak/remote_manager.py:188
-#: mast/gtk4/journal/window.py:65 mast/gtk4/services/window.py:67
-#: mast/gtk4/services/window.py:225 mast/qt6/cron/window.py:34
-#: mast/qt6/flatpak/remote_dialog.py:57 mast/qt6/journal/window.py:66
-#: mast/qt6/services/window.py:70 mast/qt6/services/window.py:188
-#: mast/tui/cron/window.py:72 mast/tui/services/window.py:94
-#: mast/tui/services/window.py:188 mast/tui/users/window.py:233
-msgid "System"
 msgstr ""
 
 #: mast/gtk4/datetime/__init__.py:16 mast/qt6/datetime/__init__.py:12
@@ -618,18 +976,6 @@ msgstr ""
 msgid "Remove"
 msgstr ""
 
-#: mast/gtk4/flatpak/package_manager.py:94
-#: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
-#: mast/gtk4/journal/window.py:87 mast/gtk4/journal/window.py:133
-#: mast/gtk4/languages/manager.py:26 mast/gtk4/services/window.py:73
-#: mast/qt6/flatpak/package_manager.py:123
-#: mast/qt6/flatpak/package_manager.py:195
-#: mast/qt6/flatpak/runtime_manager.py:64 mast/qt6/flatpak/window.py:57
-#: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
-#: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
-msgid "Search"
-msgstr ""
-
 #: mast/gtk4/flatpak/package_manager.py:98
 #: mast/gtk4/flatpak/runtime_manager.py:47 mast/gtk4/git/window.py:75
 #: mast/qt6/flatpak/package_manager.py:127
@@ -637,25 +983,6 @@ msgstr ""
 #: mast/qt6/flatpak/runtime_manager.py:68 mast/qt6/git/window.py:82
 #: mast/tui/git/window.py:82
 msgid "Reset"
-msgstr ""
-
-#: mast/gtk4/flatpak/package_manager.py:102
-#: mast/gtk4/flatpak/package_manager.py:180
-#: mast/gtk4/flatpak/remote_manager.py:40
-#: mast/gtk4/flatpak/runtime_manager.py:51 mast/gtk4/journal/window.py:94
-#: mast/gtk4/journal/window.py:140 mast/gtk4/services/window.py:80
-#: mast/gtk4/snapshots/window.py:58 mast/gtk4/snapshots/window.py:178
-#: mast/gtk4/snapshots/window.py:193 mast/gtk4/ssh/keys_tab.py:47
-#: mast/qt6/flatpak/package_manager.py:131
-#: mast/qt6/flatpak/package_manager.py:203
-#: mast/qt6/flatpak/package_manager.py:277
-#: mast/qt6/flatpak/remote_manager.py:49 mast/qt6/flatpak/runtime_manager.py:72
-#: mast/qt6/journal/window.py:98 mast/qt6/services/window.py:81
-#: mast/qt6/snapshots/window.py:55 mast/qt6/snapshots/window.py:102
-#: mast/qt6/snapshots/window.py:117 mast/qt6/ssh/keys_tab.py:50
-#: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:73
-#: mast/tui/snapshots/window.py:135
-msgid "Refresh"
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:111
@@ -670,38 +997,6 @@ msgstr ""
 msgid "Next"
 msgstr ""
 
-#: mast/gtk4/flatpak/package_manager.py:128
-#: mast/gtk4/flatpak/package_manager.py:141
-#: mast/gtk4/flatpak/runtime_manager.py:65
-#: mast/gtk4/repositories/repo_edit_dialog.py:34
-#: mast/gtk4/snapshots/window.py:84 mast/qt6/flatpak/package_manager.py:141
-#: mast/qt6/flatpak/package_manager.py:213
-#: mast/qt6/flatpak/runtime_manager.py:82
-#: mast/qt6/repositories/repo_edit_dialog.py:31 mast/qt6/snapshots/window.py:77
-#: mast/tui/snapshots/window.py:83
-msgid "ID"
-msgstr ""
-
-#: mast/gtk4/flatpak/package_manager.py:129
-#: mast/gtk4/flatpak/package_manager.py:142
-#: mast/gtk4/flatpak/remote_manager.py:52
-#: mast/gtk4/flatpak/remote_manager.py:192
-#: mast/gtk4/flatpak/remote_manager.py:257
-#: mast/gtk4/flatpak/runtime_manager.py:66 mast/gtk4/languages/manager.py:62
-#: mast/gtk4/repositories/repo_edit_dialog.py:36
-#: mast/gtk4/repositories/window.py:81 mast/gtk4/services/window.py:121
-#: mast/gtk4/ssh/keys_tab.py:68 mast/qt6/flatpak/package_manager.py:142
-#: mast/qt6/flatpak/package_manager.py:214 mast/qt6/flatpak/remote_dialog.py:42
-#: mast/qt6/flatpak/remote_dialog.py:45 mast/qt6/flatpak/remote_manager.py:58
-#: mast/qt6/flatpak/runtime_manager.py:83 mast/qt6/languages/manager.py:57
-#: mast/qt6/repositories/repo_edit_dialog.py:37
-#: mast/qt6/repositories/window.py:70 mast/qt6/services/window.py:116
-#: mast/qt6/ssh/keys_tab.py:61 mast/tui/repositories/window.py:80
-#: mast/tui/repositories/window.py:332 mast/tui/services/window.py:123
-#: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:613
-msgid "Name"
-msgstr ""
-
 #: mast/gtk4/flatpak/package_manager.py:130
 #: mast/gtk4/flatpak/package_manager.py:143
 #: mast/gtk4/flatpak/runtime_manager.py:67 mast/gtk4/services/window.py:145
@@ -713,15 +1008,6 @@ msgstr ""
 #: mast/tui/services/window.py:127 mast/tui/snapshots/window.py:70
 #: mast/tui/snapshots/window.py:87
 msgid "Description"
-msgstr ""
-
-#: mast/gtk4/flatpak/package_manager.py:131
-#: mast/gtk4/flatpak/package_manager.py:144
-#: mast/gtk4/flatpak/runtime_manager.py:68
-#: mast/qt6/flatpak/package_manager.py:144
-#: mast/qt6/flatpak/package_manager.py:216
-#: mast/qt6/flatpak/runtime_manager.py:85
-msgid "Version"
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:132
@@ -1285,14 +1571,6 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:80 mast/gtk4/journal/window.py:126
-#: mast/gtk4/services/window.py:55 mast/gtk4/services/window.py:66
-#: mast/qt6/journal/window.py:89 mast/qt6/services/window.py:59
-#: mast/qt6/services/window.py:69 mast/tui/services/window.py:81
-#: mast/tui/services/window.py:93
-msgid "All"
-msgstr ""
-
 #: mast/gtk4/journal/window.py:89 mast/gtk4/journal/window.py:135
 #: mast/qt6/journal/window.py:95
 msgid "Search messages"
@@ -1404,20 +1682,8 @@ msgstr ""
 msgid "Languages"
 msgstr ""
 
-#: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
-#: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
-msgid "Uninstall"
-msgstr ""
-
 #: mast/gtk4/languages/manager.py:57 mast/qt6/languages/manager.py:56
 msgid "Code"
-msgstr ""
-
-#: mast/gtk4/languages/manager.py:68 mast/gtk4/services/window.py:53
-#: mast/gtk4/services/window.py:133 mast/qt6/languages/manager.py:58
-#: mast/qt6/services/window.py:57 mast/qt6/services/window.py:116
-#: mast/tui/services/window.py:78 mast/tui/services/window.py:125
-msgid "Status"
 msgstr ""
 
 #: mast/gtk4/languages/manager.py:120 mast/qt6/languages/manager.py:105
@@ -1500,9 +1766,7 @@ msgstr ""
 
 #: mast/gtk4/languages/settings.py:140 mast/qt6/languages/settings.py:137
 #, python-brace-format
-msgid ""
-"Language changed successfully to '{0}'. Changes will take effect after "
-"logout."
+msgid "Language changed successfully to '{0}'. Changes will take effect after logout."
 msgstr ""
 
 #: mast/gtk4/languages/settings.py:149 mast/qt6/languages/settings.py:152
@@ -1516,11 +1780,6 @@ msgstr ""
 
 #: mast/gtk4/languages/window.py:36 mast/qt6/languages/window.py:41
 msgid "Language Management"
-msgstr ""
-
-#: mast/gtk4/packages/__init__.py:11 mast/qt6/packages/__init__.py:11
-#: mast/tui/packages/__init__.py:12
-msgid "Packages"
 msgstr ""
 
 #: mast/gtk4/proxy/__init__.py:16 mast/qt6/proxy/__init__.py:10
@@ -1623,15 +1882,6 @@ msgstr ""
 msgid "Path"
 msgstr ""
 
-#: mast/gtk4/repositories/repo_edit_dialog.py:64
-#: mast/gtk4/snapshots/window.py:89
-#: mast/qt6/repositories/repo_edit_dialog.py:74 mast/qt6/snapshots/window.py:77
-#: mast/tui/repositories/window.py:344 mast/tui/snapshots/window.py:84
-#: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:616
-#: mast/tui/users/window.py:169
-msgid "Type"
-msgstr ""
-
 #: mast/gtk4/repositories/repo_edit_dialog.py:81
 #: mast/qt6/repositories/repo_edit_dialog.py:83
 msgid "Check GPG signature"
@@ -1713,9 +1963,7 @@ msgstr ""
 
 #: mast/gtk4/repositories/window.py:366 mast/qt6/repositories/window.py:290
 #, python-brace-format
-msgid ""
-"Are you sure you want to switch mirrors?\n"
-"\n"
+msgid "Are you sure you want to switch mirrors?\n\n"
 "openSUSE mirror: {}\n"
 "Packman mirror: {}"
 msgstr ""
@@ -1781,12 +2029,6 @@ msgstr ""
 msgid "Enable"
 msgstr ""
 
-#: mast/gtk4/services/window.py:101 mast/gtk4/services/window.py:280
-#: mast/qt6/services/window.py:102 mast/qt6/services/window.py:234
-#: mast/tui/services/window.py:108
-msgid "Disable"
-msgstr ""
-
 #: mast/gtk4/services/window.py:105 mast/gtk4/services/window.py:310
 #: mast/qt6/services/window.py:106 mast/qt6/services/window.py:260
 #: mast/tui/services/window.py:109
@@ -1806,22 +2048,17 @@ msgstr ""
 
 #: mast/gtk4/services/window.py:283 mast/qt6/services/window.py:237
 #: mast/tui/services/window.py:288
-msgid "started"
+msgid "Started"
 msgstr ""
 
 #: mast/gtk4/services/window.py:284 mast/qt6/services/window.py:238
 #: mast/tui/services/window.py:291
-msgid "stopped"
-msgstr ""
-
-#: mast/gtk4/services/window.py:285 mast/qt6/services/window.py:239
-#: mast/tui/services/window.py:294
-msgid "enabled"
+msgid "Stopped"
 msgstr ""
 
 #: mast/gtk4/services/window.py:286 mast/qt6/services/window.py:240
-#: mast/tui/services/window.py:297
-msgid "disabled"
+#: mast/tui/proxy/window.py:120 mast/tui/services/window.py:297
+msgid "Disabled"
 msgstr ""
 
 #: mast/gtk4/services/window.py:291 mast/qt6/services/window.py:245
@@ -1981,7 +2218,6 @@ msgstr ""
 
 #: mast/gtk4/snapshots/window.py:62 mast/gtk4/snapshots/window.py:255
 #: mast/qt6/snapshots/window.py:59 mast/qt6/snapshots/window.py:179
-#: mast/qt6/users/groups_manager.py:253 mast/qt6/users/users_manager.py:331
 #: mast/tui/snapshots/window.py:71
 msgid "Create"
 msgstr ""
@@ -2035,7 +2271,6 @@ msgid "Description cannot be empty."
 msgstr ""
 
 #: mast/gtk4/snapshots/window.py:256 mast/qt6/snapshots/window.py:180
-#: mast/qt6/users/groups_manager.py:254 mast/qt6/users/users_manager.py:332
 msgid "Creating..."
 msgstr ""
 
@@ -2054,9 +2289,9 @@ msgstr ""
 msgid "Please select a snapshot."
 msgstr ""
 
-#: mast/gtk4/snapshots/window.py:279 mast/gtk4/users/groups_manager.py:250
-#: mast/gtk4/users/users_manager.py:320 mast/qt6/snapshots/window.py:204
-#: mast/qt6/users/groups_manager.py:223 mast/qt6/users/users_manager.py:282
+#: mast/gtk4/snapshots/window.py:279 mast/gtk4/users/group_list.py:138
+#: mast/gtk4/users/user_list.py:157 mast/qt6/snapshots/window.py:204
+#: mast/qt6/users/group_list.py:122 mast/qt6/users/user_list.py:142
 msgid "Deleting..."
 msgstr ""
 
@@ -2077,19 +2312,14 @@ msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:52 mast/qt6/ssh/__init__.py:43
 #, python-brace-format
-msgid ""
-"The following SSH items have insecure permissions:\n"
-"\n"
-"{0}\n"
-"\n"
+msgid "The following SSH items have insecure permissions:\n\n"
+"{0}\n\n"
 "Would you like to fix them now?"
 msgstr ""
 
 #: mast/gtk4/ssh/__init__.py:76 mast/qt6/ssh/__init__.py:61
 #, python-brace-format
-msgid ""
-"Failed to fix permissions for the following items:\n"
-"\n"
+msgid "Failed to fix permissions for the following items:\n\n"
 "{0}"
 msgstr ""
 
@@ -2247,17 +2477,13 @@ msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:226 mast/qt6/ssh/keys_tab.py:201
 #, python-brace-format
-msgid ""
-"Are you sure you want to delete the following keys?\n"
-"\n"
+msgid "Are you sure you want to delete the following keys?\n\n"
 "{0}"
 msgstr ""
 
 #: mast/gtk4/ssh/keys_tab.py:243 mast/qt6/ssh/keys_tab.py:218
 #, python-brace-format
-msgid ""
-"Failed to delete some files:\n"
-"\n"
+msgid "Failed to delete some files:\n\n"
 "{0}"
 msgstr ""
 
@@ -2275,207 +2501,204 @@ msgstr ""
 msgid "Users & Groups"
 msgstr ""
 
-#: mast/gtk4/users/groups_manager.py:93 mast/qt6/users/groups_manager.py:85
-msgid "Group Name"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:97 mast/gtk4/users/users_manager.py:89
-#: mast/qt6/users/groups_manager.py:90 mast/qt6/users/users_manager.py:91
+#: mast/gtk4/users/group_form.py:43 mast/qt6/users/group_form.py:42
 msgid "GID"
 msgstr ""
 
-#: mast/gtk4/users/groups_manager.py:101 mast/qt6/users/groups_manager.py:95
+#: mast/gtk4/users/group_form.py:47 mast/qt6/users/group_form.py:47
+msgid "Group Name"
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:51 mast/qt6/users/group_form.py:52
 msgid "Members"
 msgstr ""
 
-#: mast/gtk4/users/groups_manager.py:146 mast/qt6/users/groups_manager.py:122
+#: mast/gtk4/users/group_form.py:135 mast/qt6/users/group_form.py:115
+msgid "Group name cannot be empty"
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:148
+msgid "Group name must start with a lowercase letter and can only contain lowercase letters, digits, hyphens, and underscores."
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:160 mast/qt6/users/group_form.py:129
+#, python-brace-format
+msgid "Group '{0}' created successfully."
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:161 mast/qt6/users/group_form.py:130
+msgid "Create Group"
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:164 mast/qt6/users/group_form.py:136
+#, python-brace-format
+msgid "Group '{0}' updated successfully."
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:165 mast/qt6/users/group_form.py:137
+msgid "Update Group"
+msgstr ""
+
+#: mast/gtk4/users/group_form.py:169 mast/gtk4/users/user_form.py:316
+#: mast/qt6/users/group_form.py:141 mast/qt6/users/user_form.py:283
+msgid "Saving..."
+msgstr ""
+
+#: mast/gtk4/users/group_list.py:79 mast/qt6/users/group_list.py:62
+msgid "System Groups"
+msgstr ""
+
+#: mast/gtk4/users/group_list.py:80 mast/qt6/users/group_list.py:66
+msgid "User Groups"
+msgstr ""
+
+#: mast/gtk4/users/group_list.py:129 mast/qt6/users/group_list.py:114
+#, python-brace-format
+msgid "Are you sure you want to delete group '{0}'?"
+msgstr ""
+
+#: mast/gtk4/users/group_list.py:139 mast/qt6/users/group_list.py:123
+msgid "Delete Group"
+msgstr ""
+
+#: mast/gtk4/users/group_list.py:141 mast/qt6/users/group_list.py:125
+#, python-brace-format
+msgid "Group '{0}' deleted successfully."
+msgstr ""
+
+#: mast/gtk4/users/group_manager.py:59 mast/qt6/users/group_manager.py:57
 #: mast/tui/users/window.py:200
 #, python-brace-format
 msgid "Failed to load groups: {0}"
 msgstr ""
 
-#: mast/gtk4/users/groups_manager.py:153 mast/qt6/users/groups_manager.py:127
-msgid "System Groups"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:154 mast/qt6/users/groups_manager.py:131
-msgid "User Groups"
-msgstr ""
-
-
-
-#: mast/gtk4/users/user_list.py:77 mast/qt6/users/user_list.py:62
-msgid "System Users"
-msgstr "Systémové uživatelé"
-
-#: mast/gtk4/users/user_list.py:78 mast/qt6/users/user_list.py:66
-msgid "Local Users"
-msgstr "Místní uživatelé"
-
-#: mast/gtk4/users/user_form.py:298 mast/qt6/users/user_form.py:267
-msgid "No changes to save."
-msgstr "Žádné změny ke uložení."
-
-#: mast/gtk4/users/groups_manager.py:241 mast/qt6/users/groups_manager.py:215
-#, python-brace-format
-msgid "Are you sure you want to delete group '{0}'?"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:251 mast/qt6/users/groups_manager.py:224
-msgid "Delete Group"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:253 mast/qt6/users/groups_manager.py:226
-#, python-brace-format
-msgid "Group '{0}' deleted successfully."
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:270 mast/qt6/users/groups_manager.py:235
-msgid "Group name cannot be empty"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:283
-msgid ""
-"Group name must start with a lowercase letter and can only contain "
-"lowercase letters, digits, hyphens, and underscores."
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:295 mast/qt6/users/groups_manager.py:249
-#, python-brace-format
-msgid "Group '{0}' created successfully."
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:296 mast/qt6/users/groups_manager.py:250
-msgid "Create Group"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:299 mast/qt6/users/groups_manager.py:267
-#, python-brace-format
-msgid "Group '{0}' updated successfully."
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:300 mast/qt6/users/groups_manager.py:268
-msgid "Update Group"
-msgstr ""
-
-#: mast/gtk4/users/groups_manager.py:304 mast/gtk4/users/users_manager.py:395
-msgid "Saving..."
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:84 mast/qt6/users/users_manager.py:86
+#: mast/gtk4/users/user_form.py:43 mast/qt6/users/user_form.py:50
 msgid "UID"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:94 mast/qt6/users/users_manager.py:96
+#: mast/gtk4/users/user_form.py:48 mast/qt6/users/user_form.py:55
 #: mast/tui/ssh/window.py:520 mast/tui/users/window.py:161
 msgid "Username"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:99 mast/qt6/users/users_manager.py:101
+#: mast/gtk4/users/user_form.py:54 mast/qt6/users/user_form.py:61
 msgid "Display Name"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:101 mast/qt6/users/users_manager.py:103
+#: mast/gtk4/users/user_form.py:56 mast/qt6/users/user_form.py:63
 msgid "Full name"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:104 mast/qt6/users/users_manager.py:106
+#: mast/gtk4/users/user_form.py:59 mast/qt6/users/user_form.py:66
 msgid "Home Directory"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:106 mast/qt6/users/users_manager.py:108
+#: mast/gtk4/users/user_form.py:61 mast/qt6/users/user_form.py:68
 msgid "/home/username"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:109 mast/qt6/users/users_manager.py:111
+#: mast/gtk4/users/user_form.py:64 mast/qt6/users/user_form.py:71
 msgid "Shell"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:111 mast/qt6/users/users_manager.py:113
+#: mast/gtk4/users/user_form.py:66 mast/qt6/users/user_form.py:73
 msgid "/bin/bash"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:114 mast/qt6/users/users_manager.py:116
-msgid "Primary Group"
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:118 mast/qt6/users/users_manager.py:120
+#: mast/gtk4/users/user_form.py:69 mast/qt6/users/user_form.py:76
 msgid "Password"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:121 mast/qt6/users/users_manager.py:123
+#: mast/gtk4/users/user_form.py:72 mast/qt6/users/user_form.py:79
 msgid "Leave empty to skip"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:124 mast/qt6/users/users_manager.py:126
+#: mast/gtk4/users/user_form.py:75 mast/qt6/users/user_form.py:82
+msgid "Primary Group"
+msgstr ""
+
+#: mast/gtk4/users/user_form.py:79 mast/qt6/users/user_form.py:86
 msgid "Additional Groups"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:170 mast/qt6/users/users_manager.py:152
-#: mast/tui/users/window.py:183
-#, python-brace-format
-msgid "Failed to load users: {0}"
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:299 mast/qt6/users/users_manager.py:268
-#: mast/tui/users/window.py:410
-msgid "This user cannot be deleted."
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:311 mast/qt6/users/users_manager.py:274
-#, python-brace-format
-msgid "Are you sure you want to delete user '{0}'?"
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:321 mast/qt6/users/users_manager.py:283
-msgid "Delete User"
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:323 mast/qt6/users/users_manager.py:285
-#, python-brace-format
-msgid "User '{0}' deleted successfully."
-msgstr ""
-
-#: mast/gtk4/users/users_manager.py:340 mast/qt6/users/users_manager.py:294
+#: mast/gtk4/users/user_form.py:231 mast/qt6/users/user_form.py:211
 msgid "Username cannot be empty"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:354 mast/qt6/users/users_manager.py:301
-msgid ""
-"Username must start with a lowercase letter and can only contain "
-"lowercase letters, digits, hyphens, and underscores."
+#: mast/gtk4/users/user_form.py:245 mast/qt6/users/user_form.py:218
+msgid "Username must start with a lowercase letter and can only contain lowercase letters, digits, hyphens, and underscores."
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:379 mast/qt6/users/users_manager.py:327
+#: mast/gtk4/users/user_form.py:270 mast/qt6/users/user_form.py:244
 #, python-brace-format
 msgid "User '{0}' created successfully."
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:380 mast/qt6/users/users_manager.py:328
+#: mast/gtk4/users/user_form.py:271 mast/qt6/users/user_form.py:245
 msgid "Create User"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:390 mast/qt6/users/users_manager.py:351
+#: mast/gtk4/users/user_form.py:277 mast/gtk4/users/user_form.py:333
+#: mast/qt6/users/user_form.py:251 mast/qt6/users/user_form.py:303
+#: mast/tui/users/window.py:461
+msgid "Password set successfully."
+msgstr ""
+
+#: mast/gtk4/users/user_form.py:278 mast/gtk4/users/user_form.py:329
+#: mast/gtk4/users/user_form.py:331 mast/qt6/users/user_form.py:252
+#: mast/qt6/users/user_form.py:299 mast/qt6/users/user_form.py:301
+msgid "Set Password"
+msgstr ""
+
+#: mast/gtk4/users/user_form.py:281 mast/gtk4/users/user_form.py:330
+#: mast/qt6/users/user_form.py:255 mast/qt6/users/user_form.py:300
+msgid "Setting password..."
+msgstr ""
+
+#: mast/gtk4/users/user_form.py:298 mast/qt6/users/user_form.py:267
+msgid "No changes to save."
+msgstr ""
+
+#: mast/gtk4/users/user_form.py:311 mast/qt6/users/user_form.py:278
 #, python-brace-format
 msgid "User '{0}' updated successfully."
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:391 mast/qt6/users/users_manager.py:352
+#: mast/gtk4/users/user_form.py:312 mast/qt6/users/user_form.py:279
 msgid "Update User"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:408 mast/gtk4/users/users_manager.py:410
-#: mast/qt6/users/users_manager.py:372 mast/qt6/users/users_manager.py:374
-msgid "Set Password"
+#: mast/gtk4/users/user_list.py:77 mast/qt6/users/user_list.py:62
+msgid "System Users"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:409 mast/qt6/users/users_manager.py:373
-msgid "Setting password..."
+#: mast/gtk4/users/user_list.py:78 mast/qt6/users/user_list.py:66
+msgid "Local Users"
 msgstr ""
 
-#: mast/gtk4/users/users_manager.py:412 mast/qt6/users/users_manager.py:376
-#: mast/tui/users/window.py:461
-msgid "Password set successfully."
+#: mast/gtk4/users/user_list.py:136 mast/qt6/users/user_list.py:128
+#: mast/tui/users/window.py:410
+msgid "This user cannot be deleted."
+msgstr ""
+
+#: mast/gtk4/users/user_list.py:148 mast/qt6/users/user_list.py:134
+#, python-brace-format
+msgid "Are you sure you want to delete user '{0}'?"
+msgstr ""
+
+#: mast/gtk4/users/user_list.py:158 mast/qt6/users/user_list.py:143
+msgid "Delete User"
+msgstr ""
+
+#: mast/gtk4/users/user_list.py:160 mast/qt6/users/user_list.py:145
+#, python-brace-format
+msgid "User '{0}' deleted successfully."
+msgstr ""
+
+#: mast/gtk4/users/user_manager.py:59 mast/qt6/users/user_manager.py:57
+#: mast/tui/users/window.py:183
+#, python-brace-format
+msgid "Failed to load users: {0}"
 msgstr ""
 
 #: mast/gtk4/users/window.py:31 mast/qt6/users/window.py:34
@@ -2502,8 +2725,12 @@ msgstr ""
 msgid "About MaST"
 msgstr ""
 
-#: mast/qt6/main_window.py:61
+#: mast/qt6/main_window.py:63
 msgid "Help"
+msgstr ""
+
+#: mast/qt6/android/package_manager_panel.py:481
+msgid "APK Files (*.apk);;All Files (*)"
 msgstr ""
 
 #: mast/qt6/datetime/window.py:154
@@ -2661,14 +2888,6 @@ msgstr ""
 #: mast/qt6/ssh/keys_generate_dialog.py:242
 #, python-brace-format
 msgid "Failed to generate SSH key: {0}"
-msgstr ""
-
-#: mast/qt6/users/groups_manager.py:271 mast/qt6/users/users_manager.py:355
-msgid "Update"
-msgstr ""
-
-#: mast/qt6/users/groups_manager.py:272 mast/qt6/users/users_manager.py:356
-msgid "Updating..."
 msgstr ""
 
 #: mast/tui/main_window.py:64
@@ -2871,10 +3090,6 @@ msgstr ""
 #: mast/tui/proxy/window.py:114
 #, python-brace-format
 msgid "Error: Failed to load proxy configuration: {0}"
-msgstr ""
-
-#: mast/tui/proxy/window.py:120
-msgid "Disabled"
 msgstr ""
 
 #: mast/tui/proxy/window.py:121
@@ -3148,23 +3363,23 @@ msgid "UID:"
 msgstr ""
 
 #: mast/tui/users/window.py:114
-msgid "GID:"
-msgstr ""
-
-#: mast/tui/users/window.py:117
 msgid "Username:"
 msgstr ""
 
-#: mast/tui/users/window.py:120
+#: mast/tui/users/window.py:117
 msgid "Display Name:"
 msgstr ""
 
-#: mast/tui/users/window.py:123
+#: mast/tui/users/window.py:120
 msgid "Home Directory:"
 msgstr ""
 
-#: mast/tui/users/window.py:126
+#: mast/tui/users/window.py:123
 msgid "Shell:"
+msgstr ""
+
+#: mast/tui/users/window.py:126
+msgid "Password:"
 msgstr ""
 
 #: mast/tui/users/window.py:129
@@ -3172,11 +3387,11 @@ msgid "Primary Group:"
 msgstr ""
 
 #: mast/tui/users/window.py:132
-msgid "Password:"
+msgid "Additional Groups:"
 msgstr ""
 
-#: mast/tui/users/window.py:135
-msgid "Additional Groups:"
+#: mast/tui/users/window.py:144
+msgid "GID:"
 msgstr ""
 
 #: mast/tui/users/window.py:147
@@ -3192,17 +3407,17 @@ msgid "Full Name"
 msgstr ""
 
 #: mast/tui/users/window.py:165 mast/tui/users/window.py:169
-#: mast/tui/users/window.py:260 mast/tui/users/window.py:436
+#: mast/tui/users/window.py:258 mast/tui/users/window.py:436
 msgid "Group"
 msgstr ""
 
-#: mast/tui/users/window.py:165 mast/tui/users/window.py:262
-#: mast/tui/users/window.py:284 mast/tui/users/window.py:332
+#: mast/tui/users/window.py:165 mast/tui/users/window.py:260
+#: mast/tui/users/window.py:280 mast/tui/users/window.py:332
 #: mast/tui/users/window.py:334 mast/tui/users/window.py:435
 msgid "Selected"
 msgstr ""
 
-#: mast/tui/users/window.py:173 mast/tui/users/window.py:294
+#: mast/tui/users/window.py:173 mast/tui/users/window.py:292
 #: mast/tui/users/window.py:302 mast/tui/users/window.py:359
 #: mast/tui/users/window.py:361 mast/tui/users/window.py:493
 msgid "Member"
@@ -3255,13 +3470,4 @@ msgstr ""
 #: mast/tui/users/window.py:501
 msgid "Group updated successfully."
 msgstr ""
-
-#~ msgid "Packages module is not yet implemented."
-#~ msgstr ""
-
-#~ msgid "Failed to launch package manager."
-#~ msgstr "Nelze spustit správce balíčků."
-
-#~ msgid "Failed to switch mirrors: %s"
-#~ msgstr ""
 
