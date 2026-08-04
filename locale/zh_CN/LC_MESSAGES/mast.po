@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-08-04 09:57+0000\n"
-"PO-Revision-Date: 2026-08-04 10:02\n"
+"PO-Revision-Date: 2026-08-04 10:14\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr "用户"
 
 #: mast/core/android/package_filters.py:26
 msgid "Bloatware"
-msgstr ""
+msgstr "冗余"
 
 #: mast/gtk4/about_dialog.py:22
 msgid "GitHub"
@@ -79,12 +79,12 @@ msgstr "实验性"
 
 #: mast/gtk4/android/__init__.py:16 mast/qt6/android/__init__.py:10
 msgid "Android"
-msgstr ""
+msgstr "Android"
 
 #: mast/gtk4/android/device_info_panel.py:32
 #: mast/qt6/android/device_info_panel.py:25
 msgid "Serial"
-msgstr ""
+msgstr "序列号"
 
 #: mast/gtk4/android/device_info_panel.py:33
 #: mast/gtk4/android/device_panel.py:54
@@ -112,27 +112,27 @@ msgstr "名称"
 #: mast/gtk4/android/device_info_panel.py:34
 #: mast/qt6/android/device_info_panel.py:27
 msgid "Code Name"
-msgstr ""
+msgstr "代号"
 
 #: mast/gtk4/android/device_info_panel.py:35
 #: mast/qt6/android/device_info_panel.py:28
 msgid "Model"
-msgstr ""
+msgstr "型号"
 
 #: mast/gtk4/android/device_info_panel.py:36
 #: mast/qt6/android/device_info_panel.py:29
 msgid "Manufacturer"
-msgstr ""
+msgstr "厂商"
 
 #: mast/gtk4/android/device_info_panel.py:37
 #: mast/qt6/android/device_info_panel.py:30
 msgid "Android Version"
-msgstr ""
+msgstr "Android 版本"
 
 #: mast/gtk4/android/device_info_panel.py:38
 #: mast/qt6/android/device_info_panel.py:31
 msgid "API Level"
-msgstr ""
+msgstr "API 级别"
 
 #: mast/gtk4/android/device_info_panel.py:39
 #: mast/gtk4/android/device_panel.py:59 mast/gtk4/languages/manager.py:68
@@ -147,23 +147,23 @@ msgstr "状态"
 #: mast/gtk4/android/device_panel.py:109
 #: mast/qt6/android/device_info_panel.py:65 mast/qt6/android/device_panel.py:92
 msgid "Connected"
-msgstr ""
+msgstr "已连接"
 
 #: mast/gtk4/android/device_info_panel.py:71
 #: mast/gtk4/android/device_panel.py:111
 #: mast/qt6/android/device_info_panel.py:67 mast/qt6/android/device_panel.py:94
 msgid "Offline"
-msgstr ""
+msgstr "离线"
 
 #: mast/gtk4/android/device_info_panel.py:73
 #: mast/gtk4/android/device_panel.py:113
 #: mast/qt6/android/device_info_panel.py:69 mast/qt6/android/device_panel.py:96
 msgid "Unauthorized"
-msgstr ""
+msgstr "未授权"
 
 #: mast/gtk4/android/device_panel.py:44 mast/qt6/android/device_panel.py:46
 msgid "Devices"
-msgstr ""
+msgstr "设备"
 
 #: mast/gtk4/android/device_panel.py:46
 #: mast/gtk4/android/package_manager_panel.py:126
@@ -315,7 +315,7 @@ msgstr "错误"
 #: mast/gtk4/android/package_manager_panel.py:56
 #: mast/qt6/android/package_manager_panel.py:69
 msgid "Installing"
-msgstr ""
+msgstr "正在安装"
 
 #: mast/gtk4/android/package_manager_panel.py:93
 #: mast/gtk4/flatpak/package_manager.py:94
@@ -349,12 +349,12 @@ msgstr "禁用"
 #: mast/gtk4/android/package_manager_panel.py:117
 #: mast/qt6/android/package_manager_panel.py:128
 msgid "Install APK"
-msgstr ""
+msgstr "安装 APK"
 
 #: mast/gtk4/android/package_manager_panel.py:121
 #: mast/qt6/android/package_manager_panel.py:131
 msgid "Install F-Droid"
-msgstr ""
+msgstr "安装 F-Droid"
 
 #: mast/gtk4/android/package_manager_panel.py:137
 #: mast/gtk4/flatpak/package_manager.py:128
@@ -396,33 +396,36 @@ msgstr "类型"
 #: mast/gtk4/android/package_manager_panel.py:253
 #: mast/qt6/android/package_manager_panel.py:422
 msgid "Uninstall Package"
-msgstr ""
+msgstr "卸载包"
 
 #: mast/gtk4/android/package_manager_panel.py:259
 #: mast/qt6/android/package_manager_panel.py:413
 #, python-brace-format
 msgid "Are you sure you want to uninstall \"{0}\"?\n\n"
 "This is a system package. Removing it may cause missing or unstable system functionality."
-msgstr ""
+msgstr "您确定要卸载 \"{0}吗？\n\n"
+"它是一个系统包。删除它可能导致系统功能丢失或不稳定。"
 
 #: mast/gtk4/android/package_manager_panel.py:263
 #: mast/qt6/android/package_manager_panel.py:417
 #, python-brace-format
 msgid "Are you sure you want to uninstall \"{0}\"?\n\n"
 "All package data for this user will be removed."
-msgstr ""
+msgstr "您确定要卸载 \"{0}\"吗？\n\n"
+"此包的用户数据也将被删除。"
 
 #: mast/gtk4/android/package_manager_panel.py:299
 #: mast/qt6/android/package_manager_panel.py:306
 msgid "Disable Package"
-msgstr ""
+msgstr "禁用包"
 
 #: mast/gtk4/android/package_manager_panel.py:302
 #: mast/qt6/android/package_manager_panel.py:301
 #, python-brace-format
 msgid "Are you sure you want to disable \"{0}\"?\n\n"
 "The package will remain installed but will be unavailable until re-enabled."
-msgstr ""
+msgstr "您确定要禁用“{0}”吗？\n\n"
+"软件包将继续安装，但在重新启用之前将无法使用。"
 
 #: mast/gtk4/android/package_manager_panel.py:341
 #: mast/gtk4/android/package_manager_panel.py:382
@@ -464,71 +467,71 @@ msgstr "成功"
 #: mast/qt6/android/package_manager_panel.py:333
 #, python-brace-format
 msgid "Package \"{0}\" disabled successfully."
-msgstr ""
+msgstr "成功禁用包 \"{0}\"。"
 
 #: mast/gtk4/android/package_manager_panel.py:350
 #: mast/qt6/android/package_manager_panel.py:340
 #, python-brace-format
 msgid "Failed to disable \"{0}\"."
-msgstr ""
+msgstr "未能禁用 \"{0}\"。"
 
 #: mast/gtk4/android/package_manager_panel.py:383
 #: mast/qt6/android/package_manager_panel.py:450
 #, python-brace-format
 msgid "Package \"{0}\" uninstalled successfully."
-msgstr ""
+msgstr "软件包 \"{0}\" 已成功卸载。"
 
 #: mast/gtk4/android/package_manager_panel.py:391
 #: mast/qt6/android/package_manager_panel.py:457
 #, python-brace-format
 msgid "Failed to uninstall \"{0}\". Device may require root access."
-msgstr ""
+msgstr "卸载 \"{0}\" 失败。设备可能需要 root 权限。"
 
 #: mast/gtk4/android/package_manager_panel.py:407
 #: mast/qt6/android/package_manager_panel.py:479
 msgid "Select APK File"
-msgstr ""
+msgstr "选择 APK 文件"
 
 #: mast/gtk4/android/package_manager_panel.py:409
 msgid "APK Files"
-msgstr ""
+msgstr "APK 文件"
 
 #: mast/gtk4/android/package_manager_panel.py:437
 #: mast/qt6/android/package_manager_panel.py:499
 #, python-brace-format
 msgid "Installing \"{0}\"..."
-msgstr ""
+msgstr "正在安装 \"{0}\"……"
 
 #: mast/gtk4/android/package_manager_panel.py:463
 #: mast/qt6/android/package_manager_panel.py:361
 msgid "Installing F-Droid..."
-msgstr ""
+msgstr "正在安装 F-Droid……"
 
 #: mast/gtk4/android/package_manager_panel.py:499
 #: mast/qt6/android/package_manager_panel.py:382
 msgid "F-Droid installed successfully."
-msgstr ""
+msgstr "F-Droid 安装成功。"
 
 #: mast/gtk4/android/package_manager_panel.py:507
 #: mast/qt6/android/package_manager_panel.py:389
 msgid "Failed to install F-Droid."
-msgstr ""
+msgstr "安装 F-Droid 失败。"
 
 #: mast/gtk4/android/package_manager_panel.py:518
 #: mast/qt6/android/package_manager_panel.py:511
 #, python-brace-format
 msgid "APK \"{0}\" installed successfully."
-msgstr ""
+msgstr "APK \"{0}\" 安装成功。"
 
 #: mast/gtk4/android/package_manager_panel.py:526
 #: mast/qt6/android/package_manager_panel.py:520
 #, python-brace-format
 msgid "Failed to install \"{0}\"."
-msgstr ""
+msgstr "无法安装 \"{0}\"。"
 
 #: mast/gtk4/android/window.py:63 mast/qt6/android/window.py:76
 msgid "Device Info"
-msgstr ""
+msgstr "设备信息"
 
 #: mast/gtk4/android/window.py:66 mast/gtk4/packages/__init__.py:11
 #: mast/qt6/android/window.py:80 mast/qt6/packages/__init__.py:11
@@ -538,15 +541,15 @@ msgstr "软件包"
 
 #: mast/gtk4/android/window.py:92 mast/qt6/android/window.py:105
 msgid "ADB Not Found"
-msgstr ""
+msgstr "未找到 ADB"
 
 #: mast/gtk4/android/window.py:97 mast/qt6/android/window.py:109
 msgid "ADB (Android Debug Bridge) is not installed or not in PATH. Please install Android SDK platform tools."
-msgstr ""
+msgstr "ADB (Android Debug Bridge) 未安装或没有 PATH。请安装 Android SDK 平台工具。"
 
 #: mast/gtk4/android/window.py:124 mast/qt6/android/window.py:137
 msgid "Failed to connect to the selected Android device."
-msgstr ""
+msgstr "无法连接到所选的 Android 设备。"
 
 #: mast/gtk4/command/dialog.py:30 mast/qt6/command/dialog.py:30
 msgid "Running command, please wait..."
@@ -2738,7 +2741,7 @@ msgstr "帮助"
 
 #: mast/qt6/android/package_manager_panel.py:481
 msgid "APK Files (*.apk);;All Files (*)"
-msgstr ""
+msgstr "APK 文件 (*.apk);;所有文件 (*)"
 
 #: mast/qt6/datetime/window.py:154
 #, python-brace-format
@@ -2808,7 +2811,7 @@ msgstr "恢复为原始值"
 
 #: mast/qt6/journal/window.py:115
 msgid "PID"
-msgstr ""
+msgstr "PID"
 
 #: mast/qt6/languages/manager.py:141
 #, python-brace-format
