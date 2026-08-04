@@ -16,41 +16,14 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import GLib, GObject, Gtk
 
 from mast.core.android import (
+    disable_package,
     PACKAGE_TYPE_ALL,
     PACKAGE_TYPE_FILTER_OPTIONS,
     DeviceInfo,
     install_apk,
+    uninstall_package,
 )
 from mast.core.i18n import _
-
-
-def _uninstall_package_with_adbutils(
-    adb_device: AdbDevice, package_name: str, keep_data: bool = False
-) -> bool:
-    args = ["pm", "uninstall", "--user", "0"]
-    if keep_data:
-        args.append("-k")
-    args.append(package_name)
-
-    try:
-        output = str(adb_device.shell(args, timeout=60)).strip()
-        return "Success" in output
-    except Exception:
-        return False
-
-
-def _disable_package_with_adbutils(adb_device: AdbDevice, package_name: str) -> bool:
-    args = ["pm", "disable-user", "--user", "0", package_name]
-
-    try:
-        output = str(adb_device.shell(args, timeout=60)).strip()
-    except Exception:
-        return False
-
-    lower = output.lower()
-    if "unknown package" in lower or "error" in lower or "exception" in lower:
-        return False
-    return "disabled-user" in lower or "already" in lower or bool(output)
 
 
 class PackageManagerPanel(Gtk.Box):
@@ -316,7 +289,7 @@ class PackageManagerPanel(Gtk.Box):
 
         def worker() -> None:
             try:
-                success = _disable_package_with_adbutils(adb_device, pkg_name)
+                success = disable_package(adb_device, pkg_name)
                 GLib.idle_add(self._on_disable_finished, success, pkg_name)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))
@@ -357,7 +330,7 @@ class PackageManagerPanel(Gtk.Box):
 
         def worker() -> None:
             try:
-                success = _uninstall_package_with_adbutils(adb_device, pkg_name)
+                success = uninstall_package(adb_device, pkg_name)
                 GLib.idle_add(self._on_uninstall_finished, success, pkg_name)
             except Exception as e:
                 GLib.idle_add(self.emit, "show-message", "error", _("Error"), str(e))

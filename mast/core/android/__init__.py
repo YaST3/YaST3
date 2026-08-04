@@ -1,6 +1,7 @@
 """Android device management module."""
 
 from mast.core.android.adb import (
+    disable_package,
     DeviceInfo,
     PackageInfo,
     get_device_info,
@@ -8,6 +9,7 @@ from mast.core.android.adb import (
     is_adb_available,
     list_devices,
     list_packages,
+    uninstall_package,
 )
 from mast.core.android.package_filters import (
     PACKAGE_TYPE_ALL,
@@ -21,10 +23,12 @@ from mast.core.android.package_filters import (
 )
 
 __all__ = [
+    "disable_package",
     "DeviceInfo",
     "PackageInfo",
     "get_device_info",
     "install_apk",
+    "uninstall_package",
     "is_adb_available",
     "list_devices",
     "list_packages",

@@ -57,6 +57,33 @@ def install_apk(adb_device: Any, apk_path: str) -> bool:
         return False
 
 
+def uninstall_package(adb_device: Any, package_name: str, keep_data: bool = False) -> bool:
+    args = ["pm", "uninstall", "--user", "0"]
+    if keep_data:
+        args.append("-k")
+    args.append(package_name)
+
+    try:
+        output = str(adb_device.shell(args, timeout=ADB_TIMEOUT)).strip()
+        return "Success" in output
+    except Exception:
+        return False
+
+
+def disable_package(adb_device: Any, package_name: str) -> bool:
+    args = ["pm", "disable-user", "--user", "0", package_name]
+
+    try:
+        output = str(adb_device.shell(args, timeout=ADB_TIMEOUT)).strip()
+    except Exception:
+        return False
+
+    lower = output.lower()
+    if "unknown package" in lower or "error" in lower or "exception" in lower:
+        return False
+    return "disabled-user" in lower or "already" in lower or bool(output)
+
+
 def _parse_pm_package_line(line: str) -> tuple[str, str] | None:
     if not line.startswith("package:") or "=" not in line:
         return None
