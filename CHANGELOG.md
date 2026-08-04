@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.24 - 2026-08-04
+
+- feat(android): added android module to install apk, F-Droid, and uninstall bloatware.
+
 ## 0.0.23 - 2026-07-20
 
 - feat(users): grouped users into system users and local users.
