@@ -1,5 +1,9 @@
 """UI components for the Font Config module (GTK4)."""
 
+from __future__ import annotations
+
+import subprocess
+
 import gi
 
 gi.require_version("Gtk", "4.0")
@@ -8,14 +12,18 @@ from gi.repository import Gtk
 
 from mast.core.fontconfig import FontConfig
 from mast.core.i18n import _
+from mast.gtk4.fontconfig.alias_tab import FontAliasTab
+from mast.gtk4.fontconfig.match_tab import FontMatchTab
+from mast.gtk4.fontconfig.option_tab import FontOptionTab
 
 
 class FontConfigWindow(Gtk.ApplicationWindow):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.set_default_size(560, 360)
+        self.set_default_size(760, 480)
         self.config = FontConfig()
+        self.system_fonts = self._load_system_fonts()
 
         self.main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=16)
         self.main_box.set_margin_top(16)
@@ -23,58 +31,55 @@ class FontConfigWindow(Gtk.ApplicationWindow):
         self.main_box.set_margin_start(16)
         self.main_box.set_margin_end(16)
 
-        self._build_form()
+        self._build_tabs()
         self._build_buttons()
 
         self.set_child(self.main_box)
         self.load_config()
 
-    def _build_form(self) -> None:
-        grid = Gtk.Grid()
-        grid.set_row_spacing(12)
-        grid.set_column_spacing(16)
+    def _load_system_fonts(self) -> list[str]:
+        default_fonts = ["Sans", "Serif", "Monospace"]
 
-        row = 0
+        try:
+            proc = subprocess.run(
+                ["fc-list", ":", "family"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+        except OSError:
+            return default_fonts
 
-        self.antialias_switch = Gtk.Switch()
-        self.antialias_switch.set_halign(Gtk.Align.START)
-        grid.attach(Gtk.Label(label=_("Antialias"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.antialias_switch, 1, row, 1, 1)
-        row += 1
+        if proc.returncode != 0 or not proc.stdout:
+            return default_fonts
 
-        self.hinting_switch = Gtk.Switch()
-        self.hinting_switch.set_halign(Gtk.Align.START)
-        grid.attach(Gtk.Label(label=_("Hinting"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.hinting_switch, 1, row, 1, 1)
-        row += 1
+        seen: set[str] = set()
+        fonts: list[str] = []
+        for line in proc.stdout.splitlines():
+            for item in line.split(","):
+                name = item.strip()
+                if not name:
+                    continue
+                if name in seen:
+                    continue
+                seen.add(name)
+                fonts.append(name)
 
-        self.hintstyle_combo = Gtk.ComboBoxText()
-        for option in FontConfig.HINTSTYLE_OPTIONS:
-            self.hintstyle_combo.append_text(option)
-        grid.attach(Gtk.Label(label=_("Hint Style"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.hintstyle_combo, 1, row, 1, 1)
-        row += 1
+        return sorted(fonts, key=str.casefold) if fonts else default_fonts
 
-        self.rgba_combo = Gtk.ComboBoxText()
-        for option in FontConfig.RGBA_OPTIONS:
-            self.rgba_combo.append_text(option)
-        grid.attach(Gtk.Label(label=_("Subpixel Render"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.rgba_combo, 1, row, 1, 1)
-        row += 1
+    def _build_tabs(self) -> None:
+        self.notebook = Gtk.Notebook()
 
-        self.lcdfilter_combo = Gtk.ComboBoxText()
-        for option in FontConfig.LCDFILTER_OPTIONS:
-            self.lcdfilter_combo.append_text(option)
-        grid.attach(Gtk.Label(label=_("LCD Filter"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.lcdfilter_combo, 1, row, 1, 1)
-        row += 1
+        self.match_tab = FontMatchTab(self.config, self.system_fonts, self)
+        self.notebook.append_page(self.match_tab, Gtk.Label(label=_("Font Match")))
 
-        self.embeddedbitmap_switch = Gtk.Switch()
-        self.embeddedbitmap_switch.set_halign(Gtk.Align.START)
-        grid.attach(Gtk.Label(label=_("Embedded Bitmap"), halign=Gtk.Align.START), 0, row, 1, 1)
-        grid.attach(self.embeddedbitmap_switch, 1, row, 1, 1)
+        self.alias_tab = FontAliasTab(self.config, self.system_fonts, self._show_message_dialog)
+        self.notebook.append_page(self.alias_tab, Gtk.Label(label=_("Font Alias")))
 
-        self.main_box.append(grid)
+        self.option_tab = FontOptionTab()
+        self.notebook.append_page(self.option_tab, Gtk.Label(label=_("Font Option")))
+
+        self.main_box.append(self.notebook)
 
     def _build_buttons(self) -> None:
         button_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
@@ -91,30 +96,12 @@ class FontConfigWindow(Gtk.ApplicationWindow):
 
         self.main_box.append(button_box)
 
-    def _set_combo_value(self, combo: Gtk.ComboBoxText, value: str) -> None:
-        model = combo.get_model()
-        if model is None:
-            return
-        active_index = 0
-        for index, row in enumerate(model):
-            if row[0] == value:
-                active_index = index
-                break
-        combo.set_active(active_index)
-
-    def _get_combo_value(self, combo: Gtk.ComboBoxText, fallback: str) -> str:
-        text = combo.get_active_text()
-        return text if text else fallback
-
     def load_config(self) -> None:
         try:
             self.config.reload()
-            self.antialias_switch.set_active(self.config.antialias)
-            self.hinting_switch.set_active(self.config.hinting)
-            self._set_combo_value(self.hintstyle_combo, self.config.hintstyle)
-            self._set_combo_value(self.rgba_combo, self.config.rgba)
-            self._set_combo_value(self.lcdfilter_combo, self.config.lcdfilter)
-            self.embeddedbitmap_switch.set_active(self.config.embeddedbitmap)
+            self.match_tab.refresh(0)
+            self.alias_tab.refresh(0)
+            self.option_tab.load_from_config(self.config)
         except Exception as e:
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
@@ -122,16 +109,11 @@ class FontConfigWindow(Gtk.ApplicationWindow):
                 _("Failed to load font config: {0}").format(str(e)),
             )
 
-    def _on_reload_clicked(self, button: Gtk.Button) -> None:
+    def _on_reload_clicked(self, _button: Gtk.Button) -> None:
         self.load_config()
 
-    def _on_save_clicked(self, button: Gtk.Button) -> None:
-        self.config.antialias = self.antialias_switch.get_active()
-        self.config.hinting = self.hinting_switch.get_active()
-        self.config.hintstyle = self._get_combo_value(self.hintstyle_combo, "hintfull")
-        self.config.rgba = self._get_combo_value(self.rgba_combo, "none")
-        self.config.lcdfilter = self._get_combo_value(self.lcdfilter_combo, "lcddefault")
-        self.config.embeddedbitmap = self.embeddedbitmap_switch.get_active()
+    def _on_save_clicked(self, _button: Gtk.Button) -> None:
+        self.option_tab.apply_to_config(self.config)
 
         try:
             self.config.write()
@@ -156,5 +138,5 @@ class FontConfigWindow(Gtk.ApplicationWindow):
             text=title,
         )
         dialog.set_property("secondary-text", message)
-        dialog.connect("response", lambda d, r: d.destroy())
+        dialog.connect("response", lambda d, _r: d.destroy())
         dialog.present()

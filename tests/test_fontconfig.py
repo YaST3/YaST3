@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from mast.core.fontconfig import FontConfig
+from mast.core.fontconfig import FontAlias, FontConfig, FontMatch
 
 
 class TestFontConfig(unittest.TestCase):
@@ -19,6 +19,9 @@ class TestFontConfig(unittest.TestCase):
             self.assertEqual(cfg.rgba, "none")
             self.assertEqual(cfg.lcdfilter, "lcddefault")
             self.assertTrue(cfg.embeddedbitmap)
+            self.assertEqual(len(cfg.match_list), 3)
+            self.assertEqual([m.family_test for m in cfg.match_list], ["sans-serif", "serif", "monospace"])
+            self.assertEqual(cfg.alias_list, [])
 
     def test_reload_reads_options(self) -> None:
         content = """<?xml version=\"1.0\"?>
@@ -55,6 +58,93 @@ class TestFontConfig(unittest.TestCase):
             self.assertEqual(cfg.rgba, "rgb")
             self.assertEqual(cfg.lcdfilter, "lcdlight")
             self.assertFalse(cfg.embeddedbitmap)
+
+    def test_reload_reads_matches_and_aliases(self) -> None:
+        content = """<?xml version=\"1.0\"?>
+<fontconfig>
+  <match>
+    <test name=\"family\"><string>sans-serif</string></test>
+    <edit name=\"family\" binding=\"strong\" mode=\"prepend\">
+      <string>Noto Sans</string>
+      <string>DejaVu Sans</string>
+    </edit>
+  </match>
+  <match>
+    <test name=\"family\"><string>serif</string></test>
+    <test name=\"lang\"><string>ja</string></test>
+    <edit name=\"family\" binding=\"strong\" mode=\"prepend\">
+      <string>Noto Serif CJK JP</string>
+    </edit>
+  </match>
+  <alias>
+    <family>Arial</family>
+    <prefer><family>Liberation Sans</family></prefer>
+  </alias>
+</fontconfig>
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            config_path = Path(tmp) / "fonts.conf"
+            config_path.write_text(content, encoding="utf-8")
+
+            cfg = FontConfig(str(config_path))
+
+            self.assertEqual(cfg.match_list[0].family_test, "sans-serif")
+            self.assertEqual(cfg.match_list[0].family_edit, ["Noto Sans", "DejaVu Sans"])
+            self.assertEqual(cfg.match_list[1].family_test, "serif")
+            self.assertEqual(cfg.match_list[1].lang_test, "ja")
+            self.assertEqual(cfg.match_list[1].family_edit, ["Noto Serif CJK JP"])
+            self.assertEqual(len(cfg.alias_list), 1)
+            self.assertEqual(cfg.alias_list[0].family, "Arial")
+            self.assertEqual(cfg.alias_list[0].prefer, "Liberation Sans")
+
+    def test_write_replaces_matches_aliases_and_options(self) -> None:
+        content = """<?xml version=\"1.0\"?>
+<fontconfig>
+  <match>
+    <test name=\"family\"><string>sans-serif</string></test>
+    <edit name=\"family\" binding=\"strong\" mode=\"prepend\"><string>Old Sans</string></edit>
+  </match>
+  <alias>
+    <family>Arial</family>
+    <prefer><family>Old Prefer</family></prefer>
+  </alias>
+</fontconfig>
+"""
+        with tempfile.TemporaryDirectory() as tmp:
+            config_path = Path(tmp) / "fonts.conf"
+            config_path.write_text(content, encoding="utf-8")
+
+            cfg = FontConfig(str(config_path))
+            cfg.match_list = [
+                FontMatch(family_test="sans-serif", family_edit=["Noto Sans", "DejaVu Sans"]),
+                FontMatch(family_test="serif", lang_test="ja", family_edit=["Noto Serif CJK JP"]),
+                FontMatch(family_test="monospace", family_edit=["JetBrains Mono"]),
+            ]
+            cfg.alias_list = [
+                FontAlias(family="Arial", prefer="Liberation Sans"),
+                FontAlias(family="Helvetica", prefer="Noto Sans"),
+            ]
+            cfg.antialias = True
+            cfg.hinting = False
+            cfg.hintstyle = "hintmedium"
+            cfg.rgba = "bgr"
+            cfg.lcdfilter = "lcdlegacy"
+            cfg.embeddedbitmap = False
+
+            cfg.write()
+
+            written = config_path.read_text(encoding="utf-8")
+            self.assertIn('<test name="family">', written)
+            self.assertIn("<string>Noto Sans</string>", written)
+            self.assertIn("<string>DejaVu Sans</string>", written)
+            self.assertIn('<test name="lang">', written)
+            self.assertIn("<string>ja</string>", written)
+            self.assertIn("<alias>", written)
+            self.assertIn("<family>Arial</family>", written)
+            self.assertIn("<family>Liberation Sans</family>", written)
+            self.assertIn("<family>Helvetica</family>", written)
+            self.assertIn('<edit name="hintstyle" mode="assign">', written)
+            self.assertIn("<const>hintmedium</const>", written)
 
     def test_write_replaces_existing_option_nodes(self) -> None:
         content = """<?xml version=\"1.0\"?>

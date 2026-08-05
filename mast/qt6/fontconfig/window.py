@@ -2,21 +2,24 @@
 
 from __future__ import annotations
 
+import subprocess
+
 from PySide6.QtCore import Signal
 from PySide6.QtWidgets import (
-    QCheckBox,
-    QComboBox,
-    QFormLayout,
     QHBoxLayout,
     QMainWindow,
     QMessageBox,
     QPushButton,
+    QTabWidget,
     QVBoxLayout,
     QWidget,
 )
 
 from mast.core.fontconfig import FontConfig
 from mast.core.i18n import _
+from mast.qt6.fontconfig.alias_tab import FontAliasTab
+from mast.qt6.fontconfig.match_tab import FontMatchTab
+from mast.qt6.fontconfig.option_tab import FontOptionTab
 
 
 class FontConfigWindow(QMainWindow):
@@ -24,9 +27,10 @@ class FontConfigWindow(QMainWindow):
 
     def __init__(self):
         super().__init__()
-        self.resize(560, 360)
+        self.resize(760, 480)
 
         self.config = FontConfig()
+        self.system_fonts = self._load_system_fonts()
 
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
@@ -34,32 +38,18 @@ class FontConfigWindow(QMainWindow):
         layout.setContentsMargins(16, 16, 16, 16)
         layout.setSpacing(16)
 
-        form = QFormLayout()
-        form.setHorizontalSpacing(16)
-        form.setVerticalSpacing(12)
+        self.tab_widget = QTabWidget()
 
-        self.antialias_check = QCheckBox()
-        form.addRow(_("Antialias"), self.antialias_check)
+        self.match_tab = FontMatchTab(self.config, self.system_fonts, self)
+        self.tab_widget.addTab(self.match_tab, _("Font Match"))
 
-        self.hinting_check = QCheckBox()
-        form.addRow(_("Hinting"), self.hinting_check)
+        self.alias_tab = FontAliasTab(self.config, self.system_fonts, self._show_error_message, self)
+        self.tab_widget.addTab(self.alias_tab, _("Font Alias"))
 
-        self.hintstyle_combo = QComboBox()
-        self.hintstyle_combo.addItems(FontConfig.HINTSTYLE_OPTIONS)
-        form.addRow(_("Hint Style"), self.hintstyle_combo)
+        self.option_tab = FontOptionTab(self)
+        self.tab_widget.addTab(self.option_tab, _("Font Option"))
 
-        self.rgba_combo = QComboBox()
-        self.rgba_combo.addItems(FontConfig.RGBA_OPTIONS)
-        form.addRow(_("Subpixel Render"), self.rgba_combo)
-
-        self.lcdfilter_combo = QComboBox()
-        self.lcdfilter_combo.addItems(FontConfig.LCDFILTER_OPTIONS)
-        form.addRow(_("LCD Filter"), self.lcdfilter_combo)
-
-        self.embeddedbitmap_check = QCheckBox()
-        form.addRow(_("Embedded Bitmap"), self.embeddedbitmap_check)
-
-        layout.addLayout(form)
+        layout.addWidget(self.tab_widget)
 
         button_layout = QHBoxLayout()
         button_layout.addStretch()
@@ -76,19 +66,45 @@ class FontConfigWindow(QMainWindow):
 
         self.load_config()
 
-    def _set_combo_value(self, combo: QComboBox, value: str) -> None:
-        index = combo.findText(value)
-        combo.setCurrentIndex(index if index >= 0 else 0)
+    def _load_system_fonts(self) -> list[str]:
+        default_fonts = ["Sans", "Serif", "Monospace"]
+
+        try:
+            proc = subprocess.run(
+                ["fc-list", ":", "family"],
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+        except OSError:
+            return default_fonts
+
+        if proc.returncode != 0 or not proc.stdout:
+            return default_fonts
+
+        seen: set[str] = set()
+        fonts: list[str] = []
+        for line in proc.stdout.splitlines():
+            for item in line.split(","):
+                name = item.strip()
+                if not name:
+                    continue
+                if name in seen:
+                    continue
+                seen.add(name)
+                fonts.append(name)
+
+        return sorted(fonts, key=str.casefold) if fonts else default_fonts
+
+    def _show_error_message(self, message: str) -> None:
+        QMessageBox.critical(self, _("Error"), message)
 
     def load_config(self) -> None:
         try:
             self.config.reload()
-            self.antialias_check.setChecked(self.config.antialias)
-            self.hinting_check.setChecked(self.config.hinting)
-            self._set_combo_value(self.hintstyle_combo, self.config.hintstyle)
-            self._set_combo_value(self.rgba_combo, self.config.rgba)
-            self._set_combo_value(self.lcdfilter_combo, self.config.lcdfilter)
-            self.embeddedbitmap_check.setChecked(self.config.embeddedbitmap)
+            self.match_tab.refresh(0)
+            self.alias_tab.refresh(0)
+            self.option_tab.load_from_config(self.config)
         except Exception as e:
             QMessageBox.critical(
                 self,
@@ -97,12 +113,7 @@ class FontConfigWindow(QMainWindow):
             )
 
     def save_config(self) -> None:
-        self.config.antialias = self.antialias_check.isChecked()
-        self.config.hinting = self.hinting_check.isChecked()
-        self.config.hintstyle = self.hintstyle_combo.currentText()
-        self.config.rgba = self.rgba_combo.currentText()
-        self.config.lcdfilter = self.lcdfilter_combo.currentText()
-        self.config.embeddedbitmap = self.embeddedbitmap_check.isChecked()
+        self.option_tab.apply_to_config(self.config)
 
         try:
             self.config.write()
