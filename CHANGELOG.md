@@ -4,6 +4,7 @@
 
 - feat(fontconfig): added fontconfig module to manage fontconfig settings.
 - feat(keyboard): added keyboard module to manage keyboard layouts and keymaps.
+- feat(snapshots): added used-space column to snapshots module.
 
 ## 0.0.25 - 2026-08-04
 

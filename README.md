@@ -45,7 +45,7 @@ opi mast-tui
 
 ```bash
 # install dependencies
-sudo zypper install make python3 python3-adbutils python3-pyside6 python3-gobject python3-gobject-stubs gtk4-devel python3-Babel python3-python-crontab python3-configobj python3-python-dotenv python3-pytest python3-systemd
+sudo zypper install make python3 python3-adbutils python3-bytesize python3-pyside6 python3-gobject python3-gobject-stubs gtk4-devel python3-Babel python3-python-crontab python3-configobj python3-python-dotenv python3-pytest python3-systemd
 
 # compile translations
 make

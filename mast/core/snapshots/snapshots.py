@@ -16,6 +16,7 @@ class SnapshotEntry:
     snapshot_type: str
     date: str
     user: str
+    used_space: int | None
     description: str
     cleanup: str
 
@@ -25,6 +26,15 @@ def _to_int(value: object, default: int = -1) -> int:
         return int(str(value))
     except (TypeError, ValueError):
         return default
+
+
+def _to_optional_int(value: object) -> int | None:
+    if value is None:
+        return None
+    parsed = _to_int(value, default=-1)
+    if parsed < 0:
+        return None
+    return parsed
 
 
 def _run_snapper_json(command: list[str], timeout: int | None = None) -> list[dict[str, object]]:
@@ -44,11 +54,13 @@ def _run_snapper_json(command: list[str], timeout: int | None = None) -> list[di
 
 
 def _parse_snapshot_entry(item: dict[str, object]) -> SnapshotEntry:
+    used_space = _to_optional_int(item.get("used-space", item.get("used_space")))
     return SnapshotEntry(
         number=_to_int(item.get("number", item.get("id", item.get("#", -1)))),
         snapshot_type=str(item.get("type", "")),
         date=str(item.get("date", item.get("timestamp", ""))),
         user=str(item.get("user", "")),
+        used_space=used_space,
         description=str(item.get("description", "")),
         cleanup=str(item.get("cleanup", "")),
     )

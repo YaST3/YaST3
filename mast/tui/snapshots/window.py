@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import subprocess
 
+from bytesize import Size
 from textual.app import ComposeResult
 from textual.containers import Horizontal
 from textual.screen import Screen
@@ -84,6 +85,7 @@ class SnapshotsWindow(Screen):
             _("Type"),
             _("Date"),
             _("User"),
+            _("Size"),
             _("Description"),
             _("Cleanup"),
         )
@@ -153,11 +155,18 @@ class SnapshotsWindow(Screen):
                 snapshot.snapshot_type,
                 snapshot.date,
                 snapshot.user,
+                self._format_size(snapshot.used_space),
                 snapshot.description,
                 snapshot.cleanup,
             )
 
         self.update_action_buttons()
+
+    @staticmethod
+    def _format_size(used_space: int | None) -> str:
+        if used_space is None:
+            return "-"
+        return Size(used_space).human_readable()
 
     def selected_snapshot(self) -> SnapshotEntry | None:
         table = self.query_one("#snapshots-table", DataTable)

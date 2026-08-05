@@ -5,6 +5,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 import gi
+from bytesize import GB, KB, MB, Size
 
 gi.require_version("Gtk", "4.0")
 
@@ -75,7 +76,7 @@ class SnapshotsWindow(Gtk.ApplicationWindow):
         self.main_box.append(action_box)
 
     def _create_list_view(self) -> None:
-        self.list_store = Gtk.ListStore(str, str, str, str, str, str)
+        self.list_store = Gtk.ListStore(str, str, str, str, str, str, str)
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
@@ -101,11 +102,16 @@ class SnapshotsWindow(Gtk.ApplicationWindow):
         user_column.set_min_width(120)
         self.tree_view.append_column(user_column)
 
-        description_column = Gtk.TreeViewColumn(_("Description"), Gtk.CellRendererText(), text=4)
+        size_column = Gtk.TreeViewColumn(_("Size"), Gtk.CellRendererText(), text=4)
+        size_column.set_resizable(True)
+        size_column.set_min_width(120)
+        self.tree_view.append_column(size_column)
+
+        description_column = Gtk.TreeViewColumn(_("Description"), Gtk.CellRendererText(), text=5)
         description_column.set_resizable(True)
         self.tree_view.append_column(description_column)
 
-        cleanup_column = Gtk.TreeViewColumn(_("Cleanup"), Gtk.CellRendererText(), text=5)
+        cleanup_column = Gtk.TreeViewColumn(_("Cleanup"), Gtk.CellRendererText(), text=6)
         cleanup_column.set_resizable(True)
         cleanup_column.set_min_width(120)
         self.tree_view.append_column(cleanup_column)
@@ -118,6 +124,25 @@ class SnapshotsWindow(Gtk.ApplicationWindow):
         scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
         scrolled.set_child(self.tree_view)
         self.main_box.append(scrolled)
+
+    @staticmethod
+    def _format_size(used_space: int | None) -> str:
+        if used_space is None:
+            return "-"
+        if used_space <= 0:
+            return "0 KB"
+
+        size = Size(used_space)
+        gb = float(size.convert_to(GB))
+        if gb >= 1:
+            return f"{gb:.2f} GB"
+
+        mb = float(size.convert_to(MB))
+        if mb >= 1:
+            return f"{mb:.2f} MB"
+
+        kb = float(size.convert_to(KB))
+        return f"{kb:.2f} KB"
 
     def _on_selection_changed(self, _selection) -> None:
         self.update_action_buttons()
@@ -218,6 +243,7 @@ class SnapshotsWindow(Gtk.ApplicationWindow):
                     snapshot.snapshot_type,
                     snapshot.date,
                     snapshot.user,
+                    self._format_size(snapshot.used_space),
                     snapshot.description,
                     snapshot.cleanup,
                 ]
