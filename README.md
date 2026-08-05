@@ -12,6 +12,7 @@ MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaS
 | Cron         | 🚧   | 🚧  | 🚧   | 🚧  |
 | DateTime     | ✅   | ✅  | ✅   | ✅  |
 | Flatpak      | ✅   | ✅  | ✅   | ❌  |
+| Font Config  | ✅   | ✅  | ✅   | ❌  |
 | Git          | ✅   | ✅  | ✅   | ✅  |
 | Hostname     | ✅   | ✅  | ✅   | ✅  |
 | Hosts        | ✅   | ✅  | ✅   | ✅  |
