@@ -97,10 +97,10 @@ class CronWindow(Screen):
             self.root_cron = load_root_cron()
             self._populate_table("root")
 
-    def on_data_table_cursor_changed(self, event: DataTable.CursorChanged) -> None:
-        """Handle cursor change in data table."""
+    def on_data_table_row_highlighted(self, event: DataTable.RowHighlighted) -> None:
+        """Handle row highlighted in data table."""
         table_id = event.data_table.id
-        if "-table" in table_id:
+        if table_id is not None and "-table" in table_id:
             mode = table_id.replace("-table", "")
             table = event.data_table
             jobs = self._get_jobs(mode)
@@ -158,11 +158,11 @@ class CronWindow(Screen):
             elif action == "save":
                 self._save_jobs(mode)
 
-    def _get_cron(self, mode: str) -> CronTab:
+    def _get_cron(self, mode: str) -> CronTab | None:
         """Get CronTab for mode."""
         return self.user_cron if mode == "user" else self.root_cron
 
-    def on_tabbed_content_tab_selected(self, event: TabbedContent.TabSelected) -> None:
+    def on_tabbed_content_tab_activated(self, event: TabbedContent.TabActivated) -> None:
         """Load cron jobs when switching tabs."""
         tab_id = event.tab.id
         if tab_id == "user-tab":
@@ -172,7 +172,8 @@ class CronWindow(Screen):
 
     def _get_jobs(self, mode: str) -> list[CronItem]:
         """Get jobs list for mode."""
-        return list(self._get_cron(mode).crons)
+        cron = self._get_cron(mode)
+        return list(cron.crons) if cron and cron.crons else []
 
     def _add_job(self, mode: str) -> None:
         """Add a new cron job."""
@@ -206,14 +207,17 @@ class CronWindow(Screen):
             return
 
         cron = self._get_cron(mode)
-        cron.remove(jobs[table.cursor_row])
-        self._populate_table(mode)
-        self.show_message(_("Cron job deleted."), success=True)
+        if cron:
+            cron.remove(jobs[table.cursor_row])
+            self._populate_table(mode)
+            self.show_message(_("Cron job deleted."), success=True)
 
     def _save_jobs(self, mode: str) -> None:
         """Save cron jobs."""
         try:
             cron = self._get_cron(mode)
+            if cron is None:
+                raise Exception("Cron not loaded")
             if mode == "user":
                 cron.write()
             else:
@@ -227,11 +231,12 @@ class CronWindow(Screen):
         """Add a new job."""
         minute, hour, day, month, weekday, command, comment = job_data
         cron = self._get_cron(mode)
-        new_job = cron.new(command=command, comment=comment)
-        new_job.setall(minute, hour, day, month, weekday)
-        new_job.enable(True)
-        self._populate_table(mode)
-        self.show_message(_("Cron job added."), success=True)
+        if cron:
+            new_job = cron.new(command=command, comment=comment)
+            new_job.setall(minute, hour, day, month, weekday)
+            new_job.enable(True)
+            self._populate_table(mode)
+            self.show_message(_("Cron job added."), success=True)
 
     def update_job(self, mode: str, row: int, job_data: tuple) -> None:
         """Update an existing job."""

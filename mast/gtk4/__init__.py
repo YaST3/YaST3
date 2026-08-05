@@ -9,6 +9,7 @@ from mast.gtk4.git import GitModule
 from mast.gtk4.hostname import HostnameModule
 from mast.gtk4.hosts import HostsModule
 from mast.gtk4.journal import JournalModule
+from mast.gtk4.keyboard import KeyboardModule
 from mast.gtk4.languages import LanguagesModule
 from mast.gtk4.packages import PackagesModule
 from mast.gtk4.proxy import ProxyModule
@@ -28,6 +29,7 @@ __all__ = [
     "HostnameModule",
     "HostsModule",
     "JournalModule",
+    "KeyboardModule",
     "LanguagesModule",
     "PackagesModule",
     "ProxyModule",

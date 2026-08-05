@@ -5,6 +5,7 @@ from mast.tui.datetime import DateTimeModule
 from mast.tui.git import GitModule
 from mast.tui.hostname import HostnameModule
 from mast.tui.hosts import HostsModule
+from mast.tui.keyboard import KeyboardModule
 from mast.tui.languages import LanguagesModule
 from mast.tui.packages import PackagesModule
 from mast.tui.proxy import ProxyModule
@@ -20,6 +21,7 @@ __all__ = [
     "GitModule",
     "HostnameModule",
     "HostsModule",
+    "KeyboardModule",
     "LanguagesModule",
     "PackagesModule",
     "ProxyModule",

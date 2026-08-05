@@ -14,6 +14,7 @@ from mast.tui import (
     GitModule,
     HostnameModule,
     HostsModule,
+    KeyboardModule,
     LanguagesModule,
     PackagesModule,
     ProxyModule,
@@ -89,7 +90,7 @@ class ModuleButton(Button):
     """
 
     def __init__(self, module: Module) -> None:
-        safe_id = module.name.lower().replace(" ", "-").replace("_", "-")
+        safe_id = module.__class__.__name__.lower().replace("module", "")
         label = f"{module.emoji} {module.name}"
         super().__init__(label, id=f"module-{safe_id}")
         self.module = module
@@ -134,6 +135,7 @@ class MainWindow(App):
             HostsModule(),
             CronModule(),
             DateTimeModule(),
+            KeyboardModule(),
             LanguagesModule(),
             RepositoriesModule(),
             ProxyModule(),
@@ -146,10 +148,7 @@ class MainWindow(App):
 
     def compose(self) -> ComposeResult:
         yield Header()
-        yield Footer(
-            show_clock=False,
-            message=f"v{__version__} | GitHub: {GITHUB_URL}",
-        )
+        yield Footer()
         with ScrollableContainer():
             yield Static("MaST", classes="title")
             with Grid(classes="module-grid"):
