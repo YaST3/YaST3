@@ -3,6 +3,7 @@
 ## 0.0.26 - 2026-08-05
 
 - feat(fontconfig): added fontconfig module to manage fontconfig settings.
+- feat(keyboard): added keyboard module to manage keyboard layouts and keymaps.
 
 ## 0.0.25 - 2026-08-04
 
