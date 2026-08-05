@@ -89,7 +89,7 @@ class FlatpakPackageManager(QWidget):
             self._build_search_layout(layout)
         else:
             self.uninstall_action = CommandAction(
-                text=_("Remove Package"),
+                text=_("Uninstall"),
                 running_text=_("Removing package..."),
                 dialog_title=_("Remove Flatpak Package"),
                 command=["true"],

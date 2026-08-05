@@ -28,7 +28,7 @@ class FlatpakRuntimeManager(Gtk.Box):
     def _build_layout(self) -> None:
         controls_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
 
-        self.remove_btn = Gtk.Button(label=_("Remove"))
+        self.remove_btn = Gtk.Button(label=_("Uninstall"))
         self.remove_btn.connect("clicked", self._on_remove_clicked)
         controls_row.append(self.remove_btn)
 

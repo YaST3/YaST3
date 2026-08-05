@@ -33,7 +33,7 @@ class FlatpakRuntimeManager(QWidget):
         self.filtered_runtimes: list[FlatpakRuntime] = []
 
         self.uninstall_action = CommandAction(
-            text=_("Remove"),
+            text=_("Uninstall"),
             running_text=_("Removing runtime..."),
             dialog_title=_("Remove Flatpak Runtime"),
             command=["true"],

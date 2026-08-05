@@ -79,7 +79,7 @@ class FlatpakPackageManager(Gtk.Box):
             self.primary_btn = Gtk.Button(label=_("Install"))
             self.primary_btn.connect("clicked", self._on_install_clicked)
         else:
-            self.primary_btn = Gtk.Button(label=_("Remove"))
+            self.primary_btn = Gtk.Button(label=_("Uninstall"))
             self.primary_btn.connect("clicked", self._on_uninstall_clicked)
         controls_row.append(self.primary_btn)
 
