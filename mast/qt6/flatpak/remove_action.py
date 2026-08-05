@@ -1,4 +1,4 @@
-"""Remove Flatpak action component."""
+"""Uninstall Flatpak action component."""
 
 from __future__ import annotations
 
@@ -9,16 +9,16 @@ from mast.core.i18n import _
 from mast.qt6.command.action import CommandAction
 
 
-class RemoveFlatpakAction(CommandAction):
-    """Reusable action for triggering Flatpak removal."""
+class UninstallFlatpakAction(CommandAction):
+    """Reusable action for triggering Flatpak uninstall."""
 
     def __init__(self, parent: QObject | None = None):
         super().__init__(
-            text=_("Remove Flatpak"),
-            running_text=_("Removing Flatpak..."),
-            dialog_title=_("Remove Flatpak"),
+            text=_("Uninstall Flatpak"),
+            running_text=_("Uninstalling Flatpak..."),
+            dialog_title=_("Uninstall Flatpak"),
             command=["pkexec", "zypper", "--non-interactive", "remove", "-y", "flatpak"],
-            success_output=_("Flatpak removed successfully."),
+            success_output=_("Flatpak uninstalled successfully."),
             auto_close_on_success=True,
             parent=parent,
         )
@@ -35,7 +35,7 @@ class RemoveFlatpakAction(CommandAction):
         reply = QMessageBox.question(
             parent_widget,
             _("Confirm"),
-            _("Are you sure you want to remove Flatpak?"),
+            _("Are you sure you want to uninstall Flatpak?"),
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
         )
         if reply != QMessageBox.StandardButton.Yes:

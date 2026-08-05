@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from PySide6.QtWidgets import QHBoxLayout, QPushButton, QVBoxLayout, QWidget
 
-from mast.qt6.flatpak.remove_action import RemoveFlatpakAction
+from mast.qt6.flatpak.remove_action import UninstallFlatpakAction
 
 
 class FlatpakSettingsTab(QWidget):
@@ -19,15 +19,15 @@ class FlatpakSettingsTab(QWidget):
         danger_layout = QHBoxLayout()
         danger_layout.addStretch()
 
-        self.remove_action = RemoveFlatpakAction(self)
-        self.remove_button = QPushButton(self.remove_action.text(), self)
-        self.remove_button.clicked.connect(self.remove_action.trigger)
-        self.remove_action.changed.connect(self._sync_remove_action_state)
-        danger_layout.addWidget(self.remove_button)
+        self.uninstall_action = UninstallFlatpakAction(self)
+        self.uninstall_button = QPushButton(self.uninstall_action.text(), self)
+        self.uninstall_button.clicked.connect(self.uninstall_action.trigger)
+        self.uninstall_action.changed.connect(self._sync_uninstall_action_state)
+        danger_layout.addWidget(self.uninstall_button)
 
         layout.addLayout(danger_layout)
-        self._sync_remove_action_state()
+        self._sync_uninstall_action_state()
 
-    def _sync_remove_action_state(self) -> None:
-        self.remove_button.setText(self.remove_action.text())
-        self.remove_button.setEnabled(self.remove_action.isEnabled())
+    def _sync_uninstall_action_state(self) -> None:
+        self.uninstall_button.setText(self.uninstall_action.text())
+        self.uninstall_button.setEnabled(self.uninstall_action.isEnabled())

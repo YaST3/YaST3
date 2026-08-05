@@ -9,7 +9,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 from mast.core.i18n import _
-from mast.gtk4.flatpak.remove_action import RemoveFlatpakAction
+from mast.gtk4.flatpak.remove_action import UninstallFlatpakAction
 
 
 class FlatpakSettingsTab(Gtk.Box):
@@ -24,31 +24,31 @@ class FlatpakSettingsTab(Gtk.Box):
         bottom_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
         bottom_row.set_halign(Gtk.Align.END)
 
-        self.remove_action = RemoveFlatpakAction(parent_window)
-        self.remove_action.connect_changed(self._sync_remove_action_state)
-        self.remove_action.connect_finished(self._on_remove_finished)
+        self.uninstall_action = UninstallFlatpakAction(parent_window)
+        self.uninstall_action.connect_changed(self._sync_uninstall_action_state)
+        self.uninstall_action.connect_finished(self._on_uninstall_finished)
 
-        self.remove_btn = Gtk.Button(label=self.remove_action.text())
-        self.remove_btn.connect("clicked", self.remove_action.trigger)
-        bottom_row.append(self.remove_btn)
+        self.uninstall_btn = Gtk.Button(label=self.uninstall_action.text())
+        self.uninstall_btn.connect("clicked", self.uninstall_action.trigger)
+        bottom_row.append(self.uninstall_btn)
 
         self.append(bottom_row)
-        self._sync_remove_action_state()
+        self._sync_uninstall_action_state()
 
-    def _sync_remove_action_state(self) -> None:
-        self.remove_btn.set_label(self.remove_action.text())
-        self.remove_btn.set_sensitive(self.remove_action.is_enabled())
+    def _sync_uninstall_action_state(self) -> None:
+        self.uninstall_btn.set_label(self.uninstall_action.text())
+        self.uninstall_btn.set_sensitive(self.uninstall_action.is_enabled())
 
-    def _on_remove_finished(self, success: bool, error: str, _stdout: str) -> None:
+    def _on_uninstall_finished(self, success: bool, error: str, _stdout: str) -> None:
         if success:
-            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Flatpak removed successfully."))
+            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Flatpak uninstalled successfully."))
             if hasattr(self.parent_window, "_refresh_state"):
                 self.parent_window._refresh_state()
         else:
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
                 _("Error"),
-                _("Failed to remove Flatpak: {0}").format(error or _("Unknown error")),
+                _("Failed to uninstall Flatpak: {0}").format(error or _("Unknown error")),
             )
 
     def _show_message_dialog(self, msg_type: Gtk.MessageType, title: str, message: str) -> None:
