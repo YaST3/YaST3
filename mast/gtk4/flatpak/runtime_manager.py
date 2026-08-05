@@ -125,7 +125,7 @@ class FlatpakRuntimeManager(Gtk.Box):
         )
         confirm_dialog.set_property(
             "secondary-text",
-            _("Are you sure you want to remove runtime '{0}'?").format(runtime.runtime_id),
+            _("Are you sure you want to uninstall runtime '{0}'?").format(runtime.runtime_id),
         )
         confirm_dialog.connect("response", self._on_remove_confirm, runtime)
         confirm_dialog.present()
@@ -137,13 +137,13 @@ class FlatpakRuntimeManager(Gtk.Box):
 
         try:
             uninstall_flatpak_runtime(runtime.runtime_id, runtime.scope)
-            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Runtime removed successfully."))
+            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Runtime uninstalled successfully."))
             self.load_runtimes()
         except Exception as e:
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
                 _("Error"),
-                _("Failed to remove runtime: {0}").format(str(e)),
+                _("Failed to uninstall runtime: {0}").format(str(e)),
             )
 
     def _on_search_clicked(self, _widget) -> None:

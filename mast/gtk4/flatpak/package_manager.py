@@ -339,7 +339,7 @@ class FlatpakPackageManager(Gtk.Box):
         )
         confirm_dialog.set_property(
             "secondary-text",
-            _("Are you sure you want to remove package '{0}'?").format(package.app_id),
+            _("Are you sure you want to uninstall package '{0}'?").format(package.app_id),
         )
         confirm_dialog.connect("response", self._on_uninstall_confirm, package)
         confirm_dialog.present()
@@ -351,13 +351,13 @@ class FlatpakPackageManager(Gtk.Box):
 
         try:
             uninstall_flatpak_package(package.app_id, package.scope)
-            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Package removed successfully."))
+            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Package uninstalled successfully."))
             self.refresh()
         except Exception as e:
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
                 _("Error"),
-                _("Failed to remove package: {0}").format(str(e)),
+                _("Failed to uninstall package: {0}").format(str(e)),
             )
 
     def _on_prev_clicked(self, _button: Gtk.Button) -> None:
