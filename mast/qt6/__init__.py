@@ -4,6 +4,7 @@ from mast.qt6.android import AndroidModule
 from mast.qt6.cron import CronModule
 from mast.qt6.datetime import DateTimeModule
 from mast.qt6.flatpak import FlatpakModule
+from mast.qt6.fontconfig import FontConfigModule
 from mast.qt6.git import GitModule
 from mast.qt6.hostname import HostnameModule
 from mast.qt6.hosts import HostsModule
@@ -22,6 +23,7 @@ __all__ = [
     "CronModule",
     "DateTimeModule",
     "FlatpakModule",
+    "FontConfigModule",
     "GitModule",
     "HostnameModule",
     "HostsModule",

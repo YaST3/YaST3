@@ -55,6 +55,7 @@ class LanguageSettingsTab(Gtk.Box):
         utf8_box.append(label)
 
         self.utf8_switch = Gtk.Switch()
+        self.utf8_switch.set_halign(Gtk.Align.START)
         utf8_box.append(self.utf8_switch)
 
         self.append(utf8_box)
