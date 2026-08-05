@@ -44,6 +44,26 @@ class TestSnapshots(unittest.TestCase):
         self.assertEqual(snapshots[0].description, "After update")
 
     @patch("mast.core.snapshots.snapshots.subprocess.run")
+    def test_list_snapshots_parses_used_space(self, mock_run: MagicMock) -> None:
+        payload = [
+            {
+                "number": 10,
+                "type": "single",
+                "date": "2026-07-10 10:00:00",
+                "user": "root",
+                "used-space": 1536,
+                "description": "Before update",
+                "cleanup": "number",
+            },
+        ]
+        mock_run.return_value = subprocess.CompletedProcess(args=[], returncode=0, stdout=json.dumps(payload))
+
+        snapshots = list_snapshots()
+
+        self.assertEqual(len(snapshots), 1)
+        self.assertEqual(snapshots[0].used_space, 1536)
+
+    @patch("mast.core.snapshots.snapshots.subprocess.run")
     def test_list_snapshots_supports_dict_payload(self, mock_run: MagicMock) -> None:
         payload = {
             "snapshots": [
@@ -112,13 +132,14 @@ class TestSnapshots(unittest.TestCase):
     def test_parse_snapshots_from_json_dict_payload(self) -> None:
         payload = json.dumps({
             "snapshots": [
-                {"id": "5", "type": "single", "timestamp": "2026-07-11 10:00:00", "user": "root", "description": "Test", "cleanup": "timeline"},
+                {"id": "5", "type": "single", "timestamp": "2026-07-11 10:00:00", "user": "root", "used-space": 2097152, "description": "Test", "cleanup": "timeline"},
             ]
         })
         snapshots = parse_snapshots_from_json(payload)
         self.assertEqual(len(snapshots), 1)
         self.assertEqual(snapshots[0].number, 5)
         self.assertEqual(snapshots[0].date, "2026-07-11 10:00:00")
+        self.assertEqual(snapshots[0].used_space, 2097152)
 
     def test_parse_snapshots_from_json_empty_string(self) -> None:
         snapshots = parse_snapshots_from_json("")
@@ -138,7 +159,6 @@ class TestSnapshots(unittest.TestCase):
         snapshots = parse_snapshots_from_json(payload)
         self.assertEqual(len(snapshots), 2)
         self.assertEqual([s.number for s in snapshots], [12, 10])
-
 
 if __name__ == "__main__":
     unittest.main()

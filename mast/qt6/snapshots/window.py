@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
+from bytesize import Size
 from PySide6.QtCore import Qt, QTimer, Signal
 from PySide6.QtWidgets import (
     QHeaderView,
@@ -72,9 +73,9 @@ class SnapshotsWindow(QMainWindow):
         layout.addLayout(actions_layout)
 
         self.table = QTableWidget()
-        self.table.setColumnCount(6)
+        self.table.setColumnCount(7)
         self.table.setHorizontalHeaderLabels(
-            [_("ID"), _("Type"), _("Date"), _("User"), _("Description"), _("Cleanup")]
+            [_("ID"), _("Type"), _("Date"), _("User"), _("Size"), _("Description"), _("Cleanup")]
         )
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
@@ -86,8 +87,9 @@ class SnapshotsWindow(QMainWindow):
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(6, QHeaderView.ResizeMode.Stretch)
 
         layout.addWidget(self.table)
 
@@ -140,8 +142,9 @@ class SnapshotsWindow(QMainWindow):
             self._set_text_item(row, 1, snapshot.snapshot_type)
             self._set_text_item(row, 2, snapshot.date)
             self._set_text_item(row, 3, snapshot.user)
-            self._set_text_item(row, 4, snapshot.description)
-            self._set_text_item(row, 5, snapshot.cleanup)
+            self._set_text_item(row, 4, self._format_size(snapshot.used_space))
+            self._set_text_item(row, 5, snapshot.description)
+            self._set_text_item(row, 6, snapshot.cleanup)
 
         if self.snapshots:
             self.table.selectRow(0)
@@ -151,6 +154,12 @@ class SnapshotsWindow(QMainWindow):
         item = QTableWidgetItem(text)
         item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
         self.table.setItem(row, column, item)
+
+    @staticmethod
+    def _format_size(used_space: int | None) -> str:
+        if used_space is None:
+            return "-"
+        return Size(used_space).human_readable()
 
     def selected_snapshot(self) -> SnapshotEntry | None:
         row = self.table.currentRow()
