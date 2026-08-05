@@ -16,6 +16,8 @@ MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaS
 | Git          | ✅   | ✅  | ✅   | ✅  |
 | Hostname     | ✅   | ✅  | ✅   | ✅  |
 | Hosts        | ✅   | ✅  | ✅   | ✅  |
+| Journal      | ✅   | ✅  | ✅   | ✅  |
+| Keyboard     | ✅   | ✅  | ✅   | ✅  |
 | Languages    | ✅   | ✅  | ✅   | ✅  |
 | Packages     | 🚧   | 🚧  | 🚧   | 🚧  |
 | Proxy        | ✅   | ✅  | ✅   | ✅  |
