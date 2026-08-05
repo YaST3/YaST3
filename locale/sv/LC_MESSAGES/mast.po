@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-04 09:57+0000\n"
-"PO-Revision-Date: 2026-08-04 10:02\n"
+"POT-Creation-Date: 2026-08-05 08:41+0000\n"
+"PO-Revision-Date: 2026-08-05 08:47\n"
 "Last-Translator: \n"
 "Language-Team: Swedish\n"
 "MIME-Version: 1.0\n"
@@ -332,9 +332,13 @@ msgid "Search"
 msgstr "Sök"
 
 #: mast/gtk4/android/package_manager_panel.py:107
-#: mast/gtk4/languages/manager.py:37 mast/gtk4/languages/manager.py:202
+#: mast/gtk4/flatpak/package_manager.py:82
+#: mast/gtk4/flatpak/runtime_manager.py:31 mast/gtk4/languages/manager.py:37
+#: mast/gtk4/languages/manager.py:202
 #: mast/qt6/android/package_manager_panel.py:120
-#: mast/qt6/languages/manager.py:46 mast/qt6/languages/manager.py:175
+#: mast/qt6/flatpak/package_manager.py:92
+#: mast/qt6/flatpak/runtime_manager.py:36 mast/qt6/languages/manager.py:46
+#: mast/qt6/languages/manager.py:175
 msgid "Uninstall"
 msgstr "Avinstallera"
 
@@ -970,12 +974,6 @@ msgstr "Flatpak installerades framgångsrikt."
 msgid "Install"
 msgstr "Installera"
 
-#: mast/gtk4/flatpak/package_manager.py:82
-#: mast/gtk4/flatpak/runtime_manager.py:31
-#: mast/qt6/flatpak/runtime_manager.py:36
-msgid "Remove"
-msgstr "Ta bort"
-
 #: mast/gtk4/flatpak/package_manager.py:98
 #: mast/gtk4/flatpak/runtime_manager.py:47 mast/gtk4/git/window.py:75
 #: mast/qt6/flatpak/package_manager.py:127
@@ -1110,19 +1108,19 @@ msgstr "Vänligen välj ett installerat paket från listan."
 #: mast/gtk4/flatpak/package_manager.py:342
 #: mast/qt6/flatpak/package_manager.py:370
 #, python-brace-format
-msgid "Are you sure you want to remove package '{0}'?"
-msgstr "Är du säker på att du vill ta bort paketet '{0}'?"
+msgid "Are you sure you want to uninstall package '{0}'?"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/qt6/flatpak/package_manager.py:96
-msgid "Package removed successfully."
-msgstr "Paket borttaget framgångsrikt."
+msgid "Package uninstalled successfully."
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:360
 #: mast/qt6/flatpak/package_manager.py:398
 #, python-brace-format
-msgid "Failed to remove package: {0}"
-msgstr "Misslyckades att ta bort paket: {0}"
+msgid "Failed to uninstall package: {0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
@@ -1212,21 +1210,21 @@ msgstr "Misslyckades att uppdatera remote-URL: {0}"
 
 #: mast/gtk4/flatpak/remove_action.py:20 mast/gtk4/flatpak/remove_action.py:22
 #: mast/qt6/flatpak/remove_action.py:17 mast/qt6/flatpak/remove_action.py:19
-msgid "Remove Flatpak"
-msgstr "Ta bort Flatpak"
+msgid "Uninstall Flatpak"
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:21 mast/qt6/flatpak/remove_action.py:18
-msgid "Removing Flatpak..."
-msgstr "Tar bort Flatpak..."
+msgid "Uninstalling Flatpak..."
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:24 mast/gtk4/flatpak/settings.py:44
 #: mast/qt6/flatpak/remove_action.py:21 mast/qt6/flatpak/window.py:100
-msgid "Flatpak removed successfully."
-msgstr "Flatpak borttaget framgångsrikt."
+msgid "Flatpak uninstalled successfully."
+msgstr ""
 
 #: mast/gtk4/flatpak/remove_action.py:40 mast/qt6/flatpak/remove_action.py:38
-msgid "Are you sure you want to remove Flatpak?"
-msgstr "Är du säker på att du vill ta bort Flatpak?"
+msgid "Are you sure you want to uninstall Flatpak?"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:91
 #: mast/qt6/flatpak/runtime_manager.py:160
@@ -1242,24 +1240,24 @@ msgstr "Vänligen välj en installerad runtime från listan."
 #: mast/gtk4/flatpak/runtime_manager.py:128
 #: mast/qt6/flatpak/runtime_manager.py:140
 #, python-brace-format
-msgid "Are you sure you want to remove runtime '{0}'?"
-msgstr "Är du säker på att du vill ta bort runtime '{0}'?"
+msgid "Are you sure you want to uninstall runtime '{0}'?"
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:140
 #: mast/qt6/flatpak/runtime_manager.py:40
-msgid "Runtime removed successfully."
-msgstr "Runtime borttagen framgångsrikt."
+msgid "Runtime uninstalled successfully."
+msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:146
 #: mast/qt6/flatpak/runtime_manager.py:154
 #, python-brace-format
-msgid "Failed to remove runtime: {0}"
-msgstr "Misslyckades att ta bort runtime: {0}"
+msgid "Failed to uninstall runtime: {0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/settings.py:51 mast/qt6/flatpak/window.py:106
 #, python-brace-format
-msgid "Failed to remove Flatpak: {0}"
-msgstr "Misslyckades att ta bort Flatpak: {0}"
+msgid "Failed to uninstall Flatpak: {0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/window.py:33
 msgid "Flatpak is not installed"
@@ -2766,25 +2764,21 @@ msgstr "Installerar paket..."
 msgid "Install Flatpak Package"
 msgstr "Installera Flatpak-paket"
 
-#: mast/qt6/flatpak/package_manager.py:92
-msgid "Remove Package"
-msgstr "Ta bort paket"
-
 #: mast/qt6/flatpak/package_manager.py:93
-msgid "Removing package..."
-msgstr "Tar bort paket..."
+msgid "Uninstalling package..."
+msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:94
-msgid "Remove Flatpak Package"
-msgstr "Ta bort Flatpak-paket"
+msgid "Uninstall Flatpak Package"
+msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:37
-msgid "Removing runtime..."
-msgstr "Tar bort runtime..."
+msgid "Uninstalling runtime..."
+msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:38
-msgid "Remove Flatpak Runtime"
-msgstr "Ta bort Flatpak-runtime"
+msgid "Uninstall Flatpak Runtime"
+msgstr ""
 
 #: mast/qt6/flatpak/window.py:113
 msgid "Please wait"
