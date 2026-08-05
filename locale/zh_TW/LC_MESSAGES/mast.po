@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-05 08:41+0000\n"
-"PO-Revision-Date: 2026-08-05 08:47\n"
+"POT-Creation-Date: 2026-08-05 14:25+0000\n"
+"PO-Revision-Date: 2026-08-05 17:20\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Traditional\n"
 "MIME-Version: 1.0\n"
@@ -63,8 +63,8 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: mast/gtk4/main_window.py:95 mast/qt6/main_window.py:64
-#: mast/tui/main_window.py:126
+#: mast/gtk4/main_window.py:99 mast/qt6/main_window.py:68
+#: mast/tui/main_window.py:127
 msgid "About"
 msgstr ""
 
@@ -198,9 +198,9 @@ msgstr "重新整理"
 #: mast/gtk4/android/package_manager_panel.py:506
 #: mast/gtk4/android/package_manager_panel.py:525
 #: mast/gtk4/android/window.py:225 mast/gtk4/cron/cron_edit_dialog.py:128
-#: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:178
-#: mast/gtk4/datetime/window.py:227 mast/gtk4/datetime/window.py:238
-#: mast/gtk4/datetime/window.py:240 mast/gtk4/datetime/window.py:242
+#: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:180
+#: mast/gtk4/datetime/window.py:229 mast/gtk4/datetime/window.py:240
+#: mast/gtk4/datetime/window.py:242 mast/gtk4/datetime/window.py:244
 #: mast/gtk4/flatpak/package_manager.py:220
 #: mast/gtk4/flatpak/package_manager.py:241
 #: mast/gtk4/flatpak/package_manager.py:319
@@ -211,22 +211,25 @@ msgstr "重新整理"
 #: mast/gtk4/flatpak/remote_manager.py:288
 #: mast/gtk4/flatpak/runtime_manager.py:90
 #: mast/gtk4/flatpak/runtime_manager.py:145 mast/gtk4/flatpak/settings.py:50
-#: mast/gtk4/flatpak/window.py:91 mast/gtk4/git/window.py:256
-#: mast/gtk4/git/window.py:277 mast/gtk4/hostname/window.py:66
-#: mast/gtk4/hostname/window.py:68 mast/gtk4/hostname/window.py:70
-#: mast/gtk4/hostname/window.py:77 mast/gtk4/hostname/window.py:82
-#: mast/gtk4/hostname/window.py:88 mast/gtk4/hostname/window.py:108
-#: mast/gtk4/hostname/window.py:110 mast/gtk4/hostname/window.py:112
-#: mast/gtk4/hosts/window.py:119 mast/gtk4/hosts/window.py:122
-#: mast/gtk4/hosts/window.py:176 mast/gtk4/hosts/window.py:212
-#: mast/gtk4/hosts/window.py:250 mast/gtk4/hosts/window.py:252
-#: mast/gtk4/hosts/window.py:254 mast/gtk4/journal/window.py:280
-#: mast/gtk4/journal/window.py:338 mast/gtk4/journal/window.py:361
-#: mast/gtk4/journal/window.py:367 mast/gtk4/journal/window.py:396
-#: mast/gtk4/journal/window.py:402 mast/gtk4/languages/manager.py:131
-#: mast/gtk4/languages/settings.py:88 mast/gtk4/languages/settings.py:98
-#: mast/gtk4/languages/settings.py:106 mast/gtk4/languages/settings.py:145
-#: mast/gtk4/languages/settings.py:147 mast/gtk4/languages/settings.py:149
+#: mast/gtk4/flatpak/window.py:91 mast/gtk4/fontconfig/alias_tab.py:125
+#: mast/gtk4/fontconfig/window.py:108 mast/gtk4/fontconfig/window.py:128
+#: mast/gtk4/git/window.py:256 mast/gtk4/git/window.py:277
+#: mast/gtk4/hostname/window.py:66 mast/gtk4/hostname/window.py:68
+#: mast/gtk4/hostname/window.py:70 mast/gtk4/hostname/window.py:77
+#: mast/gtk4/hostname/window.py:82 mast/gtk4/hostname/window.py:88
+#: mast/gtk4/hostname/window.py:108 mast/gtk4/hostname/window.py:110
+#: mast/gtk4/hostname/window.py:112 mast/gtk4/hosts/window.py:119
+#: mast/gtk4/hosts/window.py:122 mast/gtk4/hosts/window.py:176
+#: mast/gtk4/hosts/window.py:212 mast/gtk4/hosts/window.py:250
+#: mast/gtk4/hosts/window.py:252 mast/gtk4/hosts/window.py:254
+#: mast/gtk4/journal/window.py:281 mast/gtk4/journal/window.py:339
+#: mast/gtk4/journal/window.py:362 mast/gtk4/journal/window.py:368
+#: mast/gtk4/journal/window.py:397 mast/gtk4/journal/window.py:403
+#: mast/gtk4/keyboard/window.py:135 mast/gtk4/keyboard/window.py:137
+#: mast/gtk4/keyboard/window.py:139 mast/gtk4/languages/manager.py:131
+#: mast/gtk4/languages/settings.py:89 mast/gtk4/languages/settings.py:99
+#: mast/gtk4/languages/settings.py:107 mast/gtk4/languages/settings.py:146
+#: mast/gtk4/languages/settings.py:148 mast/gtk4/languages/settings.py:150
 #: mast/gtk4/proxy/window.py:82 mast/gtk4/proxy/window.py:88
 #: mast/gtk4/proxy/window.py:94 mast/gtk4/proxy/window.py:117
 #: mast/gtk4/proxy/window.py:123 mast/gtk4/repositories/window.py:133
@@ -269,19 +272,22 @@ msgstr "重新整理"
 #: mast/qt6/flatpak/remote_manager.py:138
 #: mast/qt6/flatpak/runtime_manager.py:154
 #: mast/qt6/flatpak/runtime_manager.py:160 mast/qt6/flatpak/window.py:94
-#: mast/qt6/flatpak/window.py:105 mast/qt6/git/window.py:248
-#: mast/qt6/git/window.py:274 mast/qt6/hostname/window.py:66
-#: mast/qt6/hostname/window.py:70 mast/qt6/hostname/window.py:75
-#: mast/qt6/hostname/window.py:83 mast/qt6/hostname/window.py:89
-#: mast/qt6/hostname/window.py:97 mast/qt6/hostname/window.py:130
-#: mast/qt6/hostname/window.py:134 mast/qt6/hostname/window.py:138
-#: mast/qt6/hosts/window.py:103 mast/qt6/hosts/window.py:109
-#: mast/qt6/hosts/window.py:179 mast/qt6/hosts/window.py:216
-#: mast/qt6/hosts/window.py:270 mast/qt6/hosts/window.py:275
-#: mast/qt6/hosts/window.py:278 mast/qt6/journal/window.py:207
-#: mast/qt6/journal/window.py:271 mast/qt6/journal/window.py:294
-#: mast/qt6/journal/window.py:300 mast/qt6/journal/window.py:326
-#: mast/qt6/journal/window.py:332 mast/qt6/languages/manager.py:123
+#: mast/qt6/flatpak/window.py:105 mast/qt6/fontconfig/window.py:100
+#: mast/qt6/fontconfig/window.py:111 mast/qt6/fontconfig/window.py:128
+#: mast/qt6/git/window.py:248 mast/qt6/git/window.py:274
+#: mast/qt6/hostname/window.py:66 mast/qt6/hostname/window.py:70
+#: mast/qt6/hostname/window.py:75 mast/qt6/hostname/window.py:83
+#: mast/qt6/hostname/window.py:89 mast/qt6/hostname/window.py:97
+#: mast/qt6/hostname/window.py:130 mast/qt6/hostname/window.py:134
+#: mast/qt6/hostname/window.py:138 mast/qt6/hosts/window.py:103
+#: mast/qt6/hosts/window.py:109 mast/qt6/hosts/window.py:179
+#: mast/qt6/hosts/window.py:216 mast/qt6/hosts/window.py:270
+#: mast/qt6/hosts/window.py:275 mast/qt6/hosts/window.py:278
+#: mast/qt6/journal/window.py:207 mast/qt6/journal/window.py:271
+#: mast/qt6/journal/window.py:294 mast/qt6/journal/window.py:300
+#: mast/qt6/journal/window.py:326 mast/qt6/journal/window.py:332
+#: mast/qt6/keyboard/window.py:102 mast/qt6/keyboard/window.py:104
+#: mast/qt6/keyboard/window.py:106 mast/qt6/languages/manager.py:123
 #: mast/qt6/languages/settings.py:82 mast/qt6/languages/settings.py:92
 #: mast/qt6/languages/settings.py:100 mast/qt6/languages/settings.py:144
 #: mast/qt6/languages/settings.py:148 mast/qt6/languages/settings.py:152
@@ -432,17 +438,18 @@ msgstr ""
 #: mast/gtk4/android/package_manager_panel.py:382
 #: mast/gtk4/android/package_manager_panel.py:498
 #: mast/gtk4/android/package_manager_panel.py:517 mast/gtk4/cron/manager.py:249
-#: mast/gtk4/datetime/window.py:229 mast/gtk4/datetime/window.py:235
+#: mast/gtk4/datetime/window.py:231 mast/gtk4/datetime/window.py:237
 #: mast/gtk4/flatpak/package_manager.py:314
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/gtk4/flatpak/remote_manager.py:155
 #: mast/gtk4/flatpak/remote_manager.py:219
 #: mast/gtk4/flatpak/remote_manager.py:281
 #: mast/gtk4/flatpak/runtime_manager.py:140 mast/gtk4/flatpak/settings.py:44
-#: mast/gtk4/flatpak/window.py:86 mast/gtk4/git/window.py:275
-#: mast/gtk4/hostname/window.py:105 mast/gtk4/hosts/window.py:248
-#: mast/gtk4/journal/window.py:355 mast/gtk4/journal/window.py:389
-#: mast/gtk4/languages/settings.py:140 mast/gtk4/proxy/window.py:110
+#: mast/gtk4/flatpak/window.py:86 mast/gtk4/fontconfig/window.py:122
+#: mast/gtk4/git/window.py:275 mast/gtk4/hostname/window.py:105
+#: mast/gtk4/hosts/window.py:248 mast/gtk4/journal/window.py:356
+#: mast/gtk4/journal/window.py:390 mast/gtk4/keyboard/window.py:132
+#: mast/gtk4/languages/settings.py:141 mast/gtk4/proxy/window.py:110
 #: mast/gtk4/repositories/window.py:248 mast/gtk4/repositories/window.py:379
 #: mast/gtk4/snapshots/config_dialog.py:220 mast/gtk4/ssh/__init__.py:87
 #: mast/gtk4/ssh/hosts_tab.py:224 mast/gtk4/ssh/keys_tab.py:194
@@ -453,9 +460,10 @@ msgstr ""
 #: mast/qt6/datetime/window.py:202 mast/qt6/datetime/window.py:208
 #: mast/qt6/flatpak/remote_manager.py:94 mast/qt6/flatpak/remote_manager.py:113
 #: mast/qt6/flatpak/remote_manager.py:135 mast/qt6/flatpak/window.py:89
-#: mast/qt6/flatpak/window.py:100 mast/qt6/git/window.py:269
-#: mast/qt6/hostname/window.py:124 mast/qt6/hosts/window.py:264
-#: mast/qt6/journal/window.py:288 mast/qt6/journal/window.py:319
+#: mast/qt6/flatpak/window.py:100 mast/qt6/fontconfig/window.py:122
+#: mast/qt6/git/window.py:269 mast/qt6/hostname/window.py:124
+#: mast/qt6/hosts/window.py:264 mast/qt6/journal/window.py:288
+#: mast/qt6/journal/window.py:319 mast/qt6/keyboard/window.py:99
 #: mast/qt6/languages/settings.py:136 mast/qt6/proxy/window.py:109
 #: mast/qt6/repositories/window.py:120 mast/qt6/repositories/window.py:301
 #: mast/qt6/snapshots/config_dialog.py:168 mast/qt6/ssh/__init__.py:67
@@ -584,27 +592,29 @@ msgid "Cron"
 msgstr "排程工作"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
-#: mast/tui/cron/window.py:193
+#: mast/tui/cron/window.py:194
 msgid "Edit Cron Job"
 msgstr "編輯排程工作"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:20 mast/qt6/cron/cron_edit_dialog.py:33
-#: mast/tui/cron/window.py:179
+#: mast/tui/cron/window.py:180
 msgid "Add Cron Job"
 msgstr "新增排程工作"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:29
 #: mast/gtk4/flatpak/remote_manager.py:172
-#: mast/gtk4/flatpak/remote_manager.py:237 mast/gtk4/hosts/window.py:282
+#: mast/gtk4/flatpak/remote_manager.py:237
+#: mast/gtk4/fontconfig/match_tab.py:188 mast/gtk4/hosts/window.py:282
 #: mast/gtk4/repositories/repo_edit_dialog.py:24
 #: mast/gtk4/repositories/switch_mirror_dialog.py:24
 #: mast/gtk4/snapshots/config_dialog.py:185 mast/gtk4/snapshots/window.py:149
 #: mast/gtk4/ssh/dialogs.py:27 mast/gtk4/ssh/dialogs.py:145
-#: mast/gtk4/ssh/keys_generate_dialog.py:26 mast/tui/cron/window.py:324
+#: mast/gtk4/ssh/keys_generate_dialog.py:26 mast/tui/cron/window.py:329
 #: mast/tui/hostname/window.py:70 mast/tui/hosts/window.py:273
-#: mast/tui/proxy/window.py:92 mast/tui/repositories/window.py:359
-#: mast/tui/repositories/window.py:488 mast/tui/snapshots/config_screen.py:110
-#: mast/tui/ssh/window.py:526 mast/tui/ssh/window.py:626
+#: mast/tui/keyboard/window.py:68 mast/tui/proxy/window.py:92
+#: mast/tui/repositories/window.py:359 mast/tui/repositories/window.py:488
+#: mast/tui/snapshots/config_screen.py:110 mast/tui/ssh/window.py:526
+#: mast/tui/ssh/window.py:626
 msgid "Cancel"
 msgstr "取消"
 
@@ -614,8 +624,8 @@ msgstr "取消"
 #: mast/gtk4/repositories/repo_edit_dialog.py:25
 #: mast/gtk4/repositories/switch_mirror_dialog.py:25
 #: mast/gtk4/snapshots/config_dialog.py:186 mast/gtk4/ssh/dialogs.py:28
-#: mast/gtk4/ssh/dialogs.py:146 mast/tui/cron/window.py:323
-#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:75
+#: mast/gtk4/ssh/dialogs.py:146 mast/tui/cron/window.py:328
+#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:76
 #: mast/tui/repositories/window.py:358 mast/tui/repositories/window.py:487
 #: mast/tui/snapshots/config_screen.py:111 mast/tui/ssh/window.py:525
 #: mast/tui/ssh/window.py:625
@@ -624,7 +634,7 @@ msgstr "確定"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:43 mast/gtk4/cron/manager.py:82
 #: mast/qt6/cron/cron_edit_dialog.py:42 mast/qt6/cron/manager.py:71
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:295
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:300
 msgid "Minute"
 msgstr "分钟"
 
@@ -634,7 +644,7 @@ msgstr "0-59 或 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:44 mast/gtk4/cron/manager.py:88
 #: mast/qt6/cron/cron_edit_dialog.py:46 mast/qt6/cron/manager.py:72
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:299
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:304
 msgid "Hour"
 msgstr "小時"
 
@@ -644,7 +654,7 @@ msgstr "0-23 或 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:45 mast/gtk4/cron/manager.py:94
 #: mast/qt6/cron/cron_edit_dialog.py:50 mast/qt6/cron/manager.py:73
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:303
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:308
 msgid "Day"
 msgstr "日期"
 
@@ -654,7 +664,7 @@ msgstr "1-31 或 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:46 mast/gtk4/cron/manager.py:100
 #: mast/qt6/cron/cron_edit_dialog.py:54 mast/qt6/cron/manager.py:74
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:307
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:312
 msgid "Month"
 msgstr "月份"
 
@@ -664,7 +674,7 @@ msgstr "1-12 或 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:47 mast/gtk4/cron/manager.py:106
 #: mast/qt6/cron/cron_edit_dialog.py:58 mast/qt6/cron/manager.py:75
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:311
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:316
 msgid "Weekday"
 msgstr "星期"
 
@@ -674,12 +684,12 @@ msgstr "0-7 或 *"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:49 mast/gtk4/cron/manager.py:112
 #: mast/qt6/cron/cron_edit_dialog.py:62 mast/qt6/cron/manager.py:76
-#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:315
+#: mast/tui/cron/window.py:117 mast/tui/cron/window.py:320
 msgid "Command"
 msgstr "命令"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:53 mast/qt6/cron/cron_edit_dialog.py:61
-#: mast/tui/cron/window.py:317
+#: mast/tui/cron/window.py:322
 msgid "Command to execute"
 msgstr "执行的命令"
 
@@ -688,14 +698,14 @@ msgstr "执行的命令"
 #: mast/gtk4/ssh/keys_tab.py:96 mast/qt6/cron/cron_edit_dialog.py:67
 #: mast/qt6/cron/manager.py:77 mast/qt6/hosts/window.py:63
 #: mast/qt6/ssh/keys_tab.py:65 mast/tui/cron/window.py:117
-#: mast/tui/cron/window.py:319 mast/tui/hosts/window.py:79
+#: mast/tui/cron/window.py:324 mast/tui/hosts/window.py:79
 #: mast/tui/hosts/window.py:269 mast/tui/ssh/window.py:293
 #: mast/tui/ssh/window.py:622
 msgid "Comment"
 msgstr "備註"
 
 #: mast/gtk4/cron/cron_edit_dialog.py:61 mast/qt6/cron/cron_edit_dialog.py:66
-#: mast/tui/cron/window.py:321 mast/tui/ssh/window.py:623
+#: mast/tui/cron/window.py:326 mast/tui/ssh/window.py:623
 msgid "Optional comment"
 msgstr "可选備註"
 
@@ -709,11 +719,13 @@ msgid "Command cannot be empty"
 msgstr ""
 
 #: mast/gtk4/cron/manager.py:40 mast/gtk4/flatpak/remote_manager.py:28
+#: mast/gtk4/fontconfig/alias_tab.py:68 mast/gtk4/fontconfig/match_tab.py:100
 #: mast/gtk4/hosts/window.py:33 mast/gtk4/repositories/window.py:40
 #: mast/gtk4/ssh/dialogs.py:60 mast/gtk4/ssh/hosts_tab.py:33
 #: mast/gtk4/ssh/keys_tab.py:33 mast/gtk4/users/group_list.py:61
 #: mast/gtk4/users/user_list.py:59 mast/qt6/cron/manager.py:45
-#: mast/qt6/flatpak/remote_manager.py:37 mast/qt6/hosts/window.py:40
+#: mast/qt6/flatpak/remote_manager.py:37 mast/qt6/fontconfig/alias_tab.py:58
+#: mast/qt6/fontconfig/match_tab.py:85 mast/qt6/hosts/window.py:40
 #: mast/qt6/repositories/window.py:44 mast/qt6/ssh/dialogs.py:58
 #: mast/qt6/ssh/hosts_tab.py:38 mast/qt6/ssh/keys_tab.py:36
 #: mast/qt6/users/group_list.py:44 mast/qt6/users/user_list.py:44
@@ -735,13 +747,14 @@ msgid "Edit"
 msgstr "編輯"
 
 #: mast/gtk4/cron/manager.py:49 mast/gtk4/flatpak/remote_manager.py:36
-#: mast/gtk4/hosts/window.py:41 mast/gtk4/repositories/window.py:51
-#: mast/gtk4/snapshots/window.py:66 mast/gtk4/snapshots/window.py:150
-#: mast/gtk4/snapshots/window.py:278 mast/gtk4/ssh/hosts_tab.py:41
-#: mast/gtk4/ssh/keys_tab.py:42 mast/gtk4/users/group_list.py:65
-#: mast/gtk4/users/group_list.py:137 mast/gtk4/users/user_list.py:63
-#: mast/gtk4/users/user_list.py:156 mast/qt6/cron/manager.py:54
-#: mast/qt6/flatpak/remote_manager.py:45 mast/qt6/hosts/window.py:47
+#: mast/gtk4/fontconfig/match_tab.py:59 mast/gtk4/hosts/window.py:41
+#: mast/gtk4/repositories/window.py:51 mast/gtk4/snapshots/window.py:66
+#: mast/gtk4/snapshots/window.py:150 mast/gtk4/snapshots/window.py:278
+#: mast/gtk4/ssh/hosts_tab.py:41 mast/gtk4/ssh/keys_tab.py:42
+#: mast/gtk4/users/group_list.py:65 mast/gtk4/users/group_list.py:137
+#: mast/gtk4/users/user_list.py:63 mast/gtk4/users/user_list.py:156
+#: mast/qt6/cron/manager.py:54 mast/qt6/flatpak/remote_manager.py:45
+#: mast/qt6/fontconfig/match_tab.py:55 mast/qt6/hosts/window.py:47
 #: mast/qt6/repositories/window.py:56 mast/qt6/snapshots/window.py:63
 #: mast/qt6/snapshots/window.py:203 mast/qt6/ssh/hosts_tab.py:46
 #: mast/qt6/ssh/keys_tab.py:45 mast/qt6/users/group_list.py:48
@@ -754,24 +767,26 @@ msgstr "編輯"
 msgid "Delete"
 msgstr "刪除"
 
-#: mast/gtk4/cron/manager.py:57 mast/gtk4/datetime/window.py:157
-#: mast/gtk4/git/window.py:70 mast/gtk4/hostname/window.py:48
-#: mast/gtk4/hosts/window.py:48 mast/gtk4/languages/settings.py:65
+#: mast/gtk4/cron/manager.py:57 mast/gtk4/datetime/window.py:159
+#: mast/gtk4/fontconfig/window.py:92 mast/gtk4/git/window.py:70
+#: mast/gtk4/hostname/window.py:48 mast/gtk4/hosts/window.py:48
+#: mast/gtk4/keyboard/window.py:48 mast/gtk4/languages/settings.py:66
 #: mast/gtk4/proxy/window.py:44 mast/gtk4/ssh/hosts_tab.py:48
 #: mast/gtk4/users/group_form.py:70 mast/gtk4/users/group_form.py:168
 #: mast/gtk4/users/user_form.py:99 mast/gtk4/users/user_form.py:280
 #: mast/gtk4/users/user_form.py:315 mast/qt6/cron/manager.py:61
-#: mast/qt6/datetime/window.py:134 mast/qt6/git/window.py:78
-#: mast/qt6/hostname/window.py:51 mast/qt6/hosts/window.py:53
+#: mast/qt6/datetime/window.py:134 mast/qt6/fontconfig/window.py:61
+#: mast/qt6/git/window.py:78 mast/qt6/hostname/window.py:51
+#: mast/qt6/hosts/window.py:53 mast/qt6/keyboard/window.py:55
 #: mast/qt6/languages/settings.py:57 mast/qt6/proxy/window.py:55
 #: mast/qt6/ssh/hosts_tab.py:52 mast/qt6/users/group_form.py:63
 #: mast/qt6/users/group_form.py:140 mast/qt6/users/user_form.py:96
 #: mast/qt6/users/user_form.py:254 mast/qt6/users/user_form.py:282
 #: mast/tui/cron/window.py:82 mast/tui/datetime/window.py:116
 #: mast/tui/git/window.py:81 mast/tui/hostname/window.py:69
-#: mast/tui/hosts/window.py:72 mast/tui/proxy/window.py:91
-#: mast/tui/ssh/window.py:262 mast/tui/users/window.py:107
-#: mast/tui/users/window.py:140
+#: mast/tui/hosts/window.py:72 mast/tui/keyboard/window.py:67
+#: mast/tui/proxy/window.py:91 mast/tui/ssh/window.py:262
+#: mast/tui/users/window.py:107 mast/tui/users/window.py:140
 msgid "Save"
 msgstr "儲存"
 
@@ -819,12 +834,12 @@ msgid "Information"
 msgstr "信息"
 
 #: mast/gtk4/cron/manager.py:187 mast/qt6/cron/manager.py:161
-#: mast/tui/cron/window.py:186
+#: mast/tui/cron/window.py:187
 msgid "Please select a cron job to edit."
 msgstr "請選擇要編輯的排程工作。"
 
 #: mast/gtk4/cron/manager.py:217 mast/qt6/cron/manager.py:179
-#: mast/tui/cron/window.py:205
+#: mast/tui/cron/window.py:206
 msgid "Please select a cron job to delete."
 msgstr "請選擇要刪除的排程工作。"
 
@@ -855,10 +870,11 @@ msgstr "您確定要刪除此排程工作吗？"
 msgid "Cron jobs saved successfully."
 msgstr "排程工作儲存成功。"
 
-#: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:238
-#: mast/gtk4/hostname/window.py:108 mast/gtk4/languages/settings.py:145
-#: mast/gtk4/proxy/window.py:118 mast/qt6/cron/manager.py:232
-#: mast/qt6/datetime/window.py:211 mast/qt6/hostname/window.py:130
+#: mast/gtk4/cron/manager.py:251 mast/gtk4/datetime/window.py:240
+#: mast/gtk4/hostname/window.py:108 mast/gtk4/keyboard/window.py:135
+#: mast/gtk4/languages/settings.py:146 mast/gtk4/proxy/window.py:118
+#: mast/qt6/cron/manager.py:232 mast/qt6/datetime/window.py:211
+#: mast/qt6/hostname/window.py:130 mast/qt6/keyboard/window.py:102
 #: mast/qt6/languages/settings.py:144 mast/qt6/proxy/window.py:117
 msgid "Permission denied. Root permission required."
 msgstr "權限被拒絕。需要 root 權限。"
@@ -881,53 +897,53 @@ msgstr "搜尋時區..."
 msgid "Hardware Clock"
 msgstr "硬體時鐘"
 
-#: mast/gtk4/datetime/window.py:97 mast/qt6/datetime/window.py:83
+#: mast/gtk4/datetime/window.py:98 mast/qt6/datetime/window.py:83
 #: mast/tui/datetime/window.py:103
 msgid "Set hardware clock to UTC"
 msgstr "將硬體時鐘設定為UTC"
 
-#: mast/gtk4/datetime/window.py:108 mast/tui/datetime/window.py:106
+#: mast/gtk4/datetime/window.py:109 mast/tui/datetime/window.py:106
 msgid "NTP Synchronization"
 msgstr "NTP同步"
 
-#: mast/gtk4/datetime/window.py:119 mast/qt6/datetime/window.py:97
+#: mast/gtk4/datetime/window.py:121 mast/qt6/datetime/window.py:97
 #: mast/tui/datetime/window.py:107
 msgid "Enable NTP synchronization"
 msgstr "啟用NTP同步"
 
-#: mast/gtk4/datetime/window.py:126 mast/qt6/datetime/window.py:105
+#: mast/gtk4/datetime/window.py:128 mast/qt6/datetime/window.py:105
 #: mast/tui/datetime/window.py:109
 msgid "NTP Servers"
 msgstr "NTP伺服器"
 
-#: mast/gtk4/datetime/window.py:132 mast/qt6/datetime/window.py:110
+#: mast/gtk4/datetime/window.py:134 mast/qt6/datetime/window.py:110
 msgid "Enter NTP servers separated by spaces"
 msgstr "輸入用空格分隔的NTP伺服器"
 
-#: mast/gtk4/datetime/window.py:139 mast/qt6/datetime/window.py:118
+#: mast/gtk4/datetime/window.py:141 mast/qt6/datetime/window.py:118
 #: mast/tui/datetime/window.py:112
 msgid "Sync Now"
 msgstr "立即同步"
 
-#: mast/gtk4/datetime/window.py:178 mast/qt6/datetime/window.py:148
+#: mast/gtk4/datetime/window.py:180 mast/qt6/datetime/window.py:148
 #, python-brace-format
 msgid "Failed to load timezone: {0}"
 msgstr ""
 
-#: mast/gtk4/datetime/window.py:202 mast/qt6/datetime/window.py:175
+#: mast/gtk4/datetime/window.py:204 mast/qt6/datetime/window.py:175
 #: mast/tui/datetime/window.py:226
 #, python-brace-format
 msgid "Timezone: {0}"
 msgstr ""
 
-#: mast/gtk4/datetime/window.py:207 mast/qt6/datetime/window.py:180
+#: mast/gtk4/datetime/window.py:209 mast/qt6/datetime/window.py:180
 #: mast/tui/datetime/window.py:231
 #, python-brace-format
 msgid "Hardware clock: {0}"
 msgstr ""
 
-#: mast/gtk4/datetime/window.py:218 mast/gtk4/datetime/window.py:220
-#: mast/gtk4/datetime/window.py:224 mast/qt6/datetime/window.py:191
+#: mast/gtk4/datetime/window.py:220 mast/gtk4/datetime/window.py:222
+#: mast/gtk4/datetime/window.py:226 mast/qt6/datetime/window.py:191
 #: mast/qt6/datetime/window.py:193 mast/qt6/datetime/window.py:197
 #: mast/tui/datetime/window.py:242 mast/tui/datetime/window.py:244
 #: mast/tui/datetime/window.py:248
@@ -935,15 +951,16 @@ msgstr ""
 msgid "NTP: {0}"
 msgstr ""
 
-#: mast/gtk4/datetime/window.py:229 mast/qt6/datetime/window.py:202
+#: mast/gtk4/datetime/window.py:231 mast/qt6/datetime/window.py:202
 #: mast/tui/datetime/window.py:253
 msgid "All settings saved successfully."
 msgstr ""
 
-#: mast/gtk4/datetime/window.py:240 mast/gtk4/hostname/window.py:110
-#: mast/gtk4/hosts/window.py:252 mast/gtk4/languages/settings.py:147
-#: mast/gtk4/repositories/window.py:390 mast/qt6/datetime/window.py:213
-#: mast/qt6/hostname/window.py:134 mast/qt6/hosts/window.py:275
+#: mast/gtk4/datetime/window.py:242 mast/gtk4/hostname/window.py:110
+#: mast/gtk4/hosts/window.py:252 mast/gtk4/keyboard/window.py:137
+#: mast/gtk4/languages/settings.py:148 mast/gtk4/repositories/window.py:390
+#: mast/qt6/datetime/window.py:213 mast/qt6/hostname/window.py:134
+#: mast/qt6/hosts/window.py:275 mast/qt6/keyboard/window.py:104
 #: mast/qt6/languages/settings.py:148
 msgid "Authentication failed or pkexec not available."
 msgstr "認證失敗或 pkexec 不可用。"
@@ -968,7 +985,7 @@ msgid "Flatpak installed successfully."
 msgstr "Flatpak 安裝成功。"
 
 #: mast/gtk4/flatpak/package_manager.py:79 mast/gtk4/languages/manager.py:32
-#: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:113
+#: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:114
 #: mast/qt6/flatpak/package_manager.py:78 mast/qt6/languages/manager.py:41
 #: mast/qt6/languages/manager.py:147 mast/qt6/languages/settings.py:107
 msgid "Install"
@@ -1278,6 +1295,116 @@ msgstr ""
 #: mast/gtk4/flatpak/window.py:92 mast/qt6/flatpak/window.py:95
 #, python-brace-format
 msgid "Failed to install Flatpak: {0}"
+msgstr ""
+
+#: mast/gtk4/fontconfig/__init__.py:16 mast/qt6/fontconfig/__init__.py:10
+msgid "Font Config"
+msgstr ""
+
+#: mast/gtk4/fontconfig/alias_tab.py:38 mast/qt6/fontconfig/alias_tab.py:42
+msgid "Original Font"
+msgstr ""
+
+#: mast/gtk4/fontconfig/alias_tab.py:40 mast/qt6/fontconfig/alias_tab.py:43
+msgid "Preferred Font"
+msgstr ""
+
+#: mast/gtk4/fontconfig/alias_tab.py:58 mast/gtk4/fontconfig/match_tab.py:209
+#: mast/qt6/fontconfig/alias_tab.py:51 mast/qt6/fontconfig/match_tab.py:153
+msgid "Font family"
+msgstr ""
+
+#: mast/gtk4/fontconfig/alias_tab.py:72 mast/gtk4/fontconfig/match_tab.py:87
+#: mast/qt6/fontconfig/alias_tab.py:62 mast/qt6/fontconfig/match_tab.py:75
+msgid "Remove"
+msgstr ""
+
+#: mast/gtk4/fontconfig/alias_tab.py:126 mast/qt6/fontconfig/alias_tab.py:91
+msgid "Font family is required."
+msgstr ""
+
+#: mast/gtk4/fontconfig/match_tab.py:42 mast/qt6/fontconfig/match_tab.py:44
+msgid "Match List"
+msgstr ""
+
+#: mast/gtk4/fontconfig/match_tab.py:55 mast/gtk4/fontconfig/match_tab.py:184
+#: mast/gtk4/fontconfig/match_tab.py:189 mast/gtk4/snapshots/window.py:62
+#: mast/gtk4/snapshots/window.py:255 mast/qt6/fontconfig/match_tab.py:51
+#: mast/qt6/fontconfig/match_tab.py:148 mast/qt6/snapshots/window.py:59
+#: mast/qt6/snapshots/window.py:179 mast/tui/snapshots/window.py:71
+msgid "Create"
+msgstr "建立"
+
+#: mast/gtk4/fontconfig/match_tab.py:67 mast/qt6/fontconfig/match_tab.py:61
+msgid "Font List"
+msgstr ""
+
+#: mast/gtk4/fontconfig/match_tab.py:79 mast/qt6/fontconfig/match_tab.py:67
+msgid "Move Up"
+msgstr ""
+
+#: mast/gtk4/fontconfig/match_tab.py:83 mast/qt6/fontconfig/match_tab.py:71
+msgid "Move Down"
+msgstr ""
+
+#: mast/gtk4/fontconfig/match_tab.py:207 mast/gtk4/fontconfig/match_tab.py:211
+#: mast/gtk4/languages/settings.py:39 mast/qt6/fontconfig/match_tab.py:160
+#: mast/qt6/fontconfig/match_tab.py:162 mast/qt6/languages/settings.py:47
+msgid "Language"
+msgstr "語言"
+
+#: mast/gtk4/fontconfig/option_tab.py:36 mast/qt6/fontconfig/option_tab.py:22
+msgid "Antialias"
+msgstr ""
+
+#: mast/gtk4/fontconfig/option_tab.py:42 mast/qt6/fontconfig/option_tab.py:25
+msgid "Hinting"
+msgstr ""
+
+#: mast/gtk4/fontconfig/option_tab.py:49 mast/qt6/fontconfig/option_tab.py:29
+msgid "Hint Style"
+msgstr ""
+
+#: mast/gtk4/fontconfig/option_tab.py:56 mast/qt6/fontconfig/option_tab.py:33
+msgid "Subpixel Render"
+msgstr ""
+
+#: mast/gtk4/fontconfig/option_tab.py:63 mast/qt6/fontconfig/option_tab.py:37
+msgid "LCD Filter"
+msgstr ""
+
+#: mast/gtk4/fontconfig/option_tab.py:69 mast/qt6/fontconfig/option_tab.py:40
+msgid "Embedded Bitmap"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:74 mast/qt6/fontconfig/window.py:44
+msgid "Font Match"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:77 mast/qt6/fontconfig/window.py:47
+msgid "Font Alias"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:80 mast/qt6/fontconfig/window.py:50
+msgid "Font Option"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:88 mast/qt6/fontconfig/window.py:57
+msgid "Reload"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:109 mast/qt6/fontconfig/window.py:112
+#, python-brace-format
+msgid "Failed to load font config: {0}"
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:123 mast/qt6/fontconfig/window.py:123
+msgid "Font configuration saved successfully."
+msgstr ""
+
+#: mast/gtk4/fontconfig/window.py:129 mast/qt6/fontconfig/window.py:129
+#, python-brace-format
+msgid "Failed to save font config: {0}"
 msgstr ""
 
 #: mast/gtk4/git/__init__.py:16 mast/qt6/git/__init__.py:10
@@ -1611,68 +1738,96 @@ msgstr ""
 msgid "Compress"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:220 mast/qt6/journal/window.py:169
+#: mast/gtk4/journal/window.py:221 mast/qt6/journal/window.py:169
 msgid "Rate Limit Interval (e.g., 30s)"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:222 mast/qt6/journal/window.py:171
+#: mast/gtk4/journal/window.py:223 mast/qt6/journal/window.py:171
 msgid "RateLimitInterval"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:226 mast/qt6/journal/window.py:175
+#: mast/gtk4/journal/window.py:227 mast/qt6/journal/window.py:175
 msgid "Rate Limit Burst"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:228 mast/qt6/journal/window.py:177
+#: mast/gtk4/journal/window.py:229 mast/qt6/journal/window.py:177
 msgid "RateLimitBurst"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:232 mast/qt6/journal/window.py:181
+#: mast/gtk4/journal/window.py:233 mast/qt6/journal/window.py:181
 msgid "Save Configuration"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:281 mast/qt6/journal/window.py:208
+#: mast/gtk4/journal/window.py:282 mast/qt6/journal/window.py:208
 #, python-brace-format
 msgid "Failed to load journal: {0}"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:339 mast/qt6/journal/window.py:272
+#: mast/gtk4/journal/window.py:340 mast/qt6/journal/window.py:272
 #, python-brace-format
 msgid "Failed to load configuration: {0}"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:356 mast/qt6/journal/window.py:289
+#: mast/gtk4/journal/window.py:357 mast/qt6/journal/window.py:289
 msgid "Journal configuration saved successfully."
 msgstr ""
 
-#: mast/gtk4/journal/window.py:362 mast/qt6/journal/window.py:295
+#: mast/gtk4/journal/window.py:363 mast/qt6/journal/window.py:295
 msgid "Failed to save journal configuration."
 msgstr ""
 
-#: mast/gtk4/journal/window.py:368 mast/qt6/journal/window.py:301
+#: mast/gtk4/journal/window.py:369 mast/qt6/journal/window.py:301
 #, python-brace-format
 msgid "Failed to save configuration: {0}"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:377 mast/qt6/journal/window.py:307
+#: mast/gtk4/journal/window.py:378 mast/qt6/journal/window.py:307
 msgid "Clear Journal"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:379 mast/qt6/journal/window.py:308
+#: mast/gtk4/journal/window.py:380 mast/qt6/journal/window.py:308
 msgid "Are you sure you want to clear all journal logs?"
 msgstr ""
 
-#: mast/gtk4/journal/window.py:390 mast/qt6/journal/window.py:320
+#: mast/gtk4/journal/window.py:391 mast/qt6/journal/window.py:320
 msgid "Journal cleared successfully."
 msgstr ""
 
-#: mast/gtk4/journal/window.py:397 mast/qt6/journal/window.py:327
+#: mast/gtk4/journal/window.py:398 mast/qt6/journal/window.py:327
 msgid "Failed to clear journal."
 msgstr ""
 
-#: mast/gtk4/journal/window.py:403 mast/qt6/journal/window.py:333
+#: mast/gtk4/journal/window.py:404 mast/qt6/journal/window.py:333
 #, python-brace-format
 msgid "Failed to clear journal: {0}"
+msgstr ""
+
+#: mast/gtk4/keyboard/__init__.py:16 mast/qt6/keyboard/__init__.py:10
+#: mast/tui/keyboard/__init__.py:12
+msgid "Keyboard"
+msgstr ""
+
+#: mast/gtk4/keyboard/window.py:31 mast/qt6/keyboard/window.py:38
+msgid "Select Keyboard Layout"
+msgstr ""
+
+#: mast/gtk4/keyboard/window.py:126 mast/qt6/keyboard/window.py:93
+msgid "Info"
+msgstr ""
+
+#: mast/gtk4/keyboard/window.py:126 mast/gtk4/users/user_form.py:298
+#: mast/qt6/keyboard/window.py:93 mast/qt6/users/user_form.py:267
+msgid "No changes to save."
+msgstr ""
+
+#: mast/gtk4/keyboard/window.py:132 mast/qt6/keyboard/window.py:99
+#, python-brace-format
+msgid "Keyboard layout changed successfully to '{0}'."
+msgstr ""
+
+#: mast/gtk4/keyboard/window.py:139 mast/qt6/keyboard/window.py:106
+#, python-brace-format
+msgid "Failed to set keyboard layout: {0}"
 msgstr ""
 
 #: mast/gtk4/languages/__init__.py:16 mast/qt6/languages/__init__.py:10
@@ -1702,17 +1857,17 @@ msgstr "請選擇要安裝的語言。"
 msgid "Are you sure you want to install language '{0}' ({1})?"
 msgstr "您確定要安裝語言 '{0}' ({1}) 嗎？"
 
-#: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:114
+#: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:115
 #: mast/qt6/languages/manager.py:148 mast/qt6/languages/settings.py:108
 msgid "Installing..."
 msgstr "正在安裝..."
 
-#: mast/gtk4/languages/manager.py:170 mast/gtk4/languages/settings.py:115
+#: mast/gtk4/languages/manager.py:170 mast/gtk4/languages/settings.py:116
 #: mast/qt6/languages/manager.py:149 mast/qt6/languages/settings.py:109
 msgid "Install Language"
 msgstr "安裝語言"
 
-#: mast/gtk4/languages/manager.py:172 mast/gtk4/languages/settings.py:117
+#: mast/gtk4/languages/manager.py:172 mast/gtk4/languages/settings.py:118
 #: mast/qt6/languages/manager.py:151 mast/qt6/languages/settings.py:111
 #, python-brace-format
 msgid "Language '{0}' installed successfully."
@@ -1740,34 +1895,30 @@ msgstr "解除安裝語言"
 msgid "Language '{0}' uninstalled successfully."
 msgstr "語言 '{0}' 解除安裝成功。"
 
-#: mast/gtk4/languages/settings.py:39 mast/qt6/languages/settings.py:47
-msgid "Language"
-msgstr "語言"
-
 #: mast/gtk4/languages/settings.py:52 mast/qt6/languages/settings.py:50
 msgid "Use UTF-8"
 msgstr "使用 UTF-8"
 
-#: mast/gtk4/languages/settings.py:88 mast/qt6/languages/settings.py:82
+#: mast/gtk4/languages/settings.py:89 mast/qt6/languages/settings.py:82
 #, python-brace-format
 msgid "Failed to load languages: {0}"
 msgstr "載入語言清單失敗：{0}"
 
-#: mast/gtk4/languages/settings.py:98 mast/qt6/languages/settings.py:92
+#: mast/gtk4/languages/settings.py:99 mast/qt6/languages/settings.py:92
 msgid "Please select a language."
 msgstr "請選擇一種語言。"
 
-#: mast/gtk4/languages/settings.py:106 mast/qt6/languages/settings.py:100
+#: mast/gtk4/languages/settings.py:107 mast/qt6/languages/settings.py:100
 #, python-brace-format
 msgid "Language '{0}' not found."
 msgstr "語言 '{0}' 未找到。"
 
-#: mast/gtk4/languages/settings.py:140 mast/qt6/languages/settings.py:137
+#: mast/gtk4/languages/settings.py:141 mast/qt6/languages/settings.py:137
 #, python-brace-format
 msgid "Language changed successfully to '{0}'. Changes will take effect after logout."
 msgstr "語言已成功更改為 '{0}'。變更將在登出後生效。"
 
-#: mast/gtk4/languages/settings.py:149 mast/qt6/languages/settings.py:152
+#: mast/gtk4/languages/settings.py:150 mast/qt6/languages/settings.py:152
 #, python-brace-format
 msgid "Failed to set language: {0}"
 msgstr "設定語言失敗：{0}"
@@ -2216,12 +2367,6 @@ msgstr "設定儲存成功。"
 msgid "Failed to write config: {0}"
 msgstr "寫入設定失敗：{0}"
 
-#: mast/gtk4/snapshots/window.py:62 mast/gtk4/snapshots/window.py:255
-#: mast/qt6/snapshots/window.py:59 mast/qt6/snapshots/window.py:179
-#: mast/tui/snapshots/window.py:71
-msgid "Create"
-msgstr "建立"
-
 #: mast/gtk4/snapshots/window.py:70 mast/qt6/snapshots/window.py:67
 #: mast/tui/snapshots/window.py:74
 msgid "Configure"
@@ -2660,10 +2805,6 @@ msgstr ""
 msgid "Setting password..."
 msgstr ""
 
-#: mast/gtk4/users/user_form.py:298 mast/qt6/users/user_form.py:267
-msgid "No changes to save."
-msgstr ""
-
 #: mast/gtk4/users/user_form.py:311 mast/qt6/users/user_form.py:278
 #, python-brace-format
 msgid "User '{0}' updated successfully."
@@ -2716,21 +2857,21 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:69
+#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:70
 #, python-brace-format
 msgid "Version: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:70
+#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:71
 #, python-brace-format
 msgid "License: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:66
+#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:67
 msgid "About MaST"
 msgstr ""
 
-#: mast/qt6/main_window.py:63
+#: mast/qt6/main_window.py:67
 msgid "Help"
 msgstr ""
 
@@ -2802,6 +2943,14 @@ msgstr "重設為原始值"
 
 #: mast/qt6/journal/window.py:115
 msgid "PID"
+msgstr ""
+
+#: mast/qt6/keyboard/window.py:45
+msgid "Test Input:"
+msgstr ""
+
+#: mast/qt6/keyboard/window.py:49
+msgid "Type here to test the keyboard layout..."
 msgstr ""
 
 #: mast/qt6/languages/manager.py:141
@@ -2891,37 +3040,37 @@ msgstr "讀取公鑰失敗：{0}"
 msgid "Failed to generate SSH key: {0}"
 msgstr "產生 SSH 金鑰失敗：{0}"
 
-#: mast/tui/main_window.py:64
+#: mast/tui/main_window.py:65
 msgid "License file not found."
 msgstr ""
 
-#: mast/tui/main_window.py:72
+#: mast/tui/main_window.py:73
 msgid "License Text:"
 msgstr ""
 
-#: mast/tui/cron/window.py:211
+#: mast/tui/cron/window.py:213
 msgid "Cron job deleted."
 msgstr "排程工作已刪除。"
 
-#: mast/tui/cron/window.py:222
+#: mast/tui/cron/window.py:226
 msgid "Success: Cron jobs saved successfully."
 msgstr "成功：排程工作儲存成功。"
 
-#: mast/tui/cron/window.py:224 mast/tui/datetime/window.py:262
-#: mast/tui/hostname/window.py:135 mast/tui/languages/window.py:120
-#: mast/tui/proxy/window.py:158
+#: mast/tui/cron/window.py:228 mast/tui/datetime/window.py:262
+#: mast/tui/hostname/window.py:135 mast/tui/keyboard/window.py:139
+#: mast/tui/languages/window.py:120 mast/tui/proxy/window.py:158
 msgid "Error: Permission denied. Root permission required."
 msgstr "錯誤：權限遭拒。需要 root 權限。"
 
-#: mast/tui/cron/window.py:234
+#: mast/tui/cron/window.py:239
 msgid "Cron job added."
 msgstr "排程工作已新增。"
 
-#: mast/tui/cron/window.py:246
+#: mast/tui/cron/window.py:251
 msgid "Cron job updated."
 msgstr "排程工作已更新。"
 
-#: mast/tui/cron/window.py:344
+#: mast/tui/cron/window.py:349
 msgid "Error: Command is required."
 msgstr "錯誤：命令是必要的。"
 
@@ -2953,15 +3102,16 @@ msgid "Error loading NTP status: {0}"
 msgstr ""
 
 #: mast/tui/datetime/window.py:264 mast/tui/hostname/window.py:140
-#: mast/tui/hosts/window.py:169 mast/tui/languages/window.py:125
-#: mast/tui/repositories/window.py:268
+#: mast/tui/hosts/window.py:169 mast/tui/keyboard/window.py:144
+#: mast/tui/languages/window.py:125 mast/tui/repositories/window.py:268
 msgid "Error: Authentication failed or pkexec not available."
 msgstr "錯誤：認證失敗或 pkexec 不可用。"
 
 #: mast/tui/datetime/window.py:266 mast/tui/hostname/window.py:86
-#: mast/tui/hostname/window.py:144 mast/tui/languages/window.py:129
-#: mast/tui/ssh/window.py:415 mast/tui/ssh/window.py:451
-#: mast/tui/users/window.py:517 mast/tui/users/window.py:519
+#: mast/tui/hostname/window.py:144 mast/tui/keyboard/window.py:148
+#: mast/tui/languages/window.py:129 mast/tui/ssh/window.py:415
+#: mast/tui/ssh/window.py:451 mast/tui/users/window.py:517
+#: mast/tui/users/window.py:519
 #, python-brace-format
 msgid "Error: {0}"
 msgstr "錯誤：{0}"
@@ -3057,6 +3207,19 @@ msgstr "錯誤：IP 地址和主機名是必要的。"
 #: mast/tui/hosts/window.py:210
 msgid "Entry updated."
 msgstr "項目已更新。"
+
+#: mast/tui/keyboard/window.py:64
+msgid "Keyboard Layout Configuration"
+msgstr ""
+
+#: mast/tui/keyboard/window.py:124
+msgid "Info: No changes to save."
+msgstr ""
+
+#: mast/tui/keyboard/window.py:131
+#, python-brace-format
+msgid "Success: Keyboard layout changed successfully to '{0}'."
+msgstr ""
 
 #: mast/tui/languages/window.py:79
 msgid "Error: Please select a language."
