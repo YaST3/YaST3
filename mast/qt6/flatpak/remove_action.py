@@ -42,7 +42,3 @@ class RemoveFlatpakAction(CommandAction):
             return
 
         super().start_action()
-
-
-# Backward-compatible alias while call sites migrate from widget naming.
-RemoveFlatpakWidget = RemoveFlatpakAction
