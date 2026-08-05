@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-05 08:27+0000\n"
+"POT-Creation-Date: 2026-08-05 08:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1117,18 +1117,18 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:342
 #: mast/qt6/flatpak/package_manager.py:370
 #, python-brace-format
-msgid "Are you sure you want to remove package '{0}'?"
+msgid "Are you sure you want to uninstall package '{0}'?"
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:354
 #: mast/qt6/flatpak/package_manager.py:96
-msgid "Package removed successfully."
+msgid "Package uninstalled successfully."
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:360
 #: mast/qt6/flatpak/package_manager.py:398
 #, python-brace-format
-msgid "Failed to remove package: {0}"
+msgid "Failed to uninstall package: {0}"
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
@@ -1249,18 +1249,18 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:128
 #: mast/qt6/flatpak/runtime_manager.py:140
 #, python-brace-format
-msgid "Are you sure you want to remove runtime '{0}'?"
+msgid "Are you sure you want to uninstall runtime '{0}'?"
 msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:140
 #: mast/qt6/flatpak/runtime_manager.py:40
-msgid "Runtime removed successfully."
+msgid "Runtime uninstalled successfully."
 msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:146
 #: mast/qt6/flatpak/runtime_manager.py:154
 #, python-brace-format
-msgid "Failed to remove runtime: {0}"
+msgid "Failed to uninstall runtime: {0}"
 msgstr ""
 
 #: mast/gtk4/flatpak/settings.py:51 mast/qt6/flatpak/window.py:106
@@ -2784,19 +2784,19 @@ msgid "Install Flatpak Package"
 msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:93
-msgid "Removing package..."
+msgid "Uninstalling package..."
 msgstr ""
 
 #: mast/qt6/flatpak/package_manager.py:94
-msgid "Remove Flatpak Package"
+msgid "Uninstall Flatpak Package"
 msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:37
-msgid "Removing runtime..."
+msgid "Uninstalling runtime..."
 msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:38
-msgid "Remove Flatpak Runtime"
+msgid "Uninstall Flatpak Runtime"
 msgstr ""
 
 #: mast/qt6/flatpak/window.py:113

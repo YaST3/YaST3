@@ -90,10 +90,10 @@ class FlatpakPackageManager(QWidget):
         else:
             self.uninstall_action = CommandAction(
                 text=_("Uninstall"),
-                running_text=_("Removing package..."),
-                dialog_title=_("Remove Flatpak Package"),
+                running_text=_("Uninstalling package..."),
+                dialog_title=_("Uninstall Flatpak Package"),
                 command=["true"],
-                success_output=_("Package removed successfully."),
+                success_output=_("Package uninstalled successfully."),
                 auto_close_on_success=True,
                 parent=self,
             )
@@ -367,7 +367,7 @@ class FlatpakPackageManager(QWidget):
         reply = QMessageBox.question(
             self,
             _("Confirm"),
-            _("Are you sure you want to remove package '{0}'?").format(app_id),
+            _("Are you sure you want to uninstall package '{0}'?").format(app_id),
         )
         if reply != QMessageBox.StandardButton.Yes:
             return
@@ -395,7 +395,7 @@ class FlatpakPackageManager(QWidget):
             return
 
         if error:
-            QMessageBox.critical(self, _("Error"), _("Failed to remove package: {0}").format(error))
+            QMessageBox.critical(self, _("Error"), _("Failed to uninstall package: {0}").format(error))
 
     def search_remote(self) -> None:
         if self.mode != self.MODE_SEARCH:

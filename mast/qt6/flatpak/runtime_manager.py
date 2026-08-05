@@ -34,10 +34,10 @@ class FlatpakRuntimeManager(QWidget):
 
         self.uninstall_action = CommandAction(
             text=_("Uninstall"),
-            running_text=_("Removing runtime..."),
-            dialog_title=_("Remove Flatpak Runtime"),
+            running_text=_("Uninstalling runtime..."),
+            dialog_title=_("Uninstall Flatpak Runtime"),
             command=["true"],
-            success_output=_("Runtime removed successfully."),
+            success_output=_("Runtime uninstalled successfully."),
             auto_close_on_success=True,
             parent=self,
         )
@@ -137,7 +137,7 @@ class FlatpakRuntimeManager(QWidget):
         reply = QMessageBox.question(
             self,
             _("Confirm"),
-            _("Are you sure you want to remove runtime '{0}'?").format(runtime_id),
+            _("Are you sure you want to uninstall runtime '{0}'?").format(runtime_id),
         )
         if reply != QMessageBox.StandardButton.Yes:
             return
@@ -151,7 +151,7 @@ class FlatpakRuntimeManager(QWidget):
             return
 
         if error:
-            QMessageBox.critical(self, _("Error"), _("Failed to remove runtime: {0}").format(error))
+            QMessageBox.critical(self, _("Error"), _("Failed to uninstall runtime: {0}").format(error))
 
     def load_runtimes(self) -> None:
         try:
