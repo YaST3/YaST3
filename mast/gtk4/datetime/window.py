@@ -91,6 +91,7 @@ class DateTimeWindow(Gtk.ApplicationWindow):
         box.set_margin_end(12)
 
         self.hwclock_switch = Gtk.Switch()
+        self.hwclock_switch.set_halign(Gtk.Align.START)
         self.hwclock_switch.set_active(True)
 
         switch_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
@@ -115,6 +116,7 @@ class DateTimeWindow(Gtk.ApplicationWindow):
         box.set_margin_end(12)
 
         self.ntp_switch = Gtk.Switch()
+        self.ntp_switch.set_halign(Gtk.Align.START)
         ntp_switch_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=12)
         ntp_label = Gtk.Label(label=_("Enable NTP synchronization"))
         ntp_label.set_halign(Gtk.Align.START)

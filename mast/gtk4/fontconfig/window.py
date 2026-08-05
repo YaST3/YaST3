@@ -37,11 +37,13 @@ class FontConfigWindow(Gtk.ApplicationWindow):
         row = 0
 
         self.antialias_switch = Gtk.Switch()
+        self.antialias_switch.set_halign(Gtk.Align.START)
         grid.attach(Gtk.Label(label=_("Antialias"), halign=Gtk.Align.START), 0, row, 1, 1)
         grid.attach(self.antialias_switch, 1, row, 1, 1)
         row += 1
 
         self.hinting_switch = Gtk.Switch()
+        self.hinting_switch.set_halign(Gtk.Align.START)
         grid.attach(Gtk.Label(label=_("Hinting"), halign=Gtk.Align.START), 0, row, 1, 1)
         grid.attach(self.hinting_switch, 1, row, 1, 1)
         row += 1
@@ -68,6 +70,7 @@ class FontConfigWindow(Gtk.ApplicationWindow):
         row += 1
 
         self.embeddedbitmap_switch = Gtk.Switch()
+        self.embeddedbitmap_switch.set_halign(Gtk.Align.START)
         grid.attach(Gtk.Label(label=_("Embedded Bitmap"), halign=Gtk.Align.START), 0, row, 1, 1)
         grid.attach(self.embeddedbitmap_switch, 1, row, 1, 1)
 

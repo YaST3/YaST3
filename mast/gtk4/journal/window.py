@@ -214,6 +214,7 @@ class JournalWindow(Gtk.ApplicationWindow):
 
         grid.attach(Gtk.Label(label=_("Compress")), 0, row, 1, 1)
         self.compress_switch = Gtk.Switch()
+        self.compress_switch.set_halign(Gtk.Align.START)
         grid.attach(self.compress_switch, 1, row, 1, 1)
         row += 1
 
