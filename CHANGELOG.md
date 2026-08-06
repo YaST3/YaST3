@@ -5,6 +5,7 @@
 - feat(fontconfig): added fontconfig module to manage fontconfig settings.
 - feat(keyboard): added keyboard module to manage keyboard layouts and keymaps.
 - feat(snapshots): added used-space column to snapshots module.
+- feat(telemetry): integrated Aptabase with first-run opt-in and startup/module usage tracking.
 
 ## 0.0.25 - 2026-08-04
 
