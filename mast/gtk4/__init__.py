@@ -15,6 +15,7 @@ from mast.gtk4.packages import PackagesModule
 from mast.gtk4.proxy import ProxyModule
 from mast.gtk4.repositories import RepositoriesModule
 from mast.gtk4.services import ServicesModule
+from mast.gtk4.snap import SnapModule
 from mast.gtk4.snapshots import SnapshotsModule
 from mast.gtk4.ssh import SSHClientModule
 from mast.gtk4.users import UsersModule
@@ -35,6 +36,7 @@ __all__ = [
     "ProxyModule",
     "RepositoriesModule",
     "ServicesModule",
+    "SnapModule",
     "SnapshotsModule",
     "SSHClientModule",
     "UsersModule",

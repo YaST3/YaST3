@@ -23,6 +23,7 @@ MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaS
 | Proxy        | ✅   | ✅  | ✅   | ✅  |
 | Repositories | ✅   | ✅  | ✅   | ✅  |
 | Services     | ✅   | ✅  | ✅   | ✅  |
+| Snap         | ✅   | ✅  | ✅   | ❌  |
 | Snapshots    | ✅   | ✅  | ✅   | ✅  |
 | SSH Client   | ✅   | ✅  | ✅   | ✅  |
 

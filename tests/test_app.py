@@ -6,6 +6,7 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 from PySide6.QtWidgets import QApplication, QLabel, QToolButton
 
 from mast.qt6.main_window import MainWindow
+from mast.qt6.module_button import ModuleButton
 
 
 class MainWindowTest(unittest.TestCase):
@@ -16,7 +17,7 @@ class MainWindowTest(unittest.TestCase):
     def test_window_has_button_for_each_module(self) -> None:
         window = MainWindow()
 
-        buttons = window.findChildren(QToolButton)
+        buttons = window.findChildren(ModuleButton)
 
         self.assertEqual(len(buttons), len(window.modules))
         window.close()
