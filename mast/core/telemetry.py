@@ -107,11 +107,11 @@ async def _track_and_flush(event_name: str, props: dict[str, Any] | None = None)
         return
 
 
-def track_app_started(platform_name: str) -> None:
+def track_app_started(app_variant: str) -> None:
     """Track one application startup."""
-    track_event("app_started", {"platform": platform_name})
+    track_event("app_started", {"app_variant": app_variant})
 
 
-def track_module_started(platform_name: str, module_key: str) -> None:
+def track_module_started(app_variant: str, module_key: str) -> None:
     """Track one module launch."""
-    track_event("module_started", {"platform": platform_name, "module": module_key})
+    track_event("module_started", {"app_variant": app_variant, "module": module_key})
