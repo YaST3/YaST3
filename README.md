@@ -1,4 +1,4 @@
-# MaST
+# MaST - GUI & TUI System Setup Tool for GNU/Linux
 
 [![Crowdin](https://badges.crowdin.net/mast/localized.svg)](https://crowdin.com/project/mast)
 
@@ -30,15 +30,36 @@ MaST (**M**aybe **a**nthoer **S**etup **T**ool) is continuous development of YaS
 
 ## Installation
 
-### openSUSE & SLE
+### openSUSE
 
 ```bash
-# for KDE/LXQt users
-opi mast-qt6
-# for GNOME users
-opi mast-gtk4
-# for server users
-opi mast-tui
+# Tumbleweed
+sudo zypper addrepo https://download.opensuse.org/repositories/home:guoyunhe/openSUSE_Tumbleweed/home:guoyunhe.repo
+sudo zypper install mast-qt6 # or mast-gtk4 or mast-tui
+
+# Slowroll
+sudo zypper addrepo https://download.opensuse.org/repositories/home:guoyunhe/openSUSE_Slowroll/home:guoyunhe.repo
+sudo zypper install mast-qt6 # or mast-gtk4 or mast-tui
+
+# Leap 16.0
+sudo zypper addrepo https://download.opensuse.org/repositories/home:guoyunhe/16.0/home:guoyunhe.repo
+sudo zypper install mast-qt6 # or mast-gtk4 or mast-tui
+```
+
+### Fedora
+
+```bash
+# Fedora Rawhide
+sudo dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/home:guoyunhe:fedora/Fedora_Rawhide/home:guoyunhe:fedora.repo
+sudo dnf install mast-qt6 # or mast-gtk4 or mast-tui
+
+# Fedora 44
+sudo dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/home:guoyunhe:fedora/Fedora_44/home:guoyunhe:fedora.repo
+sudo dnf install mast-qt6 # or mast-gtk4 or mast-tui
+
+# Fedora 43
+sudo dnf config-manager addrepo --from-repofile=https://download.opensuse.org/repositories/home:guoyunhe:fedora/Fedora_43/home:guoyunhe:fedora.repo
+sudo dnf install mast-qt6 # or mast-gtk4 or mast-tui
 ```
 
 ## Development
