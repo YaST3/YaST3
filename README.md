@@ -60,6 +60,10 @@ python3 -m mast.tui
 
 Contribute to translations on [Crowdin](https://crowdin.com/project/mast)
 
+## Release
+
+Project maintainers: see [RELEASE.md](./RELEASE.md) for release procedure.
+
 ## FAQ
 
 ### Distribution support
