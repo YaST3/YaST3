@@ -16,8 +16,8 @@ from mast.core.i18n import _
 from mast.core.telemetry import (
     get_telemetry_consent,
     set_telemetry_consent,
-    track_app_started,
 )
+from mast.qt6.telemetry import track_app_started
 from mast.qt6 import (
     AndroidModule,
     CronModule,
@@ -105,7 +105,7 @@ class MainWindow(QMainWindow):
             return
 
         if consent:
-            track_app_started("qt6")
+            track_app_started()
 
     def _ask_telemetry_consent(self) -> None:
         title = _("Anonymous Usage Analytics")
@@ -123,4 +123,4 @@ class MainWindow(QMainWindow):
         enabled = result == QMessageBox.StandardButton.Yes
         set_telemetry_consent(enabled)
         if enabled:
-            track_app_started("qt6")
+            track_app_started()

@@ -6,8 +6,8 @@ from mast.core.i18n import _
 from mast.core.telemetry import (
     get_telemetry_consent,
     set_telemetry_consent,
-    track_app_started,
 )
+from mast.gtk4.telemetry import track_app_started
 from mast.gtk4 import (
     AndroidModule,
     CronModule,
@@ -120,7 +120,7 @@ class MainWindow(Gtk.ApplicationWindow):
             return
 
         if consent:
-            track_app_started("gtk4")
+            track_app_started()
 
     def _ask_telemetry_consent(self) -> None:
         dialog = Gtk.MessageDialog(
@@ -143,5 +143,5 @@ class MainWindow(Gtk.ApplicationWindow):
         enabled = response == Gtk.ResponseType.YES
         set_telemetry_consent(enabled)
         if enabled:
-            track_app_started("gtk4")
+            track_app_started()
         dialog.destroy()

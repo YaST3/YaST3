@@ -10,9 +10,8 @@ from mast.core.i18n import _
 from mast.core.telemetry import (
     get_telemetry_consent,
     set_telemetry_consent,
-    track_app_started,
-    track_module_started,
 )
+from mast.tui.telemetry import track_app_started, track_module_started
 from mast.tui.module import Module
 from mast.tui import (
     CronModule,
@@ -121,7 +120,7 @@ class TelemetryConsentScreen(ModalScreen[None]):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "telemetry-yes":
             set_telemetry_consent(True)
-            track_app_started("tui")
+            track_app_started()
             self.dismiss(None)
             return
 
@@ -196,12 +195,12 @@ class MainWindow(App):
             return
 
         if consent:
-            track_app_started("tui")
+            track_app_started()
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Handle module button press."""
         if isinstance(event.button, ModuleButton):
-            track_module_started("tui", event.button.module.__class__.__name__)
+            track_module_started(event.button.module.__class__.__name__)
             screen = event.button.module.create_window()
             if screen:
                 self.push_screen(screen)
