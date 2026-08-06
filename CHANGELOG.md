@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.27 - 2026-08-05
+
+- feat(telemetry): added optional telemetry based on aptabase.
+
 ## 0.0.26 - 2026-08-05
 
 - feat(fontconfig): added fontconfig module to manage fontconfig settings.
