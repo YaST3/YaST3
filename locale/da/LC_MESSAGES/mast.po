@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-05 14:25+0000\n"
-"PO-Revision-Date: 2026-08-05 17:20\n"
+"POT-Creation-Date: 2026-08-06 05:42+0000\n"
+"PO-Revision-Date: 2026-08-06 05:52\n"
 "Last-Translator: \n"
 "Language-Team: Danish\n"
 "MIME-Version: 1.0\n"
@@ -42,14 +42,14 @@ msgstr ""
 #: mast/gtk4/cron/window.py:31 mast/gtk4/flatpak/remote_manager.py:189
 #: mast/gtk4/git/window.py:46 mast/gtk4/journal/window.py:66
 #: mast/gtk4/services/window.py:68 mast/gtk4/services/window.py:225
-#: mast/gtk4/snapshots/window.py:99
+#: mast/gtk4/snapshots/window.py:100
 #: mast/qt6/android/package_manager_panel.py:234 mast/qt6/cron/window.py:31
 #: mast/qt6/flatpak/remote_dialog.py:58 mast/qt6/git/window.py:50
 #: mast/qt6/journal/window.py:72 mast/qt6/services/window.py:71
-#: mast/qt6/services/window.py:188 mast/qt6/snapshots/window.py:77
+#: mast/qt6/services/window.py:188 mast/qt6/snapshots/window.py:78
 #: mast/tui/cron/window.py:70 mast/tui/git/window.py:70
 #: mast/tui/services/window.py:95 mast/tui/services/window.py:188
-#: mast/tui/snapshots/window.py:86 mast/tui/ssh/window.py:519
+#: mast/tui/snapshots/window.py:87 mast/tui/ssh/window.py:519
 #: mast/tui/users/window.py:173 mast/tui/users/window.py:233
 #: mast/tui/users/window.py:494
 msgid "User"
@@ -63,12 +63,20 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: mast/gtk4/main_window.py:99 mast/qt6/main_window.py:68
-#: mast/tui/main_window.py:127
+#: mast/gtk4/main_window.py:106 mast/qt6/main_window.py:74
+#: mast/tui/main_window.py:160
 msgid "About"
 msgstr "Om"
 
-#: mast/gtk4/module.py:33 mast/qt6/module.py:31
+#: mast/gtk4/main_window.py:131 mast/tui/main_window.py:110
+msgid "Enable anonymous usage analytics?"
+msgstr ""
+
+#: mast/gtk4/main_window.py:136 mast/tui/main_window.py:113
+msgid "MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
+msgstr ""
+
+#: mast/gtk4/module.py:35 mast/qt6/module.py:33
 #, python-brace-format
 msgid "{name} — MaST"
 msgstr ""
@@ -172,8 +180,8 @@ msgstr ""
 #: mast/gtk4/flatpak/remote_manager.py:40
 #: mast/gtk4/flatpak/runtime_manager.py:51 mast/gtk4/journal/window.py:94
 #: mast/gtk4/journal/window.py:140 mast/gtk4/services/window.py:80
-#: mast/gtk4/snapshots/window.py:58 mast/gtk4/snapshots/window.py:178
-#: mast/gtk4/snapshots/window.py:193 mast/gtk4/ssh/keys_tab.py:47
+#: mast/gtk4/snapshots/window.py:59 mast/gtk4/snapshots/window.py:203
+#: mast/gtk4/snapshots/window.py:218 mast/gtk4/ssh/keys_tab.py:47
 #: mast/qt6/android/device_panel.py:50
 #: mast/qt6/android/package_manager_panel.py:135
 #: mast/qt6/flatpak/package_manager.py:131
@@ -181,10 +189,10 @@ msgstr ""
 #: mast/qt6/flatpak/package_manager.py:277
 #: mast/qt6/flatpak/remote_manager.py:49 mast/qt6/flatpak/runtime_manager.py:72
 #: mast/qt6/journal/window.py:98 mast/qt6/services/window.py:81
-#: mast/qt6/snapshots/window.py:55 mast/qt6/snapshots/window.py:102
-#: mast/qt6/snapshots/window.py:117 mast/qt6/ssh/keys_tab.py:50
-#: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:73
-#: mast/tui/snapshots/window.py:135
+#: mast/qt6/snapshots/window.py:56 mast/qt6/snapshots/window.py:104
+#: mast/qt6/snapshots/window.py:119 mast/qt6/ssh/keys_tab.py:50
+#: mast/tui/services/window.py:102 mast/tui/snapshots/window.py:74
+#: mast/tui/snapshots/window.py:137
 msgid "Refresh"
 msgstr "Opdater"
 
@@ -238,8 +246,8 @@ msgstr "Opdater"
 #: mast/gtk4/repositories/window.py:280 mast/gtk4/repositories/window.py:388
 #: mast/gtk4/repositories/window.py:390 mast/gtk4/repositories/window.py:392
 #: mast/gtk4/services/window.py:183 mast/gtk4/snapshots/config_dialog.py:46
-#: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:202
-#: mast/gtk4/snapshots/window.py:208 mast/gtk4/ssh/__init__.py:72
+#: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:227
+#: mast/gtk4/snapshots/window.py:233 mast/gtk4/ssh/__init__.py:72
 #: mast/gtk4/ssh/dialogs.py:120 mast/gtk4/ssh/hosts_tab.py:109
 #: mast/gtk4/ssh/hosts_tab.py:152 mast/gtk4/ssh/hosts_tab.py:180
 #: mast/gtk4/ssh/hosts_tab.py:195 mast/gtk4/ssh/hosts_tab.py:226
@@ -301,8 +309,8 @@ msgstr "Opdater"
 #: mast/qt6/repositories/window.py:306 mast/qt6/repositories/window.py:308
 #: mast/qt6/repositories/window.py:310 mast/qt6/repositories/window.py:325
 #: mast/qt6/services/window.py:140 mast/qt6/snapshots/config_dialog.py:38
-#: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:126
-#: mast/qt6/snapshots/window.py:132 mast/qt6/ssh/__init__.py:59
+#: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:128
+#: mast/qt6/snapshots/window.py:134 mast/qt6/ssh/__init__.py:59
 #: mast/qt6/ssh/dialogs.py:86 mast/qt6/ssh/dialogs.py:92
 #: mast/qt6/ssh/hosts_tab.py:90 mast/qt6/ssh/hosts_tab.py:141
 #: mast/qt6/ssh/hosts_tab.py:162 mast/qt6/ssh/hosts_tab.py:176
@@ -371,13 +379,13 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:141
 #: mast/gtk4/flatpak/runtime_manager.py:65
 #: mast/gtk4/repositories/repo_edit_dialog.py:34
-#: mast/gtk4/snapshots/window.py:84
+#: mast/gtk4/snapshots/window.py:85
 #: mast/qt6/android/package_manager_panel.py:143
 #: mast/qt6/flatpak/package_manager.py:141
 #: mast/qt6/flatpak/package_manager.py:213
 #: mast/qt6/flatpak/runtime_manager.py:82
-#: mast/qt6/repositories/repo_edit_dialog.py:31 mast/qt6/snapshots/window.py:77
-#: mast/tui/snapshots/window.py:83
+#: mast/qt6/repositories/repo_edit_dialog.py:31 mast/qt6/snapshots/window.py:78
+#: mast/tui/snapshots/window.py:84
 msgid "ID"
 msgstr ""
 
@@ -394,10 +402,10 @@ msgstr ""
 
 #: mast/gtk4/android/package_manager_panel.py:151
 #: mast/gtk4/repositories/repo_edit_dialog.py:64
-#: mast/gtk4/snapshots/window.py:89
+#: mast/gtk4/snapshots/window.py:90
 #: mast/qt6/android/package_manager_panel.py:143
-#: mast/qt6/repositories/repo_edit_dialog.py:74 mast/qt6/snapshots/window.py:77
-#: mast/tui/repositories/window.py:344 mast/tui/snapshots/window.py:84
+#: mast/qt6/repositories/repo_edit_dialog.py:74 mast/qt6/snapshots/window.py:78
+#: mast/tui/repositories/window.py:344 mast/tui/snapshots/window.py:85
 #: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:616
 #: mast/tui/users/window.py:169
 msgid "Type"
@@ -578,11 +586,11 @@ msgid "Command failed. See output for details."
 msgstr "Kommando fejlede. Se output for detaljer."
 
 #: mast/gtk4/command/worker.py:55 mast/gtk4/flatpak/settings.py:51
-#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snapshots/window.py:209
+#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snapshots/window.py:234
 #: mast/qt6/command/worker.py:51 mast/qt6/flatpak/window.py:95
-#: mast/qt6/flatpak/window.py:106 mast/qt6/snapshots/window.py:133
-#: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:120
-#: mast/tui/snapshots/window.py:212 mast/tui/snapshots/window.py:239
+#: mast/qt6/flatpak/window.py:106 mast/qt6/snapshots/window.py:135
+#: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:122
+#: mast/tui/snapshots/window.py:221 mast/tui/snapshots/window.py:248
 msgid "Unknown error"
 msgstr "Ukendt fejl"
 
@@ -607,7 +615,7 @@ msgstr "Tilføj Cron-job"
 #: mast/gtk4/fontconfig/match_tab.py:188 mast/gtk4/hosts/window.py:282
 #: mast/gtk4/repositories/repo_edit_dialog.py:24
 #: mast/gtk4/repositories/switch_mirror_dialog.py:24
-#: mast/gtk4/snapshots/config_dialog.py:185 mast/gtk4/snapshots/window.py:149
+#: mast/gtk4/snapshots/config_dialog.py:185 mast/gtk4/snapshots/window.py:174
 #: mast/gtk4/ssh/dialogs.py:27 mast/gtk4/ssh/dialogs.py:145
 #: mast/gtk4/ssh/keys_generate_dialog.py:26 mast/tui/cron/window.py:329
 #: mast/tui/hostname/window.py:70 mast/tui/hosts/window.py:273
@@ -625,7 +633,7 @@ msgstr "Annuller"
 #: mast/gtk4/repositories/switch_mirror_dialog.py:25
 #: mast/gtk4/snapshots/config_dialog.py:186 mast/gtk4/ssh/dialogs.py:28
 #: mast/gtk4/ssh/dialogs.py:146 mast/tui/cron/window.py:328
-#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:76
+#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:81
 #: mast/tui/repositories/window.py:358 mast/tui/repositories/window.py:487
 #: mast/tui/snapshots/config_screen.py:111 mast/tui/ssh/window.py:525
 #: mast/tui/ssh/window.py:625
@@ -748,20 +756,20 @@ msgstr "Rediger"
 
 #: mast/gtk4/cron/manager.py:49 mast/gtk4/flatpak/remote_manager.py:36
 #: mast/gtk4/fontconfig/match_tab.py:59 mast/gtk4/hosts/window.py:41
-#: mast/gtk4/repositories/window.py:51 mast/gtk4/snapshots/window.py:66
-#: mast/gtk4/snapshots/window.py:150 mast/gtk4/snapshots/window.py:278
+#: mast/gtk4/repositories/window.py:51 mast/gtk4/snapshots/window.py:67
+#: mast/gtk4/snapshots/window.py:175 mast/gtk4/snapshots/window.py:304
 #: mast/gtk4/ssh/hosts_tab.py:41 mast/gtk4/ssh/keys_tab.py:42
 #: mast/gtk4/users/group_list.py:65 mast/gtk4/users/group_list.py:137
 #: mast/gtk4/users/user_list.py:63 mast/gtk4/users/user_list.py:156
 #: mast/qt6/cron/manager.py:54 mast/qt6/flatpak/remote_manager.py:45
 #: mast/qt6/fontconfig/match_tab.py:55 mast/qt6/hosts/window.py:47
-#: mast/qt6/repositories/window.py:56 mast/qt6/snapshots/window.py:63
-#: mast/qt6/snapshots/window.py:203 mast/qt6/ssh/hosts_tab.py:46
+#: mast/qt6/repositories/window.py:56 mast/qt6/snapshots/window.py:64
+#: mast/qt6/snapshots/window.py:212 mast/qt6/ssh/hosts_tab.py:46
 #: mast/qt6/ssh/keys_tab.py:45 mast/qt6/users/group_list.py:48
 #: mast/qt6/users/group_list.py:121 mast/qt6/users/user_list.py:48
 #: mast/qt6/users/user_list.py:141 mast/tui/cron/window.py:81
 #: mast/tui/hosts/window.py:71 mast/tui/repositories/window.py:72
-#: mast/tui/snapshots/window.py:72 mast/tui/ssh/window.py:261
+#: mast/tui/snapshots/window.py:73 mast/tui/ssh/window.py:261
 #: mast/tui/ssh/window.py:269 mast/tui/users/window.py:106
 #: mast/tui/users/window.py:139
 msgid "Delete"
@@ -815,7 +823,7 @@ msgstr "Aktiv"
 #: mast/gtk4/languages/manager.py:182 mast/gtk4/repositories/window.py:232
 #: mast/gtk4/repositories/window.py:257 mast/gtk4/repositories/window.py:311
 #: mast/gtk4/services/window.py:271 mast/gtk4/services/window.py:304
-#: mast/gtk4/snapshots/window.py:249 mast/gtk4/snapshots/window.py:269
+#: mast/gtk4/snapshots/window.py:275 mast/gtk4/snapshots/window.py:295
 #: mast/gtk4/ssh/hosts_tab.py:159 mast/gtk4/ssh/hosts_tab.py:187
 #: mast/qt6/cron/manager.py:161 mast/qt6/cron/manager.py:179
 #: mast/qt6/flatpak/package_manager.py:347
@@ -828,7 +836,7 @@ msgstr "Aktiv"
 #: mast/qt6/languages/manager.py:160 mast/qt6/repositories/window.py:106
 #: mast/qt6/repositories/window.py:219 mast/qt6/repositories/window.py:262
 #: mast/qt6/services/window.py:227 mast/qt6/services/window.py:256
-#: mast/qt6/snapshots/window.py:175 mast/qt6/snapshots/window.py:191
+#: mast/qt6/snapshots/window.py:184 mast/qt6/snapshots/window.py:200
 #: mast/qt6/ssh/hosts_tab.py:148 mast/qt6/ssh/hosts_tab.py:169
 msgid "Information"
 msgstr ""
@@ -1015,13 +1023,13 @@ msgstr "Næste"
 #: mast/gtk4/flatpak/package_manager.py:130
 #: mast/gtk4/flatpak/package_manager.py:143
 #: mast/gtk4/flatpak/runtime_manager.py:67 mast/gtk4/services/window.py:145
-#: mast/gtk4/snapshots/window.py:54 mast/gtk4/snapshots/window.py:104
+#: mast/gtk4/snapshots/window.py:55 mast/gtk4/snapshots/window.py:110
 #: mast/qt6/flatpak/package_manager.py:143
 #: mast/qt6/flatpak/package_manager.py:215
 #: mast/qt6/flatpak/runtime_manager.py:84 mast/qt6/services/window.py:116
-#: mast/qt6/snapshots/window.py:77 mast/qt6/snapshots/window.py:168
-#: mast/tui/services/window.py:127 mast/tui/snapshots/window.py:70
-#: mast/tui/snapshots/window.py:87
+#: mast/qt6/snapshots/window.py:78 mast/qt6/snapshots/window.py:177
+#: mast/tui/services/window.py:127 mast/tui/snapshots/window.py:71
+#: mast/tui/snapshots/window.py:89
 msgid "Description"
 msgstr "Beskrivelse"
 
@@ -1077,10 +1085,10 @@ msgstr "Installeret"
 msgid "Installed Size"
 msgstr "Installeret størrelse"
 
-#: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:175
-#: mast/gtk4/snapshots/window.py:179 mast/qt6/flatpak/package_manager.py:275
-#: mast/qt6/snapshots/window.py:99 mast/qt6/snapshots/window.py:103
-#: mast/tui/snapshots/window.py:109
+#: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:200
+#: mast/gtk4/snapshots/window.py:204 mast/qt6/flatpak/package_manager.py:275
+#: mast/qt6/snapshots/window.py:101 mast/qt6/snapshots/window.py:105
+#: mast/tui/snapshots/window.py:111
 msgid "Loading..."
 msgstr "Indlæser..."
 
@@ -1143,7 +1151,8 @@ msgstr ""
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
 #: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
+#: mast/tui/languages/window.py:53 mast/tui/main_window.py:118
+#: mast/tui/ssh/window.py:336
 msgid "Yes"
 msgstr "Ja"
 
@@ -1151,7 +1160,8 @@ msgstr "Ja"
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
 #: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
+#: mast/tui/languages/window.py:53 mast/tui/main_window.py:117
+#: mast/tui/ssh/window.py:336
 msgid "No"
 msgstr "Nej"
 
@@ -1328,10 +1338,10 @@ msgid "Match List"
 msgstr ""
 
 #: mast/gtk4/fontconfig/match_tab.py:55 mast/gtk4/fontconfig/match_tab.py:184
-#: mast/gtk4/fontconfig/match_tab.py:189 mast/gtk4/snapshots/window.py:62
-#: mast/gtk4/snapshots/window.py:255 mast/qt6/fontconfig/match_tab.py:51
-#: mast/qt6/fontconfig/match_tab.py:148 mast/qt6/snapshots/window.py:59
-#: mast/qt6/snapshots/window.py:179 mast/tui/snapshots/window.py:71
+#: mast/gtk4/fontconfig/match_tab.py:189 mast/gtk4/snapshots/window.py:63
+#: mast/gtk4/snapshots/window.py:281 mast/qt6/fontconfig/match_tab.py:51
+#: mast/qt6/fontconfig/match_tab.py:148 mast/qt6/snapshots/window.py:60
+#: mast/qt6/snapshots/window.py:188 mast/tui/snapshots/window.py:72
 msgid "Create"
 msgstr "Opret"
 
@@ -2357,7 +2367,7 @@ msgid "Timeline Limit Yearly"
 msgstr "Tidslinje-Grænse Årlig"
 
 #: mast/gtk4/snapshots/config_dialog.py:221
-#: mast/qt6/snapshots/config_dialog.py:168 mast/tui/snapshots/window.py:245
+#: mast/qt6/snapshots/config_dialog.py:168 mast/tui/snapshots/window.py:254
 msgid "Configuration saved successfully."
 msgstr "Konfiguration gemt succesfuldt."
 
@@ -2367,81 +2377,87 @@ msgstr "Konfiguration gemt succesfuldt."
 msgid "Failed to write config: {0}"
 msgstr "Kunne ikke skrive konfiguration: {0}"
 
-#: mast/gtk4/snapshots/window.py:70 mast/qt6/snapshots/window.py:67
-#: mast/tui/snapshots/window.py:74
+#: mast/gtk4/snapshots/window.py:71 mast/qt6/snapshots/window.py:68
+#: mast/tui/snapshots/window.py:75
 msgid "Configure"
 msgstr "Konfigurer"
 
-#: mast/gtk4/snapshots/window.py:94 mast/qt6/snapshots/window.py:77
-#: mast/tui/snapshots/window.py:85
+#: mast/gtk4/snapshots/window.py:95 mast/qt6/snapshots/window.py:78
+#: mast/tui/snapshots/window.py:86
 msgid "Date"
 msgstr "Dato"
 
-#: mast/gtk4/snapshots/window.py:108 mast/qt6/snapshots/window.py:77
+#: mast/gtk4/snapshots/window.py:105 mast/gtk4/ssh/keys_tab.py:82
+#: mast/qt6/snapshots/window.py:78 mast/qt6/ssh/keys_tab.py:63
 #: mast/tui/snapshots/window.py:88
+msgid "Size"
+msgstr "Størrelse"
+
+#: mast/gtk4/snapshots/window.py:114 mast/qt6/snapshots/window.py:78
+#: mast/tui/snapshots/window.py:90
 msgid "Cleanup"
 msgstr "Rensning"
 
-#: mast/gtk4/snapshots/window.py:143 mast/gtk4/snapshots/window.py:280
-#: mast/qt6/snapshots/window.py:196 mast/qt6/snapshots/window.py:205
+#: mast/gtk4/snapshots/window.py:168 mast/gtk4/snapshots/window.py:306
+#: mast/qt6/snapshots/window.py:205 mast/qt6/snapshots/window.py:214
 msgid "Delete Snapshot"
 msgstr "Slet Snapshot"
 
-#: mast/gtk4/snapshots/window.py:147 mast/qt6/snapshots/window.py:197
+#: mast/gtk4/snapshots/window.py:172 mast/qt6/snapshots/window.py:206
 #, python-brace-format
 msgid "Delete snapshot #{0}? This action cannot be undone."
 msgstr "Slet snapshot #{0}? Denne handling kan ikke annulleres."
 
-#: mast/gtk4/snapshots/window.py:180 mast/qt6/snapshots/window.py:104
+#: mast/gtk4/snapshots/window.py:205 mast/qt6/snapshots/window.py:106
 msgid "Load Snapshots"
 msgstr "Indlæs Snapshots"
 
-#: mast/gtk4/snapshots/window.py:182 mast/qt6/snapshots/window.py:106
+#: mast/gtk4/snapshots/window.py:207 mast/qt6/snapshots/window.py:108
 msgid "Snapshots loaded successfully."
 msgstr "Snapshots indlæst succesfuldt."
 
-#: mast/gtk4/snapshots/window.py:203 mast/qt6/snapshots/window.py:127
+#: mast/gtk4/snapshots/window.py:228 mast/qt6/snapshots/window.py:129
 #, python-brace-format
 msgid "Failed to parse snapshot data: {0}"
 msgstr "Kunne ikke analysere snapshot-data: {0}"
 
-#: mast/gtk4/snapshots/window.py:209 mast/qt6/snapshots/window.py:133
+#: mast/gtk4/snapshots/window.py:234 mast/qt6/snapshots/window.py:135
 #, python-brace-format
 msgid "Failed to load snapshots: {0}"
 msgstr "Kunne ikke indlæse snapshots: {0}"
 
-#: mast/gtk4/snapshots/window.py:250 mast/qt6/snapshots/window.py:175
-#: mast/tui/snapshots/window.py:193
+#: mast/gtk4/snapshots/window.py:276 mast/qt6/snapshots/window.py:184
+#: mast/tui/snapshots/window.py:202
 msgid "Description cannot be empty."
 msgstr "Beskrivelsen kan ikke være tom."
 
-#: mast/gtk4/snapshots/window.py:256 mast/qt6/snapshots/window.py:180
+#: mast/gtk4/snapshots/window.py:282 mast/qt6/snapshots/window.py:189
 msgid "Creating..."
 msgstr "Opretter..."
 
-#: mast/gtk4/snapshots/window.py:257 mast/qt6/snapshots/window.py:167
-#: mast/qt6/snapshots/window.py:181
+#: mast/gtk4/snapshots/window.py:283 mast/qt6/snapshots/window.py:176
+#: mast/qt6/snapshots/window.py:190
 msgid "Create Snapshot"
 msgstr "Opret Snapshot"
 
-#: mast/gtk4/snapshots/window.py:259 mast/qt6/snapshots/window.py:183
-#: mast/tui/snapshots/window.py:208
+#: mast/gtk4/snapshots/window.py:285 mast/qt6/snapshots/window.py:192
+#: mast/tui/snapshots/window.py:217
 msgid "Snapshot created successfully."
 msgstr "Snapshot oprettet succesfuldt."
 
-#: mast/gtk4/snapshots/window.py:270 mast/qt6/snapshots/window.py:191
-#: mast/tui/snapshots/window.py:218
+#: mast/gtk4/snapshots/window.py:296 mast/qt6/snapshots/window.py:200
+#: mast/tui/snapshots/window.py:227
 msgid "Please select a snapshot."
 msgstr "Vælg venligst en snapshot."
 
-#: mast/gtk4/snapshots/window.py:279 mast/gtk4/users/group_list.py:138
-#: mast/gtk4/users/user_list.py:157 mast/qt6/snapshots/window.py:204
+#: mast/gtk4/snapshots/window.py:305 mast/gtk4/users/group_list.py:138
+#: mast/gtk4/users/user_list.py:157 mast/qt6/snapshots/window.py:213
 #: mast/qt6/users/group_list.py:122 mast/qt6/users/user_list.py:142
 msgid "Deleting..."
 msgstr "Sletter..."
 
-#: mast/gtk4/snapshots/window.py:282 mast/qt6/snapshots/window.py:207
-#: mast/tui/snapshots/window.py:233
+#: mast/gtk4/snapshots/window.py:308 mast/qt6/snapshots/window.py:216
+#: mast/tui/snapshots/window.py:242
 #, python-brace-format
 msgid "Snapshot #{0} deleted successfully."
 msgstr "Snapshot #{0} slettet succesfuldt."
@@ -2594,10 +2610,6 @@ msgstr "Kunne ikke generere nøgle: {0}"
 #: mast/gtk4/ssh/keys_tab.py:37 mast/qt6/ssh/keys_tab.py:40
 msgid "Copy Public Key"
 msgstr "Kopier Offentlig Nøgle"
-
-#: mast/gtk4/ssh/keys_tab.py:82 mast/qt6/ssh/keys_tab.py:63
-msgid "Size"
-msgstr "Størrelse"
 
 #: mast/gtk4/ssh/keys_tab.py:89 mast/qt6/ssh/keys_tab.py:64
 msgid "Fingerprint"
@@ -2857,22 +2869,31 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:70
+#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:75
 #, python-brace-format
 msgid "Version: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:71
+#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:76
 #, python-brace-format
 msgid "License: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:67
+#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:72
 msgid "About MaST"
 msgstr ""
 
-#: mast/qt6/main_window.py:67
+#: mast/qt6/main_window.py:73
 msgid "Help"
+msgstr ""
+
+#: mast/qt6/main_window.py:111 mast/tui/main_window.py:109
+msgid "Anonymous Usage Analytics"
+msgstr ""
+
+#: mast/qt6/main_window.py:113
+msgid "Enable anonymous usage analytics?\n\n"
+"MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
 msgstr ""
 
 #: mast/qt6/android/package_manager_panel.py:481
@@ -3040,11 +3061,11 @@ msgstr "Kunne ikke læse offentlig nøgle: {0}"
 msgid "Failed to generate SSH key: {0}"
 msgstr "Kunne ikke generere SSH-nøgle: {0}"
 
-#: mast/tui/main_window.py:65
+#: mast/tui/main_window.py:70
 msgid "License file not found."
 msgstr ""
 
-#: mast/tui/main_window.py:73
+#: mast/tui/main_window.py:78
 msgid "License Text:"
 msgstr ""
 
@@ -3343,8 +3364,8 @@ msgstr "Behold Pakker"
 msgid "Error: Failed to load services: {0}"
 msgstr "Fejl: Kunne ikke indlæse tjenester: {0}"
 
-#: mast/tui/services/window.py:271 mast/tui/snapshots/window.py:201
-#: mast/tui/snapshots/window.py:226
+#: mast/tui/services/window.py:271 mast/tui/snapshots/window.py:210
+#: mast/tui/snapshots/window.py:235
 #, python-brace-format
 msgid "Error: Failed to execute command: {0}"
 msgstr "Fejl: Kunne ikke udføre kommando: {0}"
@@ -3409,11 +3430,11 @@ msgstr "Fejl: Kunne ikke læse konfiguration: {0}"
 msgid "Error: Failed to write config: {0}"
 msgstr "Fejl: Kunne ikke skrive konfiguration: {0}"
 
-#: mast/tui/snapshots/window.py:123
+#: mast/tui/snapshots/window.py:125
 msgid "Timeout waiting for snapshots"
 msgstr "Timeout ved venting på snapshots"
 
-#: mast/tui/snapshots/window.py:142
+#: mast/tui/snapshots/window.py:144
 #, python-brace-format
 msgid "Error: Failed to load snapshots: {0}"
 msgstr "Fejl: Kunne ikke indlæse snapshots: {0}"
