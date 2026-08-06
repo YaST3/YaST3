@@ -7,11 +7,17 @@ from PySide6.QtWidgets import (
     QGridLayout,
     QMainWindow,
     QMenu,
+    QMessageBox,
     QScrollArea,
     QWidget,
 )
 
 from mast.core.i18n import _
+from mast.core.telemetry import (
+    get_telemetry_consent,
+    set_telemetry_consent,
+)
+from mast.qt6.telemetry import track_app_started
 from mast.qt6 import (
     AndroidModule,
     CronModule,
@@ -87,5 +93,34 @@ class MainWindow(QMainWindow):
         scroll_area.setWidget(container)
         self.setCentralWidget(scroll_area)
 
+        self._setup_telemetry()
+
     def _show_about(self) -> None:
         show_about_dialog(self)
+
+    def _setup_telemetry(self) -> None:
+        consent = get_telemetry_consent()
+        if consent is None:
+            self._ask_telemetry_consent()
+            return
+
+        if consent:
+            track_app_started()
+
+    def _ask_telemetry_consent(self) -> None:
+        title = _("Anonymous Usage Analytics")
+        text = _(
+            "Enable anonymous usage analytics?\n\n"
+            "MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
+        )
+        result = QMessageBox.question(
+            self,
+            title,
+            text,
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        enabled = result == QMessageBox.StandardButton.Yes
+        set_telemetry_consent(enabled)
+        if enabled:
+            track_app_started()

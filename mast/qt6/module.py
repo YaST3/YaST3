@@ -4,6 +4,7 @@ from PySide6.QtCore import QObject
 from PySide6.QtWidgets import QMainWindow
 
 from mast.core.i18n import _
+from mast.qt6.telemetry import track_module_started
 
 
 class Module(QObject):
@@ -26,6 +27,7 @@ class Module(QObject):
 
     def launch(self, parent: QMainWindow | None = None) -> None:
         """Launch the module window."""
+        track_module_started(self.__class__.__name__)
         if self.window is None:
             self.window = self._create_window()
             self.window.setWindowTitle(_("{name} — MaST").format(name=self.name))

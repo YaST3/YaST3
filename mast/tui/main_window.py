@@ -2,11 +2,16 @@
 
 from textual.app import App, ComposeResult
 from textual.containers import Grid, Horizontal, ScrollableContainer, Vertical
-from textual.screen import Screen
+from textual.screen import ModalScreen, Screen
 from textual.widgets import Button, Footer, Header, Static
 
 from mast.core import GITHUB_URL, LICENSE_NAME, __version__, get_license_text
 from mast.core.i18n import _
+from mast.core.telemetry import (
+    get_telemetry_consent,
+    set_telemetry_consent,
+)
+from mast.tui.telemetry import track_app_started, track_module_started
 from mast.tui.module import Module
 from mast.tui import (
     CronModule,
@@ -96,6 +101,34 @@ class ModuleButton(Button):
         self.module = module
 
 
+class TelemetryConsentScreen(ModalScreen[None]):
+    """First-run modal asking telemetry consent."""
+
+    def compose(self) -> ComposeResult:
+        with Vertical():
+            yield Static(_("Anonymous Usage Analytics"), classes="title")
+            yield Static(_("Enable anonymous usage analytics?"))
+            yield Static(
+                _(
+                    "MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
+                ),
+            )
+            with Horizontal():
+                yield Button(_("No"), id="telemetry-no")
+                yield Button(_("Yes"), id="telemetry-yes")
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        if event.button.id == "telemetry-yes":
+            set_telemetry_consent(True)
+            track_app_started()
+            self.dismiss(None)
+            return
+
+        if event.button.id == "telemetry-no":
+            set_telemetry_consent(False)
+            self.dismiss(None)
+
+
 class MainWindow(App):
     """Main MaST TUI application."""
 
@@ -155,9 +188,19 @@ class MainWindow(App):
                 for module in self.modules:
                     yield ModuleButton(module)
 
+    def on_mount(self) -> None:
+        consent = get_telemetry_consent()
+        if consent is None:
+            self.push_screen(TelemetryConsentScreen())
+            return
+
+        if consent:
+            track_app_started()
+
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Handle module button press."""
         if isinstance(event.button, ModuleButton):
+            track_module_started(event.button.module.__class__.__name__)
             screen = event.button.module.create_window()
             if screen:
                 self.push_screen(screen)

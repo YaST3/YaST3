@@ -7,6 +7,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 from mast.core.i18n import _
+from mast.gtk4.telemetry import track_module_started
 
 
 class Module:
@@ -28,6 +29,7 @@ class Module:
 
     def launch(self, parent: Gtk.ApplicationWindow | None = None) -> None:
         """Launch the module window."""
+        track_module_started(self.__class__.__name__)
         if self.window is None:
             self.window = self._create_window()
             self.window.set_title(_("{name} — MaST").format(name=self.name))

@@ -1,25 +1,18 @@
 
-OS_RELEASE_PATH = "/etc/os-release"
+import platform
 
-cached = None
+cached: dict[str, str] | None = None
 
 def read_os_release() -> dict[str, str]:
-    """Read the /etc/os-release file and return a dictionary of key-value pairs."""
+    """Read freedesktop os-release and return key-value pairs."""
     global cached
     if cached is not None:
         return cached
 
-    os_release_info: dict[str, str] = {}
-
     try:
-        with open(OS_RELEASE_PATH, "r") as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith("#"):
-                    key, _, value = line.partition("=")
-                    os_release_info[key] = value.strip('"')
+        os_release_info = platform.freedesktop_os_release()
     except Exception:
-        pass
+        os_release_info = {}
 
     cached = os_release_info
     return os_release_info
