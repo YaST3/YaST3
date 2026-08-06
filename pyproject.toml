@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mast"
-version = "0.0.23"
+version = "0.0.27"
 description = "MaST is continuous development of YaST with Python & Qt6 / GTK4 / TUI"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -16,6 +16,7 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "systemd>=235",
     "adbutils>=2.10.2",
+    "aptabase>=0.1.0",
     "retry>=0.9.2",
 ]
 classifiers = [

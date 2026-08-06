@@ -1,10 +1,15 @@
 # Change Log
 
+## 0.0.27 - 2026-08-05
+
+- feat(telemetry): added optional telemetry based on aptabase.
+
 ## 0.0.26 - 2026-08-05
 
 - feat(fontconfig): added fontconfig module to manage fontconfig settings.
 - feat(keyboard): added keyboard module to manage keyboard layouts and keymaps.
 - feat(snapshots): added used-space column to snapshots module.
+- feat(telemetry): integrated Aptabase with first-run opt-in and startup/module usage tracking.
 
 ## 0.0.25 - 2026-08-04
 
