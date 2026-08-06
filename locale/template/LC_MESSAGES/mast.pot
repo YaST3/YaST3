@@ -62,12 +62,22 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: mast/gtk4/main_window.py:99 mast/qt6/main_window.py:68
-#: mast/tui/main_window.py:127
+#: mast/gtk4/main_window.py:106 mast/qt6/main_window.py:74
+#: mast/tui/main_window.py:160
 msgid "About"
 msgstr ""
 
-#: mast/gtk4/module.py:33 mast/qt6/module.py:31
+#: mast/gtk4/main_window.py:131 mast/tui/main_window.py:110
+msgid "Enable anonymous usage analytics?"
+msgstr ""
+
+#: mast/gtk4/main_window.py:136 mast/tui/main_window.py:113
+msgid ""
+"MaST only collects fully anonymous, minimal usage data, and never shares "
+"it with third parties."
+msgstr ""
+
+#: mast/gtk4/module.py:35 mast/qt6/module.py:33
 #, python-brace-format
 msgid "{name} — MaST"
 msgstr ""
@@ -634,7 +644,7 @@ msgstr ""
 #: mast/gtk4/repositories/switch_mirror_dialog.py:25
 #: mast/gtk4/snapshots/config_dialog.py:186 mast/gtk4/ssh/dialogs.py:28
 #: mast/gtk4/ssh/dialogs.py:146 mast/tui/cron/window.py:328
-#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:76
+#: mast/tui/hosts/window.py:272 mast/tui/main_window.py:81
 #: mast/tui/repositories/window.py:358 mast/tui/repositories/window.py:487
 #: mast/tui/snapshots/config_screen.py:111 mast/tui/ssh/window.py:525
 #: mast/tui/ssh/window.py:625
@@ -1152,7 +1162,8 @@ msgstr ""
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
 #: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
+#: mast/tui/languages/window.py:53 mast/tui/main_window.py:118
+#: mast/tui/ssh/window.py:336
 msgid "Yes"
 msgstr ""
 
@@ -1160,7 +1171,8 @@ msgstr ""
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
 #: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
 #: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/ssh/window.py:336
+#: mast/tui/languages/window.py:53 mast/tui/main_window.py:117
+#: mast/tui/ssh/window.py:336
 msgid "No"
 msgstr ""
 
@@ -2878,22 +2890,34 @@ msgstr ""
 msgid "Groups"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:70
+#: mast/qt6/about_dialog.py:14 mast/tui/main_window.py:75
 #, python-brace-format
 msgid "Version: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:71
+#: mast/qt6/about_dialog.py:15 mast/tui/main_window.py:76
 #, python-brace-format
 msgid "License: {}"
 msgstr ""
 
-#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:67
+#: mast/qt6/about_dialog.py:19 mast/tui/main_window.py:72
 msgid "About MaST"
 msgstr ""
 
-#: mast/qt6/main_window.py:67
+#: mast/qt6/main_window.py:73
 msgid "Help"
+msgstr ""
+
+#: mast/qt6/main_window.py:111 mast/tui/main_window.py:109
+msgid "Anonymous Usage Analytics"
+msgstr ""
+
+#: mast/qt6/main_window.py:113
+msgid ""
+"Enable anonymous usage analytics?\n"
+"\n"
+"MaST only collects fully anonymous, minimal usage data, and never shares "
+"it with third parties."
 msgstr ""
 
 #: mast/qt6/android/package_manager_panel.py:481
@@ -3061,11 +3085,11 @@ msgstr ""
 msgid "Failed to generate SSH key: {0}"
 msgstr ""
 
-#: mast/tui/main_window.py:65
+#: mast/tui/main_window.py:70
 msgid "License file not found."
 msgstr ""
 
-#: mast/tui/main_window.py:73
+#: mast/tui/main_window.py:78
 msgid "License Text:"
 msgstr ""
 
