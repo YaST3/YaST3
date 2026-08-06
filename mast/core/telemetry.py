@@ -12,6 +12,7 @@ from typing import Any
 from aptabase import Aptabase
 
 from mast.core import __version__
+from mast.core.distro.os_release import read_os_release
 
 APTABASE_APP_KEY = "A-EU-2272148359"
 
@@ -67,8 +68,27 @@ def track_event(event_name: str, props: dict[str, Any] | None = None) -> None:
     if not is_telemetry_enabled():
         return
 
-    worker = threading.Thread(target=_send_event_with_sdk, args=(event_name, props), daemon=True)
+    worker = threading.Thread(
+        target=_send_event_with_sdk,
+        args=(event_name, _with_os_release_props(props)),
+        daemon=True,
+    )
     worker.start()
+
+
+def _with_os_release_props(props: dict[str, Any] | None) -> dict[str, Any]:
+    event_props: dict[str, Any] = dict(props or {})
+    os_release_info = read_os_release()
+
+    os_id = os_release_info.get("ID")
+    if os_id:
+        event_props["os_id"] = os_id
+
+    os_version_id = os_release_info.get("VERSION_ID")
+    if os_version_id:
+        event_props["os_version_id"] = os_version_id
+
+    return event_props
 
 
 def _send_event_with_sdk(event_name: str, props: dict[str, Any] | None = None) -> None:
