@@ -68,6 +68,13 @@ def _make_star_icon(size: int = 16) -> QIcon:
     return QIcon(pixmap)
 
 
+def _make_transparent_icon(size: int = 16) -> QIcon:
+    """Create a transparent placeholder icon for consistent column alignment."""
+    pixmap = QPixmap(size, size)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    return QIcon(pixmap)
+
+
 class _CatalogWorker(QObject):
     """Worker that loads snap package search results outside the UI thread."""
 
@@ -386,7 +393,9 @@ class SnapPackageManager(QWidget):
             item.setIcon(_make_star_icon())
             item.setToolTip(_("Star Developer"))
             return item
-        return QTableWidgetItem(package.publisher)
+        item = QTableWidgetItem(package.publisher)
+        item.setIcon(_make_transparent_icon())
+        return item
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()
