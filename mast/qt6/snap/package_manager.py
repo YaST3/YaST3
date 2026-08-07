@@ -19,13 +19,8 @@ from PySide6.QtWidgets import (
 )
 
 from mast.core.i18n import _
-from mast.core.snap import (
-    SnapPackage,
-    install_snap_package,
-    list_snap_packages,
-    search_snap_packages,
-    uninstall_snap_package,
-)
+from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
+from mast.qt6.command.action import CommandAction
 
 
 FILTER_ALL: Literal["all"] = "all"
@@ -68,27 +63,6 @@ class _InstalledCatalogWorker(QObject):
         self.loaded.emit(packages)
 
 
-class _SnapActionWorker(QObject):
-    """Worker that installs or uninstalls a snap package outside the UI thread."""
-
-    finished = Signal(bool, str)
-
-    def __init__(self, action: str, name: str) -> None:
-        super().__init__()
-        self.action = action
-        self.name = name
-
-    def run(self) -> None:
-        try:
-            if self.action == "install":
-                install_snap_package(self.name)
-            else:
-                uninstall_snap_package(self.name)
-            self.finished.emit(True, "")
-        except Exception as e:
-            self.finished.emit(False, str(e))
-
-
 class SnapPackageManager(QWidget):
     """Manage snap packages with an All/Installed filter."""
 
@@ -107,9 +81,7 @@ class SnapPackageManager(QWidget):
         self.installed_loading = False
         self.installed_thread: QThread | None = None
         self.installed_loader: _InstalledCatalogWorker | None = None
-        self.action_running = False
-        self.action_thread: QThread | None = None
-        self.action_worker: _SnapActionWorker | None = None
+        self.action: CommandAction | None = None
 
         layout = QVBoxLayout(self)
         self._build_layout(layout)
@@ -172,27 +144,21 @@ class SnapPackageManager(QWidget):
         self.load_remote_packages()
         self.load_installed_packages()
 
+    def _is_busy(self) -> bool:
+        return self.remote_loading or self.installed_loading or (self.action is not None and self.action.is_running())
+
     def _sync_action_buttons(self) -> None:
         is_loading = self.remote_loading or self.installed_loading
-        is_busy = is_loading or self.action_running
+        is_busy = self._is_busy()
 
         package = self._selected_package()
         if package is None:
-            if self.action_running:
-                pass  # keep current label (Installing... / Uninstalling...)
-            else:
-                self.primary_btn.setText(_("Install"))
-                self.primary_btn.setEnabled(False)
+            self.primary_btn.setText(_("Install"))
+            self.primary_btn.setEnabled(False)
         else:
             is_installed = package.name in self.installed_names
-            if self.action_running:
-                pass  # keep current label
-            elif is_installed:
-                self.primary_btn.setText(_("Uninstall"))
-                self.primary_btn.setEnabled(not is_busy)
-            else:
-                self.primary_btn.setText(_("Install"))
-                self.primary_btn.setEnabled(not is_busy)
+            self.primary_btn.setText(_("Uninstall") if is_installed else _("Install"))
+            self.primary_btn.setEnabled(not is_busy)
 
         self.search_btn.setEnabled(not is_busy)
         self.reset_btn.setEnabled(not is_busy)
@@ -216,44 +182,35 @@ class SnapPackageManager(QWidget):
         return self.filtered_installed_packages
 
     def _start_action(self, action: str, name: str) -> None:
-        if self.action_thread is not None:
+        if self.action is not None and self.action.is_running():
             return
 
-        self.action_running = True
-        if action == "install":
-            self.primary_btn.setText(_("Installing..."))
-        else:
-            self.primary_btn.setText(_("Uninstalling..."))
+        is_install = action == "install"
+        self.action = CommandAction(
+            text=_("Install") if is_install else _("Uninstall"),
+            running_text=_("Installing...") if is_install else _("Uninstalling..."),
+            dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
+            command=["pkexec", "snap", "install" if is_install else "remove", name],
+            success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
+            auto_close_on_success=True,
+            parent=self,
+        )
+        self.action.action_finished.connect(self._on_action_finished)
+        self.action.trigger()
         self._sync_action_buttons()
 
-        self.action_thread = QThread(self)
-        self.action_worker = _SnapActionWorker(action, name)
-        self.action_worker.moveToThread(self.action_thread)
-
-        self.action_thread.started.connect(self.action_worker.run)
-        self.action_worker.finished.connect(self._on_action_finished)
-
-        self.action_worker.finished.connect(self.action_thread.quit)
-        self.action_worker.finished.connect(self.action_worker.deleteLater)
-        self.action_thread.finished.connect(self.action_thread.deleteLater)
-        self.action_thread.finished.connect(self._on_action_thread_finished)
-
-        self.action_thread.start()
-
-    def _on_action_finished(self, success: bool, error: str) -> None:
+    def _on_action_finished(self, success: bool, error: str, _stdout: str) -> None:
+        self.action = None
         if success:
             self.refresh()
             return
 
-        if self._selected_package() and self._selected_package().name in self.installed_names:
+        package = self._selected_package()
+        is_uninstall_error = package is not None and package.name in self.installed_names
+        if is_uninstall_error:
             QMessageBox.critical(self, _("Error"), _("Failed to uninstall package: {0}").format(error))
         else:
             QMessageBox.critical(self, _("Error"), _("Failed to install package: {0}").format(error))
-
-    def _on_action_thread_finished(self) -> None:
-        self.action_thread = None
-        self.action_worker = None
-        self.action_running = False
         self._sync_action_buttons()
 
     def _on_primary_triggered(self) -> None:

@@ -3,7 +3,7 @@
 import unittest
 from unittest.mock import MagicMock, patch
 
-from mast.core.snap.package import install_snap_package, list_snap_packages, search_snap_packages, uninstall_snap_package
+from mast.core.snap.package import list_snap_packages, search_snap_packages
 
 
 def _make_response(result, *, type="sync", change=None):
@@ -132,37 +132,6 @@ class TestSearchSnapPackages(unittest.TestCase):
         self.assertEqual(packages[0].name, "firefox")
         self.assertEqual(packages[0].summary, "Mozilla Firefox web browser")
         self.assertEqual(packages[1].publisher, "Floorp")
-
-
-class TestSnapPackageCommands(unittest.TestCase):
-    """Tests for install and uninstall via pkexec snap CLI."""
-
-    @patch("mast.core.snap.package.subprocess.run")
-    def test_install_calls_pkexec_snap(self, mock_run) -> None:
-        mock_run.return_value = MagicMock(returncode=0, stdout="", stderr="")
-
-        install_snap_package("firefox")
-
-        mock_run.assert_called_once()
-        args = mock_run.call_args[0][0]
-        self.assertEqual(args, ["pkexec", "snap", "install", "firefox"])
-
-    @patch("mast.core.snap.package.subprocess.run")
-    def test_uninstall_calls_pkexec_snap(self, mock_run) -> None:
-        mock_run.return_value = MagicMock(returncode=0, stdout="", stderr="")
-
-        uninstall_snap_package("firefox")
-
-        mock_run.assert_called_once()
-        args = mock_run.call_args[0][0]
-        self.assertEqual(args, ["pkexec", "snap", "remove", "firefox"])
-
-    @patch("mast.core.snap.package.subprocess.run")
-    def test_install_raises_on_failure(self, mock_run) -> None:
-        mock_run.return_value = MagicMock(returncode=1, stdout="", stderr="error: snap not found")
-
-        with self.assertRaises(RuntimeError):
-            install_snap_package("nonexistent")
 
 
 if __name__ == "__main__":

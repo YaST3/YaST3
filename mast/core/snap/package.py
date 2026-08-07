@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import subprocess
 from dataclasses import dataclass
 
 import snap_http
@@ -64,41 +63,6 @@ def search_snap_packages(query: str = "") -> list[SnapPackage]:
     if not isinstance(result, list):
         result = []
     return [_snap_from_dict(snap) for snap in result if isinstance(snap, dict)]
-
-
-def install_snap_package(name: str) -> None:
-    """Install a snap package via the snap CLI with polkit authentication."""
-    normalized_name = name.strip()
-    if not normalized_name:
-        raise ValueError("Snap package name is required.")
-
-    _run_snap_cli(["snap", "install", normalized_name])
-
-
-def uninstall_snap_package(name: str) -> None:
-    """Uninstall a snap package via the snap CLI with polkit authentication."""
-    normalized_name = name.strip()
-    if not normalized_name:
-        raise ValueError("Snap package name is required.")
-
-    _run_snap_cli(["snap", "remove", normalized_name])
-
-
-def _run_snap_cli(cmd: list[str]) -> None:
-    """Run a snap command with pkexec for polkit authentication."""
-    try:
-        result = subprocess.run(
-            ["pkexec"] + cmd,
-            capture_output=True,
-            text=True,
-            check=False,
-        )
-    except FileNotFoundError as e:
-        raise RuntimeError("pkexec is not available.") from e
-
-    if result.returncode != 0:
-        error_msg = result.stderr.strip() or result.stdout.strip() or f"Command failed with exit code {result.returncode}"
-        raise RuntimeError(error_msg)
 
 
 def _snap_from_dict(data: dict) -> SnapPackage:

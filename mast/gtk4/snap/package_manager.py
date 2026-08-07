@@ -13,7 +13,8 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import GLib, Gtk
 
 from mast.core.i18n import _
-from mast.core.snap import SnapPackage, install_snap_package, list_snap_packages, search_snap_packages, uninstall_snap_package
+from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
+from mast.gtk4.command.action import CommandAction
 
 
 FILTER_ALL: Literal["all"] = "all"
@@ -66,31 +67,6 @@ class _InstalledCatalogWorker(threading.Thread):
         GLib.idle_add(self.on_loaded, packages)
 
 
-class _SnapActionWorker(threading.Thread):
-    """Worker that installs or uninstalls a snap package outside the UI thread."""
-
-    def __init__(
-        self,
-        action: str,
-        name: str,
-        on_finished: Callable[[bool, str], bool],
-    ) -> None:
-        super().__init__(daemon=True)
-        self.action = action
-        self.name = name
-        self.on_finished = on_finished
-
-    def run(self) -> None:
-        try:
-            if self.action == "install":
-                install_snap_package(self.name)
-            else:
-                uninstall_snap_package(self.name)
-            GLib.idle_add(self.on_finished, True, "")
-        except Exception as e:
-            GLib.idle_add(self.on_finished, False, str(e))
-
-
 class SnapPackageManager(Gtk.Box):
     """Manage snap packages with an All/Installed filter."""
 
@@ -108,8 +84,7 @@ class SnapPackageManager(Gtk.Box):
         self.remote_loader: _CatalogWorker | None = None
         self.installed_loading = False
         self.installed_loader: _InstalledCatalogWorker | None = None
-        self.action_running = False
-        self.action_worker: _SnapActionWorker | None = None
+        self.action: CommandAction | None = None
 
         self._build_layout()
         self.refresh()
@@ -118,6 +93,7 @@ class SnapPackageManager(Gtk.Box):
         controls_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
 
         self.primary_btn = Gtk.Button(label=_("Install"))
+        self.primary_btn.set_sensitive(False)
         self.primary_btn.connect("clicked", self._on_primary_clicked)
         controls_row.append(self.primary_btn)
 
@@ -184,11 +160,14 @@ class SnapPackageManager(Gtk.Box):
         self.load_remote_packages()
         self.load_installed_packages()
 
+    def _is_busy(self) -> bool:
+        return self.remote_loading or self.installed_loading or (self.action is not None and self.action.is_running())
+
     def _set_loading(self) -> None:
         is_loading = self.remote_loading or self.installed_loading
-        is_busy = is_loading or self.action_running
+        is_busy = self._is_busy()
         self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
-        self.primary_btn.set_sensitive(not is_busy)
+        self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
         self.search_btn.set_sensitive(not is_busy)
         self.reset_btn.set_sensitive(not is_busy)
         self.refresh_btn.set_sensitive(not is_busy)
@@ -303,16 +282,12 @@ class SnapPackageManager(Gtk.Box):
         package = self._selected_package()
         if package is None:
             self.primary_btn.set_label(_("Install"))
-            if not (self.remote_loading or self.installed_loading or self.action_running):
-                self.primary_btn.set_sensitive(False)
+            self.primary_btn.set_sensitive(False)
             return
 
         is_installed = package.name in self.installed_names
-        if is_installed:
-            self.primary_btn.set_label(_("Uninstall"))
-        else:
-            self.primary_btn.set_label(_("Install"))
-        self.primary_btn.set_sensitive(not (self.remote_loading or self.installed_loading or self.action_running))
+        self.primary_btn.set_label(_("Uninstall") if is_installed else _("Install"))
+        self.primary_btn.set_sensitive(not self._is_busy())
 
     def _selected_package(self) -> SnapPackage | None:
         model, tree_iter = self.selection.get_selected()
@@ -332,46 +307,38 @@ class SnapPackageManager(Gtk.Box):
         return self.filtered_installed_packages
 
     def _start_action(self, action: str, name: str) -> None:
-        if self.action_worker is not None:
+        if self.action is not None and self.action.is_running():
             return
 
-        self.action_running = True
-        if action == "install":
-            self.primary_btn.set_label(_("Installing..."))
-        else:
-            self.primary_btn.set_label(_("Uninstalling..."))
+        is_install = action == "install"
+        self.action = CommandAction(
+            text=_("Install") if is_install else _("Uninstall"),
+            running_text=_("Installing...") if is_install else _("Uninstalling..."),
+            dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
+            command=["pkexec", "snap", "install" if is_install else "remove", name],
+            success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
+            auto_close_on_success=True,
+            parent_window=self.parent_window,
+        )
+        self.action.connect_finished(self._on_action_finished)
+        self.action.trigger()
         self._set_loading()
 
-        self.action_worker = _SnapActionWorker(
-            action,
-            name,
-            on_finished=self._on_action_finished,
-        )
-        self.action_worker.start()
-
-    def _on_action_finished(self, success: bool, error: str) -> bool:
-        self.action_worker = None
-        self.action_running = False
-
+    def _on_action_finished(self, success: bool, error: str, _stdout: str) -> None:
+        self.action = None
         if success:
             self.refresh()
-            return False
+            return
 
-        self.primary_btn.set_label(self._default_button_label())
-        self._set_loading()
+        package = self._selected_package()
+        is_install_error = package is not None and package.name not in self.installed_names
         self._show_message_dialog(
             Gtk.MessageType.ERROR,
             _("Error"),
-            (_("Failed to install package: {0}") if self._selected_package() and self._selected_package().name not in self.installed_names
+            (_("Failed to install package: {0}") if is_install_error
              else _("Failed to uninstall package: {0}")).format(error),
         )
-        return False
-
-    def _default_button_label(self) -> str:
-        package = self._selected_package()
-        if package is None:
-            return _("Install")
-        return _("Uninstall") if package.name in self.installed_names else _("Install")
+        self._set_loading()
 
     def _on_primary_clicked(self, _button: Gtk.Button) -> None:
         package = self._selected_package()
