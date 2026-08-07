@@ -144,11 +144,6 @@ class SnapPackageManager(QWidget):
         self.reset_btn.clicked.connect(self._on_reset_triggered)
         btn_layout.addWidget(self.reset_btn)
 
-        self.refresh_btn = QPushButton(_("Refresh"), self)
-        self.refresh_btn.clicked.connect(self.load_remote_packages)
-        self.refresh_btn.clicked.connect(self.load_installed_packages)
-        btn_layout.addWidget(self.refresh_btn)
-
         layout.addLayout(btn_layout)
 
         self.table = QTableWidget(self)
@@ -188,9 +183,8 @@ class SnapPackageManager(QWidget):
 
         self.search_btn.setEnabled(not is_busy)
         self.reset_btn.setEnabled(not is_busy)
-        self.refresh_btn.setEnabled(not is_busy)
         self.filter_combo.setEnabled(not is_busy)
-        self.refresh_btn.setText(_("Loading...") if is_loading else _("Refresh"))
+        self.search_btn.setText(_("Loading...") if is_loading else _("Search"))
 
     def _on_selection_changed(self) -> None:
         self._sync_action_buttons()
@@ -266,12 +260,7 @@ class SnapPackageManager(QWidget):
         self._sync_action_buttons()
 
     def _on_search_triggered(self) -> None:
-        if self.current_filter == FILTER_ALL:
-            self.load_remote_packages()
-            return
-        query = self.search_input.text().strip()
-        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
-        self._populate_table()
+        self.refresh()
 
     def _on_reset_triggered(self) -> None:
         self.search_input.clear()

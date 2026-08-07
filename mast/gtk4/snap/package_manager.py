@@ -139,10 +139,6 @@ class SnapPackageManager(Gtk.Box):
         self.reset_btn.connect("clicked", self._on_reset_clicked)
         controls_row.append(self.reset_btn)
 
-        self.refresh_btn = Gtk.Button(label=_("Refresh"))
-        self.refresh_btn.connect("clicked", self._on_refresh_clicked)
-        controls_row.append(self.refresh_btn)
-
         self.append(controls_row)
 
         self._create_table()
@@ -204,11 +200,11 @@ class SnapPackageManager(Gtk.Box):
     def _set_loading(self) -> None:
         is_loading = self.remote_loading or self.installed_loading
         is_busy = self._is_busy()
-        self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
+        loading_label = _("Loading...") if is_loading else _("Search")
+        self.search_btn.set_label(loading_label)
         self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
         self.search_btn.set_sensitive(not is_busy)
         self.reset_btn.set_sensitive(not is_busy)
-        self.refresh_btn.set_sensitive(not is_busy)
         self.filter_combo.set_sensitive(not is_busy)
 
     def load_remote_packages(self) -> None:
@@ -297,21 +293,13 @@ class SnapPackageManager(Gtk.Box):
         self._sync_primary_button()
 
     def _on_search_clicked(self, _widget) -> None:
-        if self.current_filter == FILTER_ALL:
-            self.load_remote_packages()
-            return
-        query = self.search_entry.get_text().strip()
-        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
-        self._populate_table()
+        self.refresh()
 
     def _on_reset_clicked(self, _button: Gtk.Button) -> None:
         self.search_entry.set_text("")
         self.filtered_remote_packages = list(self.remote_packages)
         self.filtered_installed_packages = list(self.installed_packages)
         self._populate_table()
-
-    def _on_refresh_clicked(self, _button: Gtk.Button) -> None:
-        self.refresh()
 
     def _on_selection_changed(self, _selection) -> None:
         self._sync_primary_button()
