@@ -18,13 +18,13 @@ def install_snap_command() -> list[str]:
         return ["pkexec", "bash", "-c", "apt-get update && apt-get install -y snapd"]
 
     if os_id == "opensuse-tumbleweed":
-        return ["pkexec", "bash", "-c", "zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Tumbleweed/system:snappy.repo && zypper --non-interactive install -y snapd"]
+        return ["pkexec", "bash", "-c", "zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Tumbleweed/system:snappy.repo ; zypper --non-interactive install -y snapd"]
 
     if os_id == "opensuse-slowroll":
-        return ["pkexec", "bash", "-c", "zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Slowroll/system:snappy.repo && zypper --non-interactive install -y snapd"]
+        return ["pkexec", "bash", "-c", "zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Slowroll/system:snappy.repo ; zypper --non-interactive install -y snapd"]
 
     if os_id == "opensuse-leap":
-        return ["pkexec", "bash", "-c", f"zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Leap_{os_release.get("VERSION_ID")}/system:snappy.repo && zypper --non-interactive install -y snapd"]
+        return ["pkexec", "bash", "-c", f"zypper addrepo https://download.opensuse.org/repositories/system:snappy/openSUSE_Leap_{os_release.get("VERSION_ID")}/system:snappy.repo ; zypper --non-interactive install -y snapd"]
 
     if os_id == "fedora":
         return ["pkexec", "dnf", "install", "-y", "snapd"]

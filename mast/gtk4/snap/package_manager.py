@@ -40,6 +40,28 @@ class _CatalogWorker(threading.Thread):
         GLib.idle_add(self.on_loaded, packages)
 
 
+class _InstalledCatalogWorker(threading.Thread):
+    """Worker that loads installed snap packages outside the UI thread."""
+
+    def __init__(
+        self,
+        on_loaded: Callable[[list[SnapPackage]], bool],
+        on_failed: Callable[[str], bool],
+    ) -> None:
+        super().__init__(daemon=True)
+        self.on_loaded = on_loaded
+        self.on_failed = on_failed
+
+    def run(self) -> None:
+        try:
+            packages = list_snap_packages()
+        except Exception as e:
+            GLib.idle_add(self.on_failed, str(e))
+            return
+
+        GLib.idle_add(self.on_loaded, packages)
+
+
 class SnapPackageManager(Gtk.Box):
     """Manage snap packages in search or installed mode."""
 
@@ -61,6 +83,8 @@ class SnapPackageManager(Gtk.Box):
         self.installed_page = 0
         self.remote_loading = False
         self.remote_loader: _CatalogWorker | None = None
+        self.installed_loading = False
+        self.installed_loader: _InstalledCatalogWorker | None = None
 
         self._build_layout()
         self.refresh()
@@ -155,20 +179,21 @@ class SnapPackageManager(Gtk.Box):
     def refresh(self) -> None:
         if self.mode == self.MODE_SEARCH:
             self.load_remote_packages()
-            self.load_installed_packages(refresh_current=True)
+            self.load_installed_packages()
         else:
-            self.load_installed_packages(refresh_current=True)
+            self.load_installed_packages()
 
     def _set_remote_loading(self, loading: bool) -> None:
         if self.mode != self.MODE_SEARCH:
             return
 
         self.remote_loading = loading
-        self.refresh_btn.set_label(_("Loading...") if loading else _("Refresh"))
-        self.primary_btn.set_sensitive(not loading)
-        self.search_btn.set_sensitive(not loading)
-        self.reset_btn.set_sensitive(not loading)
-        self.refresh_btn.set_sensitive(not loading)
+        is_loading = loading or self.installed_loading
+        self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
+        self.primary_btn.set_sensitive(not is_loading)
+        self.search_btn.set_sensitive(not is_loading)
+        self.reset_btn.set_sensitive(not is_loading)
+        self.refresh_btn.set_sensitive(not is_loading)
 
     def load_remote_packages(self) -> None:
         if self.mode != self.MODE_SEARCH or self.remote_loader is not None:
@@ -215,18 +240,30 @@ class SnapPackageManager(Gtk.Box):
         self.remote_loader = None
         self._set_remote_loading(False)
 
-    def load_installed_packages(self, refresh_current: bool = True) -> None:
-        try:
-            self.installed_packages = list_snap_packages()
-            self.installed_names = {pkg.name for pkg in self.installed_packages}
-        except Exception as e:
-            self._show_message_dialog(
-                Gtk.MessageType.ERROR,
-                _("Error"),
-                _("Failed to load Snap packages: {0}").format(str(e)),
-            )
-            self.installed_packages = []
-            self.installed_names = set()
+    def load_installed_packages(self, _refresh_current: bool = True) -> None:
+        if self.installed_loader is not None:
+            return
+
+        self._set_installed_loading(True)
+        self.installed_loader = _InstalledCatalogWorker(
+            on_loaded=self._on_installed_packages_loaded,
+            on_failed=self._on_installed_packages_failed,
+        )
+        self.installed_loader.start()
+
+    def _set_installed_loading(self, loading: bool) -> None:
+        self.installed_loading = loading
+        if self.mode == self.MODE_INSTALLED:
+            is_loading = loading
+        else:
+            is_loading = loading or self.remote_loading
+        self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
+        self.primary_btn.set_sensitive(not is_loading)
+        self.refresh_btn.set_sensitive(not is_loading)
+
+    def _on_installed_packages_loaded(self, packages: list[SnapPackage]) -> bool:
+        self.installed_packages = packages
+        self.installed_names = {pkg.name for pkg in self.installed_packages}
 
         if self.mode == self.MODE_INSTALLED:
             self.filtered_installed_packages = self._filter_packages(
@@ -235,10 +272,34 @@ class SnapPackageManager(Gtk.Box):
             )
             self.installed_page = 0
             self._populate_table()
-            return
-
-        if refresh_current:
+        else:
             self._populate_table()
+
+        self._on_installed_loader_finished()
+        return False
+
+    def _on_installed_packages_failed(self, error: str) -> bool:
+        self._show_message_dialog(
+            Gtk.MessageType.ERROR,
+            _("Error"),
+            _("Failed to load Snap packages: {0}").format(error),
+        )
+        self.installed_packages = []
+        self.installed_names = set()
+
+        if self.mode == self.MODE_INSTALLED:
+            self.filtered_installed_packages = []
+            self.installed_page = 0
+            self._populate_table()
+        else:
+            self._populate_table()
+
+        self._on_installed_loader_finished()
+        return False
+
+    def _on_installed_loader_finished(self) -> None:
+        self.installed_loader = None
+        self._set_installed_loading(False)
 
     def _on_search_clicked(self, _widget) -> None:
         if self.mode == self.MODE_SEARCH:

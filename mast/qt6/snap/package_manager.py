@@ -43,6 +43,22 @@ class _CatalogWorker(QObject):
         self.loaded.emit(packages)
 
 
+class _InstalledCatalogWorker(QObject):
+    """Worker that loads installed snap packages outside the UI thread."""
+
+    loaded = Signal(list)
+    failed = Signal(str)
+
+    def run(self) -> None:
+        try:
+            packages = list_snap_packages()
+        except Exception as e:
+            self.failed.emit(str(e))
+            return
+
+        self.loaded.emit(packages)
+
+
 class SnapPackageManager(QWidget):
     """Manage snap packages in either search or installed mode."""
 
@@ -64,6 +80,9 @@ class SnapPackageManager(QWidget):
         self.remote_loading = False
         self.catalog_thread: QThread | None = None
         self.catalog_loader: _CatalogWorker | None = None
+        self.installed_loading = False
+        self.installed_thread: QThread | None = None
+        self.installed_loader: _InstalledCatalogWorker | None = None
 
         layout = QVBoxLayout(self)
 
@@ -226,21 +245,21 @@ class SnapPackageManager(QWidget):
     def _sync_action_buttons(self) -> None:
         if self.mode == self.MODE_SEARCH:
             self.install_btn.setText(self.install_action.text())
-            self.install_btn.setEnabled(self.install_action.isEnabled() and not self.remote_loading)
-            self.search_btn.setEnabled(not self.remote_loading)
-            self.reset_btn.setEnabled(not self.remote_loading)
-            self.refresh_catalog_btn.setEnabled(not self.remote_loading)
+            self.install_btn.setEnabled(self.install_action.isEnabled() and not self.remote_loading and not self.installed_loading)
+            self.search_btn.setEnabled(not self.remote_loading and not self.installed_loading)
+            self.reset_btn.setEnabled(not self.remote_loading and not self.installed_loading)
+            self.refresh_catalog_btn.setEnabled(not self.remote_loading and not self.installed_loading)
             return
 
         self.uninstall_btn.setText(self.uninstall_action.text())
-        self.uninstall_btn.setEnabled(self.uninstall_action.isEnabled())
+        self.uninstall_btn.setEnabled(self.uninstall_action.isEnabled() and not self.installed_loading)
 
     def _set_remote_loading(self, loading: bool) -> None:
         if self.mode != self.MODE_SEARCH:
             return
 
         self.remote_loading = loading
-        self.refresh_catalog_btn.setText(_("Loading...") if loading else _("Refresh"))
+        self.refresh_catalog_btn.setText(_("Loading...") if loading or self.installed_loading else _("Refresh"))
         self._sync_action_buttons()
 
     def _selected_package_name(self) -> str:
@@ -409,13 +428,39 @@ class SnapPackageManager(QWidget):
         self._set_remote_loading(False)
 
     def load_installed_packages(self, refresh_search_table: bool = True) -> None:
-        try:
-            self.installed_packages = list_snap_packages()
-            self.installed_names = {pkg.name for pkg in self.installed_packages}
-        except Exception as e:
-            QMessageBox.critical(self, _("Error"), _("Failed to load Snap packages: {0}").format(str(e)))
-            self.installed_packages = []
-            self.installed_names = set()
+        if self.installed_thread is not None:
+            return
+
+        self._set_installed_loading(True)
+
+        self.installed_thread = QThread(self)
+        self.installed_loader = _InstalledCatalogWorker()
+        self.installed_loader.moveToThread(self.installed_thread)
+
+        self.installed_thread.started.connect(self.installed_loader.run)
+        self.installed_loader.loaded.connect(self._on_installed_packages_loaded)
+        self.installed_loader.failed.connect(self._on_installed_packages_failed)
+
+        self.installed_loader.loaded.connect(self.installed_thread.quit)
+        self.installed_loader.failed.connect(self.installed_thread.quit)
+        self.installed_loader.loaded.connect(self.installed_loader.deleteLater)
+        self.installed_loader.failed.connect(self.installed_loader.deleteLater)
+        self.installed_thread.finished.connect(self.installed_thread.deleteLater)
+        self.installed_thread.finished.connect(self._on_installed_loader_finished)
+
+        self.installed_thread.start()
+
+    def _set_installed_loading(self, loading: bool) -> None:
+        self.installed_loading = loading
+        if self.mode == self.MODE_INSTALLED:
+            self.refresh_installed_btn.setText(_("Loading...") if loading else _("Refresh"))
+        else:
+            self.refresh_catalog_btn.setText(_("Loading...") if loading or self.remote_loading else _("Refresh"))
+        self._sync_action_buttons()
+
+    def _on_installed_packages_loaded(self, packages: list[SnapPackage]) -> None:
+        self.installed_packages = packages
+        self.installed_names = {pkg.name for pkg in self.installed_packages}
 
         if self.mode == self.MODE_INSTALLED:
             self.filtered_installed_packages = self._filter_packages(
@@ -424,10 +469,25 @@ class SnapPackageManager(QWidget):
             )
             self.installed_page = 0
             self._populate_installed_table()
-            return
-
-        if refresh_search_table:
+        else:
             self._populate_search_table()
+
+    def _on_installed_packages_failed(self, error: str) -> None:
+        QMessageBox.critical(self, _("Error"), _("Failed to load Snap packages: {0}").format(error))
+        self.installed_packages = []
+        self.installed_names = set()
+
+        if self.mode == self.MODE_INSTALLED:
+            self.filtered_installed_packages = []
+            self.installed_page = 0
+            self._populate_installed_table()
+        else:
+            self._populate_search_table()
+
+    def _on_installed_loader_finished(self) -> None:
+        self.installed_thread = None
+        self.installed_loader = None
+        self._set_installed_loading(False)
 
     def _populate_search_table(self) -> None:
         if self.mode != self.MODE_SEARCH:
