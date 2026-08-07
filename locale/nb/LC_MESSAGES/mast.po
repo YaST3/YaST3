@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-06 05:42+0000\n"
-"PO-Revision-Date: 2026-08-06 05:52\n"
+"POT-Creation-Date: 2026-08-07 16:04+0000\n"
+"PO-Revision-Date: 2026-08-07 16:14\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Bokmal\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +20,9 @@ msgstr ""
 
 #: mast/core/android/package_filters.py:23 mast/gtk4/journal/window.py:80
 #: mast/gtk4/journal/window.py:126 mast/gtk4/services/window.py:55
-#: mast/gtk4/services/window.py:66 mast/qt6/journal/window.py:89
-#: mast/qt6/services/window.py:59 mast/qt6/services/window.py:69
+#: mast/gtk4/services/window.py:66 mast/gtk4/snap/package_manager.py:114
+#: mast/qt6/journal/window.py:89 mast/qt6/services/window.py:59
+#: mast/qt6/services/window.py:69 mast/qt6/snap/package_manager.py:122
 #: mast/tui/services/window.py:81 mast/tui/services/window.py:93
 msgid "All"
 msgstr "Alle"
@@ -63,16 +64,16 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: mast/gtk4/main_window.py:106 mast/qt6/main_window.py:74
+#: mast/gtk4/main_window.py:108 mast/qt6/main_window.py:76
 #: mast/tui/main_window.py:160
 msgid "About"
 msgstr "Om"
 
-#: mast/gtk4/main_window.py:131 mast/tui/main_window.py:110
+#: mast/gtk4/main_window.py:133 mast/tui/main_window.py:110
 msgid "Enable anonymous usage analytics?"
 msgstr ""
 
-#: mast/gtk4/main_window.py:136 mast/tui/main_window.py:113
+#: mast/gtk4/main_window.py:138 mast/tui/main_window.py:113
 msgid "MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
 msgstr ""
 
@@ -104,16 +105,18 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:66 mast/gtk4/languages/manager.py:62
 #: mast/gtk4/repositories/repo_edit_dialog.py:36
 #: mast/gtk4/repositories/window.py:81 mast/gtk4/services/window.py:121
-#: mast/gtk4/ssh/keys_tab.py:68 mast/qt6/android/device_info_panel.py:26
+#: mast/gtk4/snap/package_manager.py:150 mast/gtk4/ssh/keys_tab.py:68
+#: mast/qt6/android/device_info_panel.py:26
 #: mast/qt6/flatpak/package_manager.py:142
 #: mast/qt6/flatpak/package_manager.py:214 mast/qt6/flatpak/remote_dialog.py:42
 #: mast/qt6/flatpak/remote_dialog.py:45 mast/qt6/flatpak/remote_manager.py:58
 #: mast/qt6/flatpak/runtime_manager.py:83 mast/qt6/languages/manager.py:57
 #: mast/qt6/repositories/repo_edit_dialog.py:37
 #: mast/qt6/repositories/window.py:70 mast/qt6/services/window.py:116
-#: mast/qt6/ssh/keys_tab.py:61 mast/tui/repositories/window.py:80
-#: mast/tui/repositories/window.py:332 mast/tui/services/window.py:123
-#: mast/tui/ssh/window.py:293 mast/tui/ssh/window.py:613
+#: mast/qt6/snap/package_manager.py:146 mast/qt6/ssh/keys_tab.py:61
+#: mast/tui/repositories/window.py:80 mast/tui/repositories/window.py:332
+#: mast/tui/services/window.py:123 mast/tui/ssh/window.py:293
+#: mast/tui/ssh/window.py:613
 msgid "Name"
 msgstr "Navn"
 
@@ -245,7 +248,10 @@ msgstr "Oppdater"
 #: mast/gtk4/repositories/window.py:241 mast/gtk4/repositories/window.py:276
 #: mast/gtk4/repositories/window.py:280 mast/gtk4/repositories/window.py:388
 #: mast/gtk4/repositories/window.py:390 mast/gtk4/repositories/window.py:392
-#: mast/gtk4/services/window.py:183 mast/gtk4/snapshots/config_dialog.py:46
+#: mast/gtk4/services/window.py:183 mast/gtk4/snap/package_manager.py:245
+#: mast/gtk4/snap/package_manager.py:285 mast/gtk4/snap/package_manager.py:400
+#: mast/gtk4/snap/settings.py:57 mast/gtk4/snap/window.py:98
+#: mast/gtk4/snap/window.py:109 mast/gtk4/snapshots/config_dialog.py:46
 #: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:227
 #: mast/gtk4/snapshots/window.py:233 mast/gtk4/ssh/__init__.py:72
 #: mast/gtk4/ssh/dialogs.py:120 mast/gtk4/ssh/hosts_tab.py:109
@@ -308,7 +314,11 @@ msgstr "Oppdater"
 #: mast/qt6/repositories/window.py:256 mast/qt6/repositories/window.py:278
 #: mast/qt6/repositories/window.py:306 mast/qt6/repositories/window.py:308
 #: mast/qt6/repositories/window.py:310 mast/qt6/repositories/window.py:325
-#: mast/qt6/services/window.py:140 mast/qt6/snapshots/config_dialog.py:38
+#: mast/qt6/services/window.py:140 mast/qt6/snap/package_manager.py:271
+#: mast/qt6/snap/package_manager.py:273 mast/qt6/snap/package_manager.py:352
+#: mast/qt6/snap/package_manager.py:397 mast/qt6/snap/settings.py:48
+#: mast/qt6/snap/window.py:93 mast/qt6/snap/window.py:104
+#: mast/qt6/snapshots/config_dialog.py:38
 #: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:128
 #: mast/qt6/snapshots/window.py:134 mast/qt6/ssh/__init__.py:59
 #: mast/qt6/ssh/dialogs.py:86 mast/qt6/ssh/dialogs.py:92
@@ -336,23 +346,29 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:43 mast/gtk4/flatpak/window.py:53
 #: mast/gtk4/journal/window.py:87 mast/gtk4/journal/window.py:133
 #: mast/gtk4/languages/manager.py:26 mast/gtk4/services/window.py:73
+#: mast/gtk4/snap/package_manager.py:121 mast/gtk4/snap/package_manager.py:126
+#: mast/gtk4/snap/package_manager.py:198
 #: mast/qt6/android/package_manager_panel.py:103
 #: mast/qt6/flatpak/package_manager.py:123
 #: mast/qt6/flatpak/package_manager.py:195
 #: mast/qt6/flatpak/runtime_manager.py:64 mast/qt6/flatpak/window.py:57
 #: mast/qt6/journal/window.py:93 mast/qt6/languages/manager.py:34
-#: mast/qt6/services/window.py:75 mast/tui/services/window.py:100
+#: mast/qt6/services/window.py:75 mast/qt6/snap/package_manager.py:128
+#: mast/qt6/snap/package_manager.py:133 mast/qt6/snap/package_manager.py:207
+#: mast/tui/services/window.py:100
 msgid "Search"
 msgstr "Søk"
 
 #: mast/gtk4/android/package_manager_panel.py:107
 #: mast/gtk4/flatpak/package_manager.py:82
 #: mast/gtk4/flatpak/runtime_manager.py:31 mast/gtk4/languages/manager.py:37
-#: mast/gtk4/languages/manager.py:202
+#: mast/gtk4/languages/manager.py:202 mast/gtk4/snap/package_manager.py:324
+#: mast/gtk4/snap/package_manager.py:378
 #: mast/qt6/android/package_manager_panel.py:120
 #: mast/qt6/flatpak/package_manager.py:92
 #: mast/qt6/flatpak/runtime_manager.py:36 mast/qt6/languages/manager.py:46
-#: mast/qt6/languages/manager.py:175
+#: mast/qt6/languages/manager.py:175 mast/qt6/snap/package_manager.py:193
+#: mast/qt6/snap/package_manager.py:250
 msgid "Uninstall"
 msgstr "Avinstaller"
 
@@ -393,10 +409,11 @@ msgstr ""
 #: mast/gtk4/flatpak/package_manager.py:131
 #: mast/gtk4/flatpak/package_manager.py:144
 #: mast/gtk4/flatpak/runtime_manager.py:68
+#: mast/gtk4/snap/package_manager.py:154
 #: mast/qt6/android/package_manager_panel.py:143
 #: mast/qt6/flatpak/package_manager.py:144
 #: mast/qt6/flatpak/package_manager.py:216
-#: mast/qt6/flatpak/runtime_manager.py:85
+#: mast/qt6/flatpak/runtime_manager.py:85 mast/qt6/snap/package_manager.py:146
 msgid "Version"
 msgstr "Versjon"
 
@@ -459,9 +476,11 @@ msgstr ""
 #: mast/gtk4/journal/window.py:390 mast/gtk4/keyboard/window.py:132
 #: mast/gtk4/languages/settings.py:141 mast/gtk4/proxy/window.py:110
 #: mast/gtk4/repositories/window.py:248 mast/gtk4/repositories/window.py:379
-#: mast/gtk4/snapshots/config_dialog.py:220 mast/gtk4/ssh/__init__.py:87
-#: mast/gtk4/ssh/hosts_tab.py:224 mast/gtk4/ssh/keys_tab.py:194
-#: mast/gtk4/ssh/keys_tab.py:246 mast/qt6/android/package_manager_panel.py:332
+#: mast/gtk4/snap/settings.py:50 mast/gtk4/snap/window.py:93
+#: mast/gtk4/snap/window.py:104 mast/gtk4/snapshots/config_dialog.py:220
+#: mast/gtk4/ssh/__init__.py:87 mast/gtk4/ssh/hosts_tab.py:224
+#: mast/gtk4/ssh/keys_tab.py:194 mast/gtk4/ssh/keys_tab.py:246
+#: mast/qt6/android/package_manager_panel.py:332
 #: mast/qt6/android/package_manager_panel.py:381
 #: mast/qt6/android/package_manager_panel.py:449
 #: mast/qt6/android/package_manager_panel.py:510 mast/qt6/cron/manager.py:229
@@ -474,9 +493,11 @@ msgstr ""
 #: mast/qt6/journal/window.py:319 mast/qt6/keyboard/window.py:99
 #: mast/qt6/languages/settings.py:136 mast/qt6/proxy/window.py:109
 #: mast/qt6/repositories/window.py:120 mast/qt6/repositories/window.py:301
-#: mast/qt6/snapshots/config_dialog.py:168 mast/qt6/ssh/__init__.py:67
-#: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
-#: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
+#: mast/qt6/snap/settings.py:40 mast/qt6/snap/window.py:88
+#: mast/qt6/snap/window.py:99 mast/qt6/snapshots/config_dialog.py:168
+#: mast/qt6/ssh/__init__.py:67 mast/qt6/ssh/hosts_tab.py:222
+#: mast/qt6/ssh/keys_generate_dialog.py:232 mast/qt6/ssh/keys_tab.py:174
+#: mast/qt6/ssh/keys_tab.py:221
 msgid "Success"
 msgstr "Suksess"
 
@@ -572,7 +593,8 @@ msgstr ""
 msgid "Running command, please wait..."
 msgstr "Kjører kommando, vennligst vent..."
 
-#: mast/gtk4/command/dialog.py:53 mast/qt6/command/dialog.py:44
+#: mast/gtk4/command/dialog.py:53 mast/gtk4/snap/settings.py:37
+#: mast/qt6/command/dialog.py:44 mast/qt6/snap/settings.py:28
 #: mast/tui/packages/window.py:42 mast/tui/services/window.py:362
 msgid "Close"
 msgstr "Lukk"
@@ -586,9 +608,12 @@ msgid "Command failed. See output for details."
 msgstr "Kommandoen mislyktes. Se utdata for detaljer."
 
 #: mast/gtk4/command/worker.py:55 mast/gtk4/flatpak/settings.py:51
-#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snapshots/window.py:234
-#: mast/qt6/command/worker.py:51 mast/qt6/flatpak/window.py:95
-#: mast/qt6/flatpak/window.py:106 mast/qt6/snapshots/window.py:135
+#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snap/settings.py:58
+#: mast/gtk4/snap/window.py:99 mast/gtk4/snap/window.py:110
+#: mast/gtk4/snapshots/window.py:234 mast/qt6/command/worker.py:51
+#: mast/qt6/flatpak/window.py:95 mast/qt6/flatpak/window.py:106
+#: mast/qt6/snap/settings.py:49 mast/qt6/snap/window.py:94
+#: mast/qt6/snap/window.py:105 mast/qt6/snapshots/window.py:135
 #: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:122
 #: mast/tui/snapshots/window.py:221 mast/tui/snapshots/window.py:248
 msgid "Unknown error"
@@ -823,10 +848,10 @@ msgstr "Aktiv"
 #: mast/gtk4/languages/manager.py:182 mast/gtk4/repositories/window.py:232
 #: mast/gtk4/repositories/window.py:257 mast/gtk4/repositories/window.py:311
 #: mast/gtk4/services/window.py:271 mast/gtk4/services/window.py:304
-#: mast/gtk4/snapshots/window.py:275 mast/gtk4/snapshots/window.py:295
-#: mast/gtk4/ssh/hosts_tab.py:159 mast/gtk4/ssh/hosts_tab.py:187
-#: mast/qt6/cron/manager.py:161 mast/qt6/cron/manager.py:179
-#: mast/qt6/flatpak/package_manager.py:347
+#: mast/gtk4/snap/package_manager.py:411 mast/gtk4/snapshots/window.py:275
+#: mast/gtk4/snapshots/window.py:295 mast/gtk4/ssh/hosts_tab.py:159
+#: mast/gtk4/ssh/hosts_tab.py:187 mast/qt6/cron/manager.py:161
+#: mast/qt6/cron/manager.py:179 mast/qt6/flatpak/package_manager.py:347
 #: mast/qt6/flatpak/package_manager.py:351
 #: mast/qt6/flatpak/package_manager.py:364
 #: mast/qt6/flatpak/remote_manager.py:102
@@ -836,8 +861,9 @@ msgstr "Aktiv"
 #: mast/qt6/languages/manager.py:160 mast/qt6/repositories/window.py:106
 #: mast/qt6/repositories/window.py:219 mast/qt6/repositories/window.py:262
 #: mast/qt6/services/window.py:227 mast/qt6/services/window.py:256
-#: mast/qt6/snapshots/window.py:184 mast/qt6/snapshots/window.py:200
-#: mast/qt6/ssh/hosts_tab.py:148 mast/qt6/ssh/hosts_tab.py:169
+#: mast/qt6/snap/package_manager.py:279 mast/qt6/snapshots/window.py:184
+#: mast/qt6/snapshots/window.py:200 mast/qt6/ssh/hosts_tab.py:148
+#: mast/qt6/ssh/hosts_tab.py:169
 msgid "Information"
 msgstr "Informasjon"
 
@@ -857,14 +883,16 @@ msgstr "Vennligst velg en cron-oppgave å slette."
 #: mast/gtk4/flatpak/runtime_manager.py:124 mast/gtk4/hostname/window.py:98
 #: mast/gtk4/hosts/window.py:228 mast/gtk4/languages/manager.py:159
 #: mast/gtk4/languages/manager.py:193 mast/gtk4/repositories/window.py:324
-#: mast/gtk4/repositories/window.py:363 mast/gtk4/ssh/hosts_tab.py:204
+#: mast/gtk4/repositories/window.py:363 mast/gtk4/snap/package_manager.py:423
+#: mast/gtk4/snap/remove_action.py:39 mast/gtk4/ssh/hosts_tab.py:204
 #: mast/gtk4/users/group_list.py:127 mast/gtk4/users/user_list.py:146
 #: mast/qt6/cron/manager.py:183 mast/qt6/flatpak/package_manager.py:369
 #: mast/qt6/flatpak/remote_manager.py:127 mast/qt6/flatpak/remove_action.py:37
 #: mast/qt6/flatpak/runtime_manager.py:139 mast/qt6/hostname/window.py:109
 #: mast/qt6/hosts/window.py:229 mast/qt6/languages/manager.py:140
 #: mast/qt6/languages/manager.py:168 mast/qt6/repositories/window.py:269
-#: mast/qt6/repositories/window.py:289 mast/qt6/ssh/hosts_tab.py:181
+#: mast/qt6/repositories/window.py:289 mast/qt6/snap/package_manager.py:286
+#: mast/qt6/snap/remove_action.py:38 mast/qt6/ssh/hosts_tab.py:181
 #: mast/qt6/ssh/keys_generate_dialog.py:184 mast/qt6/users/group_list.py:113
 #: mast/qt6/users/user_list.py:133
 msgid "Confirm"
@@ -973,7 +1001,7 @@ msgstr "Alle innstillinger ble lagret vellykket."
 msgid "Authentication failed or pkexec not available."
 msgstr "Autentisering mislyktes eller pkexec er ikke tilgjengelig."
 
-#: mast/gtk4/flatpak/__init__.py:16 mast/qt6/flatpak/__init__.py:10
+#: mast/gtk4/flatpak/__init__.py:16
 msgid "Flatpak"
 msgstr ""
 
@@ -994,8 +1022,11 @@ msgstr "Flatpak ble installert vellykket."
 
 #: mast/gtk4/flatpak/package_manager.py:79 mast/gtk4/languages/manager.py:32
 #: mast/gtk4/languages/manager.py:168 mast/gtk4/languages/settings.py:114
-#: mast/qt6/flatpak/package_manager.py:78 mast/qt6/languages/manager.py:41
-#: mast/qt6/languages/manager.py:147 mast/qt6/languages/settings.py:107
+#: mast/gtk4/snap/package_manager.py:96 mast/gtk4/snap/package_manager.py:321
+#: mast/gtk4/snap/package_manager.py:378 mast/qt6/flatpak/package_manager.py:78
+#: mast/qt6/languages/manager.py:41 mast/qt6/languages/manager.py:147
+#: mast/qt6/languages/settings.py:107 mast/qt6/snap/package_manager.py:104
+#: mast/qt6/snap/package_manager.py:190 mast/qt6/snap/package_manager.py:250
 msgid "Install"
 msgstr "Installer"
 
@@ -1073,8 +1104,10 @@ msgstr "Omfang"
 
 #: mast/gtk4/flatpak/package_manager.py:136 mast/gtk4/flatpak/window.py:54
 #: mast/gtk4/languages/manager.py:89 mast/gtk4/languages/manager.py:120
+#: mast/gtk4/snap/package_manager.py:115 mast/gtk4/snap/package_manager.py:178
 #: mast/qt6/flatpak/package_manager.py:149 mast/qt6/flatpak/window.py:58
 #: mast/qt6/languages/manager.py:78 mast/qt6/languages/manager.py:105
+#: mast/qt6/snap/package_manager.py:123 mast/qt6/snap/package_manager.py:146
 msgid "Installed"
 msgstr "Installert"
 
@@ -1085,15 +1118,17 @@ msgstr "Installert"
 msgid "Installed Size"
 msgstr "Installert størrelse"
 
-#: mast/gtk4/flatpak/package_manager.py:180 mast/gtk4/snapshots/window.py:200
+#: mast/gtk4/flatpak/package_manager.py:180
+#: mast/gtk4/snap/package_manager.py:198 mast/gtk4/snapshots/window.py:200
 #: mast/gtk4/snapshots/window.py:204 mast/qt6/flatpak/package_manager.py:275
-#: mast/qt6/snapshots/window.py:101 mast/qt6/snapshots/window.py:105
-#: mast/tui/snapshots/window.py:111
+#: mast/qt6/snap/package_manager.py:207 mast/qt6/snapshots/window.py:101
+#: mast/qt6/snapshots/window.py:105 mast/tui/snapshots/window.py:111
 msgid "Loading..."
 msgstr "Laster..."
 
 #: mast/gtk4/flatpak/package_manager.py:221
-#: mast/qt6/flatpak/package_manager.py:475
+#: mast/gtk4/snap/package_manager.py:246
+#: mast/qt6/flatpak/package_manager.py:475 mast/qt6/snap/package_manager.py:352
 #, python-brace-format
 msgid "Failed to load package catalog: {0}"
 msgstr "Klarte ikke å laste pakkekatalog: {0}"
@@ -1115,12 +1150,14 @@ msgid "The selected package is already installed."
 msgstr "Den valgte pakken er allerede installert."
 
 #: mast/gtk4/flatpak/package_manager.py:314
-#: mast/qt6/flatpak/package_manager.py:82
+#: mast/gtk4/snap/package_manager.py:382 mast/qt6/flatpak/package_manager.py:82
+#: mast/qt6/snap/package_manager.py:254
 msgid "Package installed successfully."
 msgstr "Pakke installert vellykket."
 
 #: mast/gtk4/flatpak/package_manager.py:320
-#: mast/qt6/flatpak/package_manager.py:387
+#: mast/gtk4/snap/package_manager.py:401
+#: mast/qt6/flatpak/package_manager.py:387 mast/qt6/snap/package_manager.py:273
 #, python-brace-format
 msgid "Failed to install package: {0}"
 msgstr "Klarte ikke å installere pakke: {0}"
@@ -1131,37 +1168,42 @@ msgid "Please select an installed package from the list."
 msgstr "Vennligst velg en installert pakke fra listen."
 
 #: mast/gtk4/flatpak/package_manager.py:342
-#: mast/qt6/flatpak/package_manager.py:370
+#: mast/gtk4/snap/package_manager.py:427
+#: mast/qt6/flatpak/package_manager.py:370 mast/qt6/snap/package_manager.py:287
 #, python-brace-format
 msgid "Are you sure you want to uninstall package '{0}'?"
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:354
-#: mast/qt6/flatpak/package_manager.py:96
+#: mast/gtk4/snap/package_manager.py:382 mast/qt6/flatpak/package_manager.py:96
+#: mast/qt6/snap/package_manager.py:254
 msgid "Package uninstalled successfully."
 msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:360
-#: mast/qt6/flatpak/package_manager.py:398
+#: mast/gtk4/snap/package_manager.py:402
+#: mast/qt6/flatpak/package_manager.py:398 mast/qt6/snap/package_manager.py:271
 #, python-brace-format
 msgid "Failed to uninstall package: {0}"
 msgstr ""
 
-#: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
+#: mast/gtk4/flatpak/package_manager.py:401
+#: mast/gtk4/snap/package_manager.py:487 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
-#: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
-#: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/main_window.py:118
-#: mast/tui/ssh/window.py:336
+#: mast/qt6/flatpak/package_manager.py:522 mast/qt6/snap/package_manager.py:438
+#: mast/qt6/ssh/keys_tab.py:137 mast/qt6/ssh/keys_tab.py:140
+#: mast/qt6/ssh/keys_tab.py:143 mast/tui/languages/window.py:53
+#: mast/tui/main_window.py:118 mast/tui/ssh/window.py:336
 msgid "Yes"
 msgstr "Ja"
 
-#: mast/gtk4/flatpak/package_manager.py:401 mast/gtk4/ssh/keys_tab.py:147
+#: mast/gtk4/flatpak/package_manager.py:401
+#: mast/gtk4/snap/package_manager.py:493 mast/gtk4/ssh/keys_tab.py:147
 #: mast/gtk4/ssh/keys_tab.py:148 mast/gtk4/ssh/keys_tab.py:149
-#: mast/qt6/flatpak/package_manager.py:522 mast/qt6/ssh/keys_tab.py:137
-#: mast/qt6/ssh/keys_tab.py:140 mast/qt6/ssh/keys_tab.py:143
-#: mast/tui/languages/window.py:53 mast/tui/main_window.py:117
-#: mast/tui/ssh/window.py:336
+#: mast/qt6/flatpak/package_manager.py:522 mast/qt6/snap/package_manager.py:444
+#: mast/qt6/ssh/keys_tab.py:137 mast/qt6/ssh/keys_tab.py:140
+#: mast/qt6/ssh/keys_tab.py:143 mast/tui/languages/window.py:53
+#: mast/tui/main_window.py:117 mast/tui/ssh/window.py:336
 msgid "No"
 msgstr "Nei"
 
@@ -1298,7 +1340,9 @@ msgstr ""
 msgid "Remotes"
 msgstr "Eksterne"
 
-#: mast/gtk4/flatpak/window.py:57 mast/qt6/flatpak/window.py:61
+#: mast/gtk4/flatpak/window.py:57 mast/gtk4/snap/package_manager.py:130
+#: mast/gtk4/snap/settings.py:19 mast/qt6/flatpak/window.py:61
+#: mast/qt6/snap/package_manager.py:137 mast/qt6/snap/settings.py:16
 msgid "Settings"
 msgstr "Innstillinger"
 
@@ -1868,7 +1912,8 @@ msgid "Are you sure you want to install language '{0}' ({1})?"
 msgstr "Er du sikker på at du vil installere språket '{0}' ({1})?"
 
 #: mast/gtk4/languages/manager.py:169 mast/gtk4/languages/settings.py:115
-#: mast/qt6/languages/manager.py:148 mast/qt6/languages/settings.py:108
+#: mast/gtk4/snap/package_manager.py:379 mast/qt6/languages/manager.py:148
+#: mast/qt6/languages/settings.py:108 mast/qt6/snap/package_manager.py:251
 msgid "Installing..."
 msgstr "Installerer..."
 
@@ -1892,7 +1937,8 @@ msgstr "Vennligst velg et språk å avinstallere."
 msgid "Are you sure you want to uninstall language '{0}' ({1})?"
 msgstr "Er du sikker på at du vil avinstallere språket '{0}' ({1})?"
 
-#: mast/gtk4/languages/manager.py:203 mast/qt6/languages/manager.py:176
+#: mast/gtk4/languages/manager.py:203 mast/gtk4/snap/package_manager.py:379
+#: mast/qt6/languages/manager.py:176 mast/qt6/snap/package_manager.py:251
 msgid "Uninstalling..."
 msgstr "Avinstallerer..."
 
@@ -2249,6 +2295,151 @@ msgstr "Journal-logger: {0}"
 #: mast/gtk4/services/window.py:314 mast/qt6/services/window.py:264
 msgid "End of journal output."
 msgstr "Slutt på journal-utgang."
+
+#: mast/gtk4/snap/__init__.py:16 mast/qt6/snap/__init__.py:10
+msgid "Snap Packages"
+msgstr ""
+
+#: mast/gtk4/snap/install_action.py:22 mast/gtk4/snap/install_action.py:24
+#: mast/qt6/snap/install_action.py:18 mast/qt6/snap/install_action.py:20
+msgid "Install Snap"
+msgstr ""
+
+#: mast/gtk4/snap/install_action.py:23 mast/qt6/snap/install_action.py:19
+msgid "Installing Snap..."
+msgstr ""
+
+#: mast/gtk4/snap/install_action.py:26 mast/gtk4/snap/window.py:93
+#: mast/qt6/snap/install_action.py:22 mast/qt6/snap/window.py:88
+msgid "Snap installed successfully."
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:101 mast/gtk4/snap/package_manager.py:367
+#: mast/gtk4/snap/package_manager.py:490 mast/qt6/snap/package_manager.py:109
+#: mast/qt6/snap/package_manager.py:239 mast/qt6/snap/package_manager.py:441
+msgid "Update"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:106 mast/gtk4/snap/package_manager.py:332
+#: mast/qt6/snap/package_manager.py:114 mast/qt6/snap/package_manager.py:201
+msgid "Update All"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:159 mast/qt6/snap/package_manager.py:146
+msgid "Publisher"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:172 mast/qt6/snap/package_manager.py:146
+msgid "Summary"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:286 mast/qt6/snap/package_manager.py:397
+#, python-brace-format
+msgid "Failed to load Snap packages: {0}"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:332 mast/qt6/snap/package_manager.py:201
+#, python-brace-format
+msgid "Update All ({0})"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:360 mast/qt6/snap/package_manager.py:232
+msgid "Package updated successfully."
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:361 mast/qt6/snap/package_manager.py:233
+msgid "Update Snap Package"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:364 mast/qt6/snap/package_manager.py:236
+msgid "All packages updated successfully."
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:365 mast/qt6/snap/package_manager.py:237
+msgid "Update All Snap Packages"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:368 mast/qt6/snap/package_manager.py:240
+msgid "Updating..."
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
+msgid "Install Snap Package"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
+msgid "Uninstall Snap Package"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:412 mast/qt6/snap/package_manager.py:279
+msgid "Please select a package from the list."
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:527 mast/qt6/snap/package_manager.py:454
+msgid "Verified Account"
+msgstr ""
+
+#: mast/gtk4/snap/package_manager.py:530 mast/qt6/snap/package_manager.py:459
+msgid "Star Developer"
+msgstr ""
+
+#: mast/gtk4/snap/remove_action.py:21 mast/gtk4/snap/remove_action.py:23
+#: mast/qt6/snap/remove_action.py:18 mast/qt6/snap/remove_action.py:20
+msgid "Uninstall Snap"
+msgstr ""
+
+#: mast/gtk4/snap/remove_action.py:22 mast/qt6/snap/remove_action.py:19
+msgid "Uninstalling Snap..."
+msgstr ""
+
+#: mast/gtk4/snap/remove_action.py:25 mast/gtk4/snap/settings.py:50
+#: mast/qt6/snap/remove_action.py:22 mast/qt6/snap/settings.py:40
+msgid "Snap uninstalled successfully."
+msgstr ""
+
+#: mast/gtk4/snap/remove_action.py:41 mast/qt6/snap/remove_action.py:39
+msgid "Are you sure you want to uninstall Snap?"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:58 mast/qt6/snap/settings.py:49
+#, python-brace-format
+msgid "Failed to uninstall Snap: {0}"
+msgstr ""
+
+#: mast/gtk4/snap/start_snapd_action.py:21
+#: mast/gtk4/snap/start_snapd_action.py:23
+#: mast/qt6/snap/start_snapd_action.py:17
+#: mast/qt6/snap/start_snapd_action.py:19
+msgid "Start Snapd"
+msgstr ""
+
+#: mast/gtk4/snap/start_snapd_action.py:22
+#: mast/qt6/snap/start_snapd_action.py:18
+msgid "Starting Snapd..."
+msgstr ""
+
+#: mast/gtk4/snap/start_snapd_action.py:25 mast/gtk4/snap/window.py:104
+#: mast/qt6/snap/start_snapd_action.py:21 mast/qt6/snap/window.py:99
+msgid "Snapd started successfully."
+msgstr ""
+
+#: mast/gtk4/snap/window.py:29
+msgid "Snap is not installed"
+msgstr ""
+
+#: mast/gtk4/snap/window.py:42
+msgid "Snapd service is not running"
+msgstr ""
+
+#: mast/gtk4/snap/window.py:99 mast/qt6/snap/window.py:94
+#, python-brace-format
+msgid "Failed to install Snap: {0}"
+msgstr ""
+
+#: mast/gtk4/snap/window.py:110 mast/qt6/snap/window.py:105
+#, python-brace-format
+msgid "Failed to start Snapd: {0}"
+msgstr ""
 
 #: mast/gtk4/snapshots/__init__.py:16 mast/qt6/snapshots/__init__.py:10
 #: mast/tui/snapshots/__init__.py:12
@@ -2883,15 +3074,15 @@ msgstr "Lisens: {}"
 msgid "About MaST"
 msgstr "Om MaST"
 
-#: mast/qt6/main_window.py:73
+#: mast/qt6/main_window.py:75
 msgid "Help"
 msgstr "Hjelp"
 
-#: mast/qt6/main_window.py:111 mast/tui/main_window.py:109
+#: mast/qt6/main_window.py:113 mast/tui/main_window.py:109
 msgid "Anonymous Usage Analytics"
 msgstr ""
 
-#: mast/qt6/main_window.py:113
+#: mast/qt6/main_window.py:115
 msgid "Enable anonymous usage analytics?\n\n"
 "MaST only collects fully anonymous, minimal usage data, and never shares it with third parties."
 msgstr ""
@@ -2918,6 +3109,10 @@ msgstr "NTP ikke synkronisert"
 msgid "Failed to load NTP status: {0}"
 msgstr "Klarte ikke å laste NTP-status: {0}"
 
+#: mast/qt6/flatpak/__init__.py:10
+msgid "Flatpak Packages"
+msgstr ""
+
 #: mast/qt6/flatpak/package_manager.py:79
 msgid "Installing package..."
 msgstr "Installerer pakke..."
@@ -2942,7 +3137,7 @@ msgstr ""
 msgid "Uninstall Flatpak Runtime"
 msgstr ""
 
-#: mast/qt6/flatpak/window.py:113
+#: mast/qt6/flatpak/window.py:113 mast/qt6/snap/window.py:115
 msgid "Please wait"
 msgstr "Vennligst vent"
 
@@ -3000,6 +3195,10 @@ msgstr ""
 
 #: mast/qt6/repositories/window.py:310 mast/tui/repositories/window.py:183
 msgid "Failed to switch mirrors."
+msgstr ""
+
+#: mast/qt6/snap/window.py:116
+msgid "A Snap operation is still running. Please wait for it to finish."
 msgstr ""
 
 #: mast/qt6/ssh/keys_generate_dialog.py:90
