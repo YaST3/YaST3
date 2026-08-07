@@ -22,6 +22,7 @@ class SnapWindow(QMainWindow):
         central_widget = QWidget()
         self.setCentralWidget(central_widget)
         layout = QVBoxLayout(central_widget)
+        layout.setContentsMargins(0, 0, 0, 0)
 
         self.install_box = QWidget()
         install_layout = QVBoxLayout(self.install_box)
@@ -45,6 +46,7 @@ class SnapWindow(QMainWindow):
 
         self.manage_box = QWidget()
         manage_layout = QVBoxLayout(self.manage_box)
+        manage_layout.setContentsMargins(0, 0, 0, 0)
 
         self.package_manager = SnapPackageManager(self.manage_box)
         manage_layout.addWidget(self.package_manager)
