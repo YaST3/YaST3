@@ -10,7 +10,7 @@ from mast.core.snap.package import install_snap_package, list_snap_packages, sea
 class TestListSnapPackages(unittest.TestCase):
     """Tests for list_snap_packages function."""
 
-    @patch("mast.core.snap.package.shutil.which")
+    @patch("mast.core.snap.snap.shutil.which")
     def test_returns_empty_when_snap_missing(self, mock_which) -> None:
         mock_which.return_value = None
 
@@ -18,10 +18,22 @@ class TestListSnapPackages(unittest.TestCase):
 
         self.assertEqual(packages, [])
 
-    @patch("mast.core.snap.package.subprocess.run")
-    @patch("mast.core.snap.package.shutil.which")
-    def test_parses_installed_packages(self, mock_which, mock_run) -> None:
+    @patch("mast.core.snap.snap.os.path.exists")
+    @patch("mast.core.snap.snap.shutil.which")
+    def test_returns_empty_when_snapd_socket_missing(self, mock_which, mock_exists) -> None:
         mock_which.return_value = "/usr/bin/snap"
+        mock_exists.return_value = False
+
+        packages = list_snap_packages()
+
+        self.assertEqual(packages, [])
+
+    @patch("mast.core.snap.package.subprocess.run")
+    @patch("mast.core.snap.snap.os.path.exists")
+    @patch("mast.core.snap.snap.shutil.which")
+    def test_parses_installed_packages(self, mock_which, mock_exists, mock_run) -> None:
+        mock_which.return_value = "/usr/bin/snap"
+        mock_exists.return_value = True
         mock_run.return_value = CompletedProcess(
             args=["snap", "list"],
             returncode=0,
@@ -46,9 +58,11 @@ class TestSearchSnapPackages(unittest.TestCase):
     """Tests for search_snap_packages function."""
 
     @patch("mast.core.snap.package.subprocess.run")
-    @patch("mast.core.snap.package.shutil.which")
-    def test_parses_search_results(self, mock_which, mock_run) -> None:
+    @patch("mast.core.snap.snap.os.path.exists")
+    @patch("mast.core.snap.snap.shutil.which")
+    def test_parses_search_results(self, mock_which, mock_exists, mock_run) -> None:
         mock_which.return_value = "/usr/bin/snap"
+        mock_exists.return_value = True
         mock_run.return_value = CompletedProcess(
             args=["snap", "find", "firefox"],
             returncode=0,

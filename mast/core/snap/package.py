@@ -3,9 +3,10 @@
 from __future__ import annotations
 
 import re
-import shutil
 import subprocess
 from dataclasses import dataclass
+
+from mast.core.snap.snap import is_snap_installed, is_snapd_running
 
 
 @dataclass
@@ -23,7 +24,7 @@ class SnapPackage:
 
 def list_snap_packages() -> list[SnapPackage]:
     """List installed snap packages."""
-    if not _is_snap_installed():
+    if not (is_snap_installed() and is_snapd_running()):
         return []
 
     result = _run_command(["snap", "list"])
@@ -32,7 +33,7 @@ def list_snap_packages() -> list[SnapPackage]:
 
 def search_snap_packages(query: str = "") -> list[SnapPackage]:
     """Search snap packages from the remote catalog."""
-    if not _is_snap_installed():
+    if not (is_snap_installed() and is_snapd_running()):
         return []
 
     args = ["snap", "find"]
@@ -116,10 +117,6 @@ def _parse_table(output: str, maxsplit: int) -> list[list[str]]:
             rows.append(fields)
 
     return rows
-
-
-def _is_snap_installed() -> bool:
-    return shutil.which("snap") is not None
 
 
 def _run_command(args: list[str], use_pkexec: bool = False) -> subprocess.CompletedProcess[str]:

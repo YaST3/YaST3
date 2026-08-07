@@ -7,10 +7,11 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 from mast.core.i18n import _
-from mast.core.snap import is_snap_installed
+from mast.core.snap import is_snap_installed, is_snapd_running
 from mast.gtk4.snap.install_action import InstallSnapAction
 from mast.gtk4.snap.package_manager import SnapPackageManager
 from mast.gtk4.snap.settings import SnapSettingsTab
+from mast.gtk4.snap.start_snapd_action import StartSnapdAction
 
 
 class SnapWindow(Gtk.ApplicationWindow):
@@ -38,6 +39,19 @@ class SnapWindow(Gtk.ApplicationWindow):
         self.install_box.append(self.install_btn)
         self.main_box.append(self.install_box)
 
+        self.start_snapd_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+        start_snapd_title = Gtk.Label(label=_("Snapd service is not running"))
+        start_snapd_title.set_halign(Gtk.Align.START)
+        self.start_snapd_action = StartSnapdAction(self)
+        self.start_snapd_action.connect_changed(self._sync_start_snapd_action_state)
+        self.start_snapd_action.connect_finished(self._on_start_snapd_finished)
+        self.start_snapd_btn = Gtk.Button(label=self.start_snapd_action.text())
+        self.start_snapd_btn.add_css_class("suggested-action")
+        self.start_snapd_btn.connect("clicked", self.start_snapd_action.trigger)
+        self.start_snapd_box.append(start_snapd_title)
+        self.start_snapd_box.append(self.start_snapd_btn)
+        self.main_box.append(self.start_snapd_box)
+
         self.manage_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         self.notebook = Gtk.Notebook()
         self.package_search_manager = SnapPackageManager(SnapPackageManager.MODE_SEARCH, self)
@@ -54,22 +68,35 @@ class SnapWindow(Gtk.ApplicationWindow):
         self.set_child(self.main_box)
 
         self._sync_install_action_state()
+        self._sync_start_snapd_action_state()
         self._refresh_state()
 
     def _sync_install_action_state(self) -> None:
         self.install_btn.set_label(self.install_action.text())
         self.install_btn.set_sensitive(self.install_action.is_enabled())
 
+    def _sync_start_snapd_action_state(self) -> None:
+        self.start_snapd_btn.set_label(self.start_snapd_action.text())
+        self.start_snapd_btn.set_sensitive(self.start_snapd_action.is_enabled())
+
     def _refresh_state(self) -> None:
-        installed = is_snap_installed()
-        if installed:
-            self.install_box.set_visible(False)
-            self.manage_box.set_visible(True)
-            self.package_search_manager.refresh()
-            self.package_installed_manager.refresh()
-        else:
-            self.manage_box.set_visible(False)
+        if not is_snap_installed():
             self.install_box.set_visible(True)
+            self.start_snapd_box.set_visible(False)
+            self.manage_box.set_visible(False)
+            return
+
+        if not is_snapd_running():
+            self.install_box.set_visible(False)
+            self.start_snapd_box.set_visible(True)
+            self.manage_box.set_visible(False)
+            return
+
+        self.install_box.set_visible(False)
+        self.start_snapd_box.set_visible(False)
+        self.manage_box.set_visible(True)
+        self.package_search_manager.refresh()
+        self.package_installed_manager.refresh()
 
     def _on_install_finished(self, success: bool, error: str, _stdout: str) -> None:
         if success:
@@ -80,6 +107,17 @@ class SnapWindow(Gtk.ApplicationWindow):
                 Gtk.MessageType.ERROR,
                 _("Error"),
                 _("Failed to install Snap: {0}").format(error or _("Unknown error")),
+            )
+
+    def _on_start_snapd_finished(self, success: bool, error: str, _stdout: str) -> None:
+        if success:
+            self._show_message_dialog(Gtk.MessageType.INFO, _("Success"), _("Snapd started successfully."))
+            self._refresh_state()
+        else:
+            self._show_message_dialog(
+                Gtk.MessageType.ERROR,
+                _("Error"),
+                _("Failed to start Snapd: {0}").format(error or _("Unknown error")),
             )
 
     def _show_message_dialog(self, msg_type: Gtk.MessageType, title: str, message: str) -> None:

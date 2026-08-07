@@ -1,5 +1,6 @@
 """Compatibility exports for Snap core helpers."""
 
+import os
 import platform
 import shutil
 
@@ -7,6 +8,16 @@ import shutil
 def is_snap_installed() -> bool:
     """Check whether the snap executable is available."""
     return shutil.which("snap") is not None
+
+
+def is_snapd_running() -> bool:
+    """Check whether the snapd daemon is running and reachable."""
+    return os.path.exists("/run/snapd.socket")
+
+
+def start_snapd_command() -> list[str]:
+    """Return the command to enable and start the snapd service with root permissions."""
+    return ["pkexec", "systemctl", "enable", "--now", "snapd.socket"]
 
 def install_snap_command() -> list[str]:
     """Return the command to install snap using the appropriate package manager with root permissions."""
