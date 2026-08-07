@@ -1,5 +1,9 @@
 # Change Log
 
+## 0.0.28 - 2026-08-07
+
+- feat(snap): added snap module to manage snap packages.
+
 ## 0.0.27 - 2026-08-05
 
 - feat(telemetry): added optional telemetry based on aptabase.

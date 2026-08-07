@@ -15,6 +15,7 @@ from mast.qt6.packages import PackagesModule
 from mast.qt6.proxy import ProxyModule
 from mast.qt6.repositories import RepositoriesModule
 from mast.qt6.services import ServicesModule
+from mast.qt6.snap import SnapModule
 from mast.qt6.snapshots import SnapshotsModule
 from mast.qt6.ssh import SSHClientModule
 from mast.qt6.users import UsersModule
@@ -35,6 +36,7 @@ __all__ = [
     "ProxyModule",
     "RepositoriesModule",
     "ServicesModule",
+    "SnapModule",
     "SnapshotsModule",
     "SSHClientModule",
     "UsersModule",

@@ -1,4 +1,4 @@
-"""Worker object that executes command in a background thread."""
+"""Worker object that executes a command in a background thread."""
 
 from __future__ import annotations
 
