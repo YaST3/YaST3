@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-08-07 17:02+0000\n"
-"PO-Revision-Date: 2026-08-07 17:04\n"
+"PO-Revision-Date: 2026-08-07 17:06\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -3125,7 +3125,7 @@ msgstr "正在卸载运行时……"
 
 #: mast/qt6/flatpak/runtime_manager.py:38
 msgid "Uninstall Runtime"
-msgstr ""
+msgstr "卸载运行时"
 
 #: mast/qt6/flatpak/window.py:113 mast/qt6/snap/window.py:115
 msgid "Please wait"
