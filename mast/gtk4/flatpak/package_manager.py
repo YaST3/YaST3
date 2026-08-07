@@ -239,7 +239,7 @@ class FlatpakPackageManager(Gtk.Box):
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
                 _("Error"),
-                _("Failed to load Flatpak packages: {0}").format(str(e)),
+                _("Failed to load packages: {0}").format(str(e)),
             )
             self.installed_packages = []
             self.installed_app_ids = set()

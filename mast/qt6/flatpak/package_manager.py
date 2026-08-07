@@ -77,7 +77,7 @@ class FlatpakPackageManager(QWidget):
             self.install_action = CommandAction(
                 text=_("Install"),
                 running_text=_("Installing package..."),
-                dialog_title=_("Install Flatpak Package"),
+                dialog_title=_("Install Package"),
                 command=["true"],
                 success_output=_("Package installed successfully."),
                 auto_close_on_success=True,
@@ -91,7 +91,7 @@ class FlatpakPackageManager(QWidget):
             self.uninstall_action = CommandAction(
                 text=_("Uninstall"),
                 running_text=_("Uninstalling package..."),
-                dialog_title=_("Uninstall Flatpak Package"),
+                dialog_title=_("Uninstall Package"),
                 command=["true"],
                 success_output=_("Package uninstalled successfully."),
                 auto_close_on_success=True,
@@ -488,7 +488,7 @@ class FlatpakPackageManager(QWidget):
             self.installed_packages = list_flatpak_packages()
             self.installed_app_ids = {pkg.app_id for pkg in self.installed_packages}
         except Exception as e:
-            QMessageBox.critical(self, _("Error"), _("Failed to load Flatpak packages: {0}").format(str(e)))
+            QMessageBox.critical(self, _("Error"), _("Failed to load packages: {0}").format(str(e)))
             self.installed_packages = []
             self.installed_app_ids = set()
 

@@ -283,7 +283,7 @@ class SnapPackageManager(Gtk.Box):
         self._show_message_dialog(
             Gtk.MessageType.ERROR,
             _("Error"),
-            _("Failed to load Snap packages: {0}").format(error),
+            _("Failed to load packages: {0}").format(error),
         )
         self.installed_packages = []
         self.installed_names = set()
@@ -358,11 +358,11 @@ class SnapPackageManager(Gtk.Box):
             if name:
                 cmd = ["pkexec", "snap", "refresh", name]
                 success_text = _("Package updated successfully.")
-                title = _("Update Snap Package")
+                title = _("Update Package")
             else:
                 cmd = ["pkexec", "snap", "refresh"]
                 success_text = _("All packages updated successfully.")
-                title = _("Update All Snap Packages")
+                title = _("Update All Packages")
             self.action = CommandAction(
                 text=_("Update"),
                 running_text=_("Updating..."),
@@ -377,7 +377,7 @@ class SnapPackageManager(Gtk.Box):
             self.action = CommandAction(
                 text=_("Install") if is_install else _("Uninstall"),
                 running_text=_("Installing...") if is_install else _("Uninstalling..."),
-                dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
+                dialog_title=_("Install Package") if is_install else _("Uninstall Package"),
                 command=["pkexec", "snap", "install" if is_install else "remove", name],
                 success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
                 auto_close_on_success=True,
