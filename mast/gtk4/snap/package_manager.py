@@ -126,7 +126,7 @@ class SnapPackageManager(Gtk.Box):
         controls_row.append(self.filter_combo)
 
         self.search_entry = Gtk.SearchEntry()
-        self.search_entry.set_placeholder_text("firefox")
+        self.search_entry.set_placeholder_text(_("Search"))
         self.search_entry.connect("activate", self._on_search_clicked)
         self.search_entry.set_hexpand(True)
         controls_row.append(self.search_entry)

@@ -132,7 +132,7 @@ class SnapPackageManager(QWidget):
         btn_layout.addWidget(self.filter_combo)
 
         self.search_input = QLineEdit(self)
-        self.search_input.setPlaceholderText("firefox")
+        self.search_input.setPlaceholderText(_("Search"))
         self.search_input.setClearButtonEnabled(True)
         self.search_input.returnPressed.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_input)
