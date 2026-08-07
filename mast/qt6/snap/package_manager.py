@@ -4,8 +4,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from PySide6.QtCore import QObject, QThread, Signal
-from PySide6.QtGui import QIcon
+from PySide6.QtCore import QObject, Qt, QThread, Signal
+from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -35,6 +35,22 @@ def _resolve_icon(names: tuple[str, ...]) -> QIcon | None:
         if not icon.isNull():
             return icon
     return None
+
+
+def _make_verified_icon(size: int = 16) -> QIcon:
+    """Render a green checkmark icon for verified publishers."""
+    pixmap = QPixmap(size, size)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+    pen = QPen(QColor("#22c55e"))
+    pen.setWidth(2)
+    pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+    painter.setPen(pen)
+    painter.drawLine(3, 8, 6, 11)
+    painter.drawLine(6, 11, 13, 4)
+    painter.end()
+    return QIcon(pixmap)
 
 
 class _CatalogWorker(QObject):
@@ -367,11 +383,8 @@ class SnapPackageManager(QWidget):
         """Build the Publisher cell, showing a verified/star marker when applicable."""
         validation = package.publisher_validation
         if validation == "verified":
-            icon = _resolve_icon(("emblem-default", "emblem-ok", "dialog-ok"))
-            text = package.publisher if icon is not None else f"✓ {package.publisher}"
-            item = QTableWidgetItem(text)
-            if icon is not None:
-                item.setIcon(icon)
+            item = QTableWidgetItem(package.publisher)
+            item.setIcon(_make_verified_icon())
             item.setToolTip(_("Verified Account"))
             return item
         if validation == "star-developer":
