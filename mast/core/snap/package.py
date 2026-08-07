@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import time
+import subprocess
 from dataclasses import dataclass
 
 import snap_http
 from snap_http import http as snap_http_http
-from snap_http.types import COMPLETE_STATUSES
 
 from mast.core.snap.snap import is_snap_installed, is_snapd_running
 
@@ -68,44 +67,38 @@ def search_snap_packages(query: str = "") -> list[SnapPackage]:
 
 
 def install_snap_package(name: str) -> None:
-    """Install a snap package."""
+    """Install a snap package via the snap CLI with polkit authentication."""
     normalized_name = name.strip()
     if not normalized_name:
         raise ValueError("Snap package name is required.")
 
-    try:
-        response = snap_http.install(normalized_name)
-        if response.type == "async" and response.change:
-            _wait_for_change(response.change)
-    except snap_http_http.SnapdHttpException as e:
-        raise RuntimeError(_extract_error(e)) from e
+    _run_snap_cli(["snap", "install", normalized_name])
 
 
 def uninstall_snap_package(name: str) -> None:
-    """Uninstall a snap package."""
+    """Uninstall a snap package via the snap CLI with polkit authentication."""
     normalized_name = name.strip()
     if not normalized_name:
         raise ValueError("Snap package name is required.")
 
+    _run_snap_cli(["snap", "remove", normalized_name])
+
+
+def _run_snap_cli(cmd: list[str]) -> None:
+    """Run a snap command with pkexec for polkit authentication."""
     try:
-        response = snap_http.remove(normalized_name)
-        if response.type == "async" and response.change:
-            _wait_for_change(response.change)
-    except snap_http_http.SnapdHttpException as e:
-        raise RuntimeError(_extract_error(e)) from e
+        result = subprocess.run(
+            ["pkexec"] + cmd,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+    except FileNotFoundError as e:
+        raise RuntimeError("pkexec is not available.") from e
 
-
-def _wait_for_change(change_id: str) -> None:
-    """Poll snapd change until it reaches a terminal status."""
-    while True:
-        response = snap_http.check_change(change_id)
-        status = response.result.get("status", "") if isinstance(response.result, dict) else ""
-        if status in COMPLETE_STATUSES:
-            if status != "Done":
-                err = response.result.get("err", "Operation failed") if isinstance(response.result, dict) else "Operation failed"
-                raise RuntimeError(err)
-            return
-        time.sleep(0.5)
+    if result.returncode != 0:
+        error_msg = result.stderr.strip() or result.stdout.strip() or f"Command failed with exit code {result.returncode}"
+        raise RuntimeError(error_msg)
 
 
 def _snap_from_dict(data: dict) -> SnapPackage:

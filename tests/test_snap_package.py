@@ -135,39 +135,31 @@ class TestSearchSnapPackages(unittest.TestCase):
 
 
 class TestSnapPackageCommands(unittest.TestCase):
-    """Tests for install and uninstall via snap_http."""
+    """Tests for install and uninstall via pkexec snap CLI."""
 
-    @patch("mast.core.snap.package.snap_http.check_change")
-    @patch("mast.core.snap.package.snap_http.install")
-    def test_install_calls_snap_http(self, mock_install, mock_check_change) -> None:
-        mock_install.return_value = _make_response(
-            result={"status": "Done"}, type="async", change="change-1"
-        )
-        mock_check_change.return_value = _make_response({"status": "Done"})
+    @patch("mast.core.snap.package.subprocess.run")
+    def test_install_calls_pkexec_snap(self, mock_run) -> None:
+        mock_run.return_value = MagicMock(returncode=0, stdout="", stderr="")
 
         install_snap_package("firefox")
 
-        mock_install.assert_called_once_with("firefox")
+        mock_run.assert_called_once()
+        args = mock_run.call_args[0][0]
+        self.assertEqual(args, ["pkexec", "snap", "install", "firefox"])
 
-    @patch("mast.core.snap.package.snap_http.check_change")
-    @patch("mast.core.snap.package.snap_http.remove")
-    def test_uninstall_calls_snap_http(self, mock_remove, mock_check_change) -> None:
-        mock_remove.return_value = _make_response(
-            result={"status": "Done"}, type="async", change="change-1"
-        )
-        mock_check_change.return_value = _make_response({"status": "Done"})
+    @patch("mast.core.snap.package.subprocess.run")
+    def test_uninstall_calls_pkexec_snap(self, mock_run) -> None:
+        mock_run.return_value = MagicMock(returncode=0, stdout="", stderr="")
 
         uninstall_snap_package("firefox")
 
-        mock_remove.assert_called_once_with("firefox")
+        mock_run.assert_called_once()
+        args = mock_run.call_args[0][0]
+        self.assertEqual(args, ["pkexec", "snap", "remove", "firefox"])
 
-    @patch("mast.core.snap.package.snap_http.check_change")
-    @patch("mast.core.snap.package.snap_http.install")
-    def test_install_raises_on_change_error(self, mock_install, mock_check_change) -> None:
-        mock_install.return_value = _make_response(
-            result={}, type="async", change="change-1"
-        )
-        mock_check_change.return_value = _make_response({"status": "Error", "err": "snap not found"})
+    @patch("mast.core.snap.package.subprocess.run")
+    def test_install_raises_on_failure(self, mock_run) -> None:
+        mock_run.return_value = MagicMock(returncode=1, stdout="", stderr="error: snap not found")
 
         with self.assertRaises(RuntimeError):
             install_snap_package("nonexistent")
