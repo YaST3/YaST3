@@ -49,12 +49,10 @@ class SnapWindow(QMainWindow):
         manage_layout = QVBoxLayout(self.manage_box)
 
         self.tabs = QTabWidget(self.manage_box)
-        self.package_search_manager = SnapPackageManager(SnapPackageManager.MODE_SEARCH, self.tabs)
-        self.package_installed_manager = SnapPackageManager(SnapPackageManager.MODE_INSTALLED, self.tabs)
+        self.package_manager = SnapPackageManager(self.tabs)
         self.settings_tab = SnapSettingsTab(self.tabs)
         self.settings_tab.uninstall_action.action_finished.connect(self._on_uninstall_finished)
-        self.tabs.addTab(self.package_search_manager, _("Search"))
-        self.tabs.addTab(self.package_installed_manager, _("Installed"))
+        self.tabs.addTab(self.package_manager, _("Packages"))
         self.tabs.addTab(self.settings_tab, _("Settings"))
         manage_layout.addWidget(self.tabs)
 
@@ -88,8 +86,7 @@ class SnapWindow(QMainWindow):
         self.install_box.hide()
         self.start_snapd_box.hide()
         self.manage_box.show()
-        self.package_search_manager.refresh()
-        self.package_installed_manager.refresh()
+        self.package_manager.refresh()
 
     def _on_install_finished(self, success: bool, error: str, _stdout: str) -> None:
         if success:

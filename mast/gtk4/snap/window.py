@@ -54,12 +54,10 @@ class SnapWindow(Gtk.ApplicationWindow):
 
         self.manage_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
         self.notebook = Gtk.Notebook()
-        self.package_search_manager = SnapPackageManager(SnapPackageManager.MODE_SEARCH, self)
-        self.package_installed_manager = SnapPackageManager(SnapPackageManager.MODE_INSTALLED, self)
+        self.package_manager = SnapPackageManager(self)
         self.settings_tab = SnapSettingsTab(self)
 
-        self.notebook.append_page(self.package_search_manager, Gtk.Label(label=_("Search")))
-        self.notebook.append_page(self.package_installed_manager, Gtk.Label(label=_("Installed")))
+        self.notebook.append_page(self.package_manager, Gtk.Label(label=_("Packages")))
         self.notebook.append_page(self.settings_tab, Gtk.Label(label=_("Settings")))
 
         self.manage_box.append(self.notebook)
@@ -95,8 +93,7 @@ class SnapWindow(Gtk.ApplicationWindow):
         self.install_box.set_visible(False)
         self.start_snapd_box.set_visible(False)
         self.manage_box.set_visible(True)
-        self.package_search_manager.refresh()
-        self.package_installed_manager.refresh()
+        self.package_manager.refresh()
 
     def _on_install_finished(self, success: bool, error: str, _stdout: str) -> None:
         if success:

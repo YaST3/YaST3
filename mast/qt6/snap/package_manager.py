@@ -6,6 +6,7 @@ from typing import Literal
 
 from PySide6.QtCore import QObject, QThread, Signal
 from PySide6.QtWidgets import (
+    QComboBox,
     QHBoxLayout,
     QHeaderView,
     QLineEdit,
@@ -25,6 +26,10 @@ from mast.core.snap import (
     search_snap_packages,
     uninstall_snap_package,
 )
+
+
+FILTER_ALL: Literal["all"] = "all"
+FILTER_INSTALLED: Literal["installed"] = "installed"
 
 
 class _CatalogWorker(QObject):
@@ -85,20 +90,17 @@ class _SnapActionWorker(QObject):
 
 
 class SnapPackageManager(QWidget):
-    """Manage snap packages in either search or installed mode."""
+    """Manage snap packages with an All/Installed filter."""
 
-    MODE_SEARCH: Literal["search"] = "search"
-    MODE_INSTALLED: Literal["installed"] = "installed"
-
-    def __init__(self, mode: Literal["search", "installed"], parent: QWidget | None = None) -> None:
+    def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
-        self.mode = mode
 
         self.remote_packages: list[SnapPackage] = []
         self.filtered_remote_packages: list[SnapPackage] = []
         self.installed_packages: list[SnapPackage] = []
         self.filtered_installed_packages: list[SnapPackage] = []
         self.installed_names: set[str] = set()
+        self.current_filter: Literal["all", "installed"] = FILTER_ALL
         self.remote_loading = False
         self.catalog_thread: QThread | None = None
         self.catalog_loader: _CatalogWorker | None = None
@@ -110,157 +112,118 @@ class SnapPackageManager(QWidget):
         self.action_worker: _SnapActionWorker | None = None
 
         layout = QVBoxLayout(self)
-
-        if self.mode == self.MODE_SEARCH:
-            self._build_search_layout(layout)
-        else:
-            self._build_installed_layout(layout)
+        self._build_layout(layout)
 
         self._sync_action_buttons()
         self.refresh()
 
-    def _build_search_layout(self, layout: QVBoxLayout) -> None:
+    def _build_layout(self, layout: QVBoxLayout) -> None:
         btn_layout = QHBoxLayout()
 
-        self.install_btn = QPushButton(_("Install"), self)
-        self.install_btn.clicked.connect(self._on_install_triggered)
-        btn_layout.addWidget(self.install_btn)
+        self.primary_btn = QPushButton(_("Install"), self)
+        self.primary_btn.setEnabled(False)
+        self.primary_btn.clicked.connect(self._on_primary_triggered)
+        btn_layout.addWidget(self.primary_btn)
 
         btn_layout.addStretch()
+
+        self.filter_combo = QComboBox(self)
+        self.filter_combo.addItem(_("All"), FILTER_ALL)
+        self.filter_combo.addItem(_("Installed"), FILTER_INSTALLED)
+        self.filter_combo.currentIndexChanged.connect(self._on_filter_changed)
+        btn_layout.addWidget(self.filter_combo)
 
         self.search_input = QLineEdit(self)
         self.search_input.setPlaceholderText("firefox")
-        self.search_input.returnPressed.connect(self.search_remote)
+        self.search_input.returnPressed.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_input)
 
         self.search_btn = QPushButton(_("Search"), self)
-        self.search_btn.clicked.connect(self.search_remote)
+        self.search_btn.clicked.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_btn)
 
         self.reset_btn = QPushButton(_("Reset"), self)
-        self.reset_btn.clicked.connect(self.reset_remote_search)
+        self.reset_btn.clicked.connect(self._on_reset_triggered)
         btn_layout.addWidget(self.reset_btn)
 
-        self.refresh_catalog_btn = QPushButton(_("Refresh"), self)
-        self.refresh_catalog_btn.clicked.connect(self.load_remote_packages)
-        btn_layout.addWidget(self.refresh_catalog_btn)
+        self.refresh_btn = QPushButton(_("Refresh"), self)
+        self.refresh_btn.clicked.connect(self.load_remote_packages)
+        self.refresh_btn.clicked.connect(self.load_installed_packages)
+        btn_layout.addWidget(self.refresh_btn)
 
         layout.addLayout(btn_layout)
 
-        self.search_table = QTableWidget(self)
-        self.search_table.setColumnCount(5)
-        self.search_table.setHorizontalHeaderLabels(
+        self.table = QTableWidget(self)
+        self.table.setColumnCount(5)
+        self.table.setHorizontalHeaderLabels(
             [_("Name"), _("Version"), _("Publisher"), _("Summary"), _("Installed")]
         )
-        self.search_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
-        self.search_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.search_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
-        layout.addWidget(self.search_table)
-
-    def _build_installed_layout(self, layout: QVBoxLayout) -> None:
-        btn_layout = QHBoxLayout()
-
-        self.uninstall_btn = QPushButton(_("Uninstall"), self)
-        self.uninstall_btn.clicked.connect(self._on_uninstall_triggered)
-        btn_layout.addWidget(self.uninstall_btn)
-
-        btn_layout.addStretch()
-
-        self.installed_search_input = QLineEdit(self)
-        self.installed_search_input.setPlaceholderText("firefox")
-        self.installed_search_input.returnPressed.connect(self.search_installed)
-        btn_layout.addWidget(self.installed_search_input)
-
-        self.installed_search_btn = QPushButton(_("Search"), self)
-        self.installed_search_btn.clicked.connect(self.search_installed)
-        btn_layout.addWidget(self.installed_search_btn)
-
-        self.installed_reset_btn = QPushButton(_("Reset"), self)
-        self.installed_reset_btn.clicked.connect(self.reset_installed_search)
-        btn_layout.addWidget(self.installed_reset_btn)
-
-        self.refresh_installed_btn = QPushButton(_("Refresh"), self)
-        self.refresh_installed_btn.clicked.connect(self.load_installed_packages)
-        btn_layout.addWidget(self.refresh_installed_btn)
-
-        layout.addLayout(btn_layout)
-
-        self.installed_table = QTableWidget(self)
-        self.installed_table.setColumnCount(5)
-        self.installed_table.setHorizontalHeaderLabels(
-            [_("Name"), _("Version"), _("Revision"), _("Tracking"), _("Publisher")]
-        )
-        self.installed_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
-        self.installed_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
-        self.installed_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        self.installed_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
-        self.installed_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
-        self.installed_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
-        self.installed_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
-        layout.addWidget(self.installed_table)
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
+        self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
+        self.table.itemSelectionChanged.connect(self._on_selection_changed)
+        layout.addWidget(self.table)
 
     def refresh(self) -> None:
-        if self.mode == self.MODE_SEARCH:
-            self.load_remote_packages()
-            self.load_installed_packages(refresh_search_table=False)
-        else:
-            self.load_installed_packages(refresh_search_table=False)
+        self.load_remote_packages()
+        self.load_installed_packages()
 
     def _sync_action_buttons(self) -> None:
-        if self.mode == self.MODE_SEARCH:
+        is_loading = self.remote_loading or self.installed_loading
+        is_busy = is_loading or self.action_running
+
+        package = self._selected_package()
+        if package is None:
             if self.action_running:
-                self.install_btn.setText(_("Installing..."))
-                self.install_btn.setEnabled(False)
+                pass  # keep current label (Installing... / Uninstalling...)
             else:
-                self.install_btn.setText(_("Install"))
-                self.install_btn.setEnabled(not self.remote_loading and not self.installed_loading)
-            self.search_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
-            self.reset_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
-            self.refresh_catalog_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
-            return
-
-        if self.action_running:
-            self.uninstall_btn.setText(_("Uninstalling..."))
-            self.uninstall_btn.setEnabled(False)
+                self.primary_btn.setText(_("Install"))
+                self.primary_btn.setEnabled(False)
         else:
-            self.uninstall_btn.setText(_("Uninstall"))
-            self.uninstall_btn.setEnabled(not self.installed_loading)
+            is_installed = package.name in self.installed_names
+            if self.action_running:
+                pass  # keep current label
+            elif is_installed:
+                self.primary_btn.setText(_("Uninstall"))
+                self.primary_btn.setEnabled(not is_busy)
+            else:
+                self.primary_btn.setText(_("Install"))
+                self.primary_btn.setEnabled(not is_busy)
 
-    def _set_remote_loading(self, loading: bool) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
+        self.search_btn.setEnabled(not is_busy)
+        self.reset_btn.setEnabled(not is_busy)
+        self.refresh_btn.setEnabled(not is_busy)
+        self.filter_combo.setEnabled(not is_busy)
+        self.refresh_btn.setText(_("Loading...") if is_loading else _("Refresh"))
 
-        self.remote_loading = loading
-        self.refresh_catalog_btn.setText(_("Loading...") if loading or self.installed_loading else _("Refresh"))
+    def _on_selection_changed(self) -> None:
         self._sync_action_buttons()
 
-    def _selected_package_name(self) -> str:
-        if self.mode != self.MODE_SEARCH:
-            return ""
-        row = self.search_table.currentRow()
-        items = self.filtered_remote_packages
+    def _selected_package(self) -> SnapPackage | None:
+        row = self.table.currentRow()
+        items = self._current_items()
         if row < 0 or row >= len(items):
-            return ""
-        return items[row].name
+            return None
+        return items[row]
 
-    def _selected_installed_name(self) -> str:
-        if self.mode != self.MODE_INSTALLED:
-            return ""
-        row = self.installed_table.currentRow()
-        items = self.filtered_installed_packages
-        if row < 0 or row >= len(items):
-            return ""
-        return items[row].name
+    def _current_items(self) -> list[SnapPackage]:
+        if self.current_filter == FILTER_ALL:
+            return self.filtered_remote_packages
+        return self.filtered_installed_packages
 
     def _start_action(self, action: str, name: str) -> None:
         if self.action_thread is not None:
             return
 
         self.action_running = True
+        if action == "install":
+            self.primary_btn.setText(_("Installing..."))
+        else:
+            self.primary_btn.setText(_("Uninstalling..."))
         self._sync_action_buttons()
 
         self.action_thread = QThread(self)
@@ -282,10 +245,10 @@ class SnapPackageManager(QWidget):
             self.refresh()
             return
 
-        if self.mode == self.MODE_SEARCH:
-            QMessageBox.critical(self, _("Error"), _("Failed to install package: {0}").format(error))
-        else:
+        if self._selected_package() and self._selected_package().name in self.installed_names:
             QMessageBox.critical(self, _("Error"), _("Failed to uninstall package: {0}").format(error))
+        else:
+            QMessageBox.critical(self, _("Error"), _("Failed to install package: {0}").format(error))
 
     def _on_action_thread_finished(self) -> None:
         self.action_thread = None
@@ -293,77 +256,52 @@ class SnapPackageManager(QWidget):
         self.action_running = False
         self._sync_action_buttons()
 
-    def _on_install_triggered(self) -> None:
-        if self.mode != self.MODE_SEARCH:
+    def _on_primary_triggered(self) -> None:
+        package = self._selected_package()
+        if package is None:
+            QMessageBox.information(self, _("Information"), _("Please select a package from the list."))
             return
 
-        name = self._selected_package_name()
-        if not name:
-            QMessageBox.information(self, _("Information"), _("Please select a package from the list to install."))
-            return
+        is_installed = package.name in self.installed_names
+        if is_installed:
+            reply = QMessageBox.question(
+                self,
+                _("Confirm"),
+                _("Are you sure you want to uninstall package '{0}'?").format(package.name),
+            )
+            if reply != QMessageBox.StandardButton.Yes:
+                return
+            self._start_action("uninstall", package.name)
+        else:
+            self._start_action("install", package.name)
 
-        if name in self.installed_names:
-            QMessageBox.information(self, _("Information"), _("The selected package is already installed."))
-            return
+    def _on_filter_changed(self, _index: int) -> None:
+        data = self.filter_combo.currentData()
+        if data in (FILTER_ALL, FILTER_INSTALLED):
+            self.current_filter = data  # type: ignore[assignment]
+        self._populate_table()
+        self._sync_action_buttons()
 
-        self._start_action("install", name)
-
-    def _on_uninstall_triggered(self) -> None:
-        if self.mode != self.MODE_INSTALLED:
-            return
-
-        name = self._selected_installed_name()
-        if not name:
-            QMessageBox.information(self, _("Information"), _("Please select an installed package from the list."))
-            return
-
-        reply = QMessageBox.question(
-            self,
-            _("Confirm"),
-            _("Are you sure you want to uninstall package '{0}'?").format(name),
-        )
-        if reply != QMessageBox.StandardButton.Yes:
-            return
-
-        self._start_action("uninstall", name)
-
-    def search_remote(self) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
+    def _on_search_triggered(self) -> None:
         query = self.search_input.text().strip()
-        self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
-        self._populate_search_table()
+        if self.current_filter == FILTER_ALL:
+            self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
+        else:
+            self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
+        self._populate_table()
 
-    def reset_remote_search(self) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
+    def _on_reset_triggered(self) -> None:
         self.search_input.clear()
         self.filtered_remote_packages = list(self.remote_packages)
-        self._populate_search_table()
-
-    def search_installed(self) -> None:
-        if self.mode != self.MODE_INSTALLED:
-            return
-
-        query = self.installed_search_input.text().strip()
-        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
-        self._populate_installed_table()
-
-    def reset_installed_search(self) -> None:
-        if self.mode != self.MODE_INSTALLED:
-            return
-
-        self.installed_search_input.clear()
         self.filtered_installed_packages = list(self.installed_packages)
-        self._populate_installed_table()
+        self._populate_table()
 
     def load_remote_packages(self) -> None:
-        if self.mode != self.MODE_SEARCH or self.catalog_thread is not None:
+        if self.catalog_thread is not None:
             return
 
-        self._set_remote_loading(True)
+        self.remote_loading = True
+        self._sync_action_buttons()
 
         self.catalog_thread = QThread(self)
         self.catalog_loader = _CatalogWorker(self.search_input.text().strip())
@@ -383,32 +321,28 @@ class SnapPackageManager(QWidget):
         self.catalog_thread.start()
 
     def _on_remote_packages_loaded(self, packages: list[SnapPackage]) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
         self.remote_packages = packages
         self.filtered_remote_packages = self._filter_packages(self.remote_packages, self.search_input.text().strip())
-        self._populate_search_table()
+        self._populate_table()
 
     def _on_remote_packages_failed(self, error: str) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
         QMessageBox.critical(self, _("Error"), _("Failed to load package catalog: {0}").format(error))
         self.remote_packages = []
         self.filtered_remote_packages = []
-        self._populate_search_table()
+        self._populate_table()
 
     def _on_remote_loader_finished(self) -> None:
         self.catalog_thread = None
         self.catalog_loader = None
-        self._set_remote_loading(False)
+        self.remote_loading = False
+        self._sync_action_buttons()
 
-    def load_installed_packages(self, refresh_search_table: bool = True) -> None:
+    def load_installed_packages(self) -> None:
         if self.installed_thread is not None:
             return
 
-        self._set_installed_loading(True)
+        self.installed_loading = True
+        self._sync_action_buttons()
 
         self.installed_thread = QThread(self)
         self.installed_loader = _InstalledCatalogWorker()
@@ -427,69 +361,39 @@ class SnapPackageManager(QWidget):
 
         self.installed_thread.start()
 
-    def _set_installed_loading(self, loading: bool) -> None:
-        self.installed_loading = loading
-        if self.mode == self.MODE_INSTALLED:
-            self.refresh_installed_btn.setText(_("Loading...") if loading else _("Refresh"))
-        else:
-            self.refresh_catalog_btn.setText(_("Loading...") if loading or self.remote_loading else _("Refresh"))
-        self._sync_action_buttons()
-
     def _on_installed_packages_loaded(self, packages: list[SnapPackage]) -> None:
         self.installed_packages = packages
         self.installed_names = {pkg.name for pkg in self.installed_packages}
-
-        if self.mode == self.MODE_INSTALLED:
-            self.filtered_installed_packages = self._filter_packages(
-                self.installed_packages,
-                self.installed_search_input.text().strip(),
-            )
-            self._populate_installed_table()
-        else:
-            self._populate_search_table()
+        self.filtered_installed_packages = self._filter_packages(
+            self.installed_packages,
+            self.search_input.text().strip(),
+        )
+        self._populate_table()
 
     def _on_installed_packages_failed(self, error: str) -> None:
         QMessageBox.critical(self, _("Error"), _("Failed to load Snap packages: {0}").format(error))
         self.installed_packages = []
         self.installed_names = set()
-
-        if self.mode == self.MODE_INSTALLED:
-            self.filtered_installed_packages = []
-            self._populate_installed_table()
-        else:
-            self._populate_search_table()
+        self.filtered_installed_packages = []
+        self._populate_table()
 
     def _on_installed_loader_finished(self) -> None:
         self.installed_thread = None
         self.installed_loader = None
-        self._set_installed_loading(False)
+        self.installed_loading = False
+        self._sync_action_buttons()
 
-    def _populate_search_table(self) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
-        items = self.filtered_remote_packages
-        self.search_table.setRowCount(len(items))
+    def _populate_table(self) -> None:
+        items = self._current_items()
+        self.table.setRowCount(len(items))
         for row, package in enumerate(items):
-            self.search_table.setItem(row, 0, QTableWidgetItem(package.name))
-            self.search_table.setItem(row, 1, QTableWidgetItem(package.version))
-            self.search_table.setItem(row, 2, QTableWidgetItem(package.publisher))
-            self.search_table.setItem(row, 3, QTableWidgetItem(package.summary))
+            self.table.setItem(row, 0, QTableWidgetItem(package.name))
+            self.table.setItem(row, 1, QTableWidgetItem(package.version))
+            self.table.setItem(row, 2, QTableWidgetItem(package.publisher))
+            self.table.setItem(row, 3, QTableWidgetItem(package.summary))
             installed_text = _("Yes") if package.name in self.installed_names else _("No")
-            self.search_table.setItem(row, 4, QTableWidgetItem(installed_text))
-
-    def _populate_installed_table(self) -> None:
-        if self.mode != self.MODE_INSTALLED:
-            return
-
-        items = self.filtered_installed_packages
-        self.installed_table.setRowCount(len(items))
-        for row, package in enumerate(items):
-            self.installed_table.setItem(row, 0, QTableWidgetItem(package.name))
-            self.installed_table.setItem(row, 1, QTableWidgetItem(package.version))
-            self.installed_table.setItem(row, 2, QTableWidgetItem(package.revision))
-            self.installed_table.setItem(row, 3, QTableWidgetItem(package.tracking))
-            self.installed_table.setItem(row, 4, QTableWidgetItem(package.publisher))
+            self.table.setItem(row, 4, QTableWidgetItem(installed_text))
+        self._sync_action_buttons()
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()

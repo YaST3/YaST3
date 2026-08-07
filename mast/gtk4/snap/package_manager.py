@@ -16,6 +16,10 @@ from mast.core.i18n import _
 from mast.core.snap import SnapPackage, install_snap_package, list_snap_packages, search_snap_packages, uninstall_snap_package
 
 
+FILTER_ALL: Literal["all"] = "all"
+FILTER_INSTALLED: Literal["installed"] = "installed"
+
+
 class _CatalogWorker(threading.Thread):
     """Worker that loads snap package search results outside the UI thread."""
 
@@ -88,14 +92,10 @@ class _SnapActionWorker(threading.Thread):
 
 
 class SnapPackageManager(Gtk.Box):
-    """Manage snap packages in search or installed mode."""
+    """Manage snap packages with an All/Installed filter."""
 
-    MODE_SEARCH: Literal["search"] = "search"
-    MODE_INSTALLED: Literal["installed"] = "installed"
-
-    def __init__(self, mode: Literal["search", "installed"], parent_window: Gtk.ApplicationWindow, **kwargs):
+    def __init__(self, parent_window: Gtk.ApplicationWindow, **kwargs):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=8, **kwargs)
-        self.mode = mode
         self.parent_window = parent_window
 
         self.remote_packages: list[SnapPackage] = []
@@ -103,6 +103,7 @@ class SnapPackageManager(Gtk.Box):
         self.installed_packages: list[SnapPackage] = []
         self.filtered_installed_packages: list[SnapPackage] = []
         self.installed_names: set[str] = set()
+        self.current_filter: Literal["all", "installed"] = FILTER_ALL
         self.remote_loading = False
         self.remote_loader: _CatalogWorker | None = None
         self.installed_loading = False
@@ -116,15 +117,18 @@ class SnapPackageManager(Gtk.Box):
     def _build_layout(self) -> None:
         controls_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
 
-        if self.mode == self.MODE_SEARCH:
-            self.primary_btn = Gtk.Button(label=_("Install"))
-            self.primary_btn.connect("clicked", self._on_install_clicked)
-        else:
-            self.primary_btn = Gtk.Button(label=_("Uninstall"))
-            self.primary_btn.connect("clicked", self._on_uninstall_clicked)
+        self.primary_btn = Gtk.Button(label=_("Install"))
+        self.primary_btn.connect("clicked", self._on_primary_clicked)
         controls_row.append(self.primary_btn)
 
         controls_row.append(Gtk.Box(hexpand=True))
+
+        self.filter_combo = Gtk.ComboBoxText()
+        self.filter_combo.append(FILTER_ALL, _("All"))
+        self.filter_combo.append(FILTER_INSTALLED, _("Installed"))
+        self.filter_combo.set_active_id(FILTER_ALL)
+        self.filter_combo.connect("changed", self._on_filter_changed)
+        controls_row.append(self.filter_combo)
 
         self.search_entry = Gtk.Entry()
         self.search_entry.set_placeholder_text("firefox")
@@ -149,30 +153,21 @@ class SnapPackageManager(Gtk.Box):
         self._create_table()
 
     def _create_table(self) -> None:
-        if self.mode == self.MODE_SEARCH:
-            self.list_store = Gtk.ListStore(str, str, str, str, str)
-            columns = [
-                (_("Name"), 0),
-                (_("Version"), 1),
-                (_("Publisher"), 2),
-                (_("Summary"), 3),
-                (_("Installed"), 4),
-            ]
-        else:
-            self.list_store = Gtk.ListStore(str, str, str, str, str)
-            columns = [
-                (_("Name"), 0),
-                (_("Version"), 1),
-                (_("Revision"), 2),
-                (_("Tracking"), 3),
-                (_("Publisher"), 4),
-            ]
+        self.list_store = Gtk.ListStore(str, str, str, str, str)
+        columns = [
+            (_("Name"), 0),
+            (_("Version"), 1),
+            (_("Publisher"), 2),
+            (_("Summary"), 3),
+            (_("Installed"), 4),
+        ]
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
         self.tree_view.set_vexpand(True)
         self.selection = self.tree_view.get_selection()
         self.selection.set_mode(Gtk.SelectionMode.SINGLE)
+        self.selection.connect("changed", self._on_selection_changed)
 
         for title, index in columns:
             renderer = Gtk.CellRendererText()
@@ -186,30 +181,25 @@ class SnapPackageManager(Gtk.Box):
         self.append(scrolled)
 
     def refresh(self) -> None:
-        if self.mode == self.MODE_SEARCH:
-            self.load_remote_packages()
-            self.load_installed_packages()
-        else:
-            self.load_installed_packages()
+        self.load_remote_packages()
+        self.load_installed_packages()
 
-    def _set_remote_loading(self, loading: bool) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
-        self.remote_loading = loading
-        is_loading = loading or self.installed_loading
+    def _set_loading(self) -> None:
+        is_loading = self.remote_loading or self.installed_loading
         is_busy = is_loading or self.action_running
         self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
         self.primary_btn.set_sensitive(not is_busy)
         self.search_btn.set_sensitive(not is_busy)
         self.reset_btn.set_sensitive(not is_busy)
         self.refresh_btn.set_sensitive(not is_busy)
+        self.filter_combo.set_sensitive(not is_busy)
 
     def load_remote_packages(self) -> None:
-        if self.mode != self.MODE_SEARCH or self.remote_loader is not None:
+        if self.remote_loader is not None:
             return
 
-        self._set_remote_loading(True)
+        self.remote_loading = True
+        self._set_loading()
         self.remote_loader = _CatalogWorker(
             self.search_entry.get_text().strip(),
             on_loaded=self._on_remote_packages_loaded,
@@ -218,10 +208,6 @@ class SnapPackageManager(Gtk.Box):
         self.remote_loader.start()
 
     def _on_remote_packages_loaded(self, packages: list[SnapPackage]) -> bool:
-        if self.mode != self.MODE_SEARCH:
-            self._on_remote_loader_finished()
-            return False
-
         self.remote_packages = packages
         self.filtered_remote_packages = self._filter_packages(self.remote_packages, self.search_entry.get_text().strip())
         self._populate_table()
@@ -229,10 +215,6 @@ class SnapPackageManager(Gtk.Box):
         return False
 
     def _on_remote_packages_failed(self, error: str) -> bool:
-        if self.mode != self.MODE_SEARCH:
-            self._on_remote_loader_finished()
-            return False
-
         self._show_message_dialog(
             Gtk.MessageType.ERROR,
             _("Error"),
@@ -246,43 +228,29 @@ class SnapPackageManager(Gtk.Box):
 
     def _on_remote_loader_finished(self) -> None:
         self.remote_loader = None
-        self._set_remote_loading(False)
+        self.remote_loading = False
+        self._set_loading()
 
     def load_installed_packages(self, _refresh_current: bool = True) -> None:
         if self.installed_loader is not None:
             return
 
-        self._set_installed_loading(True)
+        self.installed_loading = True
+        self._set_loading()
         self.installed_loader = _InstalledCatalogWorker(
             on_loaded=self._on_installed_packages_loaded,
             on_failed=self._on_installed_packages_failed,
         )
         self.installed_loader.start()
 
-    def _set_installed_loading(self, loading: bool) -> None:
-        self.installed_loading = loading
-        if self.mode == self.MODE_INSTALLED:
-            is_loading = loading
-        else:
-            is_loading = loading or self.remote_loading
-        is_busy = is_loading or self.action_running
-        self.refresh_btn.set_label(_("Loading...") if is_loading else _("Refresh"))
-        self.primary_btn.set_sensitive(not is_busy)
-        self.refresh_btn.set_sensitive(not is_busy)
-
     def _on_installed_packages_loaded(self, packages: list[SnapPackage]) -> bool:
         self.installed_packages = packages
         self.installed_names = {pkg.name for pkg in self.installed_packages}
-
-        if self.mode == self.MODE_INSTALLED:
-            self.filtered_installed_packages = self._filter_packages(
-                self.installed_packages,
-                self.search_entry.get_text().strip(),
-            )
-            self._populate_table()
-        else:
-            self._populate_table()
-
+        self.filtered_installed_packages = self._filter_packages(
+            self.installed_packages,
+            self.search_entry.get_text().strip(),
+        )
+        self._populate_table()
         self._on_installed_loader_finished()
         return False
 
@@ -294,39 +262,57 @@ class SnapPackageManager(Gtk.Box):
         )
         self.installed_packages = []
         self.installed_names = set()
-
-        if self.mode == self.MODE_INSTALLED:
-            self.filtered_installed_packages = []
-            self._populate_table()
-        else:
-            self._populate_table()
-
+        self.filtered_installed_packages = []
+        self._populate_table()
         self._on_installed_loader_finished()
         return False
 
     def _on_installed_loader_finished(self) -> None:
         self.installed_loader = None
-        self._set_installed_loading(False)
+        self.installed_loading = False
+        self._set_loading()
+
+    def _on_filter_changed(self, _combo) -> None:
+        active = self.filter_combo.get_active_id()
+        if active in (FILTER_ALL, FILTER_INSTALLED):
+            self.current_filter = active  # type: ignore[assignment]
+        self._populate_table()
+        self._sync_primary_button()
 
     def _on_search_clicked(self, _widget) -> None:
-        if self.mode == self.MODE_SEARCH:
-            self.load_remote_packages()
-            return
-
         query = self.search_entry.get_text().strip()
-        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
+        if self.current_filter == FILTER_ALL:
+            self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
+        else:
+            self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
         self._populate_table()
 
     def _on_reset_clicked(self, _button: Gtk.Button) -> None:
         self.search_entry.set_text("")
-        if self.mode == self.MODE_SEARCH:
-            self.filtered_remote_packages = list(self.remote_packages)
-        else:
-            self.filtered_installed_packages = list(self.installed_packages)
+        self.filtered_remote_packages = list(self.remote_packages)
+        self.filtered_installed_packages = list(self.installed_packages)
         self._populate_table()
 
     def _on_refresh_clicked(self, _button: Gtk.Button) -> None:
         self.refresh()
+
+    def _on_selection_changed(self, _selection) -> None:
+        self._sync_primary_button()
+
+    def _sync_primary_button(self) -> None:
+        package = self._selected_package()
+        if package is None:
+            self.primary_btn.set_label(_("Install"))
+            if not (self.remote_loading or self.installed_loading or self.action_running):
+                self.primary_btn.set_sensitive(False)
+            return
+
+        is_installed = package.name in self.installed_names
+        if is_installed:
+            self.primary_btn.set_label(_("Uninstall"))
+        else:
+            self.primary_btn.set_label(_("Install"))
+        self.primary_btn.set_sensitive(not (self.remote_loading or self.installed_loading or self.action_running))
 
     def _selected_package(self) -> SnapPackage | None:
         model, tree_iter = self.selection.get_selected()
@@ -341,7 +327,7 @@ class SnapPackageManager(Gtk.Box):
         return None
 
     def _current_items(self) -> list[SnapPackage]:
-        if self.mode == self.MODE_SEARCH:
+        if self.current_filter == FILTER_ALL:
             return self.filtered_remote_packages
         return self.filtered_installed_packages
 
@@ -350,14 +336,11 @@ class SnapPackageManager(Gtk.Box):
             return
 
         self.action_running = True
-        if self.mode == self.MODE_SEARCH:
+        if action == "install":
             self.primary_btn.set_label(_("Installing..."))
         else:
             self.primary_btn.set_label(_("Uninstalling..."))
-        self.primary_btn.set_sensitive(False)
-        self.search_btn.set_sensitive(False)
-        self.reset_btn.set_sensitive(False)
-        self.refresh_btn.set_sensitive(False)
+        self._set_loading()
 
         self.action_worker = _SnapActionWorker(
             action,
@@ -369,66 +352,54 @@ class SnapPackageManager(Gtk.Box):
     def _on_action_finished(self, success: bool, error: str) -> bool:
         self.action_worker = None
         self.action_running = False
-        if self.mode == self.MODE_SEARCH:
-            self.primary_btn.set_label(_("Install"))
-        else:
-            self.primary_btn.set_label(_("Uninstall"))
 
         if success:
             self.refresh()
             return False
 
+        self.primary_btn.set_label(self._default_button_label())
+        self._set_loading()
         self._show_message_dialog(
             Gtk.MessageType.ERROR,
             _("Error"),
-            (_("Failed to install package: {0}") if self.mode == self.MODE_SEARCH
+            (_("Failed to install package: {0}") if self._selected_package() and self._selected_package().name not in self.installed_names
              else _("Failed to uninstall package: {0}")).format(error),
         )
         return False
 
-    def _on_install_clicked(self, _button: Gtk.Button) -> None:
+    def _default_button_label(self) -> str:
+        package = self._selected_package()
+        if package is None:
+            return _("Install")
+        return _("Uninstall") if package.name in self.installed_names else _("Install")
+
+    def _on_primary_clicked(self, _button: Gtk.Button) -> None:
         package = self._selected_package()
         if package is None:
             self._show_message_dialog(
                 Gtk.MessageType.INFO,
                 _("Information"),
-                _("Please select a package from the list to install."),
+                _("Please select a package from the list."),
             )
             return
 
-        if package.name in self.installed_names:
-            self._show_message_dialog(
-                Gtk.MessageType.INFO,
-                _("Information"),
-                _("The selected package is already installed."),
+        is_installed = package.name in self.installed_names
+        if is_installed:
+            confirm_dialog = Gtk.MessageDialog(
+                transient_for=self.parent_window,
+                modal=True,
+                message_type=Gtk.MessageType.QUESTION,
+                buttons=Gtk.ButtonsType.YES_NO,
+                text=_("Confirm"),
             )
-            return
-
-        self._start_action("install", package.name)
-
-    def _on_uninstall_clicked(self, _button: Gtk.Button) -> None:
-        package = self._selected_package()
-        if package is None:
-            self._show_message_dialog(
-                Gtk.MessageType.INFO,
-                _("Information"),
-                _("Please select an installed package from the list."),
+            confirm_dialog.set_property(
+                "secondary-text",
+                _("Are you sure you want to uninstall package '{0}'?").format(package.name),
             )
-            return
-
-        confirm_dialog = Gtk.MessageDialog(
-            transient_for=self.parent_window,
-            modal=True,
-            message_type=Gtk.MessageType.QUESTION,
-            buttons=Gtk.ButtonsType.YES_NO,
-            text=_("Confirm"),
-        )
-        confirm_dialog.set_property(
-            "secondary-text",
-            _("Are you sure you want to uninstall package '{0}'?").format(package.name),
-        )
-        confirm_dialog.connect("response", self._on_uninstall_confirm, package)
-        confirm_dialog.present()
+            confirm_dialog.connect("response", self._on_uninstall_confirm, package)
+            confirm_dialog.present()
+        else:
+            self._start_action("install", package.name)
 
     def _on_uninstall_confirm(self, dialog: Gtk.MessageDialog, response_id: Gtk.ResponseType, package: SnapPackage) -> None:
         dialog.destroy()
@@ -440,27 +411,17 @@ class SnapPackageManager(Gtk.Box):
     def _populate_table(self) -> None:
         self.list_store.clear()
         for package in self._current_items():
-            if self.mode == self.MODE_SEARCH:
-                installed_text = _("Yes") if package.name in self.installed_names else _("No")
-                self.list_store.append(
-                    [
-                        package.name,
-                        package.version,
-                        package.publisher,
-                        package.summary,
-                        installed_text,
-                    ]
-                )
-            else:
-                self.list_store.append(
-                    [
-                        package.name,
-                        package.version,
-                        package.revision,
-                        package.tracking,
-                        package.publisher,
-                    ]
-                )
+            installed_text = _("Yes") if package.name in self.installed_names else _("No")
+            self.list_store.append(
+                [
+                    package.name,
+                    package.version,
+                    package.publisher,
+                    package.summary,
+                    installed_text,
+                ]
+            )
+        self._sync_primary_button()
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()
