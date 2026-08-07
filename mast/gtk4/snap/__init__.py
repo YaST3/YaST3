@@ -13,7 +13,7 @@ from mast.gtk4.snap.window import SnapWindow
 
 class SnapModule(Module):
     def __init__(self):
-        super().__init__(_("Snap"), ("snapd", "package-x-generic"))
+        super().__init__(_("Snap Packages"), ("application-vnd.snap", "package-x-generic"))
 
     def _create_window(self) -> Gtk.Window:
         return SnapWindow()
