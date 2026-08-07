@@ -2,18 +2,15 @@
 
 from __future__ import annotations
 
-import math
 import threading
 from collections.abc import Callable
 from typing import Literal
 
-import cairo
 import gi
 
-gi.require_version("Gdk", "4.0")
 gi.require_version("Gtk", "4.0")
 
-from gi.repository import Gdk, GdkPixbuf, GLib, Gtk
+from gi.repository import GLib, Gtk
 
 from mast.core.i18n import _
 from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
@@ -22,50 +19,6 @@ from mast.gtk4.command.action import CommandAction
 
 FILTER_ALL: Literal["all"] = "all"
 FILTER_INSTALLED: Literal["installed"] = "installed"
-
-
-def _make_verified_pixbuf(size: int = 16) -> GdkPixbuf.Pixbuf:
-    """Render a green checkmark pixbuf for verified publishers."""
-    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
-    ctx = cairo.Context(surface)
-    ctx.set_antialias(cairo.Antialias.SUBPIXEL)
-    ctx.set_line_width(2)
-    ctx.set_line_cap(cairo.LineCap.ROUND)
-    ctx.set_source_rgba(0.133, 0.831, 0.369, 1.0)  # #22c55e
-    ctx.move_to(3, 8)
-    ctx.line_to(6, 11)
-    ctx.line_to(13, 4)
-    ctx.stroke()
-    pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size)
-    assert pixbuf is not None
-    return pixbuf
-
-
-def _make_star_pixbuf(size: int = 16) -> GdkPixbuf.Pixbuf:
-    """Render a gold star pixbuf for star-developer publishers."""
-    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, size, size)
-    ctx = cairo.Context(surface)
-    ctx.set_antialias(cairo.Antialias.SUBPIXEL)
-
-    cx, cy = size / 2, size / 2
-    outer = size * 0.42
-    inner = outer * 0.38
-    points = []
-    for i in range(10):
-        angle = -math.pi / 2 + i * math.pi / 5
-        radius = outer if i % 2 == 0 else inner
-        points.append((cx + radius * math.cos(angle), cy + radius * math.sin(angle)))
-
-    ctx.move_to(*points[0])
-    for px, py in points[1:]:
-        ctx.line_to(px, py)
-    ctx.close_path()
-    ctx.set_source_rgba(1.0, 0.788, 0.149, 1.0)  # #ffc926
-    ctx.fill()
-
-    pixbuf = Gdk.pixbuf_get_from_surface(surface, 0, 0, size, size)
-    assert pixbuf is not None
-    return pixbuf
 
 
 class _CatalogWorker(threading.Thread):
@@ -169,8 +122,6 @@ class SnapPackageManager(Gtk.Box):
 
     def _create_table(self) -> None:
         self.list_store = Gtk.ListStore(str, str, str, str, str, str)
-        self._verified_pixbuf = _make_verified_pixbuf()
-        self._star_pixbuf = _make_star_pixbuf()
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
@@ -438,11 +389,11 @@ class SnapPackageManager(Gtk.Box):
     def _publisher_icon_data_func(self, _column, cell, model, iter, _data=None) -> None:
         validation = model.get_value(iter, 5) if iter is not None else ""
         if validation == "verified":
-            cell.set_property("icon-name", None)
-            cell.set_property("pixbuf", self._verified_pixbuf)
+            cell.set_property("pixbuf", None)
+            cell.set_property("icon-name", "data-success")
         elif validation == "starred":
-            cell.set_property("icon-name", None)
-            cell.set_property("pixbuf", self._star_pixbuf)
+            cell.set_property("pixbuf", None)
+            cell.set_property("icon-name", "preferences-desktop-default-applications")
         else:
             cell.set_property("icon-name", None)
             cell.set_property("pixbuf", None)

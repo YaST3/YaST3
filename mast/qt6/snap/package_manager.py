@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-import math
 from typing import Literal
 
-from PySide6.QtCore import QObject, QPointF, Qt, QThread, Signal
-from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap, QPolygonF
+from PySide6.QtCore import QObject, Qt, QThread, Signal
+from PySide6.QtGui import QIcon, QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -27,45 +26,6 @@ from mast.qt6.command.action import CommandAction
 
 FILTER_ALL: Literal["all"] = "all"
 FILTER_INSTALLED: Literal["installed"] = "installed"
-
-
-def _make_verified_icon(size: int = 16) -> QIcon:
-    """Render a green checkmark icon for verified publishers."""
-    pixmap = QPixmap(size, size)
-    pixmap.fill(Qt.GlobalColor.transparent)
-    painter = QPainter(pixmap)
-    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-    pen = QPen(QColor("#22c55e"))
-    pen.setWidth(2)
-    pen.setCapStyle(Qt.PenCapStyle.RoundCap)
-    painter.setPen(pen)
-    painter.drawLine(3, 8, 6, 11)
-    painter.drawLine(6, 11, 13, 4)
-    painter.end()
-    return QIcon(pixmap)
-
-
-def _make_star_icon(size: int = 16) -> QIcon:
-    """Render a gold star icon for star-developer publishers."""
-    pixmap = QPixmap(size, size)
-    pixmap.fill(Qt.GlobalColor.transparent)
-    painter = QPainter(pixmap)
-    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
-
-    cx, cy = size / 2, size / 2
-    outer = size * 0.42
-    inner = outer * 0.38
-    polygon = QPolygonF()
-    for i in range(10):
-        angle = -math.pi / 2 + i * math.pi / 5
-        radius = outer if i % 2 == 0 else inner
-        polygon.append(QPointF(cx + radius * math.cos(angle), cy + radius * math.sin(angle)))
-
-    painter.setBrush(QColor("#ffc926"))
-    painter.setPen(Qt.PenStyle.NoPen)
-    painter.drawPolygon(polygon)
-    painter.end()
-    return QIcon(pixmap)
 
 
 def _make_transparent_icon(size: int = 16) -> QIcon:
@@ -385,12 +345,12 @@ class SnapPackageManager(QWidget):
         validation = package.publisher_validation
         if validation == "verified":
             item = QTableWidgetItem(package.publisher)
-            item.setIcon(_make_verified_icon())
+            item.setIcon(QIcon.fromTheme("data-success"))
             item.setToolTip(_("Verified Account"))
             return item
         if validation == "starred":
             item = QTableWidgetItem(package.publisher)
-            item.setIcon(_make_star_icon())
+            item.setIcon(QIcon.fromTheme("preferences-desktop-default-applications"))
             item.setToolTip(_("Star Developer"))
             return item
         item = QTableWidgetItem(package.publisher)
