@@ -152,16 +152,15 @@ class SnapPackageManager(QWidget):
         layout.addLayout(btn_layout)
 
         self.search_table = QTableWidget(self)
-        self.search_table.setColumnCount(6)
+        self.search_table.setColumnCount(5)
         self.search_table.setHorizontalHeaderLabels(
-            [_("Name"), _("Version"), _("Publisher"), _("Notes"), _("Summary"), _("Installed")]
+            [_("Name"), _("Version"), _("Publisher"), _("Summary"), _("Installed")]
         )
         self.search_table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         self.search_table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         self.search_table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
-        self.search_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
-        self.search_table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
+        self.search_table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
+        self.search_table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
         self.search_table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.search_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         layout.addWidget(self.search_table)
@@ -517,10 +516,9 @@ class SnapPackageManager(QWidget):
             self.search_table.setItem(row, 0, QTableWidgetItem(package.name))
             self.search_table.setItem(row, 1, QTableWidgetItem(package.version))
             self.search_table.setItem(row, 2, QTableWidgetItem(package.publisher))
-            self.search_table.setItem(row, 3, QTableWidgetItem(package.notes))
-            self.search_table.setItem(row, 4, QTableWidgetItem(package.summary))
+            self.search_table.setItem(row, 3, QTableWidgetItem(package.summary))
             installed_text = _("Yes") if package.name in self.installed_names else _("No")
-            self.search_table.setItem(row, 5, QTableWidgetItem(installed_text))
+            self.search_table.setItem(row, 4, QTableWidgetItem(installed_text))
 
         self._update_search_pager()
 
@@ -605,7 +603,6 @@ class SnapPackageManager(QWidget):
             if normalized_query in package.name.lower()
             or normalized_query in package.version.lower()
             or normalized_query in package.publisher.lower()
-            or normalized_query in package.notes.lower()
             or normalized_query in package.summary.lower()
             or normalized_query in package.revision.lower()
             or normalized_query in package.tracking.lower()

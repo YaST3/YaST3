@@ -167,14 +167,13 @@ class SnapPackageManager(Gtk.Box):
 
     def _create_table(self) -> None:
         if self.mode == self.MODE_SEARCH:
-            self.list_store = Gtk.ListStore(str, str, str, str, str, str)
+            self.list_store = Gtk.ListStore(str, str, str, str, str)
             columns = [
                 (_("Name"), 0),
                 (_("Version"), 1),
                 (_("Publisher"), 2),
-                (_("Notes"), 3),
-                (_("Summary"), 4),
-                (_("Installed"), 5),
+                (_("Summary"), 3),
+                (_("Installed"), 4),
             ]
         else:
             self.list_store = Gtk.ListStore(str, str, str, str, str)
@@ -501,7 +500,6 @@ class SnapPackageManager(Gtk.Box):
                         package.name,
                         package.version,
                         package.publisher,
-                        package.notes,
                         package.summary,
                         installed_text,
                     ]
@@ -545,7 +543,6 @@ class SnapPackageManager(Gtk.Box):
             if normalized_query in package.name.lower()
             or normalized_query in package.version.lower()
             or normalized_query in package.publisher.lower()
-            or normalized_query in package.notes.lower()
             or normalized_query in package.summary.lower()
             or normalized_query in package.revision.lower()
             or normalized_query in package.tracking.lower()

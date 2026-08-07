@@ -21,7 +21,6 @@ class SnapPackage:
     revision: str = ""
     tracking: str = ""
     publisher: str = ""
-    notes: str = ""
     summary: str = ""
 
 
@@ -40,20 +39,31 @@ def list_snap_packages() -> list[SnapPackage]:
 
 
 def search_snap_packages(query: str = "") -> list[SnapPackage]:
-    """Search snap packages from the remote catalog."""
+    """Search snap packages from the remote catalog.
+
+    When *query* is empty, featured snaps from the store are returned
+    (equivalent to ``snap find`` without arguments).
+    """
     if not (is_snap_installed() and is_snapd_running()):
         return []
 
     normalized_query = query.strip()
-    if not normalized_query:
-        return []
 
     try:
-        response = snap_http_http.get("/find", query_params={"q": normalized_query})
+        if normalized_query:
+            raw = snap_http_http._make_request(
+                "/find", "GET", query_params={"q": normalized_query}
+            )
+        else:
+            raw = snap_http_http._make_request(
+                "/find", "GET", query_params={"scope": "wide", "section": "featured"}
+            )
     except snap_http_http.SnapdHttpException as e:
         raise RuntimeError(_extract_error(e)) from e
 
-    result = response.result if isinstance(response.result, list) else []
+    result = raw.get("result", []) if isinstance(raw, dict) else []
+    if not isinstance(result, list):
+        result = []
     return [_snap_from_dict(snap) for snap in result if isinstance(snap, dict)]
 
 
@@ -108,7 +118,6 @@ def _snap_from_dict(data: dict) -> SnapPackage:
         revision=str(data.get("revision", "")),
         tracking=data.get("tracking-channel", ""),
         publisher=publisher,
-        notes="",
         summary=data.get("summary", ""),
     )
 

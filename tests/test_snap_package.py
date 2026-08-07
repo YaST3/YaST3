@@ -74,36 +74,57 @@ class TestListSnapPackages(unittest.TestCase):
 class TestSearchSnapPackages(unittest.TestCase):
     """Tests for search_snap_packages function."""
 
+    @patch("mast.core.snap.package.snap_http_http._make_request")
     @patch("mast.core.snap.snap.os.path.exists")
     @patch("mast.core.snap.snap.shutil.which")
-    def test_returns_empty_when_query_blank(self, mock_which, mock_exists) -> None:
+    def test_loads_featured_when_query_blank(self, mock_which, mock_exists, mock_make_request) -> None:
         mock_which.return_value = "/usr/bin/snap"
         mock_exists.return_value = True
+        mock_make_request.return_value = {
+            "type": "sync",
+            "status-code": 200,
+            "result": [
+                {
+                    "name": "firefox",
+                    "version": "139.0-1",
+                    "publisher": {"display-name": "Mozilla", "username": "mozilla"},
+                    "summary": "Mozilla Firefox web browser",
+                },
+            ],
+        }
 
         packages = search_snap_packages("")
 
-        self.assertEqual(packages, [])
+        self.assertEqual(len(packages), 1)
+        self.assertEqual(packages[0].name, "firefox")
+        mock_make_request.assert_called_once_with(
+            "/find", "GET", query_params={"scope": "wide", "section": "featured"}
+        )
 
-    @patch("mast.core.snap.package.snap_http_http.get")
+    @patch("mast.core.snap.package.snap_http_http._make_request")
     @patch("mast.core.snap.snap.os.path.exists")
     @patch("mast.core.snap.snap.shutil.which")
-    def test_parses_search_results(self, mock_which, mock_exists, mock_get) -> None:
+    def test_parses_search_results(self, mock_which, mock_exists, mock_make_request) -> None:
         mock_which.return_value = "/usr/bin/snap"
         mock_exists.return_value = True
-        mock_get.return_value = _make_response([
-            {
-                "name": "firefox",
-                "version": "139.0-1",
-                "publisher": {"display-name": "Mozilla", "username": "mozilla"},
-                "summary": "Mozilla Firefox web browser",
-            },
-            {
-                "name": "floorp",
-                "version": "11.30.0",
-                "publisher": {"display-name": "Floorp", "username": "floorp"},
-                "summary": "Privacy-focused Firefox fork",
-            },
-        ])
+        mock_make_request.return_value = {
+            "type": "sync",
+            "status-code": 200,
+            "result": [
+                {
+                    "name": "firefox",
+                    "version": "139.0-1",
+                    "publisher": {"display-name": "Mozilla", "username": "mozilla"},
+                    "summary": "Mozilla Firefox web browser",
+                },
+                {
+                    "name": "floorp",
+                    "version": "11.30.0",
+                    "publisher": {"display-name": "Floorp", "username": "floorp"},
+                    "summary": "Privacy-focused Firefox fork",
+                },
+            ],
+        }
 
         packages = search_snap_packages("firefox")
 
