@@ -2,10 +2,11 @@
 
 from __future__ import annotations
 
+import math
 from typing import Literal
 
-from PySide6.QtCore import QObject, Qt, QThread, Signal
-from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap
+from PySide6.QtCore import QObject, QPointF, Qt, QThread, Signal
+from PySide6.QtGui import QColor, QIcon, QPainter, QPen, QPixmap, QPolygonF
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -28,15 +29,6 @@ FILTER_ALL: Literal["all"] = "all"
 FILTER_INSTALLED: Literal["installed"] = "installed"
 
 
-def _resolve_icon(names: tuple[str, ...]) -> QIcon | None:
-    """Return the first available themed icon from *names*, or ``None``."""
-    for name in names:
-        icon = QIcon.fromTheme(name)
-        if not icon.isNull():
-            return icon
-    return None
-
-
 def _make_verified_icon(size: int = 16) -> QIcon:
     """Render a green checkmark icon for verified publishers."""
     pixmap = QPixmap(size, size)
@@ -49,6 +41,29 @@ def _make_verified_icon(size: int = 16) -> QIcon:
     painter.setPen(pen)
     painter.drawLine(3, 8, 6, 11)
     painter.drawLine(6, 11, 13, 4)
+    painter.end()
+    return QIcon(pixmap)
+
+
+def _make_star_icon(size: int = 16) -> QIcon:
+    """Render a gold star icon for star-developer publishers."""
+    pixmap = QPixmap(size, size)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    painter = QPainter(pixmap)
+    painter.setRenderHint(QPainter.RenderHint.Antialiasing)
+
+    cx, cy = size / 2, size / 2
+    outer = size * 0.42
+    inner = outer * 0.38
+    polygon = QPolygonF()
+    for i in range(10):
+        angle = -math.pi / 2 + i * math.pi / 5
+        radius = outer if i % 2 == 0 else inner
+        polygon.append(QPointF(cx + radius * math.cos(angle), cy + radius * math.sin(angle)))
+
+    painter.setBrush(QColor("#ffc926"))
+    painter.setPen(Qt.PenStyle.NoPen)
+    painter.drawPolygon(polygon)
     painter.end()
     return QIcon(pixmap)
 
@@ -366,12 +381,9 @@ class SnapPackageManager(QWidget):
             item.setIcon(_make_verified_icon())
             item.setToolTip(_("Verified Account"))
             return item
-        if validation == "star-developer":
-            icon = _resolve_icon(("starred", "star", "emblem-favorite"))
-            text = package.publisher if icon is not None else f"★ {package.publisher}"
-            item = QTableWidgetItem(text)
-            if icon is not None:
-                item.setIcon(icon)
+        if validation == "starred":
+            item = QTableWidgetItem(package.publisher)
+            item.setIcon(_make_star_icon())
             item.setToolTip(_("Star Developer"))
             return item
         return QTableWidgetItem(package.publisher)
