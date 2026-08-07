@@ -35,7 +35,7 @@ class FlatpakRuntimeManager(QWidget):
         self.uninstall_action = CommandAction(
             text=_("Uninstall"),
             running_text=_("Uninstalling runtime..."),
-            dialog_title=_("Uninstall Flatpak Runtime"),
+            dialog_title=_("Uninstall Runtime"),
             command=["true"],
             success_output=_("Runtime uninstalled successfully."),
             auto_close_on_success=True,
@@ -157,7 +157,7 @@ class FlatpakRuntimeManager(QWidget):
         try:
             self.runtimes = list_flatpak_runtimes()
         except Exception as e:
-            QMessageBox.critical(self, _("Error"), _("Failed to load Flatpak runtimes: {0}").format(str(e)))
+            QMessageBox.critical(self, _("Error"), _("Failed to load runtimes: {0}").format(str(e)))
             self.runtimes = []
 
         self.filtered_runtimes = self._filter_runtimes(self.runtimes, self.search_input.text().strip())

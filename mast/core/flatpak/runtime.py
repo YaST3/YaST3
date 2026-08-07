@@ -76,7 +76,7 @@ def uninstall_flatpak_runtime(runtime_id: str, scope: Literal["system", "user"] 
     """Uninstall a Flatpak runtime."""
     normalized_runtime = runtime_id.strip()
     if not normalized_runtime:
-        raise ValueError("Flatpak runtime id is required.")
+        raise ValueError("Runtime id is required.")
 
     args = ["flatpak", "uninstall", "-y", f"--{scope}", normalized_runtime]
     _run_command(args, use_pkexec=scope == "system")

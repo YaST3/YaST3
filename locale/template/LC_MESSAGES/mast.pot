@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-07 16:48+0000\n"
+"POT-Creation-Date: 2026-08-07 17:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1312,7 +1312,7 @@ msgstr ""
 #: mast/gtk4/flatpak/runtime_manager.py:91
 #: mast/qt6/flatpak/runtime_manager.py:160
 #, python-brace-format
-msgid "Failed to load Flatpak runtimes: {0}"
+msgid "Failed to load runtimes: {0}"
 msgstr ""
 
 #: mast/gtk4/flatpak/runtime_manager.py:115
@@ -3145,7 +3145,7 @@ msgid "Uninstalling runtime..."
 msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:38
-msgid "Uninstall Flatpak Runtime"
+msgid "Uninstall Runtime"
 msgstr ""
 
 #: mast/qt6/flatpak/window.py:113 mast/qt6/snap/window.py:115

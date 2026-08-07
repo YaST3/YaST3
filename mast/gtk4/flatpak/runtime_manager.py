@@ -88,7 +88,7 @@ class FlatpakRuntimeManager(Gtk.Box):
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
                 _("Error"),
-                _("Failed to load Flatpak runtimes: {0}").format(str(e)),
+                _("Failed to load runtimes: {0}").format(str(e)),
             )
             self.runtimes = []
 
