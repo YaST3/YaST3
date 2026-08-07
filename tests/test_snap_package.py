@@ -1,10 +1,18 @@
 """Unit tests for Snap package management core logic."""
 
 import unittest
-from subprocess import CompletedProcess
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 
 from mast.core.snap.package import install_snap_package, list_snap_packages, search_snap_packages, uninstall_snap_package
+
+
+def _make_response(result, *, type="sync", change=None):
+    """Create a mock SnapdResponse-like object."""
+    resp = MagicMock()
+    resp.type = type
+    resp.result = result
+    resp.change = change
+    return resp
 
 
 class TestListSnapPackages(unittest.TestCase):
@@ -28,22 +36,30 @@ class TestListSnapPackages(unittest.TestCase):
 
         self.assertEqual(packages, [])
 
-    @patch("mast.core.snap.package.subprocess.run")
+    @patch("mast.core.snap.package.snap_http.list")
     @patch("mast.core.snap.snap.os.path.exists")
     @patch("mast.core.snap.snap.shutil.which")
-    def test_parses_installed_packages(self, mock_which, mock_exists, mock_run) -> None:
+    def test_parses_installed_packages(self, mock_which, mock_exists, mock_list) -> None:
         mock_which.return_value = "/usr/bin/snap"
         mock_exists.return_value = True
-        mock_run.return_value = CompletedProcess(
-            args=["snap", "list"],
-            returncode=0,
-            stdout=(
-                "Name               Version    Rev   Tracking       Publisher   Notes\n"
-                "bare               1.0        5     latest/stable  canonical**  base\n"
-                "firefox            139.0-1    6091  latest/stable  mozilla**   -\n"
-            ),
-            stderr="",
-        )
+        mock_list.return_value = _make_response([
+            {
+                "name": "bare",
+                "version": "1.0",
+                "revision": "5",
+                "tracking-channel": "latest/stable",
+                "publisher": {"display-name": "Canonical", "username": "canonical"},
+                "summary": "",
+            },
+            {
+                "name": "firefox",
+                "version": "139.0-1",
+                "revision": "6091",
+                "tracking-channel": "latest/stable",
+                "publisher": {"display-name": "Mozilla", "username": "mozilla"},
+                "summary": "Mozilla Firefox web browser",
+            },
+        ])
 
         packages = list_snap_packages()
 
@@ -52,62 +68,88 @@ class TestListSnapPackages(unittest.TestCase):
         self.assertEqual(packages[0].tracking, "latest/stable")
         self.assertEqual(packages[1].name, "firefox")
         self.assertEqual(packages[1].revision, "6091")
+        self.assertEqual(packages[1].publisher, "Mozilla")
 
 
 class TestSearchSnapPackages(unittest.TestCase):
     """Tests for search_snap_packages function."""
 
-    @patch("mast.core.snap.package.subprocess.run")
     @patch("mast.core.snap.snap.os.path.exists")
     @patch("mast.core.snap.snap.shutil.which")
-    def test_parses_search_results(self, mock_which, mock_exists, mock_run) -> None:
+    def test_returns_empty_when_query_blank(self, mock_which, mock_exists) -> None:
         mock_which.return_value = "/usr/bin/snap"
         mock_exists.return_value = True
-        mock_run.return_value = CompletedProcess(
-            args=["snap", "find", "firefox"],
-            returncode=0,
-            stdout=(
-                "Name       Version    Publisher   Notes  Summary\n"
-                "firefox    139.0-1    mozilla**   -      Mozilla Firefox web browser\n"
-                "floorp     11.30.0    floorp**    -      Privacy-focused Firefox fork\n"
-            ),
-            stderr="",
-        )
+
+        packages = search_snap_packages("")
+
+        self.assertEqual(packages, [])
+
+    @patch("mast.core.snap.package.snap_http_http.get")
+    @patch("mast.core.snap.snap.os.path.exists")
+    @patch("mast.core.snap.snap.shutil.which")
+    def test_parses_search_results(self, mock_which, mock_exists, mock_get) -> None:
+        mock_which.return_value = "/usr/bin/snap"
+        mock_exists.return_value = True
+        mock_get.return_value = _make_response([
+            {
+                "name": "firefox",
+                "version": "139.0-1",
+                "publisher": {"display-name": "Mozilla", "username": "mozilla"},
+                "summary": "Mozilla Firefox web browser",
+            },
+            {
+                "name": "floorp",
+                "version": "11.30.0",
+                "publisher": {"display-name": "Floorp", "username": "floorp"},
+                "summary": "Privacy-focused Firefox fork",
+            },
+        ])
 
         packages = search_snap_packages("firefox")
 
         self.assertEqual(len(packages), 2)
         self.assertEqual(packages[0].name, "firefox")
         self.assertEqual(packages[0].summary, "Mozilla Firefox web browser")
-        self.assertEqual(packages[1].publisher, "floorp**")
+        self.assertEqual(packages[1].publisher, "Floorp")
 
 
 class TestSnapPackageCommands(unittest.TestCase):
-    """Tests for install and uninstall command execution."""
+    """Tests for install and uninstall via snap_http."""
 
-    @patch("mast.core.snap.package.subprocess.run")
-    def test_install_uses_pkexec(self, mock_run) -> None:
-        mock_run.return_value = CompletedProcess(args=[], returncode=0, stdout="", stderr="")
+    @patch("mast.core.snap.package.snap_http.check_change")
+    @patch("mast.core.snap.package.snap_http.install")
+    def test_install_calls_snap_http(self, mock_install, mock_check_change) -> None:
+        mock_install.return_value = _make_response(
+            result={"status": "Done"}, type="async", change="change-1"
+        )
+        mock_check_change.return_value = _make_response({"status": "Done"})
 
         install_snap_package("firefox")
 
-        mock_run.assert_called_once_with(
-            ["pkexec", "snap", "install", "firefox"],
-            capture_output=True,
-            text=True,
-        )
+        mock_install.assert_called_once_with("firefox")
 
-    @patch("mast.core.snap.package.subprocess.run")
-    def test_uninstall_uses_pkexec(self, mock_run) -> None:
-        mock_run.return_value = CompletedProcess(args=[], returncode=0, stdout="", stderr="")
+    @patch("mast.core.snap.package.snap_http.check_change")
+    @patch("mast.core.snap.package.snap_http.remove")
+    def test_uninstall_calls_snap_http(self, mock_remove, mock_check_change) -> None:
+        mock_remove.return_value = _make_response(
+            result={"status": "Done"}, type="async", change="change-1"
+        )
+        mock_check_change.return_value = _make_response({"status": "Done"})
 
         uninstall_snap_package("firefox")
 
-        mock_run.assert_called_once_with(
-            ["pkexec", "snap", "remove", "firefox"],
-            capture_output=True,
-            text=True,
+        mock_remove.assert_called_once_with("firefox")
+
+    @patch("mast.core.snap.package.snap_http.check_change")
+    @patch("mast.core.snap.package.snap_http.install")
+    def test_install_raises_on_change_error(self, mock_install, mock_check_change) -> None:
+        mock_install.return_value = _make_response(
+            result={}, type="async", change="change-1"
         )
+        mock_check_change.return_value = _make_response({"status": "Error", "err": "snap not found"})
+
+        with self.assertRaises(RuntimeError):
+            install_snap_package("nonexistent")
 
 
 if __name__ == "__main__":

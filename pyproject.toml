@@ -18,6 +18,7 @@ dependencies = [
     "adbutils>=2.10.2",
     "aptabase>=0.1.0",
     "retry>=0.9.2",
+    "snap-http>=1.12.0",
 ]
 classifiers = [
     "Environment :: X11 Applications :: Qt",

@@ -19,8 +19,13 @@ from PySide6.QtWidgets import (
 )
 
 from mast.core.i18n import _
-from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
-from mast.qt6.command.action import CommandAction
+from mast.core.snap import (
+    SnapPackage,
+    install_snap_package,
+    list_snap_packages,
+    search_snap_packages,
+    uninstall_snap_package,
+)
 
 
 class _CatalogWorker(QObject):
@@ -59,6 +64,27 @@ class _InstalledCatalogWorker(QObject):
         self.loaded.emit(packages)
 
 
+class _SnapActionWorker(QObject):
+    """Worker that installs or uninstalls a snap package outside the UI thread."""
+
+    finished = Signal(bool, str)
+
+    def __init__(self, action: str, name: str) -> None:
+        super().__init__()
+        self.action = action
+        self.name = name
+
+    def run(self) -> None:
+        try:
+            if self.action == "install":
+                install_snap_package(self.name)
+            else:
+                uninstall_snap_package(self.name)
+            self.finished.emit(True, "")
+        except Exception as e:
+            self.finished.emit(False, str(e))
+
+
 class SnapPackageManager(QWidget):
     """Manage snap packages in either search or installed mode."""
 
@@ -83,36 +109,15 @@ class SnapPackageManager(QWidget):
         self.installed_loading = False
         self.installed_thread: QThread | None = None
         self.installed_loader: _InstalledCatalogWorker | None = None
+        self.action_running = False
+        self.action_thread: QThread | None = None
+        self.action_worker: _SnapActionWorker | None = None
 
         layout = QVBoxLayout(self)
 
         if self.mode == self.MODE_SEARCH:
-            self.install_action = CommandAction(
-                text=_("Install"),
-                running_text=_("Installing package..."),
-                dialog_title=_("Install Snap Package"),
-                command=["true"],
-                success_output=_("Package installed successfully."),
-                auto_close_on_success=True,
-                parent=self,
-            )
-            self.install_action.triggered.disconnect(self.install_action.start_action)
-            self.install_action.triggered.connect(self._on_install_triggered)
-            self.install_action.action_finished.connect(self._on_install_finished)
             self._build_search_layout(layout)
         else:
-            self.uninstall_action = CommandAction(
-                text=_("Uninstall"),
-                running_text=_("Uninstalling package..."),
-                dialog_title=_("Uninstall Snap Package"),
-                command=["true"],
-                success_output=_("Package uninstalled successfully."),
-                auto_close_on_success=True,
-                parent=self,
-            )
-            self.uninstall_action.triggered.disconnect(self.uninstall_action.start_action)
-            self.uninstall_action.triggered.connect(self._on_uninstall_triggered)
-            self.uninstall_action.action_finished.connect(self._on_uninstall_finished)
             self._build_installed_layout(layout)
 
         self._sync_action_buttons()
@@ -121,9 +126,8 @@ class SnapPackageManager(QWidget):
     def _build_search_layout(self, layout: QVBoxLayout) -> None:
         btn_layout = QHBoxLayout()
 
-        self.install_btn = QPushButton(self.install_action.text(), self)
-        self.install_btn.clicked.connect(self.install_action.trigger)
-        self.install_action.changed.connect(self._sync_action_buttons)
+        self.install_btn = QPushButton(_("Install"), self)
+        self.install_btn.clicked.connect(self._on_install_triggered)
         btn_layout.addWidget(self.install_btn)
 
         btn_layout.addStretch()
@@ -180,9 +184,8 @@ class SnapPackageManager(QWidget):
     def _build_installed_layout(self, layout: QVBoxLayout) -> None:
         btn_layout = QHBoxLayout()
 
-        self.uninstall_btn = QPushButton(self.uninstall_action.text(), self)
-        self.uninstall_btn.clicked.connect(self.uninstall_action.trigger)
-        self.uninstall_action.changed.connect(self._sync_action_buttons)
+        self.uninstall_btn = QPushButton(_("Uninstall"), self)
+        self.uninstall_btn.clicked.connect(self._on_uninstall_triggered)
         btn_layout.addWidget(self.uninstall_btn)
 
         btn_layout.addStretch()
@@ -244,15 +247,23 @@ class SnapPackageManager(QWidget):
 
     def _sync_action_buttons(self) -> None:
         if self.mode == self.MODE_SEARCH:
-            self.install_btn.setText(self.install_action.text())
-            self.install_btn.setEnabled(self.install_action.isEnabled() and not self.remote_loading and not self.installed_loading)
-            self.search_btn.setEnabled(not self.remote_loading and not self.installed_loading)
-            self.reset_btn.setEnabled(not self.remote_loading and not self.installed_loading)
-            self.refresh_catalog_btn.setEnabled(not self.remote_loading and not self.installed_loading)
+            if self.action_running:
+                self.install_btn.setText(_("Installing..."))
+                self.install_btn.setEnabled(False)
+            else:
+                self.install_btn.setText(_("Install"))
+                self.install_btn.setEnabled(not self.remote_loading and not self.installed_loading)
+            self.search_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
+            self.reset_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
+            self.refresh_catalog_btn.setEnabled(not self.remote_loading and not self.installed_loading and not self.action_running)
             return
 
-        self.uninstall_btn.setText(self.uninstall_action.text())
-        self.uninstall_btn.setEnabled(self.uninstall_action.isEnabled() and not self.installed_loading)
+        if self.action_running:
+            self.uninstall_btn.setText(_("Uninstalling..."))
+            self.uninstall_btn.setEnabled(False)
+        else:
+            self.uninstall_btn.setText(_("Uninstall"))
+            self.uninstall_btn.setEnabled(not self.installed_loading)
 
     def _set_remote_loading(self, loading: bool) -> None:
         if self.mode != self.MODE_SEARCH:
@@ -280,11 +291,42 @@ class SnapPackageManager(QWidget):
             return ""
         return page_items[row].name
 
-    def _build_install_command(self, name: str) -> list[str]:
-        return ["pkexec", "snap", "install", name]
+    def _start_action(self, action: str, name: str) -> None:
+        if self.action_thread is not None:
+            return
 
-    def _build_uninstall_command(self, name: str) -> list[str]:
-        return ["pkexec", "snap", "remove", name]
+        self.action_running = True
+        self._sync_action_buttons()
+
+        self.action_thread = QThread(self)
+        self.action_worker = _SnapActionWorker(action, name)
+        self.action_worker.moveToThread(self.action_thread)
+
+        self.action_thread.started.connect(self.action_worker.run)
+        self.action_worker.finished.connect(self._on_action_finished)
+
+        self.action_worker.finished.connect(self.action_thread.quit)
+        self.action_worker.finished.connect(self.action_worker.deleteLater)
+        self.action_thread.finished.connect(self.action_thread.deleteLater)
+        self.action_thread.finished.connect(self._on_action_thread_finished)
+
+        self.action_thread.start()
+
+    def _on_action_finished(self, success: bool, error: str) -> None:
+        if success:
+            self.refresh()
+            return
+
+        if self.mode == self.MODE_SEARCH:
+            QMessageBox.critical(self, _("Error"), _("Failed to install package: {0}").format(error))
+        else:
+            QMessageBox.critical(self, _("Error"), _("Failed to uninstall package: {0}").format(error))
+
+    def _on_action_thread_finished(self) -> None:
+        self.action_thread = None
+        self.action_worker = None
+        self.action_running = False
+        self._sync_action_buttons()
 
     def _on_install_triggered(self) -> None:
         if self.mode != self.MODE_SEARCH:
@@ -299,8 +341,7 @@ class SnapPackageManager(QWidget):
             QMessageBox.information(self, _("Information"), _("The selected package is already installed."))
             return
 
-        self.install_action.command = self._build_install_command(name)
-        self.install_action.start_action()
+        self._start_action("install", name)
 
     def _on_uninstall_triggered(self) -> None:
         if self.mode != self.MODE_INSTALLED:
@@ -319,30 +360,7 @@ class SnapPackageManager(QWidget):
         if reply != QMessageBox.StandardButton.Yes:
             return
 
-        self.uninstall_action.command = self._build_uninstall_command(name)
-        self.uninstall_action.start_action()
-
-    def _on_install_finished(self, success: bool, error: str, _stdout: str) -> None:
-        if self.mode != self.MODE_SEARCH:
-            return
-
-        if success:
-            self.refresh()
-            return
-
-        if error:
-            QMessageBox.critical(self, _("Error"), _("Failed to install package: {0}").format(error))
-
-    def _on_uninstall_finished(self, success: bool, error: str, _stdout: str) -> None:
-        if self.mode != self.MODE_INSTALLED:
-            return
-
-        if success:
-            self.refresh()
-            return
-
-        if error:
-            QMessageBox.critical(self, _("Error"), _("Failed to uninstall package: {0}").format(error))
+        self._start_action("uninstall", name)
 
     def search_remote(self) -> None:
         if self.mode != self.MODE_SEARCH:

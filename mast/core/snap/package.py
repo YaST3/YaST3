@@ -2,9 +2,12 @@
 
 from __future__ import annotations
 
-import re
-import subprocess
+import time
 from dataclasses import dataclass
+
+import snap_http
+from snap_http import http as snap_http_http
+from snap_http.types import COMPLETE_STATUSES
 
 from mast.core.snap.snap import is_snap_installed, is_snapd_running
 
@@ -27,8 +30,13 @@ def list_snap_packages() -> list[SnapPackage]:
     if not (is_snap_installed() and is_snapd_running()):
         return []
 
-    result = _run_command(["snap", "list"])
-    return _parse_installed_packages(result.stdout)
+    try:
+        response = snap_http.list()
+    except snap_http_http.SnapdHttpException as e:
+        raise RuntimeError(_extract_error(e)) from e
+
+    result = response.result if isinstance(response.result, list) else []
+    return [_snap_from_dict(snap) for snap in result if isinstance(snap, dict)]
 
 
 def search_snap_packages(query: str = "") -> list[SnapPackage]:
@@ -36,13 +44,17 @@ def search_snap_packages(query: str = "") -> list[SnapPackage]:
     if not (is_snap_installed() and is_snapd_running()):
         return []
 
-    args = ["snap", "find"]
     normalized_query = query.strip()
-    if normalized_query:
-        args.append(normalized_query)
+    if not normalized_query:
+        return []
 
-    result = _run_command(args)
-    return _parse_search_packages(result.stdout)
+    try:
+        response = snap_http_http.get("/find", query_params={"q": normalized_query})
+    except snap_http_http.SnapdHttpException as e:
+        raise RuntimeError(_extract_error(e)) from e
+
+    result = response.result if isinstance(response.result, list) else []
+    return [_snap_from_dict(snap) for snap in result if isinstance(snap, dict)]
 
 
 def install_snap_package(name: str) -> None:
@@ -51,7 +63,12 @@ def install_snap_package(name: str) -> None:
     if not normalized_name:
         raise ValueError("Snap package name is required.")
 
-    _run_command(["snap", "install", normalized_name], use_pkexec=True)
+    try:
+        response = snap_http.install(normalized_name)
+        if response.type == "async" and response.change:
+            _wait_for_change(response.change)
+    except snap_http_http.SnapdHttpException as e:
+        raise RuntimeError(_extract_error(e)) from e
 
 
 def uninstall_snap_package(name: str) -> None:
@@ -60,69 +77,46 @@ def uninstall_snap_package(name: str) -> None:
     if not normalized_name:
         raise ValueError("Snap package name is required.")
 
-    _run_command(["snap", "remove", normalized_name], use_pkexec=True)
+    try:
+        response = snap_http.remove(normalized_name)
+        if response.type == "async" and response.change:
+            _wait_for_change(response.change)
+    except snap_http_http.SnapdHttpException as e:
+        raise RuntimeError(_extract_error(e)) from e
 
 
-def _parse_installed_packages(output: str) -> list[SnapPackage]:
-    packages: list[SnapPackage] = []
-    for fields in _parse_table(output, maxsplit=5):
-        if len(fields) < 6:
-            continue
-        packages.append(
-            SnapPackage(
-                name=fields[0],
-                version=fields[1],
-                revision=fields[2],
-                tracking=fields[3],
-                publisher=fields[4],
-                notes=fields[5],
-            )
-        )
-    return packages
+def _wait_for_change(change_id: str) -> None:
+    """Poll snapd change until it reaches a terminal status."""
+    while True:
+        response = snap_http.check_change(change_id)
+        status = response.result.get("status", "") if isinstance(response.result, dict) else ""
+        if status in COMPLETE_STATUSES:
+            if status != "Done":
+                err = response.result.get("err", "Operation failed") if isinstance(response.result, dict) else "Operation failed"
+                raise RuntimeError(err)
+            return
+        time.sleep(0.5)
 
 
-def _parse_search_packages(output: str) -> list[SnapPackage]:
-    packages: list[SnapPackage] = []
-    for fields in _parse_table(output, maxsplit=4):
-        if len(fields) < 5:
-            continue
-        packages.append(
-            SnapPackage(
-                name=fields[0],
-                version=fields[1],
-                publisher=fields[2],
-                notes=fields[3],
-                summary=fields[4],
-            )
-        )
-    return packages
+def _snap_from_dict(data: dict) -> SnapPackage:
+    """Convert a snap dict from snapd API to SnapPackage."""
+    publisher_data = data.get("publisher") or {}
+    publisher = publisher_data.get("display-name") or publisher_data.get("username", "")
+    return SnapPackage(
+        name=data.get("name", ""),
+        version=data.get("version", ""),
+        revision=str(data.get("revision", "")),
+        tracking=data.get("tracking-channel", ""),
+        publisher=publisher,
+        notes="",
+        summary=data.get("summary", ""),
+    )
 
 
-def _parse_table(output: str, maxsplit: int) -> list[list[str]]:
-    rows: list[list[str]] = []
-    header_skipped = False
-
-    for raw_line in output.splitlines():
-        line = raw_line.rstrip()
-        if not line:
-            continue
-        if not header_skipped:
-            header_skipped = True
-            continue
-        if line.startswith("No matching snaps"):
-            continue
-
-        fields = [field.strip() for field in re.split(r"\s{2,}", line.strip(), maxsplit=maxsplit)]
-        if fields:
-            rows.append(fields)
-
-    return rows
-
-
-def _run_command(args: list[str], use_pkexec: bool = False) -> subprocess.CompletedProcess[str]:
-    command = ["pkexec", *args] if use_pkexec else args
-    result = subprocess.run(command, capture_output=True, text=True)
-    if result.returncode != 0:
-        error = result.stderr.strip() or result.stdout.strip() or "Unknown error"
-        raise RuntimeError(error)
-    return result
+def _extract_error(e: snap_http_http.SnapdHttpException) -> str:
+    """Extract a human-readable error message from a SnapdHttpException."""
+    if e.json and isinstance(e.json, dict):
+        result = e.json.get("result", {})
+        if isinstance(result, dict) and "message" in result:
+            return result["message"]
+    return str(e)
