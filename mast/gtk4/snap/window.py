@@ -10,7 +10,6 @@ from mast.core.i18n import _
 from mast.core.snap import is_snap_installed, is_snapd_running
 from mast.gtk4.snap.install_action import InstallSnapAction
 from mast.gtk4.snap.package_manager import SnapPackageManager
-from mast.gtk4.snap.settings import SnapSettingsTab
 from mast.gtk4.snap.start_snapd_action import StartSnapdAction
 
 
@@ -53,14 +52,8 @@ class SnapWindow(Gtk.ApplicationWindow):
         self.main_box.append(self.start_snapd_box)
 
         self.manage_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=12)
-        self.notebook = Gtk.Notebook()
         self.package_manager = SnapPackageManager(self)
-        self.settings_tab = SnapSettingsTab(self)
-
-        self.notebook.append_page(self.package_manager, Gtk.Label(label=_("Packages")))
-        self.notebook.append_page(self.settings_tab, Gtk.Label(label=_("Settings")))
-
-        self.manage_box.append(self.notebook)
+        self.manage_box.append(self.package_manager)
 
         self.main_box.append(self.manage_box)
         self.set_child(self.main_box)

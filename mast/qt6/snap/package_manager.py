@@ -22,6 +22,7 @@ from PySide6.QtWidgets import (
 from mast.core.i18n import _
 from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
 from mast.qt6.command.action import CommandAction
+from mast.qt6.snap.settings import SnapSettingsDialog
 
 
 FILTER_ALL: Literal["all"] = "all"
@@ -123,6 +124,10 @@ class SnapPackageManager(QWidget):
         self.search_btn.clicked.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_btn)
 
+        self.settings_btn = QPushButton(_("Settings"), self)
+        self.settings_btn.clicked.connect(self._on_settings_clicked)
+        btn_layout.addWidget(self.settings_btn)
+
         layout.addLayout(btn_layout)
 
         self.table = QTableWidget(self)
@@ -161,6 +166,7 @@ class SnapPackageManager(QWidget):
             self.primary_btn.setEnabled(not is_busy)
 
         self.search_btn.setEnabled(not is_busy)
+        self.settings_btn.setEnabled(not is_busy)
         self.filter_combo.setEnabled(not is_busy)
         self.search_btn.setText(_("Loading...") if is_loading else _("Search"))
 
@@ -239,6 +245,10 @@ class SnapPackageManager(QWidget):
 
     def _on_search_triggered(self) -> None:
         self.refresh()
+
+    def _on_settings_clicked(self) -> None:
+        dialog = SnapSettingsDialog(self.window())
+        dialog.exec()
 
     def load_remote_packages(self) -> None:
         if self.catalog_thread is not None:

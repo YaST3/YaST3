@@ -15,6 +15,7 @@ from gi.repository import GLib, Gtk
 from mast.core.i18n import _
 from mast.core.snap import SnapPackage, list_snap_packages, search_snap_packages
 from mast.gtk4.command.action import CommandAction
+from mast.gtk4.snap.settings import SnapSettingsDialog
 
 
 FILTER_ALL: Literal["all"] = "all"
@@ -116,6 +117,10 @@ class SnapPackageManager(Gtk.Box):
         self.search_btn.connect("clicked", self._on_search_clicked)
         controls_row.append(self.search_btn)
 
+        self.settings_btn = Gtk.Button(label=_("Settings"))
+        self.settings_btn.connect("clicked", self._on_settings_clicked)
+        controls_row.append(self.settings_btn)
+
         self.append(controls_row)
 
         self._create_table()
@@ -180,6 +185,7 @@ class SnapPackageManager(Gtk.Box):
         self.search_btn.set_label(loading_label)
         self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
         self.search_btn.set_sensitive(not is_busy)
+        self.settings_btn.set_sensitive(not is_busy)
         self.filter_combo.set_sensitive(not is_busy)
 
     def load_remote_packages(self) -> None:
@@ -269,6 +275,10 @@ class SnapPackageManager(Gtk.Box):
 
     def _on_search_clicked(self, _widget) -> None:
         self.refresh()
+
+    def _on_settings_clicked(self, _widget) -> None:
+        dialog = SnapSettingsDialog(self.parent_window)
+        dialog.present()
 
     def _on_selection_changed(self, _selection) -> None:
         self._sync_primary_button()
