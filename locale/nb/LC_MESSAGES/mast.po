@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-07 16:04+0000\n"
-"PO-Revision-Date: 2026-08-07 16:14\n"
+"POT-Creation-Date: 2026-08-07 16:48+0000\n"
+"PO-Revision-Date: 2026-08-07 16:57\n"
 "Last-Translator: \n"
 "Language-Team: Norwegian Bokmal\n"
 "MIME-Version: 1.0\n"
@@ -429,7 +429,9 @@ msgid "Type"
 msgstr ""
 
 #: mast/gtk4/android/package_manager_panel.py:253
+#: mast/gtk4/snap/package_manager.py:380
 #: mast/qt6/android/package_manager_panel.py:422
+#: mast/qt6/flatpak/package_manager.py:94 mast/qt6/snap/package_manager.py:252
 msgid "Uninstall Package"
 msgstr ""
 
@@ -1134,10 +1136,11 @@ msgid "Failed to load package catalog: {0}"
 msgstr "Klarte ikke å laste pakkekatalog: {0}"
 
 #: mast/gtk4/flatpak/package_manager.py:242
-#: mast/qt6/flatpak/package_manager.py:491
+#: mast/gtk4/snap/package_manager.py:286
+#: mast/qt6/flatpak/package_manager.py:491 mast/qt6/snap/package_manager.py:397
 #, python-brace-format
-msgid "Failed to load Flatpak packages: {0}"
-msgstr "Klarte ikke å laste Flatpak-pakker: {0}"
+msgid "Failed to load packages: {0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:300
 #: mast/qt6/flatpak/package_manager.py:347
@@ -2333,11 +2336,6 @@ msgstr ""
 msgid "Summary"
 msgstr ""
 
-#: mast/gtk4/snap/package_manager.py:286 mast/qt6/snap/package_manager.py:397
-#, python-brace-format
-msgid "Failed to load Snap packages: {0}"
-msgstr ""
-
 #: mast/gtk4/snap/package_manager.py:332 mast/qt6/snap/package_manager.py:201
 #, python-brace-format
 msgid "Update All ({0})"
@@ -2348,7 +2346,7 @@ msgid "Package updated successfully."
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:361 mast/qt6/snap/package_manager.py:233
-msgid "Update Snap Package"
+msgid "Update Package"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:364 mast/qt6/snap/package_manager.py:236
@@ -2356,19 +2354,16 @@ msgid "All packages updated successfully."
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:365 mast/qt6/snap/package_manager.py:237
-msgid "Update All Snap Packages"
+msgid "Update All Packages"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:368 mast/qt6/snap/package_manager.py:240
 msgid "Updating..."
 msgstr ""
 
-#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
-msgid "Install Snap Package"
-msgstr ""
-
-#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
-msgid "Uninstall Snap Package"
+#: mast/gtk4/snap/package_manager.py:380 mast/qt6/flatpak/package_manager.py:80
+#: mast/qt6/snap/package_manager.py:252
+msgid "Install Package"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:412 mast/qt6/snap/package_manager.py:279
@@ -3117,16 +3112,8 @@ msgstr ""
 msgid "Installing package..."
 msgstr "Installerer pakke..."
 
-#: mast/qt6/flatpak/package_manager.py:80
-msgid "Install Flatpak Package"
-msgstr "Installer Flatpak-pakke"
-
 #: mast/qt6/flatpak/package_manager.py:93
 msgid "Uninstalling package..."
-msgstr ""
-
-#: mast/qt6/flatpak/package_manager.py:94
-msgid "Uninstall Flatpak Package"
 msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:37
