@@ -8,7 +8,6 @@ from PySide6.QtCore import QObject, QThread, Signal
 from PySide6.QtWidgets import (
     QHBoxLayout,
     QHeaderView,
-    QLabel,
     QLineEdit,
     QMessageBox,
     QPushButton,
@@ -88,7 +87,6 @@ class _SnapActionWorker(QObject):
 class SnapPackageManager(QWidget):
     """Manage snap packages in either search or installed mode."""
 
-    PAGE_SIZE = 100
     MODE_SEARCH: Literal["search"] = "search"
     MODE_INSTALLED: Literal["installed"] = "installed"
 
@@ -101,8 +99,6 @@ class SnapPackageManager(QWidget):
         self.installed_packages: list[SnapPackage] = []
         self.filtered_installed_packages: list[SnapPackage] = []
         self.installed_names: set[str] = set()
-        self.search_page = 0
-        self.installed_page = 0
         self.remote_loading = False
         self.catalog_thread: QThread | None = None
         self.catalog_loader: _CatalogWorker | None = None
@@ -165,21 +161,6 @@ class SnapPackageManager(QWidget):
         self.search_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         layout.addWidget(self.search_table)
 
-        pager_row = QHBoxLayout()
-        self.search_prev_btn = QPushButton(_("Prev"), self)
-        self.search_prev_btn.clicked.connect(self.prev_search_page)
-        pager_row.addWidget(self.search_prev_btn)
-
-        self.search_page_label = QLabel(self)
-        self.search_page_label.setText("1/1")
-        pager_row.addWidget(self.search_page_label)
-
-        self.search_next_btn = QPushButton(_("Next"), self)
-        self.search_next_btn.clicked.connect(self.next_search_page)
-        pager_row.addWidget(self.search_next_btn)
-        pager_row.addStretch()
-        layout.addLayout(pager_row)
-
     def _build_installed_layout(self, layout: QVBoxLayout) -> None:
         btn_layout = QHBoxLayout()
 
@@ -222,21 +203,6 @@ class SnapPackageManager(QWidget):
         self.installed_table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
         layout.addWidget(self.installed_table)
 
-        pager_row = QHBoxLayout()
-        self.installed_prev_btn = QPushButton(_("Prev"), self)
-        self.installed_prev_btn.clicked.connect(self.prev_installed_page)
-        pager_row.addWidget(self.installed_prev_btn)
-
-        self.installed_page_label = QLabel(self)
-        self.installed_page_label.setText("1/1")
-        pager_row.addWidget(self.installed_page_label)
-
-        self.installed_next_btn = QPushButton(_("Next"), self)
-        self.installed_next_btn.clicked.connect(self.next_installed_page)
-        pager_row.addWidget(self.installed_next_btn)
-        pager_row.addStretch()
-        layout.addLayout(pager_row)
-
     def refresh(self) -> None:
         if self.mode == self.MODE_SEARCH:
             self.load_remote_packages()
@@ -276,19 +242,19 @@ class SnapPackageManager(QWidget):
         if self.mode != self.MODE_SEARCH:
             return ""
         row = self.search_table.currentRow()
-        page_items = self._search_page_items()
-        if row < 0 or row >= len(page_items):
+        items = self.filtered_remote_packages
+        if row < 0 or row >= len(items):
             return ""
-        return page_items[row].name
+        return items[row].name
 
     def _selected_installed_name(self) -> str:
         if self.mode != self.MODE_INSTALLED:
             return ""
         row = self.installed_table.currentRow()
-        page_items = self._installed_page_items()
-        if row < 0 or row >= len(page_items):
+        items = self.filtered_installed_packages
+        if row < 0 or row >= len(items):
             return ""
-        return page_items[row].name
+        return items[row].name
 
     def _start_action(self, action: str, name: str) -> None:
         if self.action_thread is not None:
@@ -367,7 +333,6 @@ class SnapPackageManager(QWidget):
 
         query = self.search_input.text().strip()
         self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
-        self.search_page = 0
         self._populate_search_table()
 
     def reset_remote_search(self) -> None:
@@ -376,7 +341,6 @@ class SnapPackageManager(QWidget):
 
         self.search_input.clear()
         self.filtered_remote_packages = list(self.remote_packages)
-        self.search_page = 0
         self._populate_search_table()
 
     def search_installed(self) -> None:
@@ -385,7 +349,6 @@ class SnapPackageManager(QWidget):
 
         query = self.installed_search_input.text().strip()
         self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
-        self.installed_page = 0
         self._populate_installed_table()
 
     def reset_installed_search(self) -> None:
@@ -394,7 +357,6 @@ class SnapPackageManager(QWidget):
 
         self.installed_search_input.clear()
         self.filtered_installed_packages = list(self.installed_packages)
-        self.installed_page = 0
         self._populate_installed_table()
 
     def load_remote_packages(self) -> None:
@@ -426,7 +388,6 @@ class SnapPackageManager(QWidget):
 
         self.remote_packages = packages
         self.filtered_remote_packages = self._filter_packages(self.remote_packages, self.search_input.text().strip())
-        self.search_page = 0
         self._populate_search_table()
 
     def _on_remote_packages_failed(self, error: str) -> None:
@@ -436,7 +397,6 @@ class SnapPackageManager(QWidget):
         QMessageBox.critical(self, _("Error"), _("Failed to load package catalog: {0}").format(error))
         self.remote_packages = []
         self.filtered_remote_packages = []
-        self.search_page = 0
         self._populate_search_table()
 
     def _on_remote_loader_finished(self) -> None:
@@ -484,7 +444,6 @@ class SnapPackageManager(QWidget):
                 self.installed_packages,
                 self.installed_search_input.text().strip(),
             )
-            self.installed_page = 0
             self._populate_installed_table()
         else:
             self._populate_search_table()
@@ -496,7 +455,6 @@ class SnapPackageManager(QWidget):
 
         if self.mode == self.MODE_INSTALLED:
             self.filtered_installed_packages = []
-            self.installed_page = 0
             self._populate_installed_table()
         else:
             self._populate_search_table()
@@ -510,9 +468,9 @@ class SnapPackageManager(QWidget):
         if self.mode != self.MODE_SEARCH:
             return
 
-        page_items = self._search_page_items()
-        self.search_table.setRowCount(len(page_items))
-        for row, package in enumerate(page_items):
+        items = self.filtered_remote_packages
+        self.search_table.setRowCount(len(items))
+        for row, package in enumerate(items):
             self.search_table.setItem(row, 0, QTableWidgetItem(package.name))
             self.search_table.setItem(row, 1, QTableWidgetItem(package.version))
             self.search_table.setItem(row, 2, QTableWidgetItem(package.publisher))
@@ -520,77 +478,18 @@ class SnapPackageManager(QWidget):
             installed_text = _("Yes") if package.name in self.installed_names else _("No")
             self.search_table.setItem(row, 4, QTableWidgetItem(installed_text))
 
-        self._update_search_pager()
-
     def _populate_installed_table(self) -> None:
         if self.mode != self.MODE_INSTALLED:
             return
 
-        page_items = self._installed_page_items()
-        self.installed_table.setRowCount(len(page_items))
-        for row, package in enumerate(page_items):
+        items = self.filtered_installed_packages
+        self.installed_table.setRowCount(len(items))
+        for row, package in enumerate(items):
             self.installed_table.setItem(row, 0, QTableWidgetItem(package.name))
             self.installed_table.setItem(row, 1, QTableWidgetItem(package.version))
             self.installed_table.setItem(row, 2, QTableWidgetItem(package.revision))
             self.installed_table.setItem(row, 3, QTableWidgetItem(package.tracking))
             self.installed_table.setItem(row, 4, QTableWidgetItem(package.publisher))
-
-        self._update_installed_pager()
-
-    def prev_search_page(self) -> None:
-        if self.search_page <= 0:
-            return
-        self.search_page -= 1
-        self._populate_search_table()
-
-    def next_search_page(self) -> None:
-        total_pages = self._total_pages(len(self.filtered_remote_packages))
-        if self.search_page + 1 >= total_pages:
-            return
-        self.search_page += 1
-        self._populate_search_table()
-
-    def prev_installed_page(self) -> None:
-        if self.installed_page <= 0:
-            return
-        self.installed_page -= 1
-        self._populate_installed_table()
-
-    def next_installed_page(self) -> None:
-        total_pages = self._total_pages(len(self.filtered_installed_packages))
-        if self.installed_page + 1 >= total_pages:
-            return
-        self.installed_page += 1
-        self._populate_installed_table()
-
-    def _search_page_items(self) -> list[SnapPackage]:
-        start = self.search_page * self.PAGE_SIZE
-        end = start + self.PAGE_SIZE
-        return self.filtered_remote_packages[start:end]
-
-    def _installed_page_items(self) -> list[SnapPackage]:
-        start = self.installed_page * self.PAGE_SIZE
-        end = start + self.PAGE_SIZE
-        return self.filtered_installed_packages[start:end]
-
-    def _update_search_pager(self) -> None:
-        total_pages = self._total_pages(len(self.filtered_remote_packages))
-        self.search_page = min(self.search_page, total_pages - 1)
-        self.search_page_label.setText(f"{self.search_page + 1}/{total_pages}")
-        self.search_prev_btn.setEnabled(self.search_page > 0)
-        self.search_next_btn.setEnabled(self.search_page + 1 < total_pages)
-
-    def _update_installed_pager(self) -> None:
-        total_pages = self._total_pages(len(self.filtered_installed_packages))
-        self.installed_page = min(self.installed_page, total_pages - 1)
-        self.installed_page_label.setText(f"{self.installed_page + 1}/{total_pages}")
-        self.installed_prev_btn.setEnabled(self.installed_page > 0)
-        self.installed_next_btn.setEnabled(self.installed_page + 1 < total_pages)
-
-    def _total_pages(self, total_rows: int) -> int:
-        if total_rows <= 0:
-            return 1
-        return (total_rows + self.PAGE_SIZE - 1) // self.PAGE_SIZE
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()

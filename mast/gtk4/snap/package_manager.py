@@ -92,7 +92,6 @@ class SnapPackageManager(Gtk.Box):
 
     MODE_SEARCH: Literal["search"] = "search"
     MODE_INSTALLED: Literal["installed"] = "installed"
-    PAGE_SIZE = 100
 
     def __init__(self, mode: Literal["search", "installed"], parent_window: Gtk.ApplicationWindow, **kwargs):
         super().__init__(orientation=Gtk.Orientation.VERTICAL, spacing=8, **kwargs)
@@ -104,8 +103,6 @@ class SnapPackageManager(Gtk.Box):
         self.installed_packages: list[SnapPackage] = []
         self.filtered_installed_packages: list[SnapPackage] = []
         self.installed_names: set[str] = set()
-        self.search_page = 0
-        self.installed_page = 0
         self.remote_loading = False
         self.remote_loader: _CatalogWorker | None = None
         self.installed_loading = False
@@ -150,20 +147,6 @@ class SnapPackageManager(Gtk.Box):
         self.append(controls_row)
 
         self._create_table()
-
-        pager_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
-        self.prev_btn = Gtk.Button(label=_("Prev"))
-        self.prev_btn.connect("clicked", self._on_prev_clicked)
-        pager_row.append(self.prev_btn)
-
-        self.page_label = Gtk.Label(label="1/1")
-        pager_row.append(self.page_label)
-
-        self.next_btn = Gtk.Button(label=_("Next"))
-        self.next_btn.connect("clicked", self._on_next_clicked)
-        pager_row.append(self.next_btn)
-        pager_row.append(Gtk.Box(hexpand=True))
-        self.append(pager_row)
 
     def _create_table(self) -> None:
         if self.mode == self.MODE_SEARCH:
@@ -241,7 +224,6 @@ class SnapPackageManager(Gtk.Box):
 
         self.remote_packages = packages
         self.filtered_remote_packages = self._filter_packages(self.remote_packages, self.search_entry.get_text().strip())
-        self.search_page = 0
         self._populate_table()
         self._on_remote_loader_finished()
         return False
@@ -258,7 +240,6 @@ class SnapPackageManager(Gtk.Box):
         )
         self.remote_packages = []
         self.filtered_remote_packages = []
-        self.search_page = 0
         self._populate_table()
         self._on_remote_loader_finished()
         return False
@@ -298,7 +279,6 @@ class SnapPackageManager(Gtk.Box):
                 self.installed_packages,
                 self.search_entry.get_text().strip(),
             )
-            self.installed_page = 0
             self._populate_table()
         else:
             self._populate_table()
@@ -317,7 +297,6 @@ class SnapPackageManager(Gtk.Box):
 
         if self.mode == self.MODE_INSTALLED:
             self.filtered_installed_packages = []
-            self.installed_page = 0
             self._populate_table()
         else:
             self._populate_table()
@@ -336,17 +315,14 @@ class SnapPackageManager(Gtk.Box):
 
         query = self.search_entry.get_text().strip()
         self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
-        self.installed_page = 0
         self._populate_table()
 
     def _on_reset_clicked(self, _button: Gtk.Button) -> None:
         self.search_entry.set_text("")
         if self.mode == self.MODE_SEARCH:
             self.filtered_remote_packages = list(self.remote_packages)
-            self.search_page = 0
         else:
             self.filtered_installed_packages = list(self.installed_packages)
-            self.installed_page = 0
         self._populate_table()
 
     def _on_refresh_clicked(self, _button: Gtk.Button) -> None:
@@ -359,10 +335,15 @@ class SnapPackageManager(Gtk.Box):
 
         path = model.get_path(tree_iter)
         index = int(path.to_string())
-        page_items = self._page_items()
-        if 0 <= index < len(page_items):
-            return page_items[index]
+        items = self._current_items()
+        if 0 <= index < len(items):
+            return items[index]
         return None
+
+    def _current_items(self) -> list[SnapPackage]:
+        if self.mode == self.MODE_SEARCH:
+            return self.filtered_remote_packages
+        return self.filtered_installed_packages
 
     def _start_action(self, action: str, name: str) -> None:
         if self.action_worker is not None:
@@ -456,43 +437,9 @@ class SnapPackageManager(Gtk.Box):
 
         self._start_action("uninstall", package.name)
 
-    def _on_prev_clicked(self, _button: Gtk.Button) -> None:
-        if self.mode == self.MODE_SEARCH:
-            if self.search_page <= 0:
-                return
-            self.search_page -= 1
-        else:
-            if self.installed_page <= 0:
-                return
-            self.installed_page -= 1
-        self._populate_table()
-
-    def _on_next_clicked(self, _button: Gtk.Button) -> None:
-        items = self.filtered_remote_packages if self.mode == self.MODE_SEARCH else self.filtered_installed_packages
-        total_pages = self._total_pages(len(items))
-        if self.mode == self.MODE_SEARCH:
-            if self.search_page + 1 >= total_pages:
-                return
-            self.search_page += 1
-        else:
-            if self.installed_page + 1 >= total_pages:
-                return
-            self.installed_page += 1
-        self._populate_table()
-
-    def _page_items(self) -> list[SnapPackage]:
-        if self.mode == self.MODE_SEARCH:
-            start = self.search_page * self.PAGE_SIZE
-            end = start + self.PAGE_SIZE
-            return self.filtered_remote_packages[start:end]
-
-        start = self.installed_page * self.PAGE_SIZE
-        end = start + self.PAGE_SIZE
-        return self.filtered_installed_packages[start:end]
-
     def _populate_table(self) -> None:
         self.list_store.clear()
-        for package in self._page_items():
+        for package in self._current_items():
             if self.mode == self.MODE_SEARCH:
                 installed_text = _("Yes") if package.name in self.installed_names else _("No")
                 self.list_store.append(
@@ -514,23 +461,6 @@ class SnapPackageManager(Gtk.Box):
                         package.publisher,
                     ]
                 )
-
-        if self.mode == self.MODE_SEARCH:
-            total = len(self.filtered_remote_packages)
-            current_page = self.search_page
-        else:
-            total = len(self.filtered_installed_packages)
-            current_page = self.installed_page
-
-        total_pages = self._total_pages(total)
-        self.page_label.set_text(f"{current_page + 1}/{total_pages}")
-        self.prev_btn.set_sensitive(current_page > 0)
-        self.next_btn.set_sensitive(current_page + 1 < total_pages)
-
-    def _total_pages(self, total_rows: int) -> int:
-        if total_rows <= 0:
-            return 1
-        return (total_rows + self.PAGE_SIZE - 1) // self.PAGE_SIZE
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()
