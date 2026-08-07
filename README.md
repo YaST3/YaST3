@@ -6,27 +6,27 @@ MaST (**M**aybe **a**nother **S**etup **T**ool) is continuous development of YaS
 
 ## Functional Modules
 
-| Name         | Qt6 | GTK4 | TUI | openSUSE | Fedora | Debian | Ubuntu | Arch |
-|--------------|:---:|:----:|:---:|:--------:|:------:|:------:|:------:|:----:|
-| Android      | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Cron         | 🚧  | 🚧   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   | 
-| DateTime     | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Flatpak      | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Font Config  | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Git          | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Hostname     | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Hosts        | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Journal      | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Keyboard     | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Languages    | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Packages     | 🚧  | 🚧   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Proxy        | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Repositories | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Services     | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Snap         | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| Snapshots    | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| SSH Client   | ✅  | ✅   | ✅  | ✅       | ❌     | ❌     | ❌     | ❌   |
-| SSH Server   | ❌  | ❌   | ❌  | ❌       | ❌     | ❌     | ❌     | ❌   |
+| Name          | Qt6 | GTK4 | TUI | openSUSE | Fedora | Debian | Ubuntu | Arch |
+|---------------|:---:|:----:|:---:|:--------:|:------:|:------:|:------:|:----:|
+| Android       | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Cron          | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   | 
+| DateTime      | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Flatpak       | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Font Config   | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Git           | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Hostname      | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Hosts         | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Journal       | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Keyboard      | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Languages     | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Proxy         | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| RPM Packages  | ❌  | ❌   | ❌  | ❌       | ❌     | ❌     | ❌     | ❌   |
+| RPM Repos     | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Services      | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Snap Packages | ✅  | ✅   | ❌  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| Snapshots     | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| SSH Client    | ✅  | ✅   | 🚧  | ✅       | ❌     | ❌     | ❌     | ❌   |
+| SSH Server    | ❌  | ❌   | ❌  | ❌       | ❌     | ❌     | ❌     | ❌   |
 
 ## Installation
 
