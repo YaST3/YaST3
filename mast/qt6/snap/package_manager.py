@@ -133,16 +133,13 @@ class SnapPackageManager(QWidget):
 
         self.search_input = QLineEdit(self)
         self.search_input.setPlaceholderText("firefox")
+        self.search_input.setClearButtonEnabled(True)
         self.search_input.returnPressed.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_input)
 
         self.search_btn = QPushButton(_("Search"), self)
         self.search_btn.clicked.connect(self._on_search_triggered)
         btn_layout.addWidget(self.search_btn)
-
-        self.reset_btn = QPushButton(_("Reset"), self)
-        self.reset_btn.clicked.connect(self._on_reset_triggered)
-        btn_layout.addWidget(self.reset_btn)
 
         layout.addLayout(btn_layout)
 
@@ -182,7 +179,6 @@ class SnapPackageManager(QWidget):
             self.primary_btn.setEnabled(not is_busy)
 
         self.search_btn.setEnabled(not is_busy)
-        self.reset_btn.setEnabled(not is_busy)
         self.filter_combo.setEnabled(not is_busy)
         self.search_btn.setText(_("Loading...") if is_loading else _("Search"))
 
@@ -261,12 +257,6 @@ class SnapPackageManager(QWidget):
 
     def _on_search_triggered(self) -> None:
         self.refresh()
-
-    def _on_reset_triggered(self) -> None:
-        self.search_input.clear()
-        self.filtered_remote_packages = list(self.remote_packages)
-        self.filtered_installed_packages = list(self.installed_packages)
-        self._populate_table()
 
     def load_remote_packages(self) -> None:
         if self.catalog_thread is not None:

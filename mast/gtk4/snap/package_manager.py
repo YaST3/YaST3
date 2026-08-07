@@ -125,7 +125,7 @@ class SnapPackageManager(Gtk.Box):
         self.filter_combo.connect("changed", self._on_filter_changed)
         controls_row.append(self.filter_combo)
 
-        self.search_entry = Gtk.Entry()
+        self.search_entry = Gtk.SearchEntry()
         self.search_entry.set_placeholder_text("firefox")
         self.search_entry.connect("activate", self._on_search_clicked)
         self.search_entry.set_hexpand(True)
@@ -134,10 +134,6 @@ class SnapPackageManager(Gtk.Box):
         self.search_btn = Gtk.Button(label=_("Search"))
         self.search_btn.connect("clicked", self._on_search_clicked)
         controls_row.append(self.search_btn)
-
-        self.reset_btn = Gtk.Button(label=_("Reset"))
-        self.reset_btn.connect("clicked", self._on_reset_clicked)
-        controls_row.append(self.reset_btn)
 
         self.append(controls_row)
 
@@ -204,7 +200,6 @@ class SnapPackageManager(Gtk.Box):
         self.search_btn.set_label(loading_label)
         self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
         self.search_btn.set_sensitive(not is_busy)
-        self.reset_btn.set_sensitive(not is_busy)
         self.filter_combo.set_sensitive(not is_busy)
 
     def load_remote_packages(self) -> None:
@@ -294,12 +289,6 @@ class SnapPackageManager(Gtk.Box):
 
     def _on_search_clicked(self, _widget) -> None:
         self.refresh()
-
-    def _on_reset_clicked(self, _button: Gtk.Button) -> None:
-        self.search_entry.set_text("")
-        self.filtered_remote_packages = list(self.remote_packages)
-        self.filtered_installed_packages = list(self.installed_packages)
-        self._populate_table()
 
     def _on_selection_changed(self, _selection) -> None:
         self._sync_primary_button()
