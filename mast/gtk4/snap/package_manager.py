@@ -98,6 +98,16 @@ class SnapPackageManager(Gtk.Box):
         self.primary_btn.connect("clicked", self._on_primary_clicked)
         controls_row.append(self.primary_btn)
 
+        self.update_btn = Gtk.Button(label=_("Update"))
+        self.update_btn.set_sensitive(False)
+        self.update_btn.connect("clicked", self._on_update_clicked)
+        controls_row.append(self.update_btn)
+
+        self.update_all_btn = Gtk.Button(label=_("Update All"))
+        self.update_all_btn.set_sensitive(False)
+        self.update_all_btn.connect("clicked", self._on_update_all_clicked)
+        controls_row.append(self.update_all_btn)
+
         controls_row.append(Gtk.Box(hexpand=True))
 
         self.filter_combo = Gtk.ComboBoxText()
@@ -126,7 +136,7 @@ class SnapPackageManager(Gtk.Box):
         self._create_table()
 
     def _create_table(self) -> None:
-        self.list_store = Gtk.ListStore(str, str, str, str, str, str)
+        self.list_store = Gtk.ListStore(str, str, str, str, str, str, str)
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
@@ -164,8 +174,10 @@ class SnapPackageManager(Gtk.Box):
         summary_column.set_expand(True)
         self.tree_view.append_column(summary_column)
 
-        installed_column = Gtk.TreeViewColumn(_("Installed"), Gtk.CellRendererText(), text=4)
+        installed_renderer = Gtk.CellRendererText()
+        installed_column = Gtk.TreeViewColumn(_("Installed"), installed_renderer)
         installed_column.set_resizable(True)
+        installed_column.set_cell_data_func(installed_renderer, self._installed_text_data_func)
         self.tree_view.append_column(installed_column)
 
         scrolled = Gtk.ScrolledWindow()
@@ -185,10 +197,27 @@ class SnapPackageManager(Gtk.Box):
         is_busy = self._is_busy()
         loading_label = _("Loading...") if is_loading else _("Search")
         self.search_btn.set_label(loading_label)
-        self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
         self.search_btn.set_sensitive(not is_busy)
         self.settings_btn.set_sensitive(not is_busy)
         self.filter_combo.set_sensitive(not is_busy)
+        self._sync_primary_button()
+
+    def _updatable_names(self) -> set[str]:
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
+        updatable: set[str] = set()
+        for name, v in installed_versions.items():
+            if name in remote_versions and remote_versions[name] != v:
+                updatable.add(name)
+        return updatable
+
+    def _selected_status(self) -> str:
+        package = self._selected_package()
+        if package is None:
+            return "not_installed"
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
+        return self._compute_status(package.name, installed_versions, remote_versions)
 
     def load_remote_packages(self) -> None:
         if self.remote_loader is not None:
@@ -286,15 +315,22 @@ class SnapPackageManager(Gtk.Box):
         self._sync_primary_button()
 
     def _sync_primary_button(self) -> None:
-        package = self._selected_package()
-        if package is None:
+        is_busy = self._is_busy()
+        status = self._selected_status()
+        if status == "not_installed":
             self.primary_btn.set_label(_("Install"))
-            self.primary_btn.set_sensitive(False)
-            return
+            self.primary_btn.set_sensitive(not is_busy and self._selected_package() is not None)
+        else:
+            self.primary_btn.set_label(_("Uninstall"))
+            self.primary_btn.set_sensitive(not is_busy)
 
-        is_installed = package.name in self.installed_names
-        self.primary_btn.set_label(_("Uninstall") if is_installed else _("Install"))
-        self.primary_btn.set_sensitive(not self._is_busy())
+        self.update_btn.set_sensitive(not is_busy and status == "updatable")
+
+        updatable_count = len(self._updatable_names())
+        self.update_all_btn.set_sensitive(not is_busy and updatable_count > 0)
+        self.update_all_btn.set_label(
+            _("Update All ({0})").format(updatable_count) if updatable_count > 0 else _("Update All")
+        )
 
     def _selected_package(self) -> SnapPackage | None:
         model, tree_iter = self.selection.get_selected()
@@ -313,20 +349,40 @@ class SnapPackageManager(Gtk.Box):
             return self.filtered_remote_packages
         return self.filtered_installed_packages
 
-    def _start_action(self, action: str, name: str) -> None:
+    def _start_action(self, action: str, name: str = "") -> None:
         if self.action is not None and self.action.is_running():
             return
 
-        is_install = action == "install"
-        self.action = CommandAction(
-            text=_("Install") if is_install else _("Uninstall"),
-            running_text=_("Installing...") if is_install else _("Uninstalling..."),
-            dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
-            command=["pkexec", "snap", "install" if is_install else "remove", name],
-            success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
-            auto_close_on_success=True,
-            parent_window=self.parent_window,
-        )
+        if action == "refresh":
+            cmd: list[str]
+            if name:
+                cmd = ["pkexec", "snap", "refresh", name]
+                success_text = _("Package updated successfully.")
+                title = _("Update Snap Package")
+            else:
+                cmd = ["pkexec", "snap", "refresh"]
+                success_text = _("All packages updated successfully.")
+                title = _("Update All Snap Packages")
+            self.action = CommandAction(
+                text=_("Update"),
+                running_text=_("Updating..."),
+                dialog_title=title,
+                command=cmd,
+                success_output=success_text,
+                auto_close_on_success=True,
+                parent_window=self.parent_window,
+            )
+        else:
+            is_install = action == "install"
+            self.action = CommandAction(
+                text=_("Install") if is_install else _("Uninstall"),
+                running_text=_("Installing...") if is_install else _("Uninstalling..."),
+                dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
+                command=["pkexec", "snap", "install" if is_install else "remove", name],
+                success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
+                auto_close_on_success=True,
+                parent_window=self.parent_window,
+            )
         self.action.connect_finished(self._on_action_finished)
         self.action.trigger()
         self._set_loading()
@@ -382,21 +438,60 @@ class SnapPackageManager(Gtk.Box):
 
         self._start_action("uninstall", package.name)
 
+    def _on_update_clicked(self, _button: Gtk.Button) -> None:
+        package = self._selected_package()
+        if package is None:
+            return
+        status = self._selected_status()
+        if status != "updatable":
+            return
+        self._start_action("refresh", package.name)
+
+    def _on_update_all_clicked(self, _button: Gtk.Button) -> None:
+        updatable = self._updatable_names()
+        if not updatable:
+            return
+        self._start_action("refresh")
+
     def _populate_table(self) -> None:
         self.list_store.clear()
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
         for package in self._current_items():
-            installed_text = _("Yes") if package.name in self.installed_names else _("No")
+            status = self._compute_status(package.name, installed_versions, remote_versions)
             self.list_store.append(
                 [
                     package.name,
                     package.version,
                     package.publisher,
                     package.summary,
-                    installed_text,
+                    "",
                     package.publisher_validation,
+                    status,
                 ]
             )
         self._sync_primary_button()
+
+    @staticmethod
+    def _compute_status(name: str, installed_versions: dict[str, str], remote_versions: dict[str, str]) -> str:
+        """Compute install status: 'installed', 'updatable', or 'not_installed'."""
+        if name not in installed_versions:
+            return "not_installed"
+        if name in remote_versions and remote_versions[name] != installed_versions[name]:
+            return "updatable"
+        return "installed"
+
+    def _installed_text_data_func(self, _column, cell, model, iter, _data=None) -> None:
+        status = model.get_value(iter, 6) if iter is not None else "not_installed"
+        if status == "installed":
+            cell.set_property("text", _("Yes"))
+            cell.set_property("foreground", "#22c55e")
+        elif status == "updatable":
+            cell.set_property("text", _("Update"))
+            cell.set_property("foreground", "#f97316")
+        else:
+            cell.set_property("text", _("No"))
+            cell.set_property("foreground", None)
 
     def _publisher_icon_data_func(self, _column, cell, model, iter, _data=None) -> None:
         validation = model.get_value(iter, 5) if iter is not None else ""

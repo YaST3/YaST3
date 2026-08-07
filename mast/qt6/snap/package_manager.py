@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Literal
 
 from PySide6.QtCore import QObject, Qt, QThread, Signal
-from PySide6.QtGui import QIcon, QPixmap
+from PySide6.QtGui import QColor, QIcon, QPixmap
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -106,6 +106,16 @@ class SnapPackageManager(QWidget):
         self.primary_btn.clicked.connect(self._on_primary_triggered)
         btn_layout.addWidget(self.primary_btn)
 
+        self.update_btn = QPushButton(_("Update"), self)
+        self.update_btn.setEnabled(False)
+        self.update_btn.clicked.connect(self._on_update_triggered)
+        btn_layout.addWidget(self.update_btn)
+
+        self.update_all_btn = QPushButton(_("Update All"), self)
+        self.update_all_btn.setEnabled(False)
+        self.update_all_btn.clicked.connect(self._on_update_all_triggered)
+        btn_layout.addWidget(self.update_all_btn)
+
         btn_layout.addStretch()
 
         self.filter_combo = QComboBox(self)
@@ -154,18 +164,42 @@ class SnapPackageManager(QWidget):
     def _is_busy(self) -> bool:
         return self.remote_loading or self.installed_loading or (self.action is not None and self.action.is_running())
 
+    def _updatable_names(self) -> set[str]:
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
+        updatable: set[str] = set()
+        for name, v in installed_versions.items():
+            if name in remote_versions and remote_versions[name] != v:
+                updatable.add(name)
+        return updatable
+
+    def _selected_status(self) -> str:
+        package = self._selected_package()
+        if package is None:
+            return "not_installed"
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
+        return self._compute_status(package.name, installed_versions, remote_versions)
+
     def _sync_action_buttons(self) -> None:
         is_loading = self.remote_loading or self.installed_loading
         is_busy = self._is_busy()
 
-        package = self._selected_package()
-        if package is None:
+        status = self._selected_status()
+        if status == "not_installed":
             self.primary_btn.setText(_("Install"))
-            self.primary_btn.setEnabled(False)
+            self.primary_btn.setEnabled(not is_busy and self._selected_package() is not None)
         else:
-            is_installed = package.name in self.installed_names
-            self.primary_btn.setText(_("Uninstall") if is_installed else _("Install"))
+            self.primary_btn.setText(_("Uninstall"))
             self.primary_btn.setEnabled(not is_busy)
+
+        self.update_btn.setEnabled(not is_busy and status == "updatable")
+
+        updatable_count = len(self._updatable_names())
+        self.update_all_btn.setEnabled(not is_busy and updatable_count > 0)
+        self.update_all_btn.setText(
+            _("Update All ({0})").format(updatable_count) if updatable_count > 0 else _("Update All")
+        )
 
         self.search_btn.setEnabled(not is_busy)
         self.settings_btn.setEnabled(not is_busy)
@@ -187,20 +221,40 @@ class SnapPackageManager(QWidget):
             return self.filtered_remote_packages
         return self.filtered_installed_packages
 
-    def _start_action(self, action: str, name: str) -> None:
+    def _start_action(self, action: str, name: str = "") -> None:
         if self.action is not None and self.action.is_running():
             return
 
-        is_install = action == "install"
-        self.action = CommandAction(
-            text=_("Install") if is_install else _("Uninstall"),
-            running_text=_("Installing...") if is_install else _("Uninstalling..."),
-            dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
-            command=["pkexec", "snap", "install" if is_install else "remove", name],
-            success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
-            auto_close_on_success=True,
-            parent=self,
-        )
+        if action == "refresh":
+            cmd: list[str]
+            if name:
+                cmd = ["pkexec", "snap", "refresh", name]
+                success_text = _("Package updated successfully.")
+                title = _("Update Snap Package")
+            else:
+                cmd = ["pkexec", "snap", "refresh"]
+                success_text = _("All packages updated successfully.")
+                title = _("Update All Snap Packages")
+            self.action = CommandAction(
+                text=_("Update"),
+                running_text=_("Updating..."),
+                dialog_title=title,
+                command=cmd,
+                success_output=success_text,
+                auto_close_on_success=True,
+                parent=self,
+            )
+        else:
+            is_install = action == "install"
+            self.action = CommandAction(
+                text=_("Install") if is_install else _("Uninstall"),
+                running_text=_("Installing...") if is_install else _("Uninstalling..."),
+                dialog_title=_("Install Snap Package") if is_install else _("Uninstall Snap Package"),
+                command=["pkexec", "snap", "install" if is_install else "remove", name],
+                success_output=_("Package installed successfully.") if is_install else _("Package uninstalled successfully."),
+                auto_close_on_success=True,
+                parent=self,
+            )
         self.action.action_finished.connect(self._on_action_finished)
         self.action.trigger()
         self._sync_action_buttons()
@@ -237,6 +291,19 @@ class SnapPackageManager(QWidget):
             self._start_action("uninstall", package.name)
         else:
             self._start_action("install", package.name)
+
+    def _on_update_triggered(self) -> None:
+        package = self._selected_package()
+        if package is None:
+            return
+        if self._selected_status() != "updatable":
+            return
+        self._start_action("refresh", package.name)
+
+    def _on_update_all_triggered(self) -> None:
+        if not self._updatable_names():
+            return
+        self._start_action("refresh")
 
     def _on_filter_changed(self, _index: int) -> None:
         data = self.filter_combo.currentData()
@@ -342,14 +409,40 @@ class SnapPackageManager(QWidget):
     def _populate_table(self) -> None:
         items = self._current_items()
         self.table.setRowCount(len(items))
+        installed_versions = {p.name: p.version for p in self.installed_packages}
+        remote_versions = {p.name: p.version for p in self.remote_packages}
         for row, package in enumerate(items):
             self.table.setItem(row, 0, QTableWidgetItem(package.name))
             self.table.setItem(row, 1, QTableWidgetItem(package.version))
             self.table.setItem(row, 2, self._make_publisher_item(package))
             self.table.setItem(row, 3, QTableWidgetItem(package.summary))
-            installed_text = _("Yes") if package.name in self.installed_names else _("No")
-            self.table.setItem(row, 4, QTableWidgetItem(installed_text))
+            self.table.setItem(row, 4, self._make_installed_item(
+                package.name, installed_versions, remote_versions
+            ))
         self._sync_action_buttons()
+
+    @staticmethod
+    def _compute_status(name: str, installed_versions: dict[str, str], remote_versions: dict[str, str]) -> str:
+        """Compute install status: 'installed', 'updatable', or 'not_installed'."""
+        if name not in installed_versions:
+            return "not_installed"
+        if name in remote_versions and remote_versions[name] != installed_versions[name]:
+            return "updatable"
+        return "installed"
+
+    @classmethod
+    def _make_installed_item(cls, name, installed_versions, remote_versions) -> QTableWidgetItem:
+        """Build the Installed cell with status text and color."""
+        status = cls._compute_status(name, installed_versions, remote_versions)
+        if status == "installed":
+            item = QTableWidgetItem(_("Yes"))
+            item.setForeground(QColor("#22c55e"))
+        elif status == "updatable":
+            item = QTableWidgetItem(_("Update"))
+            item.setForeground(QColor("#f97316"))
+        else:
+            item = QTableWidgetItem(_("No"))
+        return item
 
     @staticmethod
     def _make_publisher_item(package: SnapPackage) -> QTableWidgetItem:
