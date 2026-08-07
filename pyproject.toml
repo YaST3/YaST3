@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mast"
-version = "0.0.27"
+version = "0.0.28"
 description = "MaST is continuous development of YaST with Python & Qt6 / GTK4 / TUI"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -67,6 +67,7 @@ packages = [
     "mast.core.proxy",
     "mast.core.repositories",
     "mast.core.services",
+    "mast.core.snap",
     "mast.core.snapshots",
     "mast.core.ssh",
     "mast.core.users",
@@ -87,6 +88,7 @@ packages = [
     "mast.gtk4.proxy",
     "mast.gtk4.repositories",
     "mast.gtk4.services",
+    "mast.gtk4.snap",
     "mast.gtk4.snapshots",
     "mast.gtk4.ssh",
     "mast.gtk4.users",
@@ -107,6 +109,7 @@ packages = [
     "mast.qt6.proxy",
     "mast.qt6.repositories",
     "mast.qt6.services",
+    "mast.qt6.snap",
     "mast.qt6.snapshots",
     "mast.qt6.ssh",
     "mast.qt6.users",
