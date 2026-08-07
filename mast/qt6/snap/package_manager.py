@@ -28,6 +28,15 @@ FILTER_ALL: Literal["all"] = "all"
 FILTER_INSTALLED: Literal["installed"] = "installed"
 
 
+def _resolve_icon(names: tuple[str, ...]) -> QIcon | None:
+    """Return the first available themed icon from *names*, or ``None``."""
+    for name in names:
+        icon = QIcon.fromTheme(name)
+        if not icon.isNull():
+            return icon
+    return None
+
+
 class _CatalogWorker(QObject):
     """Worker that loads snap package search results outside the UI thread."""
 
@@ -347,18 +356,33 @@ class SnapPackageManager(QWidget):
         for row, package in enumerate(items):
             self.table.setItem(row, 0, QTableWidgetItem(package.name))
             self.table.setItem(row, 1, QTableWidgetItem(package.version))
-            publisher_item = QTableWidgetItem(package.publisher)
-            if package.publisher_validation == "verified":
-                publisher_item.setIcon(QIcon.fromTheme("emblem-default"))
-                publisher_item.setToolTip(_("Verified Account"))
-            elif package.publisher_validation == "star-developer":
-                publisher_item.setIcon(QIcon.fromTheme("starred"))
-                publisher_item.setToolTip(_("Star Developer"))
-            self.table.setItem(row, 2, publisher_item)
+            self.table.setItem(row, 2, self._make_publisher_item(package))
             self.table.setItem(row, 3, QTableWidgetItem(package.summary))
             installed_text = _("Yes") if package.name in self.installed_names else _("No")
             self.table.setItem(row, 4, QTableWidgetItem(installed_text))
         self._sync_action_buttons()
+
+    @staticmethod
+    def _make_publisher_item(package: SnapPackage) -> QTableWidgetItem:
+        """Build the Publisher cell, showing a verified/star marker when applicable."""
+        validation = package.publisher_validation
+        if validation == "verified":
+            icon = _resolve_icon(("emblem-default", "emblem-ok", "dialog-ok"))
+            text = package.publisher if icon is not None else f"✓ {package.publisher}"
+            item = QTableWidgetItem(text)
+            if icon is not None:
+                item.setIcon(icon)
+            item.setToolTip(_("Verified Account"))
+            return item
+        if validation == "star-developer":
+            icon = _resolve_icon(("starred", "star", "emblem-favorite"))
+            text = package.publisher if icon is not None else f"★ {package.publisher}"
+            item = QTableWidgetItem(text)
+            if icon is not None:
+                item.setIcon(icon)
+            item.setToolTip(_("Star Developer"))
+            return item
+        return QTableWidgetItem(package.publisher)
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()
