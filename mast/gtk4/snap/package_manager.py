@@ -143,6 +143,7 @@ class SnapPackageManager(Gtk.Box):
 
         version_column = Gtk.TreeViewColumn(_("Version"), Gtk.CellRendererText(), text=1)
         version_column.set_resizable(True)
+        version_column.set_max_width(80)
         self.tree_view.append_column(version_column)
 
         publisher_column = Gtk.TreeViewColumn(_("Publisher"))
@@ -160,6 +161,7 @@ class SnapPackageManager(Gtk.Box):
 
         summary_column = Gtk.TreeViewColumn(_("Summary"), Gtk.CellRendererText(), text=3)
         summary_column.set_resizable(True)
+        summary_column.set_expand(True)
         self.tree_view.append_column(summary_column)
 
         installed_column = Gtk.TreeViewColumn(_("Installed"), Gtk.CellRendererText(), text=4)
@@ -167,7 +169,7 @@ class SnapPackageManager(Gtk.Box):
         self.tree_view.append_column(installed_column)
 
         scrolled = Gtk.ScrolledWindow()
-        scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
+        scrolled.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
         scrolled.set_child(self.tree_view)
         self.append(scrolled)
 
