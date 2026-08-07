@@ -8,7 +8,7 @@ from mast.core.snap.package import (
     uninstall_snap_package,
 )
 
-from mast.core.snap.snap import install_snap_command, is_snap_installed, remove_snap_pkexec
+from mast.core.snap.snap import install_snap_command, is_snap_installed, remove_snap_command
 
 __all__ = [
     "SnapPackage",
@@ -16,7 +16,7 @@ __all__ = [
     "install_snap_command",
     "is_snap_installed",
     "list_snap_packages",
-    "remove_snap_pkexec",
+    "remove_snap_command",
     "search_snap_packages",
     "uninstall_snap_package",
 ]

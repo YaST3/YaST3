@@ -9,6 +9,7 @@ gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 from mast.core.i18n import _
+from mast.core.snap import remove_snap_command
 from mast.gtk4.command.action import CommandAction
 
 
@@ -20,7 +21,7 @@ class UninstallSnapAction(CommandAction):
             text=_("Uninstall Snap"),
             running_text=_("Uninstalling Snap..."),
             dialog_title=_("Uninstall Snap"),
-            command=["pkexec", "zypper", "--non-interactive", "remove", "-y", "snapd"],
+            command=remove_snap_command(),
             success_output=_("Snap uninstalled successfully."),
             auto_close_on_success=True,
             parent_window=parent_window,
