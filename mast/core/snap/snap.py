@@ -50,18 +50,18 @@ def install_snap_command() -> list[str]:
 
 
 def remove_snap_command() -> list[str]:
-    """Return the command to remove snap using the appropriate package manager with root permissions."""
+    """Return the command to stop and remove snap using the appropriate package manager with root permissions."""
 
     os_release = platform.freedesktop_os_release()
     os_id = os_release.get("ID")
 
     if os_id in ("debian", "ubuntu"):
-        return ["pkexec", "apt-get", "remove", "-y", "snapd"]
+        return ["pkexec", "bash", "-c", "systemctl disable --now snapd.socket && apt-get remove -y snapd"]
 
     if os_id in ("fedora", "centos"):
-        return ["pkexec", "dnf", "remove", "-y", "snapd"]
+        return ["pkexec", "bash", "-c", "systemctl disable --now snapd.socket && dnf remove -y snapd"]
 
     if os_id == "arch":
-        return ["pkexec", "pacman", "-R", "--noconfirm", "snapd"]
+        return ["pkexec", "bash", "-c", "systemctl disable --now snapd.socket && pacman -R --noconfirm snapd"]
 
-    return ["pkexec", "zypper", "--non-interactive", "remove", "-y", "snapd"]
+    return ["pkexec", "bash", "-c", "systemctl disable --now snapd.socket && zypper --non-interactive remove -y snapd"]
