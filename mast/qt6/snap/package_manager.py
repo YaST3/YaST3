@@ -241,11 +241,11 @@ class SnapPackageManager(QWidget):
         self._sync_action_buttons()
 
     def _on_search_triggered(self) -> None:
-        query = self.search_input.text().strip()
         if self.current_filter == FILTER_ALL:
-            self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
-        else:
-            self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
+            self.load_remote_packages()
+            return
+        query = self.search_input.text().strip()
+        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
         self._populate_table()
 
     def _on_reset_triggered(self) -> None:

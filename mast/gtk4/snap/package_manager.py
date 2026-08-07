@@ -277,11 +277,11 @@ class SnapPackageManager(Gtk.Box):
         self._sync_primary_button()
 
     def _on_search_clicked(self, _widget) -> None:
-        query = self.search_entry.get_text().strip()
         if self.current_filter == FILTER_ALL:
-            self.filtered_remote_packages = self._filter_packages(self.remote_packages, query)
-        else:
-            self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
+            self.load_remote_packages()
+            return
+        query = self.search_entry.get_text().strip()
+        self.filtered_installed_packages = self._filter_packages(self.installed_packages, query)
         self._populate_table()
 
     def _on_reset_clicked(self, _button: Gtk.Button) -> None:
