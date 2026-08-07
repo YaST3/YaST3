@@ -129,27 +129,45 @@ class SnapPackageManager(Gtk.Box):
         self._create_table()
 
     def _create_table(self) -> None:
-        self.list_store = Gtk.ListStore(str, str, str, str, str)
-        columns = [
-            (_("Name"), 0),
-            (_("Version"), 1),
-            (_("Publisher"), 2),
-            (_("Summary"), 3),
-            (_("Installed"), 4),
-        ]
+        self.list_store = Gtk.ListStore(str, str, str, str, str, str)
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
         self.tree_view.set_vexpand(True)
+        self.tree_view.props.has_tooltip = True
+        self.tree_view.connect("query-tooltip", self._on_query_tooltip)
         self.selection = self.tree_view.get_selection()
         self.selection.set_mode(Gtk.SelectionMode.SINGLE)
         self.selection.connect("changed", self._on_selection_changed)
 
-        for title, index in columns:
-            renderer = Gtk.CellRendererText()
-            column = Gtk.TreeViewColumn(title, renderer, text=index)
-            column.set_resizable(True)
-            self.tree_view.append_column(column)
+        name_column = Gtk.TreeViewColumn(_("Name"), Gtk.CellRendererText(), text=0)
+        name_column.set_resizable(True)
+        self.tree_view.append_column(name_column)
+
+        version_column = Gtk.TreeViewColumn(_("Version"), Gtk.CellRendererText(), text=1)
+        version_column.set_resizable(True)
+        self.tree_view.append_column(version_column)
+
+        publisher_column = Gtk.TreeViewColumn(_("Publisher"))
+        self.publisher_icon_renderer = Gtk.CellRendererPixbuf()
+        self.publisher_text_renderer = Gtk.CellRendererText()
+        publisher_column.pack_start(self.publisher_icon_renderer, False)
+        publisher_column.pack_start(self.publisher_text_renderer, True)
+        publisher_column.add_attribute(self.publisher_text_renderer, "text", 2)
+        publisher_column.set_cell_data_func(
+            self.publisher_icon_renderer, self._publisher_icon_data_func
+        )
+        publisher_column.set_resizable(True)
+        publisher_column.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
+        self.tree_view.append_column(publisher_column)
+
+        summary_column = Gtk.TreeViewColumn(_("Summary"), Gtk.CellRendererText(), text=3)
+        summary_column.set_resizable(True)
+        self.tree_view.append_column(summary_column)
+
+        installed_column = Gtk.TreeViewColumn(_("Installed"), Gtk.CellRendererText(), text=4)
+        installed_column.set_resizable(True)
+        self.tree_view.append_column(installed_column)
 
         scrolled = Gtk.ScrolledWindow()
         scrolled.set_policy(Gtk.PolicyType.AUTOMATIC, Gtk.PolicyType.AUTOMATIC)
@@ -386,9 +404,46 @@ class SnapPackageManager(Gtk.Box):
                     package.publisher,
                     package.summary,
                     installed_text,
+                    package.publisher_validation,
                 ]
             )
         self._sync_primary_button()
+
+    def _publisher_icon_data_func(self, _column, cell, model, iter, _data=None) -> None:
+        validation = model.get_value(iter, 5) if iter is not None else ""
+        if validation == "verified":
+            cell.set_property("icon-name", "emblem-default")
+        elif validation == "star-developer":
+            cell.set_property("icon-name", "starred")
+        else:
+            cell.set_property("icon-name", None)
+
+    def _on_query_tooltip(self, _widget, x, y, keyboard_mode, tooltip) -> bool:
+        if keyboard_mode:
+            return False
+
+        result = self.tree_view.get_path_at_pos(x, y)
+        if result is None:
+            return False
+
+        path, column, _cx, _cy = result
+        if path is None or column is not self.tree_view.get_column(2):
+            return False
+
+        model = self.tree_view.get_model()
+        if model is None:
+            return False
+        iter = model.get_iter(path)
+        validation = model.get_value(iter, 5)
+
+        if validation == "verified":
+            tooltip.set_text(_("Verified Account"))
+            return True
+        if validation == "star-developer":
+            tooltip.set_text(_("Star Developer"))
+            return True
+
+        return False
 
     def _filter_packages(self, packages: list[SnapPackage], query: str) -> list[SnapPackage]:
         normalized_query = query.strip().lower()

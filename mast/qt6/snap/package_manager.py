@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Literal
 
 from PySide6.QtCore import QObject, QThread, Signal
+from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import (
     QComboBox,
     QHBoxLayout,
@@ -346,7 +347,14 @@ class SnapPackageManager(QWidget):
         for row, package in enumerate(items):
             self.table.setItem(row, 0, QTableWidgetItem(package.name))
             self.table.setItem(row, 1, QTableWidgetItem(package.version))
-            self.table.setItem(row, 2, QTableWidgetItem(package.publisher))
+            publisher_item = QTableWidgetItem(package.publisher)
+            if package.publisher_validation == "verified":
+                publisher_item.setIcon(QIcon.fromTheme("emblem-default"))
+                publisher_item.setToolTip(_("Verified Account"))
+            elif package.publisher_validation == "star-developer":
+                publisher_item.setIcon(QIcon.fromTheme("starred"))
+                publisher_item.setToolTip(_("Star Developer"))
+            self.table.setItem(row, 2, publisher_item)
             self.table.setItem(row, 3, QTableWidgetItem(package.summary))
             installed_text = _("Yes") if package.name in self.installed_names else _("No")
             self.table.setItem(row, 4, QTableWidgetItem(installed_text))

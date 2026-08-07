@@ -19,6 +19,7 @@ class SnapPackage:
     revision: str = ""
     tracking: str = ""
     publisher: str = ""
+    publisher_validation: str = ""
     summary: str = ""
 
 
@@ -75,6 +76,7 @@ def _snap_from_dict(data: dict) -> SnapPackage:
         revision=str(data.get("revision", "")),
         tracking=data.get("tracking-channel", ""),
         publisher=publisher,
+        publisher_validation=publisher_data.get("validation", ""),
         summary=data.get("summary", ""),
     )
 
