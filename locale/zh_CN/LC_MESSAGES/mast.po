@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-07 16:04+0000\n"
-"PO-Revision-Date: 2026-08-07 16:14\n"
+"POT-Creation-Date: 2026-08-07 16:48+0000\n"
+"PO-Revision-Date: 2026-08-07 16:57\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -429,7 +429,9 @@ msgid "Type"
 msgstr "类型"
 
 #: mast/gtk4/android/package_manager_panel.py:253
+#: mast/gtk4/snap/package_manager.py:380
 #: mast/qt6/android/package_manager_panel.py:422
+#: mast/qt6/flatpak/package_manager.py:94 mast/qt6/snap/package_manager.py:252
 msgid "Uninstall Package"
 msgstr "卸载包"
 
@@ -1137,10 +1139,11 @@ msgid "Failed to load package catalog: {0}"
 msgstr "加载软件包目录失败：{0}"
 
 #: mast/gtk4/flatpak/package_manager.py:242
-#: mast/qt6/flatpak/package_manager.py:491
+#: mast/gtk4/snap/package_manager.py:286
+#: mast/qt6/flatpak/package_manager.py:491 mast/qt6/snap/package_manager.py:397
 #, python-brace-format
-msgid "Failed to load Flatpak packages: {0}"
-msgstr "加载 Flatpak 软件包失败：{0}"
+msgid "Failed to load packages: {0}"
+msgstr ""
 
 #: mast/gtk4/flatpak/package_manager.py:300
 #: mast/qt6/flatpak/package_manager.py:347
@@ -1360,29 +1363,29 @@ msgstr "字体配置"
 
 #: mast/gtk4/fontconfig/alias_tab.py:38 mast/qt6/fontconfig/alias_tab.py:42
 msgid "Original Font"
-msgstr ""
+msgstr "原始字体"
 
 #: mast/gtk4/fontconfig/alias_tab.py:40 mast/qt6/fontconfig/alias_tab.py:43
 msgid "Preferred Font"
-msgstr ""
+msgstr "偏好字体"
 
 #: mast/gtk4/fontconfig/alias_tab.py:58 mast/gtk4/fontconfig/match_tab.py:209
 #: mast/qt6/fontconfig/alias_tab.py:51 mast/qt6/fontconfig/match_tab.py:153
 msgid "Font family"
-msgstr ""
+msgstr "字体族"
 
 #: mast/gtk4/fontconfig/alias_tab.py:72 mast/gtk4/fontconfig/match_tab.py:87
 #: mast/qt6/fontconfig/alias_tab.py:62 mast/qt6/fontconfig/match_tab.py:75
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: mast/gtk4/fontconfig/alias_tab.py:126 mast/qt6/fontconfig/alias_tab.py:91
 msgid "Font family is required."
-msgstr ""
+msgstr "字体族是必需的。"
 
 #: mast/gtk4/fontconfig/match_tab.py:42 mast/qt6/fontconfig/match_tab.py:44
 msgid "Match List"
-msgstr ""
+msgstr "匹配列表"
 
 #: mast/gtk4/fontconfig/match_tab.py:55 mast/gtk4/fontconfig/match_tab.py:184
 #: mast/gtk4/fontconfig/match_tab.py:189 mast/gtk4/snapshots/window.py:63
@@ -2301,148 +2304,140 @@ msgstr "日志输出结束。"
 
 #: mast/gtk4/snap/__init__.py:16 mast/qt6/snap/__init__.py:10
 msgid "Snap Packages"
-msgstr ""
+msgstr "Snap 包"
 
 #: mast/gtk4/snap/install_action.py:22 mast/gtk4/snap/install_action.py:24
 #: mast/qt6/snap/install_action.py:18 mast/qt6/snap/install_action.py:20
 msgid "Install Snap"
-msgstr ""
+msgstr "安装 Snap"
 
 #: mast/gtk4/snap/install_action.py:23 mast/qt6/snap/install_action.py:19
 msgid "Installing Snap..."
-msgstr ""
+msgstr "正在安装 Snap……"
 
 #: mast/gtk4/snap/install_action.py:26 mast/gtk4/snap/window.py:93
 #: mast/qt6/snap/install_action.py:22 mast/qt6/snap/window.py:88
 msgid "Snap installed successfully."
-msgstr ""
+msgstr "Snap 安装成功。"
 
 #: mast/gtk4/snap/package_manager.py:101 mast/gtk4/snap/package_manager.py:367
 #: mast/gtk4/snap/package_manager.py:490 mast/qt6/snap/package_manager.py:109
 #: mast/qt6/snap/package_manager.py:239 mast/qt6/snap/package_manager.py:441
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: mast/gtk4/snap/package_manager.py:106 mast/gtk4/snap/package_manager.py:332
 #: mast/qt6/snap/package_manager.py:114 mast/qt6/snap/package_manager.py:201
 msgid "Update All"
-msgstr ""
+msgstr "全部更新"
 
 #: mast/gtk4/snap/package_manager.py:159 mast/qt6/snap/package_manager.py:146
 msgid "Publisher"
-msgstr ""
+msgstr "发布者"
 
 #: mast/gtk4/snap/package_manager.py:172 mast/qt6/snap/package_manager.py:146
 msgid "Summary"
-msgstr ""
-
-#: mast/gtk4/snap/package_manager.py:286 mast/qt6/snap/package_manager.py:397
-#, python-brace-format
-msgid "Failed to load Snap packages: {0}"
-msgstr ""
+msgstr "概览"
 
 #: mast/gtk4/snap/package_manager.py:332 mast/qt6/snap/package_manager.py:201
 #, python-brace-format
 msgid "Update All ({0})"
-msgstr ""
+msgstr "全部更新 ({0})"
 
 #: mast/gtk4/snap/package_manager.py:360 mast/qt6/snap/package_manager.py:232
 msgid "Package updated successfully."
-msgstr ""
+msgstr "软件包更新成功。"
 
 #: mast/gtk4/snap/package_manager.py:361 mast/qt6/snap/package_manager.py:233
-msgid "Update Snap Package"
+msgid "Update Package"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:364 mast/qt6/snap/package_manager.py:236
 msgid "All packages updated successfully."
-msgstr ""
+msgstr "所有软件包更新成功。"
 
 #: mast/gtk4/snap/package_manager.py:365 mast/qt6/snap/package_manager.py:237
-msgid "Update All Snap Packages"
+msgid "Update All Packages"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:368 mast/qt6/snap/package_manager.py:240
 msgid "Updating..."
-msgstr ""
+msgstr "正在更新……"
 
-#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
-msgid "Install Snap Package"
-msgstr ""
-
-#: mast/gtk4/snap/package_manager.py:380 mast/qt6/snap/package_manager.py:252
-msgid "Uninstall Snap Package"
+#: mast/gtk4/snap/package_manager.py:380 mast/qt6/flatpak/package_manager.py:80
+#: mast/qt6/snap/package_manager.py:252
+msgid "Install Package"
 msgstr ""
 
 #: mast/gtk4/snap/package_manager.py:412 mast/qt6/snap/package_manager.py:279
 msgid "Please select a package from the list."
-msgstr ""
+msgstr "请从列表中选择一个包。"
 
 #: mast/gtk4/snap/package_manager.py:527 mast/qt6/snap/package_manager.py:454
 msgid "Verified Account"
-msgstr ""
+msgstr "认证开发者"
 
 #: mast/gtk4/snap/package_manager.py:530 mast/qt6/snap/package_manager.py:459
 msgid "Star Developer"
-msgstr ""
+msgstr "星级开发者"
 
 #: mast/gtk4/snap/remove_action.py:21 mast/gtk4/snap/remove_action.py:23
 #: mast/qt6/snap/remove_action.py:18 mast/qt6/snap/remove_action.py:20
 msgid "Uninstall Snap"
-msgstr ""
+msgstr "卸载 Snap"
 
 #: mast/gtk4/snap/remove_action.py:22 mast/qt6/snap/remove_action.py:19
 msgid "Uninstalling Snap..."
-msgstr ""
+msgstr "正在卸载 Snap……"
 
 #: mast/gtk4/snap/remove_action.py:25 mast/gtk4/snap/settings.py:50
 #: mast/qt6/snap/remove_action.py:22 mast/qt6/snap/settings.py:40
 msgid "Snap uninstalled successfully."
-msgstr ""
+msgstr "Snap 卸载成功。"
 
 #: mast/gtk4/snap/remove_action.py:41 mast/qt6/snap/remove_action.py:39
 msgid "Are you sure you want to uninstall Snap?"
-msgstr ""
+msgstr "您确定要卸载 Snap 吗？"
 
 #: mast/gtk4/snap/settings.py:58 mast/qt6/snap/settings.py:49
 #, python-brace-format
 msgid "Failed to uninstall Snap: {0}"
-msgstr ""
+msgstr "卸载 Snap 失败：{0}"
 
 #: mast/gtk4/snap/start_snapd_action.py:21
 #: mast/gtk4/snap/start_snapd_action.py:23
 #: mast/qt6/snap/start_snapd_action.py:17
 #: mast/qt6/snap/start_snapd_action.py:19
 msgid "Start Snapd"
-msgstr ""
+msgstr "启动 Snapd"
 
 #: mast/gtk4/snap/start_snapd_action.py:22
 #: mast/qt6/snap/start_snapd_action.py:18
 msgid "Starting Snapd..."
-msgstr ""
+msgstr "正在启动 Snapd……"
 
 #: mast/gtk4/snap/start_snapd_action.py:25 mast/gtk4/snap/window.py:104
 #: mast/qt6/snap/start_snapd_action.py:21 mast/qt6/snap/window.py:99
 msgid "Snapd started successfully."
-msgstr ""
+msgstr "Snapd 已成功启动。"
 
 #: mast/gtk4/snap/window.py:29
 msgid "Snap is not installed"
-msgstr ""
+msgstr "Snap 未安装"
 
 #: mast/gtk4/snap/window.py:42
 msgid "Snapd service is not running"
-msgstr ""
+msgstr "Snapd 服务未运行"
 
 #: mast/gtk4/snap/window.py:99 mast/qt6/snap/window.py:94
 #, python-brace-format
 msgid "Failed to install Snap: {0}"
-msgstr ""
+msgstr "安装 Snap 失败：{0}"
 
 #: mast/gtk4/snap/window.py:110 mast/qt6/snap/window.py:105
 #, python-brace-format
 msgid "Failed to start Snapd: {0}"
-msgstr ""
+msgstr "启动 Snapd 失败：{0}"
 
 #: mast/gtk4/snapshots/__init__.py:16 mast/qt6/snapshots/__init__.py:10
 #: mast/tui/snapshots/__init__.py:12
@@ -3120,16 +3115,8 @@ msgstr ""
 msgid "Installing package..."
 msgstr "正在安装软件包..."
 
-#: mast/qt6/flatpak/package_manager.py:80
-msgid "Install Flatpak Package"
-msgstr "安装 Flatpak 软件包"
-
 #: mast/qt6/flatpak/package_manager.py:93
 msgid "Uninstalling package..."
-msgstr ""
-
-#: mast/qt6/flatpak/package_manager.py:94
-msgid "Uninstall Flatpak Package"
 msgstr ""
 
 #: mast/qt6/flatpak/runtime_manager.py:37
@@ -3202,7 +3189,7 @@ msgstr ""
 
 #: mast/qt6/snap/window.py:116
 msgid "A Snap operation is still running. Please wait for it to finish."
-msgstr ""
+msgstr "Snap 操作仍在运行中，请等待其完成。"
 
 #: mast/qt6/ssh/keys_generate_dialog.py:90
 msgid "Key Name:"
