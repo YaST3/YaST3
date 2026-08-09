@@ -14,6 +14,8 @@ from mast.core.flatpak.runtime import (
     uninstall_flatpak_runtime,
 )
 from mast.core.flatpak.flatpak import (
+    clear_flatpak_cache_command,
+    get_flatpak_cache_size,
     install_flatpak_pkexec,
     is_flatpak_installed,
     remove_flatpak_pkexec,
@@ -28,10 +30,12 @@ from mast.core.flatpak.remote import (
 
 __all__ = [
     "FlatpakPackage",
-    "FlatpakRuntime",
     "FlatpakRemote",
+    "FlatpakRuntime",
     "add_flatpak_remote",
+    "clear_flatpak_cache_command",
     "delete_flatpak_remote",
+    "get_flatpak_cache_size",
     "install_flatpak_pkexec",
     "install_flatpak_package",
     "is_flatpak_installed",
