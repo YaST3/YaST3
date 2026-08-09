@@ -4,6 +4,7 @@
 
 - feat(snap): added snap cache clean function.
 - feat(snap): added snap package size display.
+- feat(flatpak): added flatpak cache clean function.
 
 ## 0.0.28 - 2026-08-07
 
