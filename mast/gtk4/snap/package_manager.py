@@ -136,7 +136,7 @@ class SnapPackageManager(Gtk.Box):
         self._create_table()
 
     def _create_table(self) -> None:
-        self.list_store = Gtk.ListStore(str, str, str, str, str, str, str)
+        self.list_store = Gtk.ListStore(str, str, str, str, str, str, str, str)
 
         self.tree_view = Gtk.TreeView(model=self.list_store)
         self.tree_view.set_hexpand(True)
@@ -156,12 +156,16 @@ class SnapPackageManager(Gtk.Box):
         version_column.set_max_width(80)
         self.tree_view.append_column(version_column)
 
+        size_column = Gtk.TreeViewColumn(_("Size"), Gtk.CellRendererText(), text=2)
+        size_column.set_resizable(True)
+        self.tree_view.append_column(size_column)
+
         publisher_column = Gtk.TreeViewColumn(_("Publisher"))
         self.publisher_icon_renderer = Gtk.CellRendererPixbuf()
         self.publisher_text_renderer = Gtk.CellRendererText()
         publisher_column.pack_start(self.publisher_icon_renderer, False)
         publisher_column.pack_start(self.publisher_text_renderer, True)
-        publisher_column.add_attribute(self.publisher_text_renderer, "text", 2)
+        publisher_column.add_attribute(self.publisher_text_renderer, "text", 3)
         publisher_column.set_cell_data_func(
             self.publisher_icon_renderer, self._publisher_icon_data_func
         )
@@ -169,7 +173,7 @@ class SnapPackageManager(Gtk.Box):
         publisher_column.set_sizing(Gtk.TreeViewColumnSizing.AUTOSIZE)
         self.tree_view.append_column(publisher_column)
 
-        summary_column = Gtk.TreeViewColumn(_("Summary"), Gtk.CellRendererText(), text=3)
+        summary_column = Gtk.TreeViewColumn(_("Summary"), Gtk.CellRendererText(), text=4)
         summary_column.set_resizable(True)
         summary_column.set_expand(True)
         self.tree_view.append_column(summary_column)
@@ -463,6 +467,7 @@ class SnapPackageManager(Gtk.Box):
                 [
                     package.name,
                     package.version,
+                    package.size,
                     package.publisher,
                     package.summary,
                     "",
@@ -482,7 +487,7 @@ class SnapPackageManager(Gtk.Box):
         return "installed"
 
     def _installed_text_data_func(self, _column, cell, model, iter, _data=None) -> None:
-        status = model.get_value(iter, 6) if iter is not None else "not_installed"
+        status = model.get_value(iter, 7) if iter is not None else "not_installed"
         if status == "installed":
             cell.set_property("text", _("Yes"))
             cell.set_property("foreground", "#22c55e")
@@ -494,7 +499,7 @@ class SnapPackageManager(Gtk.Box):
             cell.set_property("foreground", None)
 
     def _publisher_icon_data_func(self, _column, cell, model, iter, _data=None) -> None:
-        validation = model.get_value(iter, 5) if iter is not None else ""
+        validation = model.get_value(iter, 6) if iter is not None else ""
         if validation == "verified":
             cell.set_property("pixbuf", None)
             cell.set_property("icon-name", "data-success")
@@ -514,14 +519,14 @@ class SnapPackageManager(Gtk.Box):
             return False
 
         path, column, _cx, _cy = result
-        if path is None or column is not self.tree_view.get_column(2):
+        if path is None or column is not self.tree_view.get_column(3):
             return False
 
         model = self.tree_view.get_model()
         if model is None:
             return False
         iter = model.get_iter(path)
-        validation = model.get_value(iter, 5)
+        validation = model.get_value(iter, 6)
 
         if validation == "verified":
             tooltip.set_text(_("Verified Account"))

@@ -1,5 +1,10 @@
 # Change Log
 
+## 0.0.29 - 2026-08-09
+
+- feat(snap): added snap cache clean function.
+- feat(snap): added snap package size display.
+
 ## 0.0.28 - 2026-08-07
 
 - feat(snap): added snap module to manage snap packages.

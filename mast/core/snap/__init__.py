@@ -6,10 +6,20 @@ from mast.core.snap.package import (
     search_snap_packages,
 )
 
-from mast.core.snap.snap import install_snap_command, is_snap_installed, is_snapd_running, remove_snap_command, start_snapd_command
+from mast.core.snap.snap import (
+    clear_snap_cache_command,
+    get_snap_cache_size,
+    install_snap_command,
+    is_snap_installed,
+    is_snapd_running,
+    remove_snap_command,
+    start_snapd_command,
+)
 
 __all__ = [
     "SnapPackage",
+    "clear_snap_cache_command",
+    "get_snap_cache_size",
     "install_snap_command",
     "is_snap_installed",
     "is_snapd_running",
