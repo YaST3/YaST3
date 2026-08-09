@@ -54,6 +54,7 @@ class FlatpakWindow(QMainWindow):
         self.remote_manager = FlatpakRemoteManager(self.tabs)
         self.settings_tab = FlatpakSettingsTab(self.tabs)
         self.settings_tab.uninstall_action.action_finished.connect(self._on_uninstall_finished)
+        self.settings_tab.clear_cache_action.action_finished.connect(self._on_clear_cache_finished)
         self.tabs.addTab(self.package_search_manager, _("Search"))
         self.tabs.addTab(self.package_installed_manager, _("Installed"))
         self.tabs.addTab(self.runtime_manager, _("Runtimes"))
@@ -106,8 +107,20 @@ class FlatpakWindow(QMainWindow):
                 _("Failed to uninstall Flatpak: {0}").format(error or _("Unknown error")),
             )
 
+    def _on_clear_cache_finished(self, success: bool, error: str, _stdout: str) -> None:
+        if not success:
+            QMessageBox.critical(
+                self,
+                _("Error"),
+                _("Failed to clear Flatpak cache: {0}").format(error or _("Unknown error")),
+            )
+
     def closeEvent(self, event) -> None:
-        if self.install_action.is_running() or self.settings_tab.uninstall_action.is_running():
+        if (
+            self.install_action.is_running()
+            or self.settings_tab.uninstall_action.is_running()
+            or self.settings_tab.clear_cache_action.is_running()
+        ):
             QMessageBox.warning(
                 self,
                 _("Please wait"),
