@@ -141,15 +141,16 @@ class SnapPackageManager(QWidget):
         layout.addLayout(btn_layout)
 
         self.table = QTableWidget(self)
-        self.table.setColumnCount(5)
+        self.table.setColumnCount(6)
         self.table.setHorizontalHeaderLabels(
-            [_("Name"), _("Version"), _("Publisher"), _("Summary"), _("Installed")]
+            [_("Name"), _("Version"), _("Size"), _("Publisher"), _("Summary"), _("Installed")]
         )
         self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.Interactive)
         self.table.horizontalHeader().setSectionResizeMode(2, QHeaderView.ResizeMode.ResizeToContents)
-        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
-        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(4, QHeaderView.ResizeMode.Stretch)
+        self.table.horizontalHeader().setSectionResizeMode(5, QHeaderView.ResizeMode.ResizeToContents)
         self.table.setColumnWidth(1, 80)
         self.table.horizontalHeader().setStretchLastSection(False)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
@@ -414,9 +415,10 @@ class SnapPackageManager(QWidget):
         for row, package in enumerate(items):
             self.table.setItem(row, 0, QTableWidgetItem(package.name))
             self.table.setItem(row, 1, QTableWidgetItem(package.version))
-            self.table.setItem(row, 2, self._make_publisher_item(package))
-            self.table.setItem(row, 3, QTableWidgetItem(package.summary))
-            self.table.setItem(row, 4, self._make_installed_item(
+            self.table.setItem(row, 2, QTableWidgetItem(package.size))
+            self.table.setItem(row, 3, self._make_publisher_item(package))
+            self.table.setItem(row, 4, QTableWidgetItem(package.summary))
+            self.table.setItem(row, 5, self._make_installed_item(
                 package.name, installed_versions, remote_versions
             ))
         self._sync_action_buttons()

@@ -5,6 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import snap_http
+from bytesize import Size
 from snap_http import http as snap_http_http
 
 from mast.core.snap.snap import is_snap_installed, is_snapd_running
@@ -16,6 +17,7 @@ class SnapPackage:
 
     name: str
     version: str = ""
+    size: str = ""
     revision: str = ""
     tracking: str = ""
     publisher: str = ""
@@ -70,9 +72,11 @@ def _snap_from_dict(data: dict) -> SnapPackage:
     """Convert a snap dict from snapd API to SnapPackage."""
     publisher_data = data.get("publisher") or {}
     publisher = publisher_data.get("display-name") or publisher_data.get("username", "")
+    size_bytes = data.get("installed-size") or data.get("download-size") or 0
     return SnapPackage(
         name=data.get("name", ""),
         version=data.get("version", ""),
+        size=Size(size_bytes).human_readable() if size_bytes else "",
         revision=str(data.get("revision", "")),
         tracking=data.get("tracking-channel", ""),
         publisher=publisher,
