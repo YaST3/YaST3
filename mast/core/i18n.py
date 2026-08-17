@@ -10,6 +10,10 @@ APP_NAME = "mast"
 
 # Locale search paths in priority order
 LOCALE_DIRS = [
+    # AppImage bundle (the runtime exposes the mount point as $APPDIR)
+    os.path.join(os.environ["APPDIR"], "usr", "share", "locale")
+    if "APPDIR" in os.environ
+    else None,
     # Development path (relative to package)
     os.path.join(os.path.dirname(__file__), "..", "..", "locale"),
     # User local installation
@@ -18,6 +22,9 @@ LOCALE_DIRS = [
     "/usr/local/share/locale",
     "/usr/share/locale",
 ]
+
+# Drop placeholder entries produced by conditional appends above.
+LOCALE_DIRS = [path for path in LOCALE_DIRS if path is not None]
 
 # Type alias for gettext function
 _GettextFunc = Callable[[str], str]

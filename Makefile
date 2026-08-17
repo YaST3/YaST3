@@ -14,6 +14,8 @@ XARGS = xargs
 prefix ?= $(HOME)/.local
 datadir ?= $(prefix)/share
 appdir ?= $(datadir)/applications
+APPIMAGE_BUILDER ?= ./appimage-builder-x86_64.AppImage
+APPIMAGE_BUILDER_URL ?= https://github.com/AppImageCrafters/appimage-builder/releases/download/v1.1.0/appimage-builder-1.1.0-x86_64.AppImage
 
 install_args =
 ifdef DESTDIR
@@ -26,7 +28,7 @@ install_args += --upgrade
 PYTHON_DIRS = mast
 PYTHON_DIRS += tests
 
-.PHONY: install install-desktop-files install-system dist clean
+.PHONY: install install-desktop-files install-system dist clean appimage
 .PHONY: i18n-update i18n-compile
 
 install:: all
@@ -42,6 +44,14 @@ install-system::
 dist:: clean
 	$(PIP) install --upgrade build
 	$(PYTHON) -m build --outdir dist .
+
+# Download the standalone appimage-builder AppImage if it is missing.
+$(APPIMAGE_BUILDER):
+	wget -O $@ $(APPIMAGE_BUILDER_URL)
+	chmod +x $@
+
+appimage:: $(APPIMAGE_BUILDER)
+	$(APPIMAGE_BUILDER) --recipe AppImageBuilder.yml
 
 clean::
 	$(FIND) $(PYTHON_DIRS) -name '*.py[cod]' -print0 | $(XARGS) -0 $(RM)

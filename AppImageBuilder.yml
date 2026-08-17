@@ -1,0 +1,113 @@
+# appimage-builder recipe for the MaST Qt6 AppImage.
+#
+# Build locally with Docker:
+#   docker run --rm --privileged -v "$PWD:/project" -w /project \
+#     appimagecrafters/appimage-builder --recipe AppImageBuilder.yml
+#
+# Or install appimage-builder and run:
+#   appimage-builder --recipe AppImageBuilder.yml
+#
+# The embedded Python is Ubuntu 24.04 (noble) Python 3.12. If you change the
+# apt sources below, remember to update the PYTHONPATH / SSL_CERT_FILE paths in
+# the runtime section (they embed the python minor version, i.e. "python3.12").
+
+version: 1
+
+script:
+  # Work from the recipe (project root) directory.
+  - cd "$SOURCE_DIR"
+  # Remove any previous build.
+  - rm -rf AppDir || true
+  # Stage the AppDir skeleton.
+  - mkdir -p AppDir/usr/src
+  - mkdir -p AppDir/usr/share/applications AppDir/usr/share/metainfo AppDir/usr/share/icons/hicolor/64x64/apps
+  # Stage desktop integration files.
+  - cp packaging/me.guoyunhe.mast.qt6.desktop AppDir/usr/share/applications/
+  - cp packaging/me.guoyunhe.mast.qt6.metainfo.xml AppDir/usr/share/metainfo/
+  - cp packaging/me.guoyunhe.mast.qt6.svg AppDir/usr/share/icons/hicolor/64x64/apps/
+
+AppDir:
+  path: ./AppDir
+
+  app_info:
+    id: me.guoyunhe.mast.qt6
+    name: MaST Qt6
+    icon: me.guoyunhe.mast.qt6
+    version: 0.0.29
+    # Launch the bundled interpreter with the mast.qt6 module.
+    exec: usr/bin/python3
+    exec_args: -m mast.qt6 $@
+
+  # Install the application and its Python dependencies using the freshly
+  # bundled interpreter, so compiled wheels (PySide6, systemd, ...) always
+  # match the embedded Python ABI.
+  after_bundle: |
+    export PYTHONHOME="${APPDIR}/usr"
+    export PYTHONPATH="${APPDIR}/usr/lib/python3/dist-packages"
+    export PATH="${APPDIR}/usr/bin:$PATH"
+
+    python3 -m pip install --no-input --no-cache-dir --no-warn-script-location \
+        --prefix="${APPDIR}/usr" "${SOURCE_DIR}[qt6]"
+
+  apt:
+    arch: amd64
+    sources:
+      - sourceline: deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ noble main restricted universe multiverse
+        key_url: http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x871920D1991BC93C
+      - sourceline: deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ noble-updates main restricted universe multiverse
+        key_url: http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x871920D1991BC93C
+    include:
+      # Python runtime and tooling.
+      - python3
+      - python3-pip
+      - python3-certifi
+      # TLS / crypto (used by snap-http, adbutils, aptabase).
+      - ca-certificates
+      - libssl3
+      # Qt base libraries (PySide6 wheels bundle Qt itself, but these
+      # low-level system libraries are still required at runtime).
+      - libgl1
+      - libegl1
+      - libxcb-cursor0
+      - libxcb-icccm4
+      - libxcb-image0
+      - libxcb-keysyms1
+      - libxcb-render-util0
+      - libxcb-shape0
+      - libxcb-xkb1
+      - libxcb-xinerama0
+      - libxcb-xinput0
+      - libxcb-randr0
+      - libxkbcommon0
+      - libxkbcommon-x11-0
+      - libxrender1
+      - libxi6
+      - libxext6
+      - libxfixes3
+      - libxcursor1
+      - fontconfig
+      - libfontconfig1
+      - libfreetype6
+      - libglib2.0-0
+      - libdbus-1-3
+      # Native library for the "systemd" Python bindings.
+      - libsystemd0
+
+  files:
+    exclude:
+      - usr/share/man
+      - usr/share/doc
+
+  runtime:
+    env:
+      # Point the bundled interpreter at the embedded standard library.
+      PYTHONHOME: '${APPDIR}/usr'
+      # Look up the pip-installed packages and the apt-provided Python modules.
+      PYTHONPATH: '${APPDIR}/usr/lib/python3.12/site-packages:${APPDIR}/usr/lib/python3/dist-packages'
+      # Ship our own CA bundle: distros store certificates in many locations.
+      SSL_CERT_FILE: '${APPDIR}/usr/lib/python3/dist-packages/certifi/cacert.pem'
+
+AppImage:
+  arch: x86_64
+  file_name: mast-qt6-0.0.29-x86_64.AppImage
+  update-information: gh-releases-zsync|guoyunhe|mast|latest|mast-qt6-*x86_64.AppImage.zsync

@@ -8,3 +8,8 @@ venv/
 build/
 dist/
 .trae/
+# AppImage build artifacts
+AppDir/
+appimage-build/
+*.AppImage
+*.AppImage.zsync

@@ -62,6 +62,39 @@ sudo dnf config-manager addrepo --from-repofile=https://download.opensuse.org/re
 sudo dnf install mast-qt6 # or mast-gtk4 or mast-tui
 ```
 
+### AppImage (all distributions)
+
+The Qt6 frontend is also distributed as a self-contained
+[AppImage](https://appimage.org) that runs on any modern GNU/Linux distribution.
+
+Download `mast-qt6-*-x86_64.AppImage` from the
+[latest release](https://github.com/guoyunhe/mast/releases/latest), make it
+executable and run it:
+
+```bash
+chmod +x mast-qt6-*-x86_64.AppImage
+./mast-qt6-*-x86_64.AppImage
+```
+
+To build it yourself, run:
+
+```bash
+# Downloads appimage-builder automatically, then builds the AppImage
+make appimage
+```
+
+Or use Docker (requires network access for apt and pip):
+
+```bash
+docker run --rm --privileged -v "$PWD:/project" -w /project \
+  appimagecrafters/appimage-builder --recipe AppImageBuilder.yml
+```
+
+The build bundles Ubuntu 24.04 (noble) Python 3.12 together with PySide6 and
+all runtime libraries, so the resulting AppImage does not depend on the host
+distribution's Python or Qt installation. Builds are automated by the
+`build-appimage.yml` workflow and attached to every `v*` tag release.
+
 ## Development
 
 ```bash
