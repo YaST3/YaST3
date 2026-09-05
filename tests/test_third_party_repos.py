@@ -39,13 +39,13 @@ class TestThirdPartyRepos(unittest.TestCase):
             "brave-browser",
             "collabora-office",
             "dotnet",
-            "SoftMaker",
+            "softmaker",
             "jami",
             "librewolf",
-            "megasync",
+            "mega",
             "microsoft-edge",
             "mullvad",
-            "PlexRepo",
+            "plex",
             "resilio-sync",
             "skype-stable",
             "slack",
@@ -55,12 +55,17 @@ class TestThirdPartyRepos(unittest.TestCase):
             "hashicorp",
             "vivaldi",
             "vscodium",
-            "yandex-browser-stable",
+            "yandex-browser",
             "yandex-disk",
         ):
             self.assertIn(repo_id, repositories)
             self.assertTrue(repositories[repo_id].baseurl)
             self.assertTrue(repositories[repo_id].gpgkey)
+
+    def test_all_repositories_are_enabled_and_autorefreshed(self) -> None:
+        """All predefined repositories should be enabled and auto-refreshed."""
+        self.assertTrue(all(repo.enabled for repo in third_party_repos))
+        self.assertTrue(all(repo.autorefresh for repo in third_party_repos))
 
     def test_google_chrome_repository(self) -> None:
         """Google Chrome should be available from the repository import menu."""
@@ -103,7 +108,7 @@ class TestThirdPartyRepos(unittest.TestCase):
 
         self.assertEqual(rpmfusion.filename, "rpmfusion-free.repo")
         self.assertEqual(rpmfusion.name, "RPM Fusion Free")
-        self.assertFalse(rpmfusion.enabled)
+        self.assertTrue(rpmfusion.enabled)
         self.assertEqual(
             rpmfusion.other_options["metalink"],
             "https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch",
@@ -123,7 +128,7 @@ class TestThirdPartyRepos(unittest.TestCase):
 
         self.assertEqual(rpmfusion.filename, "rpmfusion-nonfree.repo")
         self.assertEqual(rpmfusion.name, "RPM Fusion Nonfree")
-        self.assertFalse(rpmfusion.enabled)
+        self.assertTrue(rpmfusion.enabled)
         self.assertEqual(
             rpmfusion.other_options["metalink"],
             "https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch",

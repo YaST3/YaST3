@@ -72,10 +72,10 @@ third_party_repos = [
         gpgkey="https://rpm.librewolf.net/pubkey.gpg",
     ),
     RepoEntry(
-        id="megasync",
-        name="MEGAsync",
-        baseurl="https://mega.nz/linux/repo/openSUSE_Tumbleweed/",
-        gpgkey="https://mega.nz/linux/repo/openSUSE_Tumbleweed/repodata/repomd.xml.key",
+        id="mega",
+        name="MEGA",
+        baseurl=f"https://mega.nz/linux/repo/{distro}/",
+        gpgkey=f"https://mega.nz/linux/repo/{distro}/repodata/repomd.xml.key",
     ),
     RepoEntry(
         id="microsoft-edge",
@@ -193,8 +193,6 @@ if os_id == "fedora":
         RepoEntry(
             id="rpmfusion-free",
             name="RPM Fusion Free",
-            enabled=False,
-            autorefresh=True,
             type="rpm-md",
             gpgcheck=False,
             repo_gpgcheck=False,
@@ -208,8 +206,6 @@ if os_id == "fedora":
         RepoEntry(
             id="rpmfusion-nonfree",
             name="RPM Fusion Nonfree",
-            enabled=False,
-            autorefresh=True,
             type="rpm-md",
             gpgcheck=False,
             repo_gpgcheck=False,
@@ -226,8 +222,6 @@ if os_id == "opensuse" or os_id.startswith("opensuse-"):
         RepoEntry(
             id="packman",
             name="Packman",
-            enabled=True,
-            autorefresh=True,
             baseurl=f"https://ftp.gwdg.de/pub/linux/misc/packman/suse/{distro}/",
             gpgkey=f"https://ftp.gwdg.de/pub/linux/misc/packman/suse/{distro}/repodata/repomd.xml.key",
             gpgcheck=True,
@@ -238,8 +232,6 @@ if os_id == "opensuse" or os_id.startswith("opensuse-"):
         RepoEntry(
             id="vlc",
             name="VLC",
-            enabled=True,
-            autorefresh=True,
             baseurl=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/",
             gpgkey=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/repodata/repomd.xml.key",
             gpgcheck=True,
