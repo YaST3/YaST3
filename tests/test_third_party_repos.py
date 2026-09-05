@@ -19,7 +19,7 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertEqual(chrome.name, "Google Chrome")
         self.assertEqual(
             chrome.baseurl,
-            "http://dl.google.com/linux/chrome/rpm/stable/$basearch",
+            "http://dl.google.com/linux/chrome/rpm/stable/$basearch/",
         )
         self.assertTrue(chrome.enabled)
         self.assertTrue(chrome.gpgcheck)
@@ -51,7 +51,7 @@ class TestThirdPartyRepos(unittest.TestCase):
         )
 
         self.assertEqual(rpmfusion.filename, "rpmfusion-free.repo")
-        self.assertEqual(rpmfusion.name, "RPM Fusion for Fedora - Free")
+        self.assertEqual(rpmfusion.name, "RPM Fusion Free")
         self.assertFalse(rpmfusion.enabled)
         self.assertEqual(
             rpmfusion.other_options["metalink"],
@@ -60,6 +60,25 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertEqual(rpmfusion.other_options["metadata_expire"], "14d")
         self.assertFalse(rpmfusion.repo_gpgcheck)
         self.assertEqual(rpmfusion.gpgkey, "")
+        self.assertFalse(rpmfusion.gpgcheck)
+
+    def test_rpmfusion_nonfree_repository(self) -> None:
+        """RPM Fusion Nonfree should be available on Fedora."""
+        if not any(repo.id == "rpmfusion-nonfree" for repo in third_party_repos):
+            self.skipTest("RPM Fusion is only available on Fedora")
+        rpmfusion = next(
+            repo for repo in third_party_repos if repo.id == "rpmfusion-nonfree"
+        )
+
+        self.assertEqual(rpmfusion.filename, "rpmfusion-nonfree.repo")
+        self.assertEqual(rpmfusion.name, "RPM Fusion Nonfree")
+        self.assertFalse(rpmfusion.enabled)
+        self.assertEqual(
+            rpmfusion.other_options["metalink"],
+            "https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch",
+        )
+        self.assertEqual(rpmfusion.other_options["metadata_expire"], "14d")
+        self.assertFalse(rpmfusion.repo_gpgcheck)
         self.assertFalse(rpmfusion.gpgcheck)
 
 

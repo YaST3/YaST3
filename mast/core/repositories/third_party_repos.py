@@ -33,7 +33,7 @@ if os_id == "fedora":
     third_party_repos.append(
         RepoEntry(
             id="rpmfusion-free",
-            name="RPM Fusion for Fedora - Free",
+            name="RPM Fusion Free",
             enabled=False,
             autorefresh=True,
             type="rpm-md",
@@ -41,6 +41,21 @@ if os_id == "fedora":
             repo_gpgcheck=False,
             other_options={
                 "metalink": "https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch",
+                "metadata_expire": "14d",
+            },
+        )
+    )
+    third_party_repos.append(
+        RepoEntry(
+            id="rpmfusion-nonfree",
+            name="RPM Fusion Nonfree",
+            enabled=False,
+            autorefresh=True,
+            type="rpm-md",
+            gpgcheck=False,
+            repo_gpgcheck=False,
+            other_options={
+                "metalink": "https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch",
                 "metadata_expire": "14d",
             },
         )
@@ -71,3 +86,5 @@ if os_id == "opensuse" or os_id.startswith("opensuse-"):
             gpgcheck=True,
         )
     )
+
+third_party_repos.sort(key=lambda repo: repo.name.lower())
