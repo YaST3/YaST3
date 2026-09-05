@@ -29,4 +29,14 @@ third_party_repos = [
         gpgcheck=True,
         priority=120,
     ),
+    RepoEntry(
+        filename="vlc.repo",
+        id="vlc",
+        name="VLC",
+        enabled=True,
+        autorefresh=True,
+        baseurl=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/",
+        gpgkey=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/repodata/repomd.xml.key",
+        gpgcheck=False,
+    ),
 ]
