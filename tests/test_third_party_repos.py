@@ -67,6 +67,12 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertTrue(all(repo.enabled for repo in third_party_repos))
         self.assertTrue(all(repo.autorefresh for repo in third_party_repos))
 
+    def test_repositories_with_gpg_keys_check_packages(self) -> None:
+        """Repositories with signing keys should enable package verification."""
+        for repo in third_party_repos:
+            if repo.gpgkey:
+                self.assertTrue(repo.gpgcheck, repo.id)
+
     def test_google_chrome_repository(self) -> None:
         """Google Chrome should be available from the repository import menu."""
         chrome = next(repo for repo in third_party_repos if repo.id == "google-chrome")
@@ -117,6 +123,7 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertFalse(rpmfusion.repo_gpgcheck)
         self.assertEqual(rpmfusion.gpgkey, "")
         self.assertFalse(rpmfusion.gpgcheck)
+        self.assertEqual(rpmfusion.priority, 70)
 
     def test_rpmfusion_nonfree_repository(self) -> None:
         """RPM Fusion Nonfree should be available on Fedora."""
@@ -136,6 +143,7 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertEqual(rpmfusion.other_options["metadata_expire"], "14d")
         self.assertFalse(rpmfusion.repo_gpgcheck)
         self.assertFalse(rpmfusion.gpgcheck)
+        self.assertEqual(rpmfusion.priority, 70)
 
 
 class TestRepositoryDirectory(unittest.TestCase):

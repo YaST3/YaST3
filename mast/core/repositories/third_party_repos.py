@@ -35,7 +35,6 @@ third_party_repos = [
         name="Collabora Office 24.04 Snapshot",
         baseurl="https://www.collaboraoffice.com/downloads/Collabora-Office-24-Snapshot/Linux/yum",
         gpgkey="https://www.collaboraoffice.com/downloads/Collabora-Office-24-Snapshot/Linux/yum/repodata/repomd.xml.key",
-        gpgcheck=True,
     ),
     RepoEntry(
         id="dotnet",
@@ -49,7 +48,6 @@ third_party_repos = [
         enabled=True,
         autorefresh=True,
         baseurl="http://dl.google.com/linux/chrome/rpm/stable/$basearch/",
-        gpgcheck=True,
         gpgkey="https://dl.google.com/linux/linux_signing_key.pub",
     ),
     RepoEntry(
@@ -63,7 +61,6 @@ third_party_repos = [
         name="Jami",
         baseurl="https://dl.jami.net/nightly/opensuse-tumbleweed/",
         gpgkey="https://dl.jami.net/jami.pub.key",
-        gpgcheck=False,
     ),
     RepoEntry(
         id="librewolf",
@@ -88,16 +85,12 @@ third_party_repos = [
         name="Mullvad VPN",
         baseurl="https://repository.mullvad.net/rpm/stable/$basearch/",
         gpgkey="https://repository.mullvad.net/rpm/mullvad-keyring.asc",
-        gpgcheck=True,
     ),
     RepoEntry(
         id="nvidia",
         name="NVIDIA",
-        enabled=True,
-        autorefresh=True,
         baseurl=f"https://download.nvidia.com/{distro.replace("_", "/").lower()}/",
         gpgkey=f"https://download.nvidia.com/{distro.replace("_", "/").lower()}/repodata/repomd.xml.key",
-        gpgcheck=True,
         priority=120,
     ),
     RepoEntry(
@@ -111,7 +104,6 @@ third_party_repos = [
         name="Resilio Sync",
         baseurl="https://linux-packages.resilio.com/resilio-sync/rpm/$basearch",
         gpgkey="https://linux-packages.resilio.com/resilio-sync/key.asc",
-        gpgcheck=False,
     ),
     RepoEntry(
         id="skype-stable",
@@ -158,10 +150,7 @@ third_party_repos = [
     RepoEntry(
         id="vscode",
         name="Visual Studio Code",
-        enabled=True,
-        autorefresh=True,
         baseurl="https://packages.microsoft.com/yumrepos/vscode",
-        gpgcheck=True,
         gpgkey="https://packages.microsoft.com/keys/microsoft.asc",
     ),
     RepoEntry(
@@ -175,14 +164,12 @@ third_party_repos = [
         name="Yandex Browser",
         baseurl="https://repo.yandex.ru/yandex-browser/rpm/stable/$basearch/",
         gpgkey="https://repo.yandex.ru/yandex-browser/YANDEX-BROWSER-KEY.GPG",
-        gpgcheck=False,
     ),
     RepoEntry(
         id="yandex-disk",
         name="Yandex.Disk",
         baseurl="https://repo.yandex.ru/yandex-disk/rpm/stable/$basearch/",
         gpgkey="https://repo.yandex.ru/yandex-disk/YANDEX-DISK-KEY.GPG",
-        gpgcheck=False,
     ),
 ]
 
@@ -196,6 +183,7 @@ if os_id == "fedora":
             type="rpm-md",
             gpgcheck=False,
             repo_gpgcheck=False,
+            priority=70,
             other_options={
                 "metalink": "https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch",
                 "metadata_expire": "14d",
@@ -209,6 +197,7 @@ if os_id == "fedora":
             type="rpm-md",
             gpgcheck=False,
             repo_gpgcheck=False,
+            priority=70,
             other_options={
                 "metalink": "https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-$releasever&arch=$basearch",
                 "metadata_expire": "14d",
@@ -224,7 +213,6 @@ if os_id == "opensuse" or os_id.startswith("opensuse-"):
             name="Packman",
             baseurl=f"https://ftp.gwdg.de/pub/linux/misc/packman/suse/{distro}/",
             gpgkey=f"https://ftp.gwdg.de/pub/linux/misc/packman/suse/{distro}/repodata/repomd.xml.key",
-            gpgcheck=True,
             priority=70,  # opi project recommends 70 for packman repo
         ),
     )
@@ -234,7 +222,6 @@ if os_id == "opensuse" or os_id.startswith("opensuse-"):
             name="VLC",
             baseurl=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/",
             gpgkey=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/repodata/repomd.xml.key",
-            gpgcheck=True,
         )
     )
 
