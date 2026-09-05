@@ -200,10 +200,8 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
                 dialog.destroy()
                 return
 
-            filename = f"{repo_id}.repo"
             new_entry = RepoEntry(
                 id=repo_id,
-                filename=filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],
@@ -284,7 +282,6 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             entry = self.repo_entries[index]
             self.repo_entries[index] = RepoEntry(
                 id=repo_id,
-                filename=entry.filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],

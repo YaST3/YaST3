@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- feat(repositories): added vlc repository
+
 ## 0.0.29 - 2026-08-09
 
 - feat(snap): added snap cache clean function.

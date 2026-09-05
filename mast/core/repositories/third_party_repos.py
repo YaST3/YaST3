@@ -8,7 +8,6 @@ distro = os_release.get("PRETTY_NAME", "openSUSE Tumbleweed").replace(" ", "_")
 third_party_repos = [
     # http://packman.links2linux.org/
     RepoEntry(
-        filename="packman.repo",
         id="packman",
         name="Packman",
         enabled=True,
@@ -19,7 +18,6 @@ third_party_repos = [
         priority=70, # opi project recommends 70 for packman repo
     ),
     RepoEntry(
-        filename="nvidia.repo",
         id="nvidia",
         name="NVIDIA",
         enabled=True,
@@ -30,13 +28,12 @@ third_party_repos = [
         priority=120,
     ),
     RepoEntry(
-        filename="vlc.repo",
         id="vlc",
         name="VLC",
         enabled=True,
         autorefresh=True,
         baseurl=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/",
         gpgkey=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/repodata/repomd.xml.key",
-        gpgcheck=False,
+        gpgcheck=True,
     ),
 ]

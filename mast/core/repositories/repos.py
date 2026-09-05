@@ -9,7 +9,14 @@ import tempfile
 from dataclasses import dataclass, field
 from typing import Literal
 
-REPOS_DIR = "/etc/zypp/repos.d"
+from mast.core.distro import read_os_release
+
+
+def _repository_dir() -> str:
+    """Return the repository directory for the current distribution."""
+    if read_os_release().get("ID", "").lower() == "fedora":
+        return "/etc/yum.repos.d"
+    return "/etc/zypp/repos.d"
 
 
 @dataclass
@@ -17,7 +24,6 @@ class RepoEntry:
     """Represents a single repository entry."""
 
     id: str
-    filename: str
     name: str = ""
     enabled: bool = True
     autorefresh: bool = True
@@ -30,6 +36,11 @@ class RepoEntry:
     keep_packages: bool = False
     path: str = ""
     other_options: dict = field(default_factory=dict)
+
+    @property
+    def filename(self) -> str:
+        """Return the repository filename derived from its ID."""
+        return f"{self.id}.repo"
 
     @property
     def url(self) -> str:
@@ -47,7 +58,7 @@ def parse_repo_file(filepath: str) -> list[RepoEntry]:
         config.read(filepath)
 
         for section in config.sections():
-            entry = RepoEntry(id=section, filename=os.path.basename(filepath))
+            entry = RepoEntry(id=section)
 
             for key, value in config.items(section):
                 key_lower = key.lower()
@@ -89,16 +100,17 @@ def parse_repo_file(filepath: str) -> list[RepoEntry]:
 
 
 def load_repos() -> list[RepoEntry]:
-    """Load all repositories from /etc/zypp/repos.d/*.repo files."""
+    """Load all repositories from the system repository directory."""
     entries: list[RepoEntry] = []
+    repos_dir = _repository_dir()
 
-    if not os.path.isdir(REPOS_DIR):
+    if not os.path.isdir(repos_dir):
         return entries
 
     try:
-        for filename in os.listdir(REPOS_DIR):
+        for filename in os.listdir(repos_dir):
             if filename.endswith(".repo"):
-                filepath = os.path.join(REPOS_DIR, filename)
+                filepath = os.path.join(repos_dir, filename)
                 if os.path.isfile(filepath):
                     entries.extend(parse_repo_file(filepath))
     except PermissionError:
@@ -113,7 +125,7 @@ def save_repo_entry(
     entry: RepoEntry, use_pkexec: bool = True
 ) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
     """Save a single repository entry to its .repo file."""
-    filepath = os.path.join(REPOS_DIR, entry.filename)
+    filepath = os.path.join(_repository_dir(), entry.filename)
 
     # Check if we need to read existing content
     config = configparser.ConfigParser()
@@ -188,7 +200,7 @@ def delete_repo_entry(
     entry: RepoEntry, use_pkexec: bool = True
 ) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
     """Delete a repository entry from its .repo file."""
-    filepath = os.path.join(REPOS_DIR, entry.filename)
+    filepath = os.path.join(_repository_dir(), entry.filename)
 
     if not os.path.exists(filepath):
         return "ok"

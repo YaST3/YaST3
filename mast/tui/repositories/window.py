@@ -194,10 +194,8 @@ class RepositoriesWindow(Screen):
             self.show_message(_("Error: URL is required."), error=True)
             return
 
-        filename = f"{repo_id}.repo"
         new_entry = RepoEntry(
             id=repo_id,
-            filename=filename,
             name=values.get("name", repo_id),
             enabled=values.get("enabled", True),
             autorefresh=values.get("autorefresh", True),
@@ -234,7 +232,6 @@ class RepositoriesWindow(Screen):
 
         updated_entry = RepoEntry(
             id=repo_id,
-            filename=entry.filename,
             name=values.get("name", repo_id),
             enabled=values.get("enabled", True),
             autorefresh=values.get("autorefresh", True),

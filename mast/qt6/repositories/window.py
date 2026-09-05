@@ -187,10 +187,8 @@ class RepositoriesWindow(QMainWindow):
                 QMessageBox.warning(self, _("Error"), _("URL is required."))
                 return
 
-            filename = f"{repo_id}.repo"
             new_entry = RepoEntry(
                 id=repo_id,
-                filename=filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],
@@ -236,7 +234,6 @@ class RepositoriesWindow(QMainWindow):
 
             self.repo_entries[current_row] = RepoEntry(
                 id=repo_id,
-                filename=entry.filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],
