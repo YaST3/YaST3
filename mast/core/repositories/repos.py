@@ -24,6 +24,7 @@ class RepoEntry:
     """Represents a single repository entry."""
 
     id: str
+    filename: str = ""
     name: str = ""
     enabled: bool = True
     autorefresh: bool = True
@@ -40,13 +41,10 @@ class RepoEntry:
 
     def __post_init__(self) -> None:
         """Use package GPG checking when repository GPG checking is unspecified."""
+        if not self.filename:
+            self.filename = f"{self.id}.repo"
         if self.repo_gpgcheck is None:
             self.repo_gpgcheck = self.gpgcheck
-
-    @property
-    def filename(self) -> str:
-        """Return the repository filename derived from its ID."""
-        return f"{self.id}.repo"
 
     @property
     def url(self) -> str:
@@ -64,7 +62,7 @@ class RepoEntry:
             config.read(filepath)
 
             for section in config.sections():
-                entry = RepoEntry(id=section)
+                entry = RepoEntry(id=section, filename=os.path.basename(filepath))
                 has_repo_gpgcheck = False
 
                 for key, value in config.items(section):

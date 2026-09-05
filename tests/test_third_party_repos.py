@@ -1,5 +1,6 @@
 """Unit tests for predefined third-party repositories."""
 
+import os
 import unittest
 from tempfile import NamedTemporaryFile
 from unittest.mock import patch
@@ -188,6 +189,7 @@ class TestRepoGpgCheckFallback(unittest.TestCase):
             entry = repos.RepoEntry.parse_file(repo_file.name)[0]
 
         self.assertFalse(entry.repo_gpgcheck)
+        self.assertEqual(entry.filename, os.path.basename(repo_file.name))
 
     def test_explicit_repo_gpgcheck_is_preserved(self) -> None:
         with NamedTemporaryFile(mode="w+") as repo_file:
@@ -197,6 +199,11 @@ class TestRepoGpgCheckFallback(unittest.TestCase):
             entry = repos.RepoEntry.parse_file(repo_file.name)[0]
 
         self.assertTrue(entry.repo_gpgcheck)
+
+    def test_filename_can_be_overridden(self) -> None:
+        entry = repos.RepoEntry(id="repo", filename="custom-name.repo")
+
+        self.assertEqual(entry.filename, "custom-name.repo")
 
 
 if __name__ == "__main__":
