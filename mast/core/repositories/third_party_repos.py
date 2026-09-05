@@ -36,4 +36,17 @@ third_party_repos = [
         gpgkey=f"https://download.videolan.org/SuSE/{distro.replace("openSUSE_", "")}/repodata/repomd.xml.key",
         gpgcheck=True,
     ),
+    RepoEntry(
+        id="rpmfusion-free",
+        name="RPM Fusion for Fedora - Free",
+        enabled=False,
+        autorefresh=True,
+        type="rpm-md",
+        gpgcheck=False,
+        repo_gpgcheck=False,
+        other_options={
+            "metalink": "https://mirrors.rpmfusion.org/metalink?repo=free-fedora-$releasever&arch=$basearch",
+            "metadata_expire": "14d",
+        },
+    ),
 ]

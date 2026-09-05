@@ -80,9 +80,14 @@ class RepoEditDialog(QDialog):
         type_layout.addWidget(self.type_combo)
         layout.addLayout(type_layout)
 
-        self.gpgcheck_check = QCheckBox(_("Check GPG signature"))
+        self.gpgcheck_check = QCheckBox(_("Check Package GPG signature"))
         self.gpgcheck_check.setChecked(entry.gpgcheck if entry else True)
         layout.addWidget(self.gpgcheck_check)
+
+        self.repo_gpgcheck_check = QCheckBox(_("Check Repository GPG signature"))
+        self.repo_gpgcheck_check.setChecked(entry.repo_gpgcheck if entry else False)
+        self.gpgcheck_check.toggled.connect(self.repo_gpgcheck_check.setChecked)
+        layout.addWidget(self.repo_gpgcheck_check)
 
         gpgkey_layout = QHBoxLayout()
         gpgkey_layout.addWidget(QLabel(_("GPG Key URL")))
@@ -121,6 +126,7 @@ class RepoEditDialog(QDialog):
             "path": self.path_edit.text().strip(),
             "type": self.type_combo.currentText(),
             "gpgcheck": self.gpgcheck_check.isChecked(),
+            "repo_gpgcheck": self.repo_gpgcheck_check.isChecked(),
             "gpgkey": self.gpgkey_edit.text().strip(),
             "priority": self.priority_spin.value(),
             "keep_packages": self.keep_packages_check.isChecked(),

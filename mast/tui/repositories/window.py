@@ -201,6 +201,7 @@ class RepositoriesWindow(Screen):
             path=values.get("path", ""),
             type=values.get("type", ""),
             gpgcheck=values.get("gpgcheck", False),
+            repo_gpgcheck=values.get("repo_gpgcheck", False),
             gpgkey=values.get("gpgkey", ""),
             priority=values.get("priority", 99),
             keep_packages=values.get("keep_packages", False),
@@ -237,6 +238,7 @@ class RepositoriesWindow(Screen):
             path=values.get("path", ""),
             type=values.get("type", ""),
             gpgcheck=values.get("gpgcheck", False),
+            repo_gpgcheck=values.get("repo_gpgcheck", False),
             gpgkey=values.get("gpgkey", ""),
             priority=values.get("priority", 99),
             keep_packages=values.get("keep_packages", False),
@@ -346,7 +348,8 @@ class RepoEditScreen(Screen):
                 yield Input(value=self._get_value("gpgkey"), id="gpgkey-input", placeholder=_("GPG key URL"))
             yield Checkbox(_("Enabled"), id="enabled-check", value=self._get_bool("enabled", True))
             yield Checkbox(_("Auto Refresh"), id="autorefresh-check", value=self._get_bool("autorefresh", True))
-            yield Checkbox(_("GPG Check"), id="gpgcheck-check", value=self._get_bool("gpgcheck", False))
+            yield Checkbox(_("Package GPG Check"), id="gpgcheck-check", value=self._get_bool("gpgcheck", False))
+            yield Checkbox(_("Repository GPG Check"), id="repo-gpgcheck-check", value=self._get_bool("repo_gpgcheck", False))
             yield Checkbox(_("Keep Packages"), id="keep-packages-check", value=self._get_bool("keep_packages", False))
             with Horizontal(classes="button-row"):
                 yield Button(_("OK"), id="ok-btn", variant="primary")
@@ -384,6 +387,11 @@ class RepoEditScreen(Screen):
         elif event.button.id == "cancel-btn":
             self.app.pop_screen()
 
+    def on_checkbox_changed(self, event: Checkbox.Changed) -> None:
+        """Keep repository signature checking aligned with package checking."""
+        if event.checkbox.id == "gpgcheck-check":
+            self.query_one("#repo-gpgcheck-check", Checkbox).value = event.value
+
     def action_submit(self) -> None:
         """Submit the form."""
         values = {
@@ -397,6 +405,7 @@ class RepoEditScreen(Screen):
             "enabled": self.query_one("#enabled-check", Checkbox).value,
             "autorefresh": self.query_one("#autorefresh-check", Checkbox).value,
             "gpgcheck": self.query_one("#gpgcheck-check", Checkbox).value,
+            "repo_gpgcheck": self.query_one("#repo-gpgcheck-check", Checkbox).value,
             "keep_packages": self.query_one("#keep-packages-check", Checkbox).value,
         }
 

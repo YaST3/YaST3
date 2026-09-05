@@ -31,11 +31,17 @@ class RepoEntry:
     mirrorlist: str = ""
     type: str = "rpm-md"
     gpgcheck: bool = True
+    repo_gpgcheck: bool | None = None
     gpgkey: str = ""
     priority: int = 99
     keep_packages: bool = False
     path: str = ""
     other_options: dict = field(default_factory=dict)
+
+    def __post_init__(self) -> None:
+        """Use package GPG checking when repository GPG checking is unspecified."""
+        if self.repo_gpgcheck is None:
+            self.repo_gpgcheck = self.gpgcheck
 
     @property
     def filename(self) -> str:
@@ -59,6 +65,7 @@ class RepoEntry:
 
             for section in config.sections():
                 entry = RepoEntry(id=section)
+                has_repo_gpgcheck = False
 
                 for key, value in config.items(section):
                     key_lower = key.lower()
@@ -77,6 +84,9 @@ class RepoEntry:
                         entry.type = value
                     elif key_lower == "gpgcheck":
                         entry.gpgcheck = value.lower() in ("1", "true", "yes", "on")
+                    elif key_lower == "repo_gpgcheck":
+                        has_repo_gpgcheck = True
+                        entry.repo_gpgcheck = value.lower() in ("1", "true", "yes", "on")
                     elif key_lower == "gpgkey":
                         entry.gpgkey = value
                     elif key_lower == "priority":
@@ -91,6 +101,8 @@ class RepoEntry:
                     else:
                         entry.other_options[key] = value
 
+                if not has_repo_gpgcheck:
+                    entry.repo_gpgcheck = entry.gpgcheck
                 entries.append(entry)
 
         except Exception:
@@ -149,6 +161,8 @@ class RepoEntry:
             config[self.id]["mirrorlist"] = self.mirrorlist
         config[self.id]["type"] = self.type
         config[self.id]["gpgcheck"] = "1" if self.gpgcheck else "0"
+        repo_gpgcheck = self.gpgcheck if self.repo_gpgcheck is None else self.repo_gpgcheck
+        config[self.id]["repo_gpgcheck"] = "1" if repo_gpgcheck else "0"
         if self.gpgkey:
             config[self.id]["gpgkey"] = self.gpgkey
         config[self.id]["priority"] = str(self.priority)
