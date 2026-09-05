@@ -1,5 +1,12 @@
 # Change Log
 
+## Unreleased
+
+- feat(repositories): added vlc repository
+- feat(repositories): added rpm-fusion repository
+- feat(repositories): added google-chrome repository
+- feat(repositories): added vscode repository
+
 ## 0.0.29 - 2026-08-09
 
 - feat(snap): added snap cache clean function.

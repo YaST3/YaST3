@@ -78,9 +78,14 @@ class RepoEditDialog(Gtk.Dialog):
         type_box.append(self.type_combo)
         content.append(type_box)
 
-        self.gpgcheck_check = Gtk.CheckButton(label=_("Check GPG signature"))
+        self.gpgcheck_check = Gtk.CheckButton(label=_("Check Package GPG signature"))
         self.gpgcheck_check.set_active(entry.gpgcheck if entry else True)
+        self.gpgcheck_check.connect("toggled", self._on_gpgcheck_toggled)
         content.append(self.gpgcheck_check)
+
+        self.repo_gpgcheck_check = Gtk.CheckButton(label=_("Check Repository GPG signature"))
+        self.repo_gpgcheck_check.set_active(entry.repo_gpgcheck if entry else False)
+        content.append(self.repo_gpgcheck_check)
 
         self.gpgkey_entry = self._create_entry_row(content, _("GPG Key URL"), entry.gpgkey if entry else "")
 
@@ -117,6 +122,10 @@ class RepoEditDialog(Gtk.Dialog):
         parent.append(box)
         return entry
 
+    def _on_gpgcheck_toggled(self, button: Gtk.CheckButton) -> None:
+        """Keep repository signature checking aligned with package checking."""
+        self.repo_gpgcheck_check.set_active(button.get_active())
+
     def get_values(self) -> dict:
         """Get the dialog values."""
         url_type = self.url_type_combo.get_active()
@@ -130,6 +139,7 @@ class RepoEditDialog(Gtk.Dialog):
             "path": self.path_entry.get_text().strip(),
             "type": self.type_combo.get_active_text(),
             "gpgcheck": self.gpgcheck_check.get_active(),
+            "repo_gpgcheck": self.repo_gpgcheck_check.get_active(),
             "gpgkey": self.gpgkey_entry.get_text().strip(),
             "priority": int(self.priority_spin.get_value()),
             "keep_packages": self.keep_packages_check.get_active(),

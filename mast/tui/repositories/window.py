@@ -8,9 +8,6 @@ from textual.widgets import Button, Checkbox, DataTable, Header, Input, Label, S
 from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
-    delete_repo_entry,
-    load_repos,
-    save_repo_entry,
     switch_mirror,
 )
 from mast.core.repositories.opensuse_mirrors import opensuse_mirrors
@@ -87,7 +84,7 @@ class RepositoriesWindow(Screen):
         table.clear()
 
         try:
-            self.repo_entries = load_repos()
+            self.repo_entries = RepoEntry.load_repos()
         except PermissionError:
             self.show_message(
                 _("Error: Cannot read repository directory. Root permission required."),
@@ -157,7 +154,7 @@ class RepositoriesWindow(Screen):
             return
 
         entry = self.repo_entries[table.cursor_row]
-        result = delete_repo_entry(entry)
+        result = entry.delete()
         if result == "ok":
             self.repo_entries.pop(table.cursor_row)
             self.populate_table()
@@ -194,10 +191,8 @@ class RepositoriesWindow(Screen):
             self.show_message(_("Error: URL is required."), error=True)
             return
 
-        filename = f"{repo_id}.repo"
         new_entry = RepoEntry(
             id=repo_id,
-            filename=filename,
             name=values.get("name", repo_id),
             enabled=values.get("enabled", True),
             autorefresh=values.get("autorefresh", True),
@@ -206,12 +201,13 @@ class RepositoriesWindow(Screen):
             path=values.get("path", ""),
             type=values.get("type", ""),
             gpgcheck=values.get("gpgcheck", False),
+            repo_gpgcheck=values.get("repo_gpgcheck", False),
             gpgkey=values.get("gpgkey", ""),
             priority=values.get("priority", 99),
             keep_packages=values.get("keep_packages", False),
         )
 
-        result = save_repo_entry(new_entry)
+        result = new_entry.save()
         if result == "ok":
             self.repo_entries.append(new_entry)
             self.populate_table()
@@ -234,7 +230,6 @@ class RepositoriesWindow(Screen):
 
         updated_entry = RepoEntry(
             id=repo_id,
-            filename=entry.filename,
             name=values.get("name", repo_id),
             enabled=values.get("enabled", True),
             autorefresh=values.get("autorefresh", True),
@@ -243,12 +238,13 @@ class RepositoriesWindow(Screen):
             path=values.get("path", ""),
             type=values.get("type", ""),
             gpgcheck=values.get("gpgcheck", False),
+            repo_gpgcheck=values.get("repo_gpgcheck", False),
             gpgkey=values.get("gpgkey", ""),
             priority=values.get("priority", 99),
             keep_packages=values.get("keep_packages", False),
         )
 
-        result = save_repo_entry(updated_entry)
+        result = updated_entry.save()
         if result == "ok":
             self.repo_entries[row] = updated_entry
             self.populate_table()
@@ -352,7 +348,8 @@ class RepoEditScreen(Screen):
                 yield Input(value=self._get_value("gpgkey"), id="gpgkey-input", placeholder=_("GPG key URL"))
             yield Checkbox(_("Enabled"), id="enabled-check", value=self._get_bool("enabled", True))
             yield Checkbox(_("Auto Refresh"), id="autorefresh-check", value=self._get_bool("autorefresh", True))
-            yield Checkbox(_("GPG Check"), id="gpgcheck-check", value=self._get_bool("gpgcheck", False))
+            yield Checkbox(_("Package GPG Check"), id="gpgcheck-check", value=self._get_bool("gpgcheck", False))
+            yield Checkbox(_("Repository GPG Check"), id="repo-gpgcheck-check", value=self._get_bool("repo_gpgcheck", False))
             yield Checkbox(_("Keep Packages"), id="keep-packages-check", value=self._get_bool("keep_packages", False))
             with Horizontal(classes="button-row"):
                 yield Button(_("OK"), id="ok-btn", variant="primary")
@@ -390,6 +387,11 @@ class RepoEditScreen(Screen):
         elif event.button.id == "cancel-btn":
             self.app.pop_screen()
 
+    def on_checkbox_changed(self, event: Checkbox.Changed) -> None:
+        """Keep repository signature checking aligned with package checking."""
+        if event.checkbox.id == "gpgcheck-check":
+            self.query_one("#repo-gpgcheck-check", Checkbox).value = event.value
+
     def action_submit(self) -> None:
         """Submit the form."""
         values = {
@@ -403,6 +405,7 @@ class RepoEditScreen(Screen):
             "enabled": self.query_one("#enabled-check", Checkbox).value,
             "autorefresh": self.query_one("#autorefresh-check", Checkbox).value,
             "gpgcheck": self.query_one("#gpgcheck-check", Checkbox).value,
+            "repo_gpgcheck": self.query_one("#repo-gpgcheck-check", Checkbox).value,
             "keep_packages": self.query_one("#keep-packages-check", Checkbox).value,
         }
 

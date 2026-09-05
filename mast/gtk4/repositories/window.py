@@ -9,9 +9,6 @@ from gi.repository import Gtk
 from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
-    delete_repo_entry,
-    load_repos,
-    save_repo_entry,
     switch_mirror,
 )
 from mast.gtk4.repositories.import_repo_button import ImportRepoButton
@@ -128,7 +125,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
         self.list_store.clear()
 
         try:
-            self.repo_entries = load_repos()
+            self.repo_entries = RepoEntry.load_repos()
         except PermissionError:
             self._show_message_dialog(Gtk.MessageType.WARNING, _("Error"), _("Cannot read repository directory. Root permission required."))
             return
@@ -171,7 +168,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
     def _save_single_entry(self, index: int) -> None:
         """Save a single repository entry."""
         entry = self.repo_entries[index]
-        result = save_repo_entry(entry)
+        result = entry.save()
         if result != "ok":
             self._handle_save_error(result)
             # Revert the change
@@ -200,10 +197,8 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
                 dialog.destroy()
                 return
 
-            filename = f"{repo_id}.repo"
             new_entry = RepoEntry(
                 id=repo_id,
-                filename=filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],
@@ -212,6 +207,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
                 path=values["path"],
                 type=values["type"],
                 gpgcheck=values["gpgcheck"],
+                repo_gpgcheck=values["repo_gpgcheck"],
                 gpgkey=values["gpgkey"],
                 priority=values["priority"],
                 keep_packages=values["keep_packages"],
@@ -219,7 +215,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             self.repo_entries.append(new_entry)
             self._populate_list()
 
-            result = save_repo_entry(new_entry)
+            result = new_entry.save()
             if result != "ok":
                 self._handle_save_error(result)
         dialog.destroy()
@@ -234,7 +230,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             )
             return
 
-        result = save_repo_entry(entry)
+            result = entry.save()
         if result != "ok":
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
@@ -284,7 +280,6 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             entry = self.repo_entries[index]
             self.repo_entries[index] = RepoEntry(
                 id=repo_id,
-                filename=entry.filename,
                 name=values["name"],
                 enabled=values["enabled"],
                 autorefresh=values["autorefresh"],
@@ -293,13 +288,14 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
                 path=values["path"],
                 type=values["type"],
                 gpgcheck=values["gpgcheck"],
+                repo_gpgcheck=values["repo_gpgcheck"],
                 gpgkey=values["gpgkey"],
                 priority=values["priority"],
                 keep_packages=values["keep_packages"],
             )
             self._populate_list()
 
-            result = save_repo_entry(self.repo_entries[index])
+            result = self.repo_entries[index].save()
             if result != "ok":
                 self._handle_save_error(result)
         dialog.destroy()
@@ -334,7 +330,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
         """Handle delete confirmation response."""
         if response_id == Gtk.ResponseType.YES:
             entry = self.repo_entries[index]
-            result = delete_repo_entry(entry)
+            result = entry.delete()
             if result == "ok":
                 self.repo_entries.pop(index)
                 self.list_store.remove(tree_iter)
