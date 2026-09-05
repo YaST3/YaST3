@@ -5,7 +5,7 @@ from tempfile import NamedTemporaryFile
 from unittest.mock import patch
 
 from mast.core.repositories import repos
-from mast.core.repositories.third_party_repos import third_party_repos
+from mast.core.repositories.third_party_repos import _jami_repo_url, third_party_repos
 
 
 class TestThirdPartyRepos(unittest.TestCase):
@@ -26,6 +26,25 @@ class TestThirdPartyRepos(unittest.TestCase):
         self.assertEqual(
             vscode.gpgkey,
             "https://packages.microsoft.com/keys/microsoft.asc",
+        )
+
+    def test_jami_repository_follows_os_release(self) -> None:
+        """Jami should use the repository matching the RPM distribution."""
+        self.assertEqual(
+            _jami_repo_url({"ID": "fedora", "VERSION_ID": "44"}),
+            "https://dl.jami.net/nightly/fedora_44/",
+        )
+        self.assertEqual(
+            _jami_repo_url({"ID": "opensuse-leap", "VERSION_ID": "15.6"}),
+            "https://dl.jami.net/nightly/opensuse-leap_15.6/",
+        )
+        self.assertEqual(
+            _jami_repo_url({"NAME": "openSUSE Leap", "VERSION_ID": "16.0"}),
+            "https://dl.jami.net/nightly/opensuse-leap_16.0/",
+        )
+        self.assertEqual(
+            _jami_repo_url({"ID": "opensuse-tumbleweed"}),
+            "https://dl.jami.net/nightly/opensuse-tumbleweed/",
         )
 
     def test_opi_repository_entries(self) -> None:

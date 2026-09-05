@@ -5,6 +5,19 @@ os_release = read_os_release()
 
 distro = os_release.get("PRETTY_NAME", "openSUSE Tumbleweed").replace(" ", "_")
 
+
+def _jami_repo_url(os_release: dict[str, str]) -> str:
+    """Return the Jami repository URL for the current RPM distribution."""
+    id = os_release.get("ID", "").lower()
+    version = os_release.get("VERSION_ID", "")
+
+    if id == "opensuse-tumbleweed":
+        return f"https://dl.jami.net/nightly/{id}/"
+    return f"https://dl.jami.net/nightly/{id}_{version}/"
+
+
+jami_repo_url = _jami_repo_url(os_release)
+
 third_party_repos = [
     RepoEntry(
         id="antigravity",
@@ -59,7 +72,7 @@ third_party_repos = [
     RepoEntry(
         id="jami",
         name="Jami",
-        baseurl="https://dl.jami.net/nightly/opensuse-tumbleweed/",
+        baseurl=jami_repo_url,
         gpgkey="https://dl.jami.net/jami.pub.key",
     ),
     RepoEntry(
