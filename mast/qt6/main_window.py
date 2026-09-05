@@ -20,6 +20,7 @@ from mast.core.telemetry import (
 from mast.qt6.telemetry import track_app_started
 from mast.qt6 import (
     AndroidModule,
+    BuildServiceModule,
     CronModule,
     DateTimeModule,
     FlatpakModule,
@@ -48,6 +49,7 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.modules = (
             AndroidModule(),
+            BuildServiceModule(),
             CronModule(),
             DateTimeModule(),
             FlatpakModule(),

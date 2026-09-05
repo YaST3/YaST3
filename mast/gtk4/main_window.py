@@ -10,6 +10,7 @@ from mast.core.telemetry import (
 from mast.gtk4.telemetry import track_app_started
 from mast.gtk4 import (
     AndroidModule,
+    BuildServiceModule,
     CronModule,
     DateTimeModule,
     FlatpakModule,
@@ -39,6 +40,7 @@ class MainWindow(Gtk.ApplicationWindow):
 
         self.modules = (
             AndroidModule(),
+            BuildServiceModule(),
             CronModule(),
             DateTimeModule(),
             FlatpakModule(),

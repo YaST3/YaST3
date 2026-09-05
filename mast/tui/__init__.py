@@ -2,6 +2,7 @@
 
 from mast.tui.cron import CronModule
 from mast.tui.datetime import DateTimeModule
+from mast.tui.buildservice import BuildServiceModule
 from mast.tui.git import GitModule
 from mast.tui.hostname import HostnameModule
 from mast.tui.hosts import HostsModule
@@ -18,6 +19,7 @@ from mast.tui.users import UsersModule
 __all__ = [
     "CronModule",
     "DateTimeModule",
+    "BuildServiceModule",
     "GitModule",
     "HostnameModule",
     "HostsModule",

@@ -3,6 +3,7 @@
 from mast.gtk4.android import AndroidModule
 from mast.gtk4.cron import CronModule
 from mast.gtk4.datetime import DateTimeModule
+from mast.gtk4.buildservice import BuildServiceModule
 from mast.gtk4.flatpak import FlatpakModule
 from mast.gtk4.fontconfig import FontConfigModule
 from mast.gtk4.git import GitModule
@@ -24,6 +25,7 @@ __all__ = [
     "AndroidModule",
     "CronModule",
     "DateTimeModule",
+    "BuildServiceModule",
     "FlatpakModule",
     "FontConfigModule",
     "GitModule",

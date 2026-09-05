@@ -14,6 +14,7 @@ from mast.core.telemetry import (
 from mast.tui.telemetry import track_app_started, track_module_started
 from mast.tui.module import Module
 from mast.tui import (
+    BuildServiceModule,
     CronModule,
     DateTimeModule,
     GitModule,
@@ -163,6 +164,7 @@ class MainWindow(App):
     def __init__(self) -> None:
         super().__init__()
         self.modules: list[Module] = [
+            BuildServiceModule(),
             HostnameModule(),
             GitModule(),
             HostsModule(),
