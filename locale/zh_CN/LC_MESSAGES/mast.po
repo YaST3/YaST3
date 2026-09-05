@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mast\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-08-07 17:02+0000\n"
-"PO-Revision-Date: 2026-08-07 17:06\n"
+"POT-Creation-Date: 2026-08-09 10:01+0000\n"
+"PO-Revision-Date: 2026-08-09 10:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "MIME-Version: 1.0\n"
@@ -250,8 +250,9 @@ msgstr "刷新"
 #: mast/gtk4/repositories/window.py:390 mast/gtk4/repositories/window.py:392
 #: mast/gtk4/services/window.py:183 mast/gtk4/snap/package_manager.py:245
 #: mast/gtk4/snap/package_manager.py:285 mast/gtk4/snap/package_manager.py:400
-#: mast/gtk4/snap/settings.py:57 mast/gtk4/snap/window.py:98
-#: mast/gtk4/snap/window.py:109 mast/gtk4/snapshots/config_dialog.py:46
+#: mast/gtk4/snap/settings.py:111 mast/gtk4/snap/settings.py:124
+#: mast/gtk4/snap/window.py:98 mast/gtk4/snap/window.py:109
+#: mast/gtk4/snapshots/config_dialog.py:46
 #: mast/gtk4/snapshots/config_dialog.py:227 mast/gtk4/snapshots/window.py:227
 #: mast/gtk4/snapshots/window.py:233 mast/gtk4/ssh/__init__.py:72
 #: mast/gtk4/ssh/dialogs.py:120 mast/gtk4/ssh/hosts_tab.py:109
@@ -316,9 +317,9 @@ msgstr "刷新"
 #: mast/qt6/repositories/window.py:310 mast/qt6/repositories/window.py:325
 #: mast/qt6/services/window.py:140 mast/qt6/snap/package_manager.py:271
 #: mast/qt6/snap/package_manager.py:273 mast/qt6/snap/package_manager.py:352
-#: mast/qt6/snap/package_manager.py:397 mast/qt6/snap/settings.py:48
-#: mast/qt6/snap/window.py:93 mast/qt6/snap/window.py:104
-#: mast/qt6/snapshots/config_dialog.py:38
+#: mast/qt6/snap/package_manager.py:397 mast/qt6/snap/settings.py:101
+#: mast/qt6/snap/settings.py:115 mast/qt6/snap/window.py:93
+#: mast/qt6/snap/window.py:104 mast/qt6/snapshots/config_dialog.py:38
 #: mast/qt6/snapshots/config_dialog.py:171 mast/qt6/snapshots/window.py:128
 #: mast/qt6/snapshots/window.py:134 mast/qt6/ssh/__init__.py:59
 #: mast/qt6/ssh/dialogs.py:86 mast/qt6/ssh/dialogs.py:92
@@ -481,11 +482,11 @@ msgstr "您确定要禁用“{0}”吗？\n\n"
 #: mast/gtk4/journal/window.py:390 mast/gtk4/keyboard/window.py:132
 #: mast/gtk4/languages/settings.py:141 mast/gtk4/proxy/window.py:110
 #: mast/gtk4/repositories/window.py:248 mast/gtk4/repositories/window.py:379
-#: mast/gtk4/snap/settings.py:50 mast/gtk4/snap/window.py:93
-#: mast/gtk4/snap/window.py:104 mast/gtk4/snapshots/config_dialog.py:220
-#: mast/gtk4/ssh/__init__.py:87 mast/gtk4/ssh/hosts_tab.py:224
-#: mast/gtk4/ssh/keys_tab.py:194 mast/gtk4/ssh/keys_tab.py:246
-#: mast/qt6/android/package_manager_panel.py:332
+#: mast/gtk4/snap/settings.py:106 mast/gtk4/snap/settings.py:117
+#: mast/gtk4/snap/window.py:93 mast/gtk4/snap/window.py:104
+#: mast/gtk4/snapshots/config_dialog.py:220 mast/gtk4/ssh/__init__.py:87
+#: mast/gtk4/ssh/hosts_tab.py:224 mast/gtk4/ssh/keys_tab.py:194
+#: mast/gtk4/ssh/keys_tab.py:246 mast/qt6/android/package_manager_panel.py:332
 #: mast/qt6/android/package_manager_panel.py:381
 #: mast/qt6/android/package_manager_panel.py:449
 #: mast/qt6/android/package_manager_panel.py:510 mast/qt6/cron/manager.py:229
@@ -498,11 +499,11 @@ msgstr "您确定要禁用“{0}”吗？\n\n"
 #: mast/qt6/journal/window.py:319 mast/qt6/keyboard/window.py:99
 #: mast/qt6/languages/settings.py:136 mast/qt6/proxy/window.py:109
 #: mast/qt6/repositories/window.py:120 mast/qt6/repositories/window.py:301
-#: mast/qt6/snap/settings.py:40 mast/qt6/snap/window.py:88
-#: mast/qt6/snap/window.py:99 mast/qt6/snapshots/config_dialog.py:168
-#: mast/qt6/ssh/__init__.py:67 mast/qt6/ssh/hosts_tab.py:222
-#: mast/qt6/ssh/keys_generate_dialog.py:232 mast/qt6/ssh/keys_tab.py:174
-#: mast/qt6/ssh/keys_tab.py:221
+#: mast/qt6/snap/settings.py:97 mast/qt6/snap/settings.py:107
+#: mast/qt6/snap/window.py:88 mast/qt6/snap/window.py:99
+#: mast/qt6/snapshots/config_dialog.py:168 mast/qt6/ssh/__init__.py:67
+#: mast/qt6/ssh/hosts_tab.py:222 mast/qt6/ssh/keys_generate_dialog.py:232
+#: mast/qt6/ssh/keys_tab.py:174 mast/qt6/ssh/keys_tab.py:221
 msgid "Success"
 msgstr "成功"
 
@@ -598,8 +599,8 @@ msgstr "无法连接到所选的 Android 设备。"
 msgid "Running command, please wait..."
 msgstr "正在执行命令，请稍候..."
 
-#: mast/gtk4/command/dialog.py:53 mast/gtk4/snap/settings.py:37
-#: mast/qt6/command/dialog.py:44 mast/qt6/snap/settings.py:28
+#: mast/gtk4/command/dialog.py:53 mast/gtk4/snap/settings.py:86
+#: mast/qt6/command/dialog.py:44 mast/qt6/snap/settings.py:79
 #: mast/tui/packages/window.py:42 mast/tui/services/window.py:362
 msgid "Close"
 msgstr "关闭"
@@ -613,11 +614,12 @@ msgid "Command failed. See output for details."
 msgstr "命令执行失败。请查看输出了解详情。"
 
 #: mast/gtk4/command/worker.py:55 mast/gtk4/flatpak/settings.py:51
-#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snap/settings.py:58
-#: mast/gtk4/snap/window.py:99 mast/gtk4/snap/window.py:110
-#: mast/gtk4/snapshots/window.py:234 mast/qt6/command/worker.py:51
-#: mast/qt6/flatpak/window.py:95 mast/qt6/flatpak/window.py:106
-#: mast/qt6/snap/settings.py:49 mast/qt6/snap/window.py:94
+#: mast/gtk4/flatpak/window.py:92 mast/gtk4/snap/settings.py:112
+#: mast/gtk4/snap/settings.py:125 mast/gtk4/snap/window.py:99
+#: mast/gtk4/snap/window.py:110 mast/gtk4/snapshots/window.py:234
+#: mast/qt6/command/worker.py:51 mast/qt6/flatpak/window.py:95
+#: mast/qt6/flatpak/window.py:106 mast/qt6/snap/settings.py:102
+#: mast/qt6/snap/settings.py:116 mast/qt6/snap/window.py:94
 #: mast/qt6/snap/window.py:105 mast/qt6/snapshots/window.py:135
 #: mast/tui/services/window.py:284 mast/tui/snapshots/window.py:122
 #: mast/tui/snapshots/window.py:221 mast/tui/snapshots/window.py:248
@@ -1347,8 +1349,8 @@ msgid "Remotes"
 msgstr "远端"
 
 #: mast/gtk4/flatpak/window.py:57 mast/gtk4/snap/package_manager.py:130
-#: mast/gtk4/snap/settings.py:19 mast/qt6/flatpak/window.py:61
-#: mast/qt6/snap/package_manager.py:137 mast/qt6/snap/settings.py:16
+#: mast/gtk4/snap/settings.py:39 mast/qt6/flatpak/window.py:61
+#: mast/qt6/snap/package_manager.py:137 mast/qt6/snap/settings.py:44
 msgid "Settings"
 msgstr "设置"
 
@@ -2390,8 +2392,8 @@ msgstr "卸载 Snap"
 msgid "Uninstalling Snap..."
 msgstr "正在卸载 Snap……"
 
-#: mast/gtk4/snap/remove_action.py:25 mast/gtk4/snap/settings.py:50
-#: mast/qt6/snap/remove_action.py:22 mast/qt6/snap/settings.py:40
+#: mast/gtk4/snap/remove_action.py:25 mast/gtk4/snap/settings.py:117
+#: mast/qt6/snap/remove_action.py:22 mast/qt6/snap/settings.py:107
 msgid "Snap uninstalled successfully."
 msgstr "Snap 卸载成功。"
 
@@ -2399,7 +2401,37 @@ msgstr "Snap 卸载成功。"
 msgid "Are you sure you want to uninstall Snap?"
 msgstr "您确定要卸载 Snap 吗？"
 
-#: mast/gtk4/snap/settings.py:58 mast/qt6/snap/settings.py:49
+#: mast/gtk4/snap/settings.py:25 mast/qt6/snap/settings.py:29
+msgid "Clear Cache"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:26 mast/qt6/snap/settings.py:30
+msgid "Clearing Cache..."
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:27 mast/qt6/snap/settings.py:31
+msgid "Clear Snap Cache"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:29 mast/gtk4/snap/settings.py:106
+#: mast/qt6/snap/settings.py:33 mast/qt6/snap/settings.py:97
+msgid "Snap cache cleared successfully."
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:51 mast/qt6/snap/settings.py:51
+msgid "Cache Management"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:59 mast/qt6/snap/settings.py:55
+msgid "Cache Size:"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:112 mast/qt6/snap/settings.py:102
+#, python-brace-format
+msgid "Failed to clear Snap cache: {0}"
+msgstr ""
+
+#: mast/gtk4/snap/settings.py:125 mast/qt6/snap/settings.py:116
 #, python-brace-format
 msgid "Failed to uninstall Snap: {0}"
 msgstr "卸载 Snap 失败：{0}"
