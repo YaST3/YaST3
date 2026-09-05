@@ -119,80 +119,79 @@ class RepoEntry:
         entries.sort(key=lambda e: e.priority)
         return entries
 
+    def save(
+        self, use_pkexec: bool = True
+    ) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
+        """Save this repository entry to its .repo file."""
+        filepath = os.path.join(_repository_dir(), self.filename)
 
-def save_repo_entry(
-    entry: RepoEntry, use_pkexec: bool = True
-) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
-    """Save a single repository entry to its .repo file."""
-    filepath = os.path.join(_repository_dir(), entry.filename)
+        # Check if we need to read existing content
+        config = configparser.ConfigParser()
+        config.optionxform = str
+        if os.path.exists(filepath):
+            config.read(filepath)
 
-    # Check if we need to read existing content
-    config = configparser.ConfigParser()
-    config.optionxform = str
-    if os.path.exists(filepath):
-        config.read(filepath)
+        # Remove existing section if present
+        if self.id in config.sections():
+            config.remove_section(self.id)
 
-    # Remove existing section if present
-    if entry.id in config.sections():
-        config.remove_section(entry.id)
+        # Add new section
+        config[self.id] = {}
 
-    # Add new section
-    config[entry.id] = {}
+        # Set values
+        if self.name:
+            config[self.id]["name"] = self.name
+        config[self.id]["enabled"] = "1" if self.enabled else "0"
+        config[self.id]["autorefresh"] = "1" if self.autorefresh else "0"
+        if self.baseurl:
+            config[self.id]["baseurl"] = self.baseurl
+        if self.mirrorlist:
+            config[self.id]["mirrorlist"] = self.mirrorlist
+        config[self.id]["type"] = self.type
+        config[self.id]["gpgcheck"] = "1" if self.gpgcheck else "0"
+        if self.gpgkey:
+            config[self.id]["gpgkey"] = self.gpgkey
+        config[self.id]["priority"] = str(self.priority)
+        config[self.id]["keep_packages"] = "1" if self.keep_packages else "0"
+        if self.path:
+            config[self.id]["path"] = self.path
 
-    # Set values
-    if entry.name:
-        config[entry.id]["name"] = entry.name
-    config[entry.id]["enabled"] = "1" if entry.enabled else "0"
-    config[entry.id]["autorefresh"] = "1" if entry.autorefresh else "0"
-    if entry.baseurl:
-        config[entry.id]["baseurl"] = entry.baseurl
-    if entry.mirrorlist:
-        config[entry.id]["mirrorlist"] = entry.mirrorlist
-    config[entry.id]["type"] = entry.type
-    config[entry.id]["gpgcheck"] = "1" if entry.gpgcheck else "0"
-    if entry.gpgkey:
-        config[entry.id]["gpgkey"] = entry.gpgkey
-    config[entry.id]["priority"] = str(entry.priority)
-    config[entry.id]["keep_packages"] = "1" if entry.keep_packages else "0"
-    if entry.path:
-        config[entry.id]["path"] = entry.path
+        # Add other options
+        for key, value in self.other_options.items():
+            config[self.id][key] = value
 
-    # Add other options
-    for key, value in entry.other_options.items():
-        config[entry.id][key] = value
-
-    # Try direct write first
-    try:
-        with open(filepath, "w") as f:
-            config.write(f)
-        return "ok"
-    except PermissionError:
-        if not use_pkexec:
-            return "permission_denied"
-    except Exception:
-        return "error"
-
-    # Use pkexec to get root permission
-    try:
-        with tempfile.NamedTemporaryFile(mode="w+", suffix=".repo", delete=False) as tmp:
-            tmp_path = tmp.name
-            config.write(tmp)
-            os.chmod(tmp_path, 0o664)
-
-        result = subprocess.run(
-            ["pkexec", "cp", tmp_path, filepath],
-            capture_output=True,
-            text=True,
-        )
-
-        subprocess.run(["rm", "-f", tmp_path], capture_output=True)
-
-        if result.returncode == 0:
+        # Try direct write first
+        try:
+            with open(filepath, "w") as f:
+                config.write(f)
             return "ok"
-        else:
-            return "pkexec_failed"
-    except Exception:
-        return "error"
+        except PermissionError:
+            if not use_pkexec:
+                return "permission_denied"
+        except Exception:
+            return "error"
+
+        # Use pkexec to get root permission
+        try:
+            with tempfile.NamedTemporaryFile(mode="w+", suffix=".repo", delete=False) as tmp:
+                tmp_path = tmp.name
+                config.write(tmp)
+                os.chmod(tmp_path, 0o664)
+
+            result = subprocess.run(
+                ["pkexec", "cp", tmp_path, filepath],
+                capture_output=True,
+                text=True,
+            )
+
+            subprocess.run(["rm", "-f", tmp_path], capture_output=True)
+
+            if result.returncode == 0:
+                return "ok"
+            else:
+                return "pkexec_failed"
+        except Exception:
+            return "error"
 
 
 def delete_repo_entry(

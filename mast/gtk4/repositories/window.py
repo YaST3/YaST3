@@ -10,7 +10,6 @@ from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
     delete_repo_entry,
-    save_repo_entry,
     switch_mirror,
 )
 from mast.gtk4.repositories.import_repo_button import ImportRepoButton
@@ -170,7 +169,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
     def _save_single_entry(self, index: int) -> None:
         """Save a single repository entry."""
         entry = self.repo_entries[index]
-        result = save_repo_entry(entry)
+        result = entry.save()
         if result != "ok":
             self._handle_save_error(result)
             # Revert the change
@@ -216,7 +215,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             self.repo_entries.append(new_entry)
             self._populate_list()
 
-            result = save_repo_entry(new_entry)
+            result = new_entry.save()
             if result != "ok":
                 self._handle_save_error(result)
         dialog.destroy()
@@ -231,7 +230,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             )
             return
 
-        result = save_repo_entry(entry)
+            result = entry.save()
         if result != "ok":
             self._show_message_dialog(
                 Gtk.MessageType.ERROR,
@@ -295,7 +294,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
             )
             self._populate_list()
 
-            result = save_repo_entry(self.repo_entries[index])
+            result = self.repo_entries[index].save()
             if result != "ok":
                 self._handle_save_error(result)
         dialog.destroy()

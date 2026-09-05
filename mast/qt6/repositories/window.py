@@ -20,7 +20,6 @@ from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
     delete_repo_entry,
-    save_repo_entry,
     switch_mirror_pkexec,
 )
 from mast.qt6.repositories.import_repo_button import ImportRepoButton
@@ -107,7 +106,7 @@ class RepositoriesWindow(QMainWindow):
             )
             return
 
-        result = save_repo_entry(entry)
+        result = entry.save()
         if result != "ok":
             QMessageBox.critical(
                 self, _("Error"), _("Failed to import repository: %s") % result
@@ -205,7 +204,7 @@ class RepositoriesWindow(QMainWindow):
             self.table.insertRow(row)
             self.populate_row(row)
 
-            result = save_repo_entry(new_entry)
+            result = new_entry.save()
             if result != "ok":
                 QMessageBox.critical(self, _("Error"), _("Failed to save repository: %s") % result)
 
@@ -247,7 +246,7 @@ class RepositoriesWindow(QMainWindow):
             )
             self.populate_row(current_row)
 
-            result = save_repo_entry(self.repo_entries[current_row])
+            result = self.repo_entries[current_row].save()
             if result != "ok":
                 QMessageBox.critical(self, _("Error"), _("Failed to save repository: %s") % result)
 
@@ -316,7 +315,7 @@ class RepositoriesWindow(QMainWindow):
 
     def save_single_entry(self, row: int) -> None:
         entry = self.repo_entries[row]
-        result = save_repo_entry(entry)
+        result = entry.save()
         if result != "ok":
             QMessageBox.critical(self, _("Error"), _("Failed to save repository: %s") % result)
             entry.enabled = not entry.enabled

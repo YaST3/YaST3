@@ -9,7 +9,7 @@ import os
 
 from mast.core.repositories.opensuse_mirrors import opensuse_mirrors
 from mast.core.repositories.packman_mirrors import packman_mirrors
-from mast.core.repositories.repos import RepoEntry, save_repo_entry
+from mast.core.repositories.repos import RepoEntry
 
 
 def switch_mirror(
@@ -48,7 +48,7 @@ def switch_mirror(
         return
 
     for entry in modified_entries:
-        save_repo_entry(entry)
+        entry.save()
 
 
 def _replace_opensuse_mirror_prefix(url: str, new_prefix: str) -> str:

@@ -9,7 +9,6 @@ from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
     delete_repo_entry,
-    save_repo_entry,
     switch_mirror,
 )
 from mast.core.repositories.opensuse_mirrors import opensuse_mirrors
@@ -208,7 +207,7 @@ class RepositoriesWindow(Screen):
             keep_packages=values.get("keep_packages", False),
         )
 
-        result = save_repo_entry(new_entry)
+        result = new_entry.save()
         if result == "ok":
             self.repo_entries.append(new_entry)
             self.populate_table()
@@ -244,7 +243,7 @@ class RepositoriesWindow(Screen):
             keep_packages=values.get("keep_packages", False),
         )
 
-        result = save_repo_entry(updated_entry)
+        result = updated_entry.save()
         if result == "ok":
             self.repo_entries[row] = updated_entry
             self.populate_table()
