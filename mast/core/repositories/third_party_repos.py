@@ -21,13 +21,13 @@ third_party_repos = [
     RepoEntry(
         id="atom",
         name="Atom",
-        baseurl="https://packagecloud.io/AtomEditor/atom/el/7/x86_64/?type=rpm",
+        baseurl="https://packagecloud.io/AtomEditor/atom/el/7/$basearch/?type=rpm",
         gpgkey="https://packagecloud.io/AtomEditor/atom/gpgkey",
     ),
     RepoEntry(
         id="brave-browser",
         name="Brave Browser",
-        baseurl="https://brave-browser-rpm-release.s3.brave.com/x86_64/",
+        baseurl="https://brave-browser-rpm-release.s3.brave.com/$basearch/",
         gpgkey="https://brave-browser-rpm-release.s3.brave.com/brave-core.asc",
     ),
     RepoEntry(
@@ -120,7 +120,7 @@ third_party_repos = [
     RepoEntry(
         id="sublime-text",
         name="Sublime Text",
-        baseurl="https://download.sublimetext.com/rpm/stable/x86_64",
+        baseurl="https://download.sublimetext.com/rpm/stable/$basearch",
         gpgkey="https://download.sublimetext.com/sublimehq-rpm-pub.gpg",
     ),
     RepoEntry(
