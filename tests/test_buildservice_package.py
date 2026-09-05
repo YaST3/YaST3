@@ -23,23 +23,23 @@ class TestBuildServicePackage(unittest.TestCase):
 
         packages = search_packages("firefox")
 
-        self.assertEqual([package.name for package in packages], ["firefox"])
-        self.assertEqual(packages[0].package, "MozillaFirefox")
+        self.assertEqual([package.name for package in packages], ["firefox", "firefox"])
+        official = next(package for package in packages if package.project == "openSUSE:Factory")
+        personal = next(package for package in packages if package.project == "home:user:firefox")
+        self.assertEqual(official.package, "MozillaFirefox")
+        self.assertEqual(personal.package, "firefox")
 
     def test_build_install_command_uses_obs_rpm_url(self) -> None:
         package = BuildServicePackage("foo", "1", "2", "x86_64", "home:user:project", "Tumbleweed")
 
-        self.assertEqual(
-            build_install_command(package),
-            [
-                "pkexec",
-                "zypper",
-                "--non-interactive",
-                "install",
-                "-y",
-                "https://download.opensuse.org/repositories/home:/user:/project/Tumbleweed/x86_64/foo.rpm",
-            ],
-        )
+        command = build_install_command(package)
+
+        self.assertEqual(command[:3], ["pkexec", "bash", "-c"])
+        self.assertIn("zypper --non-interactive ar --refresh", command[3])
+        self.assertIn("https://download.opensuse.org/repositories/home:/user:/project/Tumbleweed/", command[3])
+        self.assertIn("--gpg-auto-import-keys refresh home_user_project", command[3])
+        self.assertIn("--from home_user_project", command[3])
+        self.assertIn("foo.x86_64", command[3])
 
 
 if __name__ == "__main__":

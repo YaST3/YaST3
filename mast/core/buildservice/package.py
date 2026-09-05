@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import platform
+import shlex
 import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
@@ -31,6 +32,15 @@ class BuildServicePackage:
     def download_url(self) -> str:
         project = self.project.replace(":", ":/")
         return f"{OBS_DOWNLOAD_URL}/{project}/{self.repository}/{self.arch}/{self.name}.rpm"
+
+    @property
+    def repository_url(self) -> str:
+        project = self.project.replace(":", ":/")
+        return f"{OBS_DOWNLOAD_URL}/{project}/{self.repository}/"
+
+    @property
+    def repository_alias(self) -> str:
+        return self.project.replace(":", "_")
 
 
 def _distribution() -> str:
@@ -110,7 +120,6 @@ def search_packages(query: str, *, timeout: float = 15.0) -> list[BuildServicePa
         root = ET.fromstring(response.read())
 
     distribution = _distribution()
-    print(distribution)
     architecture = _architecture()
     packages: list[BuildServicePackage] = []
     seen: set[tuple[str, str, str]] = set()
@@ -149,5 +158,17 @@ def search_packages(query: str, *, timeout: float = 15.0) -> list[BuildServicePa
 
 
 def build_install_command(package: BuildServicePackage) -> list[str]:
-    """Return a privileged, non-interactive zypper command for *package*."""
-    return ["pkexec", "zypper", "--non-interactive", "install", "-y", package.download_url]
+    """Return the opi-style command sequence for installing *package*."""
+    repository_url = shlex.quote(package.repository_url)
+    repository_alias = shlex.quote(package.repository_alias)
+    package_name = shlex.quote(f"{package.name}.{package.arch}")
+    script = " && ".join(
+        [
+            f"zypper lr {repository_alias} >/dev/null 2>&1 || zypper --non-interactive ar --refresh {repository_url} {repository_alias}",
+            f"zypper --non-interactive --gpg-auto-import-keys refresh {repository_alias}",
+            "zypper --non-interactive install -y --oldpackage "
+            f"--from {repository_alias} --allow-downgrade --allow-arch-change "
+            f"--allow-name-change --allow-vendor-change {package_name}",
+        ]
+    )
+    return ["pkexec", "bash", "-c", script]
