@@ -28,6 +28,40 @@ class TestThirdPartyRepos(unittest.TestCase):
             "https://packages.microsoft.com/keys/microsoft.asc",
         )
 
+    def test_opi_repository_entries(self) -> None:
+        """Repositories imported from OPI should have complete definitions."""
+        repositories = {repo.id: repo for repo in third_party_repos}
+
+        for repo_id in (
+            "antigravity",
+            "anydesk",
+            "atom",
+            "brave-browser",
+            "collabora-office",
+            "dotnet",
+            "SoftMaker",
+            "jami",
+            "librewolf",
+            "megasync",
+            "microsoft-edge",
+            "mullvad",
+            "PlexRepo",
+            "resilio-sync",
+            "skype-stable",
+            "slack",
+            "sublime-text",
+            "teams-for-linux",
+            "teamviewer",
+            "hashicorp",
+            "vivaldi",
+            "vscodium",
+            "yandex-browser-stable",
+            "yandex-disk",
+        ):
+            self.assertIn(repo_id, repositories)
+            self.assertTrue(repositories[repo_id].baseurl)
+            self.assertTrue(repositories[repo_id].gpgkey)
+
     def test_google_chrome_repository(self) -> None:
         """Google Chrome should be available from the repository import menu."""
         chrome = next(repo for repo in third_party_repos if repo.id == "google-chrome")
