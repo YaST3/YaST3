@@ -47,56 +47,56 @@ class RepoEntry:
         """Return the URL (baseurl or mirrorlist)."""
         return self.baseurl or self.mirrorlist
 
+    @staticmethod
+    def parse_file(filepath: str) -> list["RepoEntry"]:
+        """Parse all repository entries from a .repo file."""
+        entries: list[RepoEntry] = []
 
-def parse_repo_file(filepath: str) -> list[RepoEntry]:
-    """Parse a single .repo file using configparser."""
-    entries: list[RepoEntry] = []
+        try:
+            config = configparser.ConfigParser()
+            config.optionxform = str  # Preserve case of keys
+            config.read(filepath)
 
-    try:
-        config = configparser.ConfigParser()
-        config.optionxform = str  # Preserve case of keys
-        config.read(filepath)
+            for section in config.sections():
+                entry = RepoEntry(id=section)
 
-        for section in config.sections():
-            entry = RepoEntry(id=section)
+                for key, value in config.items(section):
+                    key_lower = key.lower()
 
-            for key, value in config.items(section):
-                key_lower = key.lower()
+                    if key_lower == "name":
+                        entry.name = value
+                    elif key_lower == "enabled":
+                        entry.enabled = value.lower() in ("1", "true", "yes", "on")
+                    elif key_lower == "autorefresh":
+                        entry.autorefresh = value.lower() in ("1", "true", "yes", "on")
+                    elif key_lower == "baseurl":
+                        entry.baseurl = value
+                    elif key_lower == "mirrorlist":
+                        entry.mirrorlist = value
+                    elif key_lower == "type":
+                        entry.type = value
+                    elif key_lower == "gpgcheck":
+                        entry.gpgcheck = value.lower() in ("1", "true", "yes", "on")
+                    elif key_lower == "gpgkey":
+                        entry.gpgkey = value
+                    elif key_lower == "priority":
+                        try:
+                            entry.priority = int(value)
+                        except ValueError:
+                            pass
+                    elif key_lower == "keep_packages":
+                        entry.keep_packages = value.lower() in ("1", "true", "yes", "on")
+                    elif key_lower == "path":
+                        entry.path = value
+                    else:
+                        entry.other_options[key] = value
 
-                if key_lower == "name":
-                    entry.name = value
-                elif key_lower == "enabled":
-                    entry.enabled = value.lower() in ("1", "true", "yes", "on")
-                elif key_lower == "autorefresh":
-                    entry.autorefresh = value.lower() in ("1", "true", "yes", "on")
-                elif key_lower == "baseurl":
-                    entry.baseurl = value
-                elif key_lower == "mirrorlist":
-                    entry.mirrorlist = value
-                elif key_lower == "type":
-                    entry.type = value
-                elif key_lower == "gpgcheck":
-                    entry.gpgcheck = value.lower() in ("1", "true", "yes", "on")
-                elif key_lower == "gpgkey":
-                    entry.gpgkey = value
-                elif key_lower == "priority":
-                    try:
-                        entry.priority = int(value)
-                    except ValueError:
-                        pass
-                elif key_lower == "keep_packages":
-                    entry.keep_packages = value.lower() in ("1", "true", "yes", "on")
-                elif key_lower == "path":
-                    entry.path = value
-                else:
-                    entry.other_options[key] = value
+                entries.append(entry)
 
-            entries.append(entry)
+        except Exception:
+            pass
 
-    except Exception:
-        pass
-
-    return entries
+        return entries
 
 
 def load_repos() -> list[RepoEntry]:
@@ -112,7 +112,7 @@ def load_repos() -> list[RepoEntry]:
             if filename.endswith(".repo"):
                 filepath = os.path.join(repos_dir, filename)
                 if os.path.isfile(filepath):
-                    entries.extend(parse_repo_file(filepath))
+                    entries.extend(RepoEntry.parse_file(filepath))
     except PermissionError:
         raise PermissionError("Cannot read repository directory")
 
