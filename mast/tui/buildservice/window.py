@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from rich.text import Text
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.screen import Screen
@@ -28,7 +29,7 @@ class BuildServiceWindow(Screen):
 
     def on_mount(self) -> None:
         table = self.query_one("#results", DataTable)
-        for column in [_('Name'), _('Version'), _('Architecture'), _('Project'), _('Repository')]:
+        for column in [_('Name'), _('Version'), _('Architecture'), _('Project')]:
             table.add_column(column)
         self.packages: list[BuildServicePackage] = []
 
@@ -63,8 +64,21 @@ class BuildServiceWindow(Screen):
         table = self.query_one("#results", DataTable)
         table.clear()
         for package in packages:
-            table.add_row(package.name, f"{package.version}-{package.release}", package.arch, package.project, package.repository)
+            table.add_row(
+                package.name,
+                f"{package.version}-{package.release}",
+                package.arch,
+                Text(package.project, style=self._project_color(package.project)),
+            )
         self.query_one("#status", Static).update(_("Found {0} packages.").format(len(packages)))
+
+    @staticmethod
+    def _project_color(project: str) -> str:
+        if project.startswith("openSUSE:"):
+            return "green"
+        if project.startswith(("home:", "isv:")):
+            return "red"
+        return "orange"
 
     def on_data_table_row_selected(self, _event: DataTable.RowSelected) -> None:
         self.query_one("#install", Button).disabled = False

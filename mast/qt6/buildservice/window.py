@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from PySide6.QtCore import QObject, QThread, Signal
+from PySide6.QtGui import QColor
 from PySide6.QtWidgets import QHBoxLayout, QHeaderView, QLineEdit, QMessageBox, QPushButton, QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget
 
 from mast.core.buildservice import BuildServicePackage, build_install_command, search_packages
@@ -30,7 +31,7 @@ class BuildServiceWindow(QWidget):
         super().__init__()
         self.resize(1200, 720)
         self.packages: list[BuildServicePackage] = []
-        self.thread: QThread | None = None
+        self.search_thread: QThread | None = None
         self.worker: _SearchWorker | None = None
         self.install_action: CommandAction | None = None
 
@@ -50,8 +51,10 @@ class BuildServiceWindow(QWidget):
         layout.addLayout(controls)
 
         self.table = QTableWidget(self)
-        self.table.setColumnCount(6)
-        self.table.setHorizontalHeaderLabels([_("Name"), _("Version"), _("Architecture"), _("Project"), _("Repository"), _("Package")])
+        self.table.setColumnCount(4)
+        self.table.setHorizontalHeaderLabels([_("Name"), _("Version"), _("Architecture"), _("Project")])
+        self.table.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.ResizeToContents)
+        self.table.horizontalHeader().setSectionResizeMode(1, QHeaderView.ResizeMode.ResizeToContents)
         self.table.horizontalHeader().setSectionResizeMode(3, QHeaderView.ResizeMode.Stretch)
         self.table.setSelectionBehavior(QTableWidget.SelectionBehavior.SelectRows)
         self.table.setSelectionMode(QTableWidget.SelectionMode.SingleSelection)
@@ -60,26 +63,26 @@ class BuildServiceWindow(QWidget):
 
     def search(self) -> None:
         query = self.search_input.text().strip()
-        if not query or self.thread is not None:
+        if not query or self.search_thread is not None:
             return
         self.search_btn.setEnabled(False)
         self.install_btn.setEnabled(False)
         self.table.setRowCount(0)
-        self.thread = QThread(self)
+        self.search_thread = QThread(self)
         self.worker = _SearchWorker(query)
-        self.worker.moveToThread(self.thread)
-        self.thread.started.connect(self.worker.run)
+        self.worker.moveToThread(self.search_thread)
+        self.search_thread.started.connect(self.worker.run)
         self.worker.loaded.connect(self._show_results)
         self.worker.failed.connect(self._show_error)
         self.worker.loaded.connect(self._finish_search)
         self.worker.failed.connect(self._finish_search)
-        self.thread.finished.connect(self.thread.deleteLater)
-        self.thread.start()
+        self.search_thread.finished.connect(self.search_thread.deleteLater)
+        self.search_thread.start()
 
     def _finish_search(self, *_args) -> None:
-        if self.thread is not None:
-            self.thread.quit()
-        self.thread = None
+        if self.search_thread is not None:
+            self.search_thread.quit()
+        self.search_thread = None
         self.worker = None
         self.search_btn.setEnabled(True)
 
@@ -87,9 +90,20 @@ class BuildServiceWindow(QWidget):
         self.packages = packages
         self.table.setRowCount(len(packages))
         for row, package in enumerate(packages):
-            values = [package.name, f"{package.version}-{package.release}", package.arch, package.project, package.repository, package.package]
+            values = [package.name, f"{package.version}-{package.release}", package.arch, package.project]
             for column, value in enumerate(values):
-                self.table.setItem(row, column, QTableWidgetItem(value))
+                item = QTableWidgetItem(value)
+                if column == 3:
+                    item.setForeground(QColor(self._project_color(package.project)))
+                self.table.setItem(row, column, item)
+
+    @staticmethod
+    def _project_color(project: str) -> str:
+        if project.startswith("openSUSE:"):
+            return "green"
+        if project.startswith(("home:", "isv:")):
+            return "red"
+        return "orange"
 
     def _show_error(self, message: str) -> None:
         QMessageBox.critical(self, _("Error"), _("Build Service search failed: {0}").format(message))

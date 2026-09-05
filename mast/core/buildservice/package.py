@@ -67,6 +67,30 @@ def _matches_query(name: str, query: str) -> bool:
     return bool(terms) and all(term in name.casefold() for term in terms)
 
 
+def _is_compatible_repository(repository: str, architecture: str) -> bool:
+    """Exclude OBS repositories built for a different CPU family."""
+    repository_name = repository.casefold()
+    repository_architectures = {
+        "arm": ("arm", "aarch64"),
+        "powerpc": ("ppc", "powerpc"),
+        "zsystems": ("s390", "zsystems"),
+        "riscv": ("risc", "riscv"),
+        "loongarch": ("loongarch",),
+    }
+    for repository_family, markers in repository_architectures.items():
+        if any(marker in repository_name for marker in markers):
+            if repository_family == "arm":
+                return architecture.startswith("arm") or architecture == "aarch64"
+            if repository_family == "powerpc":
+                return architecture.startswith("ppc") or architecture == "powerpc"
+            if repository_family == "zsystems":
+                return architecture.startswith("s390")
+            if repository_family == "riscv":
+                return architecture.startswith("risc")
+            return architecture.startswith("loongarch")
+    return True
+
+
 def search_packages(query: str, *, timeout: float = 15.0) -> list[BuildServicePackage]:
     """Search OBS binaries matching all words in *query*."""
     normalized = query.strip()
@@ -85,6 +109,8 @@ def search_packages(query: str, *, timeout: float = 15.0) -> list[BuildServicePa
     with urllib.request.urlopen(request, timeout=timeout) as response:
         root = ET.fromstring(response.read())
 
+    distribution = _distribution()
+    print(distribution)
     architecture = _architecture()
     packages: list[BuildServicePackage] = []
     seen: set[tuple[str, str, str]] = set()
@@ -94,7 +120,12 @@ def search_packages(query: str, *, timeout: float = 15.0) -> list[BuildServicePa
         arch = data.get("arch", "")
         project = data.get("project", "")
         repository = data.get("repository", "")
-        if not name or arch not in (architecture, "noarch") or not _matches_query(name, normalized):
+        if (
+            not name
+            or arch not in (architecture, "noarch")
+            or not _is_compatible_repository(repository, architecture)
+            or not _matches_query(name, normalized)
+        ):
             continue
         if ":branches:" in project or name.endswith(IGNORED_SUFFIXES):
             continue

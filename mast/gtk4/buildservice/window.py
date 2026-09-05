@@ -35,7 +35,7 @@ class BuildServiceWindow(Gtk.ApplicationWindow):
         self.set_default_size(1200, 720)
         self.packages: list[BuildServicePackage] = []
         self.worker: _SearchWorker | None = None
-        self.install_action: CommandAction | None = None
+        self.package_install_action: CommandAction | None = None
 
         box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
         box.set_margin_top(12); box.set_margin_bottom(12); box.set_margin_start(12); box.set_margin_end(12)
@@ -47,11 +47,15 @@ class BuildServiceWindow(Gtk.ApplicationWindow):
         self.install_btn = Gtk.Button(label=_("Install")); self.install_btn.set_sensitive(False); self.install_btn.connect("clicked", lambda *_args: self.install_selected()); controls.append(self.install_btn)
         box.append(controls)
 
-        self.store = Gtk.ListStore(str, str, str, str, str, str)
+        self.store = Gtk.ListStore(str, str, str, str)
         self.tree = Gtk.TreeView(model=self.store)
         self.tree.get_selection().connect("changed", lambda *_args: self.install_btn.set_sensitive(self.tree.get_selection().get_selected()[1] is not None))
-        for index, title in enumerate([_("Name"), _("Version"), _("Architecture"), _("Project"), _("Repository"), _("Package")]):
-            column = Gtk.TreeViewColumn(title, Gtk.CellRendererText(), text=index); column.set_resizable(True); column.set_expand(index == 3); self.tree.append_column(column)
+        for index, title in enumerate([_("Name"), _("Version"), _("Architecture"), _("Project")]):
+            renderer = Gtk.CellRendererText()
+            column = Gtk.TreeViewColumn(title, renderer, text=index)
+            if index == 3:
+                column.set_cell_data_func(renderer, self._project_cell_data_func)
+            column.set_resizable(True); column.set_expand(index == 3); self.tree.append_column(column)
         scroll = Gtk.ScrolledWindow(); scroll.set_vexpand(True); scroll.set_child(self.tree); box.append(scroll)
         self.set_child(box)
 
@@ -65,7 +69,7 @@ class BuildServiceWindow(Gtk.ApplicationWindow):
     def _show_results(self, packages: list[BuildServicePackage]) -> bool:
         self.packages = packages
         for package in packages:
-            self.store.append([package.name, f"{package.version}-{package.release}", package.arch, package.project, package.repository, package.package])
+            self.store.append([package.name, f"{package.version}-{package.release}", package.arch, package.project])
         self._finish_search(); return False
 
     def _show_error(self, message: str) -> bool:
@@ -74,11 +78,31 @@ class BuildServiceWindow(Gtk.ApplicationWindow):
     def _finish_search(self) -> None:
         self.worker = None; self.search_btn.set_sensitive(True)
 
+    @staticmethod
+    def _project_cell_data_func(_column, renderer, model, tree_iter, _data=None) -> None:
+        project = model.get_value(tree_iter, 3)
+        renderer.set_property("foreground", BuildServiceWindow._project_color(project))
+        renderer.set_property("foreground-set", True)
+
+    @staticmethod
+    def _project_color(project: str) -> str:
+        if project.startswith("openSUSE:"):
+            return "green"
+        if project.startswith(("home:", "isv:")):
+            return "red"
+        return "orange"
+
     def install_selected(self) -> None:
         model, tree_iter = self.tree.get_selection().get_selected()
-        if tree_iter is None or self.install_action is not None:
+        if tree_iter is None or self.package_install_action is not None:
             return
-        package = self.packages[model.get_path(tree_iter).get_indices()[0]]
-        self.install_action = CommandAction(text=_("Install"), running_text=_("Installing..."), dialog_title=_("Install Package"), command=build_install_command(package), success_output=_("Package installed successfully."), auto_close_on_success=True, parent_window=self)
-        self.install_action.connect_finished(lambda *_args: setattr(self, "install_action", None))
-        self.install_action.trigger()
+        path = model.get_path(tree_iter)
+        if path is None:
+            return
+        indices = path.get_indices()
+        if not indices:
+            return
+        package = self.packages[indices[0]]
+        self.package_install_action = CommandAction(text=_("Install"), running_text=_("Installing..."), dialog_title=_("Install Package"), command=build_install_command(package), success_output=_("Package installed successfully."), auto_close_on_success=True, parent_window=self)
+        self.package_install_action.connect_finished(lambda *_args: setattr(self, "package_install_action", None))
+        self.package_install_action.trigger()

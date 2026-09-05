@@ -1,5 +1,9 @@
 # Change Log
 
+## Unreleased
+
+- feat(buildservice): added openSUSE Build Service module to search and install packages from build.opensuse.org.
+
 ## 0.0.30 - 2026-09-05
 
 - feat(repositories): added vlc repository

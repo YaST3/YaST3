@@ -13,6 +13,8 @@ class TestBuildServicePackage(unittest.TestCase):
     def test_search_filters_results(self, _arch, _distribution, urlopen) -> None:
         xml = b"""<collection>
           <binary name="firefox" version="1" release="1" arch="x86_64" project="openSUSE:Factory" repository="snapshot" package="MozillaFirefox" />
+          <binary name="firefox" version="1" release="1" arch="x86_64" project="home:user:firefox" repository="snapshot" />
+          <binary name="firefox" version="1" release="1" arch="x86_64" project="openSUSE:Factory" repository="openSUSE_Factory_ARM" />
           <binary name="firefox-debuginfo" version="1" release="1" arch="x86_64" project="openSUSE:Factory" repository="snapshot" />
           <binary name="firefox" version="1" release="1" arch="aarch64" project="openSUSE:Factory" repository="snapshot" />
         </collection>"""
