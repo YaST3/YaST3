@@ -8,7 +8,6 @@ from textual.widgets import Button, Checkbox, DataTable, Header, Input, Label, S
 from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
-    delete_repo_entry,
     switch_mirror,
 )
 from mast.core.repositories.opensuse_mirrors import opensuse_mirrors
@@ -155,7 +154,7 @@ class RepositoriesWindow(Screen):
             return
 
         entry = self.repo_entries[table.cursor_row]
-        result = delete_repo_entry(entry)
+        result = entry.delete()
         if result == "ok":
             self.repo_entries.pop(table.cursor_row)
             self.populate_table()

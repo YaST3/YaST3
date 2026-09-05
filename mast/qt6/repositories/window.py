@@ -19,7 +19,6 @@ from PySide6.QtWidgets import (
 from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
-    delete_repo_entry,
     switch_mirror_pkexec,
 )
 from mast.qt6.repositories.import_repo_button import ImportRepoButton
@@ -265,7 +264,7 @@ class RepositoriesWindow(QMainWindow):
             _("Are you sure you want to delete repository '{}'?").format(entry.name),
         )
         if reply == QMessageBox.StandardButton.Yes:
-            result = delete_repo_entry(entry)
+            result = entry.delete()
             if result == "ok":
                 self.repo_entries.pop(current_row)
                 self.table.removeRow(current_row)

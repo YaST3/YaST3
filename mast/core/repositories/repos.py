@@ -193,30 +193,54 @@ class RepoEntry:
         except Exception:
             return "error"
 
+    def delete(
+        self, use_pkexec: bool = True
+    ) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
+        """Delete this repository entry from its .repo file."""
+        filepath = os.path.join(_repository_dir(), self.filename)
 
-def delete_repo_entry(
-    entry: RepoEntry, use_pkexec: bool = True
-) -> Literal["ok", "permission_denied", "pkexec_failed", "error"]:
-    """Delete a repository entry from its .repo file."""
-    filepath = os.path.join(_repository_dir(), entry.filename)
+        if not os.path.exists(filepath):
+            return "ok"
 
-    if not os.path.exists(filepath):
-        return "ok"
+        config = configparser.ConfigParser()
+        config.optionxform = str
+        config.read(filepath)
 
-    config = configparser.ConfigParser()
-    config.optionxform = str
-    config.read(filepath)
+        if self.id not in config.sections():
+            return "ok"
 
-    if entry.id not in config.sections():
-        return "ok"
+        # Remove the section
+        config.remove_section(self.id)
 
-    # Remove the section
-    config.remove_section(entry.id)
+        # If no sections remain, delete the file
+        if not config.sections():
+            try:
+                os.remove(filepath)
+                return "ok"
+            except PermissionError:
+                if not use_pkexec:
+                    return "permission_denied"
+            except Exception:
+                return "error"
 
-    # If no sections remain, delete the file
-    if not config.sections():
+            # Use pkexec
+            try:
+                result = subprocess.run(
+                    ["pkexec", "rm", filepath],
+                    capture_output=True,
+                    text=True,
+                )
+                if result.returncode == 0:
+                    return "ok"
+                else:
+                    return "pkexec_failed"
+            except Exception:
+                return "error"
+
+        # Otherwise, write remaining sections
         try:
-            os.remove(filepath)
+            with open(filepath, "w") as f:
+                config.write(f)
             return "ok"
         except PermissionError:
             if not use_pkexec:
@@ -224,47 +248,22 @@ def delete_repo_entry(
         except Exception:
             return "error"
 
-        # Use pkexec
         try:
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".repo", delete=False) as tmp:
+                config.write(tmp)
+                tmp_path = tmp.name
+
             result = subprocess.run(
-                ["pkexec", "rm", filepath],
+                ["pkexec", "cp", tmp_path, filepath],
                 capture_output=True,
                 text=True,
             )
+
+            subprocess.run(["rm", "-f", tmp_path], capture_output=True)
+
             if result.returncode == 0:
                 return "ok"
             else:
                 return "pkexec_failed"
         except Exception:
             return "error"
-
-    # Otherwise, write remaining sections
-    try:
-        with open(filepath, "w") as f:
-            config.write(f)
-        return "ok"
-    except PermissionError:
-        if not use_pkexec:
-            return "permission_denied"
-    except Exception:
-        return "error"
-
-    try:
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".repo", delete=False) as tmp:
-            config.write(tmp)
-            tmp_path = tmp.name
-
-        result = subprocess.run(
-            ["pkexec", "cp", tmp_path, filepath],
-            capture_output=True,
-            text=True,
-        )
-
-        subprocess.run(["rm", "-f", tmp_path], capture_output=True)
-
-        if result.returncode == 0:
-            return "ok"
-        else:
-            return "pkexec_failed"
-    except Exception:
-        return "error"

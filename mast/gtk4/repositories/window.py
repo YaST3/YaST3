@@ -9,7 +9,6 @@ from gi.repository import Gtk
 from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
-    delete_repo_entry,
     switch_mirror,
 )
 from mast.gtk4.repositories.import_repo_button import ImportRepoButton
@@ -329,7 +328,7 @@ class RepositoriesWindow(Gtk.ApplicationWindow):
         """Handle delete confirmation response."""
         if response_id == Gtk.ResponseType.YES:
             entry = self.repo_entries[index]
-            result = delete_repo_entry(entry)
+            result = entry.delete()
             if result == "ok":
                 self.repo_entries.pop(index)
                 self.list_store.remove(tree_iter)
