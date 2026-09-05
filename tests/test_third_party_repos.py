@@ -11,6 +11,23 @@ from mast.core.repositories.third_party_repos import third_party_repos
 class TestThirdPartyRepos(unittest.TestCase):
     """Tests for predefined repository entries."""
 
+    def test_vscode_repository(self) -> None:
+        """Visual Studio Code should be available from the import menu."""
+        vscode = next(repo for repo in third_party_repos if repo.id == "vscode")
+
+        self.assertEqual(vscode.filename, "vscode.repo")
+        self.assertEqual(vscode.name, "Visual Studio Code")
+        self.assertEqual(
+            vscode.baseurl,
+            "https://packages.microsoft.com/yumrepos/vscode",
+        )
+        self.assertTrue(vscode.enabled)
+        self.assertTrue(vscode.gpgcheck)
+        self.assertEqual(
+            vscode.gpgkey,
+            "https://packages.microsoft.com/keys/microsoft.asc",
+        )
+
     def test_google_chrome_repository(self) -> None:
         """Google Chrome should be available from the repository import menu."""
         chrome = next(repo for repo in third_party_repos if repo.id == "google-chrome")

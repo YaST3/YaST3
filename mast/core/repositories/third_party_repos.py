@@ -25,6 +25,15 @@ third_party_repos = [
         gpgcheck=True,
         gpgkey="https://dl.google.com/linux/linux_signing_key.pub",
     ),
+    RepoEntry(
+        id="vscode",
+        name="Visual Studio Code",
+        enabled=True,
+        autorefresh=True,
+        baseurl="https://packages.microsoft.com/yumrepos/vscode",
+        gpgcheck=True,
+        gpgkey="https://packages.microsoft.com/keys/microsoft.asc",
+    ),
 ]
 
 os_id = os_release.get("ID", "").lower()
