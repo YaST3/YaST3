@@ -16,6 +16,15 @@ third_party_repos = [
         gpgcheck=True,
         priority=120,
     ),
+    RepoEntry(
+        id="google-chrome",
+        name="Google Chrome",
+        enabled=True,
+        autorefresh=True,
+        baseurl="http://dl.google.com/linux/chrome/rpm/stable/$basearch/",
+        gpgcheck=True,
+        gpgkey="https://dl.google.com/linux/linux_signing_key.pub",
+    ),
 ]
 
 os_id = os_release.get("ID", "").lower()

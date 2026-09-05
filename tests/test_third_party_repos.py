@@ -11,6 +11,23 @@ from mast.core.repositories.third_party_repos import third_party_repos
 class TestThirdPartyRepos(unittest.TestCase):
     """Tests for predefined repository entries."""
 
+    def test_google_chrome_repository(self) -> None:
+        """Google Chrome should be available from the repository import menu."""
+        chrome = next(repo for repo in third_party_repos if repo.id == "google-chrome")
+
+        self.assertEqual(chrome.filename, "google-chrome.repo")
+        self.assertEqual(chrome.name, "Google Chrome")
+        self.assertEqual(
+            chrome.baseurl,
+            "http://dl.google.com/linux/chrome/rpm/stable/$basearch",
+        )
+        self.assertTrue(chrome.enabled)
+        self.assertTrue(chrome.gpgcheck)
+        self.assertEqual(
+            chrome.gpgkey,
+            "https://dl.google.com/linux/linux_signing_key.pub",
+        )
+
     def test_vlc_repository(self) -> None:
         """VLC should be available from the repository import menu."""
         if not any(repo.id == "vlc" for repo in third_party_repos):
