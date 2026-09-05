@@ -98,27 +98,26 @@ class RepoEntry:
 
         return entries
 
+    @staticmethod
+    def load_repos() -> list["RepoEntry"]:
+        """Load all repositories from the system repository directory."""
+        entries: list[RepoEntry] = []
+        repos_dir = _repository_dir()
 
-def load_repos() -> list[RepoEntry]:
-    """Load all repositories from the system repository directory."""
-    entries: list[RepoEntry] = []
-    repos_dir = _repository_dir()
+        if not os.path.isdir(repos_dir):
+            return entries
 
-    if not os.path.isdir(repos_dir):
+        try:
+            for filename in os.listdir(repos_dir):
+                if filename.endswith(".repo"):
+                    filepath = os.path.join(repos_dir, filename)
+                    if os.path.isfile(filepath):
+                        entries.extend(RepoEntry.parse_file(filepath))
+        except PermissionError:
+            raise PermissionError("Cannot read repository directory")
+
+        entries.sort(key=lambda e: e.priority)
         return entries
-
-    try:
-        for filename in os.listdir(repos_dir):
-            if filename.endswith(".repo"):
-                filepath = os.path.join(repos_dir, filename)
-                if os.path.isfile(filepath):
-                    entries.extend(RepoEntry.parse_file(filepath))
-    except PermissionError:
-        raise PermissionError("Cannot read repository directory")
-
-    # Sort by priority (ascending, lower number = higher priority)
-    entries.sort(key=lambda e: e.priority)
-    return entries
 
 
 def save_repo_entry(

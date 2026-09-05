@@ -9,7 +9,6 @@ from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
     delete_repo_entry,
-    load_repos,
     save_repo_entry,
     switch_mirror,
 )
@@ -87,7 +86,7 @@ class RepositoriesWindow(Screen):
         table.clear()
 
         try:
-            self.repo_entries = load_repos()
+            self.repo_entries = RepoEntry.load_repos()
         except PermissionError:
             self.show_message(
                 _("Error: Cannot read repository directory. Root permission required."),

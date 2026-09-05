@@ -20,7 +20,6 @@ from mast.core.i18n import _
 from mast.core.repositories import (
     RepoEntry,
     delete_repo_entry,
-    load_repos,
     save_repo_entry,
     switch_mirror_pkexec,
 )
@@ -127,7 +126,7 @@ class RepositoriesWindow(QMainWindow):
         self.table.setRowCount(0)
 
         try:
-            self.repo_entries = load_repos()
+            self.repo_entries = RepoEntry.load_repos()
         except PermissionError:
             QMessageBox.warning(
                 self,

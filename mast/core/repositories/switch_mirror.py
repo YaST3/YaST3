@@ -9,7 +9,7 @@ import os
 
 from mast.core.repositories.opensuse_mirrors import opensuse_mirrors
 from mast.core.repositories.packman_mirrors import packman_mirrors
-from mast.core.repositories.repos import RepoEntry, load_repos, save_repo_entry
+from mast.core.repositories.repos import RepoEntry, save_repo_entry
 
 
 def switch_mirror(
@@ -28,7 +28,7 @@ def switch_mirror(
     opensuse_repos = ["repo-oss", "repo-non-oss", "repo-update", "repo-debug", "repo-source"]
     packman_repos = ["packman"]
 
-    entries = load_repos()
+    entries = RepoEntry.load_repos()
 
     modified_entries: list[RepoEntry] = []
 
