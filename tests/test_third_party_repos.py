@@ -13,6 +13,8 @@ class TestThirdPartyRepos(unittest.TestCase):
 
     def test_vlc_repository(self) -> None:
         """VLC should be available from the repository import menu."""
+        if not any(repo.id == "vlc" for repo in third_party_repos):
+            self.skipTest("VLC is only available on openSUSE")
         vlc = next(repo for repo in third_party_repos if repo.id == "vlc")
 
         self.assertEqual(vlc.filename, "vlc.repo")
@@ -25,6 +27,8 @@ class TestThirdPartyRepos(unittest.TestCase):
 
     def test_rpmfusion_free_repository(self) -> None:
         """RPM Fusion Free should preserve its Fedora repository options."""
+        if not any(repo.id == "rpmfusion-free" for repo in third_party_repos):
+            self.skipTest("RPM Fusion is only available on Fedora")
         rpmfusion = next(
             repo for repo in third_party_repos if repo.id == "rpmfusion-free"
         )
