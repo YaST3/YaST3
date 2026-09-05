@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mast"
-version = "0.0.29"
+version = "0.0.30"
 description = "MaST is continuous development of YaST with Python & Qt6 / GTK4 / TUI"
 readme = "README.md"
 requires-python = ">=3.12"

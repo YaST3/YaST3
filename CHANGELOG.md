@@ -1,6 +1,6 @@
 # Change Log
 
-## Unreleased
+## 0.0.30 - 2026-09-05
 
 - feat(repositories): added vlc repository
 - feat(repositories): added rpm-fusion repository
